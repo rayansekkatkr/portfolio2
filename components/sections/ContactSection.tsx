@@ -15,6 +15,7 @@ import { motion, useInView } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { contactSchema, type ContactFormData } from "@/lib/validations/contact";
+import { startProgress, doneProgress } from "@/components/ui/ProgressBar";
 
 type SubmissionState = "idle" | "loading" | "success" | "error";
 
@@ -48,6 +49,7 @@ export default function ContactSection() {
   const onSubmit = async (data: ContactFormData) => {
     setSubmissionState("loading");
     setErrorMessage("");
+    startProgress(); // Start progress bar
 
     try {
       const response = await fetch("/api/contact", {
@@ -64,6 +66,7 @@ export default function ContactSection() {
         throw new Error(result.message || "Failed to send message");
       }
 
+      doneProgress(); // Complete progress bar
       setSubmissionState("success");
       reset(); // Clear form on success
 
@@ -73,6 +76,7 @@ export default function ContactSection() {
       }, 5000);
     } catch (error) {
       console.error("Form submission error:", error);
+      doneProgress(); // Complete progress bar even on error
       setSubmissionState("error");
       setErrorMessage(
         error instanceof Error ? error.message : "Failed to send message. Please try again."

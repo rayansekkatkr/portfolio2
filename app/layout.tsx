@@ -3,8 +3,10 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { LanguageProvider } from "@/lib/i18n/LanguageContext";
 import { ThemeProvider } from "@/lib/theme/ThemeContext";
 import ScrollToTop from "@/components/ui/ScrollToTop";
+import ProgressBar from "@/components/ui/ProgressBar";
 import Script from "next/script";
 import "./globals.css";
+import "./nprogress.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -59,6 +61,7 @@ export default function RootLayout({
         <meta name="theme-color" content="#ffffff" />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <ProgressBar />
         <ThemeProvider>
           <LanguageProvider>
             {children}
