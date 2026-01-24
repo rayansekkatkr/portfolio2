@@ -13,7 +13,8 @@ interface LanguageContextType {
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 // Translation storage
-type TranslationData = Record<string, string | TranslationData>;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type TranslationData = Record<string, any>;
 const translations: Record<Locale, TranslationData> = {
   fr: {},
   en: {},
