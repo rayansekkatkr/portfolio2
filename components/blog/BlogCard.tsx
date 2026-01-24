@@ -14,6 +14,7 @@ interface BlogCardProps {
   readingTime: number;
   tags: string[];
   category: string;
+  priority?: boolean;
 }
 
 export default function BlogCard({
@@ -25,6 +26,7 @@ export default function BlogCard({
   readingTime,
   tags,
   category,
+  priority = false,
 }: BlogCardProps) {
   return (
     <motion.article
@@ -38,7 +40,13 @@ export default function BlogCard({
           src={coverImage}
           alt={title}
           fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           className="object-cover transition-transform duration-300 group-hover:scale-105"
+          priority={priority}
+          loading={priority ? undefined : "lazy"}
+          quality={85}
+          placeholder="blur"
+          blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwMCIgaGVpZ2h0PSI2MzAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJnIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNlNWU3ZWIiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNmOWZhZmIiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB3aWR0aD0iMTIwMCIgaGVpZ2h0PSI2MzAiIGZpbGw9InVybCgjZykiLz48L3N2Zz4="
         />
         <div className="absolute top-4 left-4">
           <span className="bg-primary-600 rounded-full px-3 py-1 text-xs font-semibold text-white">

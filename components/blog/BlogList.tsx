@@ -30,7 +30,7 @@ export default function BlogList({ posts, locale }: BlogListProps) {
 
   return (
     <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-      {posts.map((post) => (
+      {posts.map((post, index) => (
         <BlogCard
           key={post.id}
           slug={post.slug[locale] || post.slug.en || post.slug.fr || ""}
@@ -41,6 +41,7 @@ export default function BlogList({ posts, locale }: BlogListProps) {
           readingTime={post.readingTimeMinutes}
           tags={post.tags}
           category={post.category}
+          priority={index === 0}
         />
       ))}
     </div>
