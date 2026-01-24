@@ -1,8 +1,22 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { Mail, Linkedin, Github, Briefcase, Send } from "lucide-react";
+import {
+  Mail,
+  Linkedin,
+  Github,
+  Briefcase,
+  Send,
+  CheckCircle,
+  AlertCircle,
+  Loader2,
+} from "lucide-react";
 import { motion, useInView } from "framer-motion";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { contactSchema, type ContactFormData } from "@/lib/validations/contact";
+
+type SubmissionState = "idle" | "loading" | "success" | "error";
 
 export default function ContactSection() {
   const ref = useRef<HTMLElement>(null);
@@ -11,6 +25,18 @@ export default function ContactSection() {
     () =>
       typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches
   );
+  const [submissionState, setSubmissionState] = useState<SubmissionState>("idle");
+  const [errorMessage, setErrorMessage] = useState<string>("");
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid, isDirty },
+    reset,
+  } = useForm<ContactFormData>({
+    resolver: zodResolver(contactSchema),
+    mode: "onChange", // Real-time validation
+  });
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -19,23 +45,44 @@ export default function ContactSection() {
     return () => mediaQuery.removeEventListener("change", handleChange);
   }, []);
 
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
+  const onSubmit = async (data: ContactFormData) => {
+    setSubmissionState("loading");
+    setErrorMessage("");
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Form will be fully functional in Epic 3
-    alert("Formulaire en cours de développement. Fonctionnalité disponible prochainement!");
-  };
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.message || "Failed to send message");
+      }
+
+      setSubmissionState("success");
+      reset(); // Clear form on success
+
+      // Reset success message after 5 seconds
+      setTimeout(() => {
+        setSubmissionState("idle");
+      }, 5000);
+    } catch (error) {
+      console.error("Form submission error:", error);
+      setSubmissionState("error");
+      setErrorMessage(
+        error instanceof Error ? error.message : "Failed to send message. Please try again."
+      );
+
+      // Reset error state after 5 seconds
+      setTimeout(() => {
+        setSubmissionState("idle");
+      }, 5000);
+    }
   };
 
   const professionalLinks = [
@@ -104,7 +151,45 @@ export default function ContactSection() {
               Remplissez le formulaire et je vous répondrai dans les plus brefs délais.
             </p>
 
-            <form onSubmit={handleSubmit} className="mt-8 space-y-6">
+            <form onSubmit={handleSubmit(onSubmit)} className="mt-8 space-y-6">
+              {/* Success Message */}
+              {submissionState === "success" && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="flex items-start gap-3 rounded-lg border border-green-500 bg-green-50 p-4 dark:bg-green-900/20"
+                >
+                  <CheckCircle className="h-5 w-5 flex-shrink-0 text-green-600 dark:text-green-400" />
+                  <div className="flex-1">
+                    <h4 className="font-semibold text-green-900 dark:text-green-100">
+                      Message sent successfully!
+                    </h4>
+                    <p className="mt-1 text-sm text-green-800 dark:text-green-200">
+                      Thank you for reaching out. I&apos;ll get back to you as soon as possible.
+                    </p>
+                  </div>
+                </motion.div>
+              )}
+
+              {/* Error Message */}
+              {submissionState === "error" && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="flex items-start gap-3 rounded-lg border border-red-500 bg-red-50 p-4 dark:bg-red-900/20"
+                >
+                  <AlertCircle className="h-5 w-5 flex-shrink-0 text-red-600 dark:text-red-400" />
+                  <div className="flex-1">
+                    <h4 className="font-semibold text-red-900 dark:text-red-100">
+                      Failed to send message
+                    </h4>
+                    <p className="mt-1 text-sm text-red-800 dark:text-red-200">
+                      {errorMessage || "An error occurred. Please try again later."}
+                    </p>
+                  </div>
+                </motion.div>
+              )}
+
               <div>
                 <label
                   htmlFor="name"
@@ -115,13 +200,20 @@ export default function ContactSection() {
                 <input
                   type="text"
                   id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
+                  {...register("name")}
+                  disabled={submissionState === "loading"}
                   placeholder="Votre nom"
-                  className="focus:ring-primary-600 mt-2 block w-full rounded-md border-0 px-4 py-3 text-gray-900 shadow-sm ring-1 ring-gray-300 ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6 dark:bg-gray-900 dark:text-white dark:ring-gray-700"
+                  className={`focus:ring-primary-600 mt-2 block w-full rounded-md border-0 px-4 py-3 text-gray-900 shadow-sm ring-1 ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset disabled:cursor-not-allowed disabled:opacity-50 sm:text-sm sm:leading-6 dark:bg-gray-900 dark:text-white ${
+                    errors.name
+                      ? "ring-red-500 focus:ring-red-500"
+                      : "ring-gray-300 dark:ring-gray-700"
+                  }`}
                 />
+                {errors.name && (
+                  <p className="mt-2 text-sm text-red-600 dark:text-red-400">
+                    {errors.name.message}
+                  </p>
+                )}
               </div>
 
               <div>
@@ -134,13 +226,20 @@ export default function ContactSection() {
                 <input
                   type="email"
                   id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
+                  {...register("email")}
+                  disabled={submissionState === "loading"}
                   placeholder="votre.email@exemple.com"
-                  className="focus:ring-primary-600 mt-2 block w-full rounded-md border-0 px-4 py-3 text-gray-900 shadow-sm ring-1 ring-gray-300 ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6 dark:bg-gray-900 dark:text-white dark:ring-gray-700"
+                  className={`focus:ring-primary-600 mt-2 block w-full rounded-md border-0 px-4 py-3 text-gray-900 shadow-sm ring-1 ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset disabled:cursor-not-allowed disabled:opacity-50 sm:text-sm sm:leading-6 dark:bg-gray-900 dark:text-white ${
+                    errors.email
+                      ? "ring-red-500 focus:ring-red-500"
+                      : "ring-gray-300 dark:ring-gray-700"
+                  }`}
                 />
+                {errors.email && (
+                  <p className="mt-2 text-sm text-red-600 dark:text-red-400">
+                    {errors.email.message}
+                  </p>
+                )}
               </div>
 
               <div>
@@ -152,27 +251,40 @@ export default function ContactSection() {
                 </label>
                 <textarea
                   id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  required
+                  {...register("message")}
+                  disabled={submissionState === "loading"}
                   rows={5}
                   placeholder="Décrivez votre projet ou votre demande..."
-                  className="focus:ring-primary-600 mt-2 block w-full rounded-md border-0 px-4 py-3 text-gray-900 shadow-sm ring-1 ring-gray-300 ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6 dark:bg-gray-900 dark:text-white dark:ring-gray-700"
+                  className={`focus:ring-primary-600 mt-2 block w-full rounded-md border-0 px-4 py-3 text-gray-900 shadow-sm ring-1 ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset disabled:cursor-not-allowed disabled:opacity-50 sm:text-sm sm:leading-6 dark:bg-gray-900 dark:text-white ${
+                    errors.message
+                      ? "ring-red-500 focus:ring-red-500"
+                      : "ring-gray-300 dark:ring-gray-700"
+                  }`}
                 />
+                {errors.message && (
+                  <p className="mt-2 text-sm text-red-600 dark:text-red-400">
+                    {errors.message.message}
+                  </p>
+                )}
               </div>
 
               <button
                 type="submit"
-                className="bg-primary-600 hover:bg-primary-500 focus-visible:outline-primary-600 shadow-primary-600/20 hover:shadow-primary-600/30 flex w-full items-center justify-center gap-2 rounded-md px-6 py-3 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:scale-105 hover:shadow-lg focus-visible:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 active:scale-95"
+                disabled={!isValid || !isDirty || submissionState === "loading"}
+                className="bg-primary-600 hover:bg-primary-500 focus-visible:outline-primary-600 shadow-primary-600/20 hover:shadow-primary-600/30 flex w-full items-center justify-center gap-2 rounded-md px-6 py-3 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:scale-105 hover:shadow-lg focus-visible:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:scale-100"
               >
-                <Send className="h-4 w-4" />
-                Envoyer le message
+                {submissionState === "loading" ? (
+                  <>
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                    Envoi en cours...
+                  </>
+                ) : (
+                  <>
+                    <Send className="h-4 w-4" />
+                    Envoyer le message
+                  </>
+                )}
               </button>
-
-              <p className="text-center text-xs text-gray-500 dark:text-gray-400">
-                ⚠️ Formulaire en développement - Fonctionnel dans Epic 3
-              </p>
             </form>
           </motion.div>
 

@@ -1,24 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
-import { z } from "zod";
 import { sendEmailWithRetry, EMAIL_CONFIG } from "@/lib/email/resend";
 import { generateContactEmailHTML, generateContactEmailText } from "@/lib/email/contact-template";
+import { contactSchema } from "@/lib/validations/contact";
 
 // Rate limiting store (in-memory for simplicity, use Redis in production)
 const rateLimitStore = new Map<string, { count: number; resetTime: number }>();
-
-// Contact form validation schema
-const contactSchema = z.object({
-  name: z.string().min(1, "Name is required").max(100, "Name is too long"),
-  email: z
-    .string()
-    .min(1, "Email is required")
-    .email("Invalid email format")
-    .max(255, "Email is too long"),
-  message: z
-    .string()
-    .min(10, "Message must be at least 10 characters")
-    .max(5000, "Message is too long"),
-});
 
 // Simple XSS sanitization (remove potential script tags and dangerous HTML)
 function sanitizeInput(input: string): string {
