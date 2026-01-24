@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { LanguageProvider } from "@/lib/i18n/LanguageContext";
-import { ThemeProvider } from "@/lib/theme/ThemeContext";
-import ScrollToTop from "@/components/ui/ScrollToTop";
+import ClientProviders from "@/components/ClientProviders";
 import ProgressBar from "@/components/ui/ProgressBar";
 import Script from "next/script";
 import "./globals.css";
@@ -11,11 +9,15 @@ import "./nprogress.css";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+  display: "swap",
+  preload: true,
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  display: "swap",
+  preload: true,
 });
 
 export const metadata: Metadata = {
@@ -62,12 +64,7 @@ export default function RootLayout({
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <ProgressBar />
-        <ThemeProvider>
-          <LanguageProvider>
-            {children}
-            <ScrollToTop />
-          </LanguageProvider>
-        </ThemeProvider>
+        <ClientProviders>{children}</ClientProviders>
       </body>
     </html>
   );
