@@ -7,12 +7,24 @@ export default function ThemeToggle() {
   const { theme, resolvedTheme, setTheme } = useTheme();
 
   const cycleTheme = () => {
+    let newTheme: "light" | "dark" | "system";
     if (theme === "light") {
-      setTheme("dark");
+      newTheme = "dark";
     } else if (theme === "dark") {
-      setTheme("system");
+      newTheme = "system";
     } else {
-      setTheme("light");
+      newTheme = "light";
+    }
+    setTheme(newTheme);
+
+    // Announce theme change to screen readers
+    const announcement = document.getElementById("theme-announcement");
+    if (announcement) {
+      const message =
+        newTheme === "system"
+          ? "Theme changed to system preference"
+          : `Theme changed to ${newTheme} mode`;
+      announcement.textContent = message;
     }
   };
 
@@ -33,15 +45,31 @@ export default function ThemeToggle() {
   };
 
   return (
-    <button
-      type="button"
-      onClick={cycleTheme}
-      className="animate-fade-in inline-flex items-center justify-center rounded-lg p-2 text-gray-700 opacity-0 transition-colors hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-800"
-      style={{ animationDelay: "50ms", animationFillMode: "forwards" }}
-      aria-label={getLabel()}
-      title={getLabel()}
-    >
-      {getIcon()}
-    </button>
+    <>
+      {/* Screen reader announcement region */}
+      <div
+        id="theme-announcement"
+        className="sr-only"
+        role="status"
+        aria-live="polite"
+        aria-atomic="true"
+      />
+      <button
+        type="button"
+        onClick={cycleTheme}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            cycleTheme();
+          }
+        }}
+        className="animate-fade-in inline-flex items-center justify-center rounded-lg p-2 text-gray-700 opacity-0 transition-colors hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-800"
+        style={{ animationDelay: "50ms", animationFillMode: "forwards" }}
+        aria-label={getLabel()}
+        title={getLabel()}
+      >
+        {getIcon()}
+      </button>
+    </>
   );
 }
