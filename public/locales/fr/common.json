@@ -144,30 +144,13 @@
     }
   },
   "blog": {
-    "title": "Blog",
-    "subtitle": "Articles et tutoriels sur le développement web",
-    "comingSoon": "Bientôt disponible",
-    "placeholder": {
-      "post1": {
-        "title": "Comment intégrer l'IA dans vos applications Next.js",
-        "excerpt": "Guide complet pour ajouter des fonctionnalités d'intelligence artificielle à vos projets web...",
-        "date": "15 janvier 2026",
-        "readTime": "8 min"
-      },
-      "post2": {
-        "title": "Architecture SAAS scalable avec Next.js et PostgreSQL",
-        "excerpt": "Les meilleures pratiques pour construire une plateforme SAAS performante et évolutive...",
-        "date": "10 janvier 2026",
-        "readTime": "12 min"
-      },
-      "post3": {
-        "title": "Optimisation des performances : atteindre 100 sur Lighthouse",
-        "excerpt": "Techniques avancées pour maximiser les performances de vos applications web modernes...",
-        "date": "5 janvier 2026",
-        "readTime": "10 min"
-      }
-    },
-    "readMore": "Lire la suite"
+    "title": "Derniers Articles",
+    "subtitle": "Expertise technique et partage de connaissances",
+    "comingSoon": "Articles à venir prochainement",
+    "viewAll": "Voir tous les articles",
+    "readMore": "Lire la suite",
+    "readTime": "min",
+    "noArticles": "Aucun article publié pour le moment. Revenez bientôt !"
   },
   "contact": {
     "title": "Contactez-moi",

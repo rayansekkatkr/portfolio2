@@ -144,9 +144,13 @@
     }
   },
   "blog": {
-    "title": "Blog",
-    "subtitle": "Articles and tutorials on web development",
-    "comingSoon": "Available soon",
+    "title": "Latest Articles",
+    "subtitle": "Technical expertise and knowledge sharing",
+    "comingSoon": "Articles coming soon",
+    "viewAll": "View all articles",
+    "readMore": "Read more",
+    "readTime": "min",
+    "noArticles": "No articles published yet. Check back soon!",
     "placeholder": {
       "post1": {
         "title": "How to integrate AI into your Next.js applications",
@@ -166,8 +170,7 @@
         "date": "January 5, 2026",
         "readTime": "10 min"
       }
-    },
-    "readMore": "Read more"
+    }
   },
   "contact": {
     "title": "Get in Touch",

@@ -144,9 +144,13 @@
     }
   },
   "blog": {
-    "title": "블로그",
-    "subtitle": "웹 개발 관련 문서 및 튜토리얼",
-    "comingSoon": "곧 사용 가능",
+    "title": "최신 기사",
+    "subtitle": "기술 전문성과 지식 공유",
+    "comingSoon": "곧 기사가 게시됩니다",
+    "viewAll": "모든 기사 보기",
+    "readMore": "자세히 보기",
+    "readTime": "분",
+    "noArticles": "아직 게시된 기사가 없습니다. 곧 확인하세요!",
     "placeholder": {
       "post1": {
         "title": "Next.js 애플리케이션에 AI를 통합하는 방법",
@@ -166,8 +170,7 @@
         "date": "2026년 1월 5일",
         "readTime": "10분"
       }
-    },
-    "readMore": "자세히 보기"
+    }
   },
   "contact": {
     "title": "다음 연락처로 문의하세요.",

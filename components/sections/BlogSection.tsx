@@ -1,85 +1,87 @@
-"use client";
+import { prisma } from "@/lib/prisma";
+import BlogList from "@/components/blog/BlogList";
+import Link from "next/link";
 
-import { motion, useInView } from "framer-motion";
-import { useRef, useState, useEffect } from "react";
+export interface BlogPost {
+  id: string;
+  title: Record<string, string>;
+  slug: Record<string, string>;
+  excerpt: Record<string, string>;
+  coverImage: string;
+  publishedAt: Date;
+  readingTimeMinutes: number;
+  tags: string[];
+  category: string;
+}
 
-export default function BlogSection() {
-  const ref = useRef<HTMLElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(
-    () =>
-      typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches
-  );
+async function getLatestPosts(): Promise<BlogPost[]> {
+  try {
+    const posts = await prisma.blogPost.findMany({
+      where: {
+        isPublished: true,
+      },
+      orderBy: {
+        publishedAt: "desc",
+      },
+      take: 3,
+      select: {
+        id: true,
+        title: true,
+        slug: true,
+        excerpt: true,
+        coverImage: true,
+        publishedAt: true,
+        readingTimeMinutes: true,
+        tags: true,
+        category: true,
+      },
+    });
 
-  useEffect(() => {
-    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const handleChange = () => setPrefersReducedMotion(mediaQuery.matches);
-    mediaQuery.addEventListener("change", handleChange);
-    return () => mediaQuery.removeEventListener("change", handleChange);
-  }, []);
-  const posts = [
-    {
-      title: "Getting Started with Next.js 14",
-      excerpt: "Learn the fundamentals of Next.js App Router and server components.",
-      date: "2026-01-20",
-      readTime: "5 min read",
-    },
-    {
-      title: "TypeScript Best Practices",
-      excerpt: "Essential tips for writing better TypeScript code in modern applications.",
-      date: "2026-01-15",
-      readTime: "8 min read",
-    },
-    {
-      title: "Building with Tailwind CSS",
-      excerpt: "A comprehensive guide to creating beautiful UIs with Tailwind CSS.",
-      date: "2026-01-10",
-      readTime: "6 min read",
-    },
-  ];
+    return posts as BlogPost[];
+  } catch (error) {
+    console.error("Failed to fetch blog posts:", error);
+    return [];
+  }
+}
+
+export default async function BlogSection() {
+  const posts = await getLatestPosts();
+
+  // TODO: Add multi-language support via reading translation JSON files or context
+  const locale = "fr"; // Default to French for now
 
   return (
-    <section ref={ref} id="blog" className="bg-gray-50 px-6 py-24 sm:py-32 dark:bg-gray-800">
+    <section id="blog" className="bg-gray-50 px-6 py-24 sm:py-32 dark:bg-gray-800">
       <div className="mx-auto max-w-7xl">
-        <motion.h2
-          className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl dark:text-white"
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: prefersReducedMotion ? 0 : 0.5 }}
-        >
-          Latest Blog Posts
-        </motion.h2>
-        <div className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {posts.map((post, index) => (
-            <motion.article
-              key={post.title}
-              className="overflow-hidden rounded-lg bg-white shadow-md transition-shadow hover:shadow-lg dark:bg-gray-900"
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{
-                duration: prefersReducedMotion ? 0 : 0.4,
-                delay: prefersReducedMotion ? 0 : index * 0.1,
-              }}
-            >
-              <div className="p-6">
-                <time className="text-sm text-gray-500 dark:text-gray-400">{post.date}</time>
-                <h3 className="mt-2 text-xl font-semibold text-gray-900 dark:text-white">
-                  {post.title}
-                </h3>
-                <p className="mt-4 text-gray-600 dark:text-gray-300">{post.excerpt}</p>
-                <div className="mt-4 flex items-center justify-between">
-                  <span className="text-sm text-gray-500 dark:text-gray-400">{post.readTime}</span>
-                  <a
-                    href="#"
-                    className="text-primary-600 hover:text-primary-500 dark:text-primary-400 text-sm font-semibold"
-                  >
-                    Read more →
-                  </a>
-                </div>
-              </div>
-            </motion.article>
-          ))}
+        <div className="mb-12">
+          <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl dark:text-white">
+            Derniers Articles
+          </h2>
+          <p className="mt-4 text-lg text-gray-600 dark:text-gray-400">
+            Expertise technique et partage de connaissances
+          </p>
         </div>
+
+        {posts.length > 0 ? (
+          <>
+            <BlogList posts={posts} locale={locale} />
+
+            <div className="mt-12 text-center">
+              <Link
+                href="/blog"
+                className="bg-primary-600 hover:bg-primary-700 focus-visible:outline-primary-600 dark:bg-primary-500 dark:hover:bg-primary-600 inline-flex items-center justify-center rounded-lg px-6 py-3 text-base font-semibold text-white shadow-sm transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+              >
+                Voir tous les articles
+              </Link>
+            </div>
+          </>
+        ) : (
+          <div className="py-12 text-center">
+            <p className="text-lg text-gray-600 dark:text-gray-400">
+              Aucun article publié pour le moment. Revenez bientôt !
+            </p>
+          </div>
+        )}
       </div>
     </section>
   );
