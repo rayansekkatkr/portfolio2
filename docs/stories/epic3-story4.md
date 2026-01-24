@@ -30,7 +30,46 @@ so that **the portfolio immediately captures my attention**.
 
 ## Definition of Done
 
-- [ ] All acceptance criteria met
-- [ ] Animation is engaging
-- [ ] Works in all languages
-- [ ] Accessible and performant
+- [x] All acceptance criteria met
+- [x] Animation is engaging
+- [x] Works in all languages
+- [x] Accessible and performant
+
+---
+
+## Dev Agent Record
+
+### Agent Model Used
+
+Claude Sonnet 4.5
+
+### Completion Notes
+
+- **Typing Animation**: Implemented character-by-character typing effect for hero subtitle using React useEffect and setInterval
+- **Speed**: 50ms per character for natural typing speed (neither too fast nor too slow)
+- **Cursor**: Animated blinking cursor using Framer Motion (opacity: [1, 0], 0.8s repeat) that disappears when typing completes
+- **i18n Integration**: Uses `useLanguageContext()` to fetch translated title from hero.title key, works with FR/EN/KR
+- **Accessibility**: Full title in sr-only span for screen readers, animated text marked aria-hidden
+- **Reduced Motion**: Checks prefers-reduced-motion media query, shows static text immediately if preferred
+- **Performance**: Lightweight implementation with cleanup on unmount, no external libraries needed beyond Framer Motion
+- **Dark Mode**: Cursor color adapts with dark:bg-primary-400 class
+- **Completion**: Animation runs once on mount, completes after all characters typed, leaves final text visible
+
+### Debug Log References
+
+None - implementation successful on first attempt
+
+### File List
+
+- components/sections/HeroSection.tsx - Added typing animation logic and i18n support
+
+### Change Log
+
+1. Added useLanguageContext hook import for translations
+2. Added displayedTitle and isTypingComplete state
+3. Implemented typing effect with 50ms interval per character
+4. Added blinking cursor with Framer Motion animate
+5. Added sr-only span with full title for screen readers
+6. Added aria-hidden to animated text
+7. Integrated t() translation function for hero.name, hero.title, hero.description, hero.cta buttons
+8. Added cleanup function to clear typing interval on unmount
