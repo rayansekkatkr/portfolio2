@@ -75,7 +75,15 @@ export default async function BlogPage() {
   const locale = "fr"; // TODO: Get from context or headers
 
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-950">
+    <div className="min-h-screen bg-white dark:bg-gray-950" lang="fr">
+      {/* Skip to content link */}
+      <a
+        href="#main-content"
+        className="focus:bg-primary-600 focus:ring-primary-500 sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:rounded-md focus:px-4 focus:py-2 focus:text-white focus:ring-2 focus:outline-none"
+      >
+        Aller au contenu principal
+      </a>
+
       {/* Header with back button */}
       <header className="border-b border-gray-200 dark:border-gray-800">
         <div className="mx-auto max-w-7xl px-6 py-6">
@@ -90,7 +98,7 @@ export default async function BlogPage() {
       </header>
 
       {/* Blog content */}
-      <main className="mx-auto max-w-7xl px-6 py-12">
+      <main id="main-content" className="mx-auto max-w-7xl px-6 py-12">
         <div className="mb-12">
           <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl dark:text-white">
             Blog

@@ -142,7 +142,15 @@ export default async function ArticlePage({ params }: PageProps) {
   };
 
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-950">
+    <div className="min-h-screen bg-white dark:bg-gray-950" lang="fr">
+      {/* Skip to content link for keyboard navigation */}
+      <a
+        href="#main-content"
+        className="focus:bg-primary-600 focus:ring-primary-500 sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:rounded-md focus:px-4 focus:py-2 focus:text-white focus:ring-2 focus:outline-none"
+      >
+        Aller au contenu principal
+      </a>
+
       {/* Reading progress indicator */}
       <ReadingProgress />
 
@@ -166,7 +174,7 @@ export default async function ArticlePage({ params }: PageProps) {
       </header>
 
       {/* Article content */}
-      <main className="mx-auto max-w-7xl px-6 py-12">
+      <main id="main-content" className="mx-auto max-w-7xl px-6 py-12">
         <BlogPost
           title={article.title}
           content={article.content}
