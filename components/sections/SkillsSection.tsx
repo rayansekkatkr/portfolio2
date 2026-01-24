@@ -14,8 +14,10 @@ import {
 } from "lucide-react";
 import { motion, useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
+import { useLanguageContext } from "@/lib/i18n/LanguageContext";
 
 export default function SkillsSection() {
+  const { t } = useLanguageContext();
   const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(
@@ -32,72 +34,62 @@ export default function SkillsSection() {
   const services = [
     {
       icon: Brain,
-      title: "Intégration IA & Automatisation",
-      description:
-        "Implémentation de solutions d'intelligence artificielle : LLM, Machine Learning, Chatbots intelligents, et automatisation de processus métier pour optimiser vos opérations.",
+      title: t("services.items.ai.title"),
+      description: t("services.items.ai.description"),
       featured: true,
     },
     {
       icon: Code2,
-      title: "Développement Backend & API",
-      description:
-        "Création d'architectures backend robustes avec Node.js, TypeScript et API RESTful/GraphQL pour des applications performantes et scalables.",
+      title: t("services.items.backend.title"),
+      description: t("services.items.backend.description"),
       featured: false,
     },
     {
       icon: Layers,
-      title: "Création de SAAS",
-      description:
-        "Développement complet de plateformes SAAS : architecture multi-tenant, gestion d'abonnements, tableaux de bord et expérience utilisateur optimale.",
+      title: t("services.items.saas.title"),
+      description: t("services.items.saas.description"),
       featured: false,
     },
     {
       icon: Wrench,
-      title: "Refactoring & Modernisation",
-      description:
-        "Refonte de sites existants, migration vers des technologies modernes, optimisation des performances et amélioration de la maintenabilité du code.",
+      title: t("services.items.refactoring.title"),
+      description: t("services.items.refactoring.description"),
       featured: false,
     },
     {
       icon: Database,
-      title: "Gestion de Bases de Données",
-      description:
-        "Conception de schémas optimisés, migrations, requêtes performantes avec PostgreSQL, MongoDB et ORMs modernes comme Prisma.",
+      title: t("services.items.database.title"),
+      description: t("services.items.database.description"),
       featured: false,
     },
     {
       icon: ShoppingCart,
-      title: "Systèmes de Paiement",
-      description:
-        "Intégration sécurisée de solutions de paiement (Stripe, PayPal), gestion de transactions, abonnements récurrents et webhooks.",
+      title: t("services.items.payment.title"),
+      description: t("services.items.payment.description"),
       featured: false,
     },
     {
       icon: Cloud,
-      title: "Déploiement & DevOps",
-      description:
-        "Configuration CI/CD, déploiement sur cloud (AWS, Vercel, Railway), containerisation Docker et monitoring de production.",
+      title: t("services.items.devops.title"),
+      description: t("services.items.devops.description"),
       featured: false,
     },
     {
       icon: Lock,
-      title: "Sécurité & Authentification",
-      description:
-        "Implémentation de systèmes d'authentification robustes, gestion des permissions, protection contre les vulnérabilités et bonnes pratiques de sécurité.",
+      title: t("services.items.security.title"),
+      description: t("services.items.security.description"),
       featured: false,
     },
     {
       icon: Bot,
-      title: "Chatbots & Assistants IA",
-      description:
-        "Création de chatbots conversationnels avec traitement du langage naturel, intégration d'API IA et automatisation du support client.",
+      title: t("services.items.frontend.title"),
+      description: t("services.items.frontend.description"),
       featured: false,
     },
     {
       icon: Zap,
-      title: "Optimisation & Performance",
-      description:
-        "Analyse et optimisation des performances, lazy loading, mise en cache stratégique, et amélioration des temps de chargement pour une UX optimale.",
+      title: t("services.items.optimization.title"),
+      description: t("services.items.optimization.description"),
       featured: false,
     },
   ];
@@ -112,11 +104,9 @@ export default function SkillsSection() {
           transition={{ duration: prefersReducedMotion ? 0 : 0.5 }}
         >
           <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl dark:text-white">
-            Services & Expertise
+            {t("services.title")}
           </h2>
-          <p className="mt-4 text-lg text-gray-600 dark:text-gray-300">
-            Des solutions complètes pour transformer vos idées en applications performantes
-          </p>
+          <p className="mt-4 text-lg text-gray-600 dark:text-gray-300">{t("services.subtitle")}</p>
         </motion.div>
 
         <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">

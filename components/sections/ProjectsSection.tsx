@@ -3,8 +3,10 @@
 import { ExternalLink, CheckCircle2, TrendingUp } from "lucide-react";
 import { motion, useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
+import { useLanguageContext } from "@/lib/i18n/LanguageContext";
 
 export default function ProjectsSection() {
+  const { t } = useLanguageContext();
   const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(
@@ -19,10 +21,9 @@ export default function ProjectsSection() {
     return () => mediaQuery.removeEventListener("change", handleChange);
   }, []);
   const project = {
-    name: "pont-facturx.com",
-    tagline: "Plateforme de Facturation Électronique B2B",
-    description:
-      "Développement d'une plateforme web complète permettant aux entreprises de générer, envoyer et gérer leurs factures électroniques conformément aux normes françaises. Solution conçue pour simplifier la transition vers la facturation électronique obligatoire.",
+    name: t("projects.featured.title"),
+    tagline: t("projects.subtitle"),
+    description: t("projects.featured.description"),
     technologies: [
       {
         name: "Python",
@@ -40,16 +41,25 @@ export default function ProjectsSection() {
       { name: "Docker", color: "bg-cyan-100 text-cyan-700 dark:bg-cyan-900/30 dark:text-cyan-400" },
     ],
     features: [
-      "Génération automatique de factures au format Factur-X (PDF/XML)",
-      "Interface d'administration intuitive avec tableau de bord analytique",
-      "Validation automatique de conformité aux normes françaises",
-      "Système de notifications et suivi des paiements",
-      "API REST sécurisée pour intégration avec systèmes existants",
+      t("projects.featured.featureList.invoicing"),
+      t("projects.featured.featureList.dashboard"),
+      t("projects.featured.featureList.integration"),
+      t("projects.featured.featureList.automation"),
+      t("projects.featured.featureList.responsive"),
     ],
     results: [
-      { label: "Réduction du temps de traitement", value: "40%" },
-      { label: "Factures générées par mois", value: "500+" },
-      { label: "Taux de conformité", value: "100%" },
+      {
+        label: t("projects.featured.resultList.time.label"),
+        value: t("projects.featured.resultList.time.value"),
+      },
+      {
+        label: t("projects.featured.resultList.users.label"),
+        value: t("projects.featured.resultList.users.value"),
+      },
+      {
+        label: t("projects.featured.resultList.satisfaction.label"),
+        value: t("projects.featured.resultList.satisfaction.value"),
+      },
     ],
     liveUrl: "https://pont-facturx.com",
     image: "/projects/pont-facturx-preview.jpg",
@@ -65,11 +75,9 @@ export default function ProjectsSection() {
           transition={{ duration: prefersReducedMotion ? 0 : 0.5 }}
         >
           <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl dark:text-white">
-            Projet Phare
+            {t("projects.title")}
           </h2>
-          <p className="mt-4 text-lg text-gray-600 dark:text-gray-300">
-            Une solution complète développée de A à Z
-          </p>
+          <p className="mt-4 text-lg text-gray-600 dark:text-gray-300">{t("projects.subtitle")}</p>
         </motion.div>
 
         <motion.div
@@ -107,7 +115,7 @@ export default function ProjectsSection() {
                 className="bg-primary-600 hover:bg-primary-500 shadow-primary-600/20 hover:shadow-primary-600/30 inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:scale-105 hover:shadow-lg focus-visible:scale-105 active:scale-95"
               >
                 <ExternalLink className="h-4 w-4" />
-                Voir le site
+                {t("projects.featured.cta")}
               </a>
             </div>
 
@@ -119,7 +127,7 @@ export default function ProjectsSection() {
             {/* Technologies */}
             <div className="mt-8">
               <h4 className="text-sm font-semibold tracking-wide text-gray-500 uppercase dark:text-gray-400">
-                Technologies Utilisées
+                {t("projects.featured.technologies")}
               </h4>
               <div className="mt-4 flex flex-wrap gap-3">
                 {project.technologies.map((tech) => (
@@ -136,7 +144,7 @@ export default function ProjectsSection() {
             {/* Features */}
             <div className="mt-8">
               <h4 className="text-sm font-semibold tracking-wide text-gray-500 uppercase dark:text-gray-400">
-                Fonctionnalités Clés
+                {t("projects.featured.features")}
               </h4>
               <ul className="mt-4 space-y-3">
                 {project.features.map((feature, index) => (
@@ -152,7 +160,7 @@ export default function ProjectsSection() {
             <div className="mt-10">
               <h4 className="mb-6 flex items-center gap-2 text-sm font-semibold tracking-wide text-gray-500 uppercase dark:text-gray-400">
                 <TrendingUp className="h-5 w-5" />
-                Résultats Mesurables
+                {t("projects.featured.results")}
               </h4>
               <div className="grid gap-6 sm:grid-cols-3">
                 {project.results.map((result, index) => (

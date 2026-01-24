@@ -3,8 +3,10 @@
 import { Sparkles, Code2, Database, Brain, Rocket, Users, Award, Clock } from "lucide-react";
 import { motion, useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
+import { useLanguageContext } from "@/lib/i18n/LanguageContext";
 
 export default function AboutSection() {
+  const { t } = useLanguageContext();
   const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(
@@ -19,19 +21,55 @@ export default function AboutSection() {
     return () => mediaQuery.removeEventListener("change", handleChange);
   }, []);
   const stats = [
-    { label: "Années d'expérience", value: "5+", icon: Clock },
-    { label: "Projets livrés", value: "10+", icon: Rocket },
-    { label: "Clients satisfaits", value: "8+", icon: Users },
-    { label: "Technologies maîtrisées", value: "15+", icon: Award },
+    {
+      label: t("about.stats.experience.label"),
+      value: t("about.stats.experience.value"),
+      icon: Clock,
+    },
+    {
+      label: t("about.stats.projects.label"),
+      value: t("about.stats.projects.value"),
+      icon: Rocket,
+    },
+    { label: t("about.stats.clients.label"), value: t("about.stats.clients.value"), icon: Users },
+    {
+      label: t("about.stats.technologies.label"),
+      value: t("about.stats.technologies.value"),
+      icon: Award,
+    },
   ];
 
   const technologies = [
-    { name: "React & Next.js", icon: Code2, color: "text-blue-600 dark:text-blue-400" },
-    { name: "TypeScript", icon: Code2, color: "text-blue-600 dark:text-blue-400" },
-    { name: "Node.js", icon: Code2, color: "text-green-600 dark:text-green-400" },
-    { name: "Python", icon: Brain, color: "text-yellow-600 dark:text-yellow-400" },
-    { name: "PostgreSQL", icon: Database, color: "text-blue-700 dark:text-blue-300" },
-    { name: "Docker & AWS", icon: Sparkles, color: "text-orange-600 dark:text-orange-400" },
+    {
+      name: t("about.techStack.items.react"),
+      icon: Code2,
+      color: "text-blue-600 dark:text-blue-400",
+    },
+    {
+      name: t("about.techStack.items.typescript"),
+      icon: Code2,
+      color: "text-blue-600 dark:text-blue-400",
+    },
+    {
+      name: t("about.techStack.items.nodejs"),
+      icon: Code2,
+      color: "text-green-600 dark:text-green-400",
+    },
+    {
+      name: t("about.techStack.items.python"),
+      icon: Brain,
+      color: "text-yellow-600 dark:text-yellow-400",
+    },
+    {
+      name: t("about.techStack.items.postgresql"),
+      icon: Database,
+      color: "text-blue-700 dark:text-blue-300",
+    },
+    {
+      name: t("about.techStack.items.docker"),
+      icon: Sparkles,
+      color: "text-orange-600 dark:text-orange-400",
+    },
   ];
 
   return (
@@ -43,7 +81,7 @@ export default function AboutSection() {
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: prefersReducedMotion ? 0 : 0.5 }}
         >
-          À Propos
+          {t("about.title")}
         </motion.h2>
 
         <div className="mt-10 grid gap-12 lg:grid-cols-2 lg:gap-16">
@@ -57,27 +95,9 @@ export default function AboutSection() {
               delay: prefersReducedMotion ? 0 : 0.2,
             }}
           >
-            <p>
-              <strong className="text-primary-600 dark:text-primary-400">
-                Développeur Full-Stack propulsé par l&apos;IA
-              </strong>
-              , je combine expertise technique traditionnelle et intelligence artificielle pour
-              créer des solutions web innovantes et performantes. Ma spécialité : transformer des
-              idées complexes en applications élégantes et scalables.
-            </p>
-            <p>
-              Avec une maîtrise approfondie de <strong>Next.js, TypeScript et Node.js</strong>, et
-              une expertise unique en <strong>intégration d&apos;IA</strong>, je développe des
-              applications qui non seulement répondent aux besoins actuels, mais anticipent les
-              défis de demain. Mon approche allie rigueur technique, design centré utilisateur et
-              automatisation intelligente.
-            </p>
-            <p>
-              Passionné par l&apos;innovation et l&apos;apprentissage continu, je m&apos;engage à
-              livrer du code propre, maintenable et documenté. Chaque projet est une opportunité de
-              repousser les limites du possible grâce à la synergie entre développement moderne et
-              intelligence artificielle.
-            </p>
+            <p>{t("about.biography.intro")}</p>
+            <p>{t("about.biography.expertise")}</p>
+            <p>{t("about.biography.passion")}</p>
           </motion.div>
 
           {/* Stats & Technologies */}
@@ -114,7 +134,7 @@ export default function AboutSection() {
             {/* Technologies */}
             <div>
               <h3 className="mb-4 text-xl font-semibold text-gray-900 dark:text-white">
-                Stack Technique Principal
+                {t("about.techStack.title")}
               </h3>
               <div className="grid grid-cols-2 gap-4">
                 {technologies.map((tech) => {

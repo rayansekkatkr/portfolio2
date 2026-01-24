@@ -16,10 +16,12 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { contactSchema, type ContactFormData } from "@/lib/validations/contact";
 import { startProgress, doneProgress } from "@/components/ui/ProgressBar";
+import { useLanguageContext } from "@/lib/i18n/LanguageContext";
 
 type SubmissionState = "idle" | "loading" | "success" | "error";
 
 export default function ContactSection() {
+  const { t } = useLanguageContext();
   const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(
@@ -130,11 +132,9 @@ export default function ContactSection() {
           transition={{ duration: prefersReducedMotion ? 0 : 0.5 }}
         >
           <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl dark:text-white">
-            Contactez-moi
+            {t("contact.title")}
           </h2>
-          <p className="mt-4 text-lg text-gray-600 dark:text-gray-300">
-            Un projet en tête ? Discutons de la manière dont je peux vous aider à le concrétiser.
-          </p>
+          <p className="mt-4 text-lg text-gray-600 dark:text-gray-300">{t("contact.subtitle")}</p>
         </motion.div>
 
         <div className="mt-16 grid gap-12 lg:grid-cols-2">
@@ -148,9 +148,11 @@ export default function ContactSection() {
               delay: prefersReducedMotion ? 0 : 0.2,
             }}
           >
-            <h3 className="text-2xl font-bold text-gray-900 dark:text-white">Envoyer un message</h3>
+            <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
+              {t("contact.form.title")}
+            </h3>
             <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-              Remplissez le formulaire et je vous répondrai dans les plus brefs délais.
+              {t("contact.form.description")}
             </p>
 
             <form onSubmit={handleSubmit(onSubmit)} className="mt-8 space-y-6">
@@ -197,7 +199,7 @@ export default function ContactSection() {
                   htmlFor="name"
                   className="block text-sm leading-6 font-semibold text-gray-900 dark:text-white"
                 >
-                  Nom complet *
+                  {t("contact.form.name.label")} *
                 </label>
                 <div className="relative mt-2">
                   <input
@@ -205,7 +207,7 @@ export default function ContactSection() {
                     id="name"
                     {...register("name")}
                     disabled={submissionState === "loading"}
-                    placeholder="Votre nom"
+                    placeholder={t("contact.form.name.placeholder")}
                     className={`block w-full rounded-lg border-0 px-4 py-3.5 text-gray-900 shadow-sm ring-1 transition-all duration-200 ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset disabled:cursor-not-allowed disabled:opacity-50 sm:text-sm sm:leading-6 dark:bg-gray-900 dark:text-white ${
                       errors.name
                         ? "pr-10 ring-red-500 focus:ring-red-500"
@@ -234,7 +236,7 @@ export default function ContactSection() {
                   htmlFor="email"
                   className="block text-sm leading-6 font-semibold text-gray-900 dark:text-white"
                 >
-                  Email *
+                  {t("contact.form.email.label")} *
                 </label>
                 <div className="relative mt-2">
                   <input
@@ -242,7 +244,7 @@ export default function ContactSection() {
                     id="email"
                     {...register("email")}
                     disabled={submissionState === "loading"}
-                    placeholder="votre.email@exemple.com"
+                    placeholder={t("contact.form.email.placeholder")}
                     className={`block w-full rounded-lg border-0 px-4 py-3.5 text-gray-900 shadow-sm ring-1 transition-all duration-200 ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset disabled:cursor-not-allowed disabled:opacity-50 sm:text-sm sm:leading-6 dark:bg-gray-900 dark:text-white ${
                       errors.email
                         ? "pr-10 ring-red-500 focus:ring-red-500"
@@ -271,7 +273,7 @@ export default function ContactSection() {
                   htmlFor="message"
                   className="block text-sm leading-6 font-semibold text-gray-900 dark:text-white"
                 >
-                  Message *
+                  {t("contact.form.message.label")} *
                 </label>
                 <div className="relative mt-2">
                   <textarea
@@ -279,7 +281,7 @@ export default function ContactSection() {
                     {...register("message")}
                     disabled={submissionState === "loading"}
                     rows={5}
-                    placeholder="Décrivez votre projet ou votre demande..."
+                    placeholder={t("contact.form.message.placeholder")}
                     className={`block w-full rounded-lg border-0 px-4 py-3.5 text-gray-900 shadow-sm ring-1 transition-all duration-200 ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset disabled:cursor-not-allowed disabled:opacity-50 sm:text-sm sm:leading-6 dark:bg-gray-900 dark:text-white ${
                       errors.message
                         ? "ring-red-500 focus:ring-red-500"
@@ -316,7 +318,7 @@ export default function ContactSection() {
                 ) : (
                   <>
                     <Send className="h-5 w-5" />
-                    Envoyer le message
+                    {t("contact.form.submit")}
                   </>
                 )}
               </button>
@@ -333,10 +335,10 @@ export default function ContactSection() {
             }}
           >
             <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
-              Autres moyens de contact
+              {t("contact.links.title")}
             </h3>
             <p className="mt-2 text-gray-600 dark:text-gray-400">
-              Vous préférez un autre canal ? Contactez-moi directement via ces plateformes.
+              {t("contact.links.description")}
             </p>
 
             <div className="mt-8 space-y-4">
@@ -380,10 +382,10 @@ export default function ContactSection() {
             {/* Additional Info */}
             <div className="bg-primary-50 dark:bg-primary-900/20 mt-8 rounded-lg p-6">
               <h4 className="text-primary-900 dark:text-primary-100 font-semibold">
-                💡 Disponibilité
+                {t("contact.availability.title")}
               </h4>
               <p className="text-primary-800 dark:text-primary-200 mt-2 text-sm">
-                Actuellement disponible pour de nouveaux projets. Temps de réponse moyen : 24-48h.
+                {t("contact.availability.description")}
               </p>
             </div>
           </motion.div>
