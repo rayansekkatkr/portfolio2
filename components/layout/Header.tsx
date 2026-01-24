@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import LanguageSwitcher from "@/components/ui/LanguageSwitcher";
 import ThemeToggle from "@/components/ui/ThemeToggle";
@@ -15,11 +15,48 @@ const navigation = [
   { name: "navigation.contact", href: "#contact" },
 ];
 
+// Smooth scroll utility with easing and reduced-motion support
+function smoothScrollTo(targetId: string, offset: number = 80, duration: number = 600) {
+  const target = document.querySelector(targetId);
+  if (!target) return;
+
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (prefersReducedMotion) {
+    const targetPosition = target.getBoundingClientRect().top + window.scrollY - offset;
+    window.scrollTo({ top: targetPosition, behavior: "auto" });
+    return;
+  }
+
+  const targetPosition = target.getBoundingClientRect().top + window.scrollY - offset;
+  const startPosition = window.scrollY;
+  const distance = targetPosition - startPosition;
+  const startTime = performance.now();
+
+  function easeInOutCubic(t: number): number {
+    return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+  }
+
+  function animation(currentTime: number) {
+    const elapsed = currentTime - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    const ease = easeInOutCubic(progress);
+    window.scrollTo(0, startPosition + distance * ease);
+    if (progress < 1) {
+      requestAnimationFrame(animation);
+    }
+  }
+
+  requestAnimationFrame(animation);
+}
+
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState("#hero");
   const { t } = useTranslation();
 
+  // Handle scroll events for header background and active section
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
@@ -27,6 +64,47 @@ export default function Header() {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Track active section with Intersection Observer
+  useEffect(() => {
+    const observerOptions = {
+      root: null,
+      rootMargin: "-100px 0px -50% 0px",
+      threshold: 0,
+    };
+
+    const observerCallback = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const id = `#${entry.target.id}`;
+          setActiveSection(id);
+          // Update URL hash without scrolling
+          if (window.history.pushState) {
+            window.history.pushState(null, "", id);
+          }
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+    // Observe all sections
+    navigation.forEach(({ href }) => {
+      const element = document.querySelector(href);
+      if (element) {
+        observer.observe(element);
+      }
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  // Handle click navigation with smooth scroll
+  const handleNavClick = useCallback((e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    smoothScrollTo(href);
+    setActiveSection(href);
   }, []);
 
   return (
@@ -90,11 +168,14 @@ export default function Header() {
             <a
               key={item.name}
               href={item.href}
-              className="hover:text-primary-600 dark:hover:text-primary-400 text-sm leading-6 font-semibold text-gray-900 transition-colors dark:text-white"
-              onClick={() => {
-                const element = document.querySelector(item.href);
-                element?.scrollIntoView({ behavior: "smooth" });
-              }}
+              className={`relative text-sm leading-6 font-semibold transition-colors ${
+                activeSection === item.href
+                  ? "text-primary-600 dark:text-primary-400"
+                  : "hover:text-primary-600 dark:hover:text-primary-400 text-gray-900 dark:text-white"
+              } after:bg-primary-600 dark:after:bg-primary-400 after:absolute after:bottom-0 after:left-0 after:h-0.5 after:transition-all after:duration-300 ${
+                activeSection === item.href ? "after:w-full" : "after:w-0 hover:after:w-full"
+              }`}
+              onClick={(e) => handleNavClick(e, item.href)}
             >
               {t(item.name)}
             </a>
@@ -140,10 +221,13 @@ export default function Header() {
                     <a
                       key={item.name}
                       href={item.href}
-                      className="-mx-3 block rounded-lg px-3 py-2 text-base leading-7 font-semibold text-gray-900 hover:bg-gray-50 dark:text-white dark:hover:bg-gray-800"
-                      onClick={() => {
-                        const element = document.querySelector(item.href);
-                        element?.scrollIntoView({ behavior: "smooth" });
+                      className={`-mx-3 block rounded-lg px-3 py-2 text-base leading-7 font-semibold transition-colors ${
+                        activeSection === item.href
+                          ? "text-primary-600 bg-primary-50 dark:text-primary-400 dark:bg-gray-800"
+                          : "text-gray-900 hover:bg-gray-50 dark:text-white dark:hover:bg-gray-800"
+                      }`}
+                      onClick={(e) => {
+                        handleNavClick(e, item.href);
                         setMobileMenuOpen(false);
                       }}
                     >
