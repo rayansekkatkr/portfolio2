@@ -34,47 +34,360 @@ async function main() {
 
 ## Introduction
 
-Les Large Language Models (LLMs) révolutionnent le développement web. Ce guide explore comment intégrer efficacement ces technologies dans vos applications.
+Les Large Language Models (LLMs) comme GPT-4, Claude, ou Llama représentent une révolution dans le développement web. Leur capacité à comprendre et générer du texte de manière contextuelle ouvre des possibilités infinies pour créer des applications intelligentes et personnalisées. Dans cet article, je partage mon expérience pratique d'intégration de LLMs dans des applications web de production, avec des exemples concrets et des patterns architecturaux éprouvés.
 
-## Architecture Recommandée
+## Architecture Backend : Le Pattern API Gateway
 
-### Backend API Pattern
+### Pourquoi séparer la logique LLM du frontend ?
+
+L'intégration de LLMs nécessite une architecture bien pensée. J'ai appris à mes dépens qu'exposer directement les clés API au frontend est une erreur coûteuse. Voici l'architecture que je recommande :
+
 \`\`\`typescript
-// API Route for LLM integration
+// app/api/ai/chat/route.ts
+import { OpenAI } from 'openai';
+import { ratelimit } from '@/lib/redis';
+
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
+
 export async function POST(req: Request) {
-  const { prompt, context } = await req.json();
-  
-  const response = await openai.chat.completions.create({
-    model: "gpt-4",
-    messages: [
-      { role: "system", content: context },
-      { role: "user", content: prompt }
-    ],
-    temperature: 0.7,
-    max_tokens: 1000
-  });
-  
-  return Response.json({ result: response.choices[0].message });
+  try {
+    // 1. Rate limiting par utilisateur
+    const ip = req.headers.get('x-forwarded-for') ?? 'unknown';
+    const { success } = await ratelimit.limit(ip);
+    
+    if (!success) {
+      return Response.json(
+        { error: 'Too many requests' },
+        { status: 429 }
+      );
+    }
+
+    // 2. Validation et sanitization
+    const { prompt, context, userId } = await req.json();
+    
+    if (!prompt || prompt.length > 1000) {
+      return Response.json(
+        { error: 'Invalid prompt' },
+        { status: 400 }
+      );
+    }
+
+    // 3. Vérification du cache
+    const cacheKey = \`llm:\${userId}:\${prompt}\`;
+    const cached = await redis.get(cacheKey);
+    
+    if (cached) {
+      return Response.json({ result: cached, cached: true });
+    }
+
+    // 4. Appel API avec streaming
+    const stream = await openai.chat.completions.create({
+      model: 'gpt-4-turbo',
+      messages: [
+        { 
+          role: 'system', 
+          content: 'You are a helpful assistant specialized in web development.' 
+        },
+        { role: 'user', content: prompt }
+      ],
+      temperature: 0.7,
+      max_tokens: 2000,
+      stream: true,
+    });
+
+    // 5. Stream response au client
+    const encoder = new TextEncoder();
+    const readable = new ReadableStream({
+      async start(controller) {
+        for await (const chunk of stream) {
+          const text = chunk.choices[0]?.delta?.content || '';
+          controller.enqueue(encoder.encode(text));
+        }
+        controller.close();
+      },
+    });
+
+    return new Response(readable, {
+      headers: {
+        'Content-Type': 'text/plain; charset=utf-8',
+        'Transfer-Encoding': 'chunked',
+      },
+    });
+
+  } catch (error) {
+    console.error('LLM Error:', error);
+    return Response.json(
+      { error: 'Internal server error' },
+      { status: 500 }
+    );
+  }
 }
 \`\`\`
 
-## Bonnes Pratiques
+## Optimisations Essentielles
 
-1. **Caching** - Utilisez Redis pour réduire les coûts API
-2. **Rate Limiting** - Protégez votre budget avec des limites
-3. **Streaming** - Améliorez l'UX avec des réponses progressives
-4. **Error Handling** - Gérez les timeouts et erreurs API
+### 1. Caching Intelligent avec Redis
 
-## Cas d'Usage Pratiques
+Le caching est crucial pour réduire les coûts. Voici ma stratégie :
 
-- Génération de contenu dynamique
-- Assistants conversationnels
-- Analyse de sentiment
-- Résumés automatiques
+\`\`\`typescript
+// lib/cache.ts
+import Redis from 'ioredis';
+
+const redis = new Redis(process.env.REDIS_URL);
+
+export async function getCachedOrGenerate<T>(
+  key: string,
+  generator: () => Promise<T>,
+  ttl: number = 3600
+): Promise<T> {
+  // Vérifier le cache
+  const cached = await redis.get(key);
+  if (cached) {
+    return JSON.parse(cached) as T;
+  }
+
+  // Générer si absent
+  const result = await generator();
+  
+  // Stocker avec TTL
+  await redis.setex(key, ttl, JSON.stringify(result));
+  
+  return result;
+}
+
+// Utilisation
+const response = await getCachedOrGenerate(
+  \`summary:\${articleId}\`,
+  () => generateSummary(articleContent),
+  7200 // 2 heures
+);
+\`\`\`
+
+### 2. Streaming pour une UX Optimale
+
+Le streaming améliore considérablement l'expérience utilisateur :
+
+\`\`\`typescript
+// hooks/useLLMStream.ts
+'use client';
+
+import { useState } from 'react';
+
+export function useLLMStream() {
+  const [response, setResponse] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  const sendPrompt = async (prompt: string) => {
+    setLoading(true);
+    setResponse('');
+
+    try {
+      const res = await fetch('/api/ai/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prompt }),
+      });
+
+      const reader = res.body?.getReader();
+      const decoder = new TextDecoder();
+
+      while (true) {
+        const { done, value } = await reader!.read();
+        if (done) break;
+
+        const text = decoder.decode(value);
+        setResponse(prev => prev + text);
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return { response, loading, sendPrompt };
+}
+\`\`\`
+
+### 3. Gestion des Erreurs et Retry Logic
+
+\`\`\`typescript
+// lib/retry.ts
+export async function retryWithBackoff<T>(
+  fn: () => Promise<T>,
+  maxRetries: number = 3,
+  baseDelay: number = 1000
+): Promise<T> {
+  for (let i = 0; i < maxRetries; i++) {
+    try {
+      return await fn();
+    } catch (error) {
+      if (i === maxRetries - 1) throw error;
+      
+      // Exponential backoff
+      const delay = baseDelay * Math.pow(2, i);
+      await new Promise(resolve => setTimeout(resolve, delay));
+    }
+  }
+  throw new Error('Max retries reached');
+}
+\`\`\`
+
+## Cas d'Usage Réels
+
+### 1. Génération de Contenu Dynamique
+
+\`\`\`typescript
+// Génération de descriptions de produits
+async function generateProductDescription(product: Product) {
+  const prompt = \`
+    Generate a compelling product description for:
+    Name: \${product.name}
+    Category: \${product.category}
+    Features: \${product.features.join(', ')}
+    
+    Write in a professional yet engaging tone, highlighting benefits.
+  \`;
+
+  return await getCachedOrGenerate(
+    \`product-desc:\${product.id}\`,
+    () => callLLM(prompt),
+    86400 // 24 heures
+  );
+}
+\`\`\`
+
+### 2. Assistant Conversationnel avec Contexte
+
+\`\`\`typescript
+// Chatbot avec mémoire de conversation
+export async function chat(
+  userId: string,
+  message: string,
+  conversationHistory: Message[]
+) {
+  const messages = [
+    { role: 'system', content: SYSTEM_PROMPT },
+    ...conversationHistory.map(m => ({
+      role: m.role,
+      content: m.content
+    })),
+    { role: 'user', content: message }
+  ];
+
+  const response = await openai.chat.completions.create({
+    model: 'gpt-4',
+    messages,
+    temperature: 0.8,
+  });
+
+  // Sauvegarder l'historique
+  await saveConversation(userId, messages);
+
+  return response.choices[0].message.content;
+}
+\`\`\`
+
+### 3. Analyse de Sentiment pour Modération
+
+\`\`\`typescript
+// Détection automatique de contenu inapproprié
+async function moderateContent(text: string): Promise<ModerationResult> {
+  const prompt = \`
+    Analyze this text for inappropriate content:
+    "\${text}"
+    
+    Return JSON with: { safe: boolean, reason: string, score: number }
+  \`;
+
+  const response = await openai.chat.completions.create({
+    model: 'gpt-3.5-turbo',
+    messages: [{ role: 'user', content: prompt }],
+    response_format: { type: 'json_object' }
+  });
+
+  return JSON.parse(response.choices[0].message.content);
+}
+\`\`\`
+
+## Considérations de Sécurité
+
+### Protection des Clés API
+
+1. **Jamais côté client** : Les clés doivent rester sur le serveur
+2. **Variables d'environnement** : Utilisez .env.local
+3. **Rotation régulière** : Changez les clés périodiquement
+4. **Monitoring** : Surveillez l'utilisation anormale
+
+### Validation des Entrées
+
+\`\`\`typescript
+import { z } from 'zod';
+
+const PromptSchema = z.object({
+  prompt: z.string().min(1).max(1000),
+  context: z.string().optional(),
+  temperature: z.number().min(0).max(2).default(0.7),
+});
+
+// Utilisation
+const validated = PromptSchema.parse(req.body);
+\`\`\`
+
+## Gestion des Coûts
+
+### Stratégies pour réduire les coûts :
+
+1. **Caching agressif** : 80% de mes requêtes sont servies depuis le cache
+2. **Modèles adaptés** : GPT-3.5 pour les tâches simples, GPT-4 pour les complexes
+3. **Limitation de tokens** : max_tokens approprié selon le cas d'usage
+4. **Monitoring** : Alertes sur les pics d'utilisation
+
+\`\`\`typescript
+// Calcul des coûts en temps réel
+function estimateCost(tokens: number, model: string): number {
+  const pricing = {
+    'gpt-4': 0.03 / 1000,
+    'gpt-3.5-turbo': 0.001 / 1000,
+  };
+  
+  return tokens * (pricing[model] || 0);
+}
+\`\`\`
+
+## Performance et Monitoring
+
+### Métriques à suivre :
+
+\`\`\`typescript
+// lib/analytics.ts
+export async function trackLLMMetrics(data: {
+  model: string;
+  tokens: number;
+  latency: number;
+  cached: boolean;
+}) {
+  await analytics.track('llm_request', {
+    ...data,
+    cost: estimateCost(data.tokens, data.model),
+    timestamp: Date.now(),
+  });
+}
+\`\`\`
 
 ## Conclusion
 
-L'intégration de LLMs ouvre de nouvelles possibilités pour créer des expériences utilisateur innovantes et intelligentes.`,
+L'intégration de LLMs dans des applications web de production nécessite bien plus qu'un simple appel API. Une architecture solide, des optimisations intelligentes, et une gestion rigoureuse des coûts et de la sécurité sont essentielles. 
+
+Les patterns présentés ici sont le fruit de plusieurs projets en production et ont fait leurs preuves. Le streaming améliore l'UX de manière spectaculaire, le caching réduit les coûts de 70-80%, et une bonne gestion des erreurs garantit la fiabilité.
+
+L'avenir du développement web est clairement orienté vers l'IA. En maîtrisant ces techniques dès maintenant, vous serez en avance sur la courbe et capable de créer des expériences utilisateur véritablement innovantes.
+
+**Ressources complémentaires :**
+- [Documentation OpenAI](https://platform.openai.com/docs)
+- [Vercel AI SDK](https://sdk.vercel.ai/)
+- [LangChain pour orchestration complexe](https://langchain.com/)`,
         en: `# Integrating LLMs into Modern Web Applications
 
 ## Introduction
