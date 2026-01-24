@@ -114,6 +114,17 @@ export default function Footer() {
                   </Link>
                 </li>
               ))}
+              <li>
+                <button
+                  onClick={() => {
+                    localStorage.removeItem("cookie-consent");
+                    window.location.reload();
+                  }}
+                  className="hover:text-primary-600 dark:hover:text-primary-400 text-sm text-gray-600 transition-colors dark:text-gray-400"
+                >
+                  Gérer les cookies
+                </button>
+              </li>
             </ul>
           </div>
         </div>

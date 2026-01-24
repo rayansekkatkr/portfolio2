@@ -11,14 +11,42 @@ const ScrollToTop = dynamic(() => import("@/components/ui/ScrollToTop"), {
   ssr: false,
 });
 
+const CookieConsent = dynamic(() => import("@/components/ui/CookieConsent"), {
+  ssr: false,
+});
+
+function ConditionalAnalytics() {
+  // Check if analytics is enabled from localStorage on mount
+  if (typeof window !== "undefined") {
+    const consent = localStorage.getItem("cookie-consent");
+    const analyticsFlag = localStorage.getItem("analytics-enabled");
+
+    if (consent) {
+      const preferences = JSON.parse(consent);
+      const analyticsEnabled = preferences.analytics && analyticsFlag === "true";
+
+      if (analyticsEnabled) {
+        return (
+          <>
+            <Analytics />
+            <SpeedInsights />
+          </>
+        );
+      }
+    }
+  }
+
+  return null;
+}
+
 export default function ClientProviders({ children }: { children: ReactNode }) {
   return (
     <ThemeProvider>
       <LanguageProvider>
         {children}
         <ScrollToTop />
-        <Analytics />
-        <SpeedInsights />
+        <ConditionalAnalytics />
+        <CookieConsent />
       </LanguageProvider>
     </ThemeProvider>
   );
