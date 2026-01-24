@@ -164,7 +164,7 @@ export default function ContactSection() {
 
               <button
                 type="submit"
-                className="bg-primary-600 hover:bg-primary-500 focus-visible:outline-primary-600 flex w-full items-center justify-center gap-2 rounded-md px-6 py-3 text-sm font-semibold text-white shadow-sm transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+                className="bg-primary-600 hover:bg-primary-500 focus-visible:outline-primary-600 shadow-primary-600/20 hover:shadow-primary-600/30 flex w-full items-center justify-center gap-2 rounded-md px-6 py-3 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:scale-105 hover:shadow-lg focus-visible:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 active:scale-95"
               >
                 <Send className="h-4 w-4" />
                 Envoyer le message
@@ -201,10 +201,10 @@ export default function ContactSection() {
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group hover:border-primary-500 dark:hover:border-primary-500 flex items-center gap-4 rounded-lg border border-gray-200 bg-white p-4 transition-all hover:shadow-md dark:border-gray-700 dark:bg-gray-800"
+                    className="group hover:border-primary-500 dark:hover:border-primary-500 focus-visible:border-primary-500 dark:focus-visible:border-primary-500 flex items-center gap-4 rounded-lg border border-gray-200 bg-white p-4 transition-all duration-200 hover:scale-[1.02] hover:shadow-md focus-visible:scale-[1.02] focus-visible:shadow-md dark:border-gray-700 dark:bg-gray-800"
                   >
                     <div
-                      className={`group-hover:bg-primary-50 dark:group-hover:bg-primary-900/20 flex h-12 w-12 items-center justify-center rounded-lg bg-gray-100 transition-colors dark:bg-gray-700`}
+                      className={`group-hover:bg-primary-50 dark:group-hover:bg-primary-900/20 flex h-12 w-12 items-center justify-center rounded-lg bg-gray-100 transition-all duration-200 group-hover:scale-110 group-focus-visible:scale-110 dark:bg-gray-700`}
                     >
                       <Icon className={`h-6 w-6 ${link.color}`} />
                     </div>

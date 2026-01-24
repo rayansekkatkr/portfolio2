@@ -66,13 +66,13 @@ export default function HeroSection() {
             <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row lg:justify-start">
               <a
                 href="#contact"
-                className="bg-primary-600 hover:bg-primary-500 focus-visible:outline-primary-600 w-full rounded-md px-8 py-3 text-center text-sm font-semibold text-white shadow-sm transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 sm:w-auto"
+                className="bg-primary-600 hover:bg-primary-500 focus-visible:outline-primary-600 shadow-primary-600/20 hover:shadow-primary-600/30 w-full rounded-md px-8 py-3 text-center text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:scale-105 hover:shadow-lg focus-visible:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 active:scale-95 sm:w-auto"
               >
                 Get in Touch
               </a>
               <a
                 href="#projects"
-                className="hover:bg-primary-50 dark:hover:bg-primary-900/20 border-primary-600 text-primary-600 dark:border-primary-400 dark:text-primary-400 w-full rounded-md border-2 px-8 py-3 text-center text-sm font-semibold transition-colors sm:w-auto"
+                className="hover:bg-primary-50 dark:hover:bg-primary-900/20 border-primary-600 text-primary-600 dark:border-primary-400 dark:text-primary-400 w-full rounded-md border-2 px-8 py-3 text-center text-sm font-semibold transition-all duration-200 hover:scale-105 focus-visible:scale-105 active:scale-95 sm:w-auto"
               >
                 View Projects
               </a>

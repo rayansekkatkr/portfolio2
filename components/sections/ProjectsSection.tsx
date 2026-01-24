@@ -104,7 +104,7 @@ export default function ProjectsSection() {
                 href={project.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-primary-600 hover:bg-primary-500 inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold text-white transition-colors"
+                className="bg-primary-600 hover:bg-primary-500 shadow-primary-600/20 hover:shadow-primary-600/30 inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:scale-105 hover:shadow-lg focus-visible:scale-105 active:scale-95"
               >
                 <ExternalLink className="h-4 w-4" />
                 Voir le site

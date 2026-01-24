@@ -178,3 +178,21 @@ body {
   white-space: nowrap;
   border-width: 0;
 }
+
+/* Touch device hover prevention - prevent sticky hover states on mobile */
+@media (hover: none) {
+  .hover\:scale-105:hover,
+  .hover\:scale-\[1\.02\]:hover,
+  .hover\:-translate-y-1:hover,
+  .hover\:shadow-xl:hover,
+  .hover\:shadow-2xl:hover,
+  .hover\:shadow-lg:hover,
+  .hover\:shadow-md:hover,
+  .hover\:ring-primary-500\/40:hover,
+  .group:hover .group-hover\:scale-105,
+  .group:hover .group-hover\:scale-110 {
+    transform: none;
+    box-shadow: none;
+    ring: none;
+  }
+}

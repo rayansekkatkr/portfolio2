@@ -125,10 +125,10 @@ export default function SkillsSection() {
             return (
               <motion.div
                 key={service.title}
-                className={`group relative overflow-hidden rounded-xl bg-white p-8 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl dark:bg-gray-900 ${
+                className={`group relative overflow-hidden rounded-xl bg-white p-8 shadow-md transition-all duration-200 focus-within:-translate-y-1 focus-within:scale-[1.02] focus-within:shadow-2xl hover:-translate-y-1 hover:scale-[1.02] hover:shadow-2xl dark:bg-gray-900 ${
                   service.featured
-                    ? "border-primary-500 ring-primary-500/20 border-2 ring-2"
-                    : "border border-gray-200 dark:border-gray-700"
+                    ? "border-primary-500 ring-primary-500/20 hover:ring-primary-500/40 focus-within:ring-primary-500/40 border-2 ring-2"
+                    : "hover:border-primary-300 dark:hover:border-primary-700 focus-within:border-primary-300 dark:focus-within:border-primary-700 border border-gray-200 dark:border-gray-700"
                 }`}
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
