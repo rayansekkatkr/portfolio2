@@ -33,9 +33,9 @@ export default function BlogList({ posts, locale }: BlogListProps) {
       {posts.map((post) => (
         <BlogCard
           key={post.id}
-          slug={post.slug[locale] || post.slug.en}
-          title={post.title[locale] || post.title.en}
-          excerpt={post.excerpt[locale] || post.excerpt.en}
+          slug={post.slug[locale] || post.slug.en || post.slug.fr || ""}
+          title={post.title[locale] || post.title.en || post.title.fr || ""}
+          excerpt={post.excerpt[locale] || post.excerpt.en || post.excerpt.fr || ""}
           coverImage={post.coverImage}
           publishedAt={post.publishedAt}
           readingTime={post.readingTimeMinutes}

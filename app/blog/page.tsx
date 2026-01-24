@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import { prisma } from "@/lib/prisma";
-import BlogList from "@/components/blog/BlogList";
+import BlogPageClient from "@/components/blog/BlogPageClient";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 
@@ -87,7 +87,7 @@ export default async function BlogPage() {
         </div>
 
         {posts.length > 0 ? (
-          <BlogList posts={posts} locale={locale} />
+          <BlogPageClient posts={posts} locale={locale} />
         ) : (
           <div className="py-12 text-center">
             <p className="text-lg text-gray-600 dark:text-gray-400">

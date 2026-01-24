@@ -23,19 +23,23 @@ async function getArticle(slug: string, locale: string = "fr") {
 
     if (!post) return null;
 
+    const titleObj = post.title as Record<string, string>;
+    const contentObj = post.content as Record<string, string>;
+    const excerptObj = post.excerpt as Record<string, string>;
+    const seoMetaObj = post.seoMetaDescription as Record<string, string> | null;
+
     return {
       id: post.id,
-      title: (post.title as Record<string, string>)[locale],
-      content: (post.content as Record<string, string>)[locale],
-      excerpt: (post.excerpt as Record<string, string>)[locale],
+      title: titleObj[locale] || titleObj.en || titleObj.fr || "",
+      content: contentObj[locale] || contentObj.en || contentObj.fr || "",
+      excerpt: excerptObj[locale] || excerptObj.en || excerptObj.fr || "",
       coverImage: post.coverImage,
       publishedAt: post.publishedAt,
       author: post.author,
       readingTimeMinutes: post.readingTimeMinutes,
       tags: post.tags,
       category: post.category,
-      seoMetaDescription:
-        (post.seoMetaDescription as Record<string, string> | null)?.[locale] || "",
+      seoMetaDescription: seoMetaObj?.[locale] || seoMetaObj?.en || seoMetaObj?.fr || "",
       seoKeywords: post.seoKeywords || [],
     };
   } catch (error) {
@@ -62,7 +66,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       title: article.title,
       description: article.seoMetaDescription || article.excerpt,
       type: "article",
-      publishedTime: article.publishedAt.toISOString(),
+      publishedTime: article.publishedAt?.toISOString() || new Date().toISOString(),
       authors: [article.author],
       images: [
         {
@@ -110,7 +114,7 @@ export default async function ArticlePage({ params }: PageProps) {
         <BlogPost
           title={article.title}
           content={article.content}
-          publishedAt={article.publishedAt}
+          publishedAt={article.publishedAt || new Date()}
           author={article.author}
           readingTime={article.readingTimeMinutes}
           tags={article.tags}

@@ -61,20 +61,11 @@ export default function BlogPost({
           remarkPlugins={[remarkGfm]}
           rehypePlugins={[rehypeHighlight, rehypeRaw]}
           components={{
-            code({
-              inline,
-              className,
-              children,
-              ...props
-            }: {
-              inline?: boolean;
-              className?: string;
-              children?: React.ReactNode;
-              [key: string]: unknown;
-            }) {
+            code(props: React.ComponentPropsWithoutRef<"code"> & { inline?: boolean }) {
+              const { inline, className, children, ...rest } = props;
               if (inline) {
                 return (
-                  <code className={className} {...props}>
+                  <code className={className} {...rest}>
                     {children}
                   </code>
                 );
