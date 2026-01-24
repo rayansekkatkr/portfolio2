@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import { prisma } from "@/lib/prisma";
 import BlogPost from "@/components/blog/BlogPost";
+import ReadingProgress from "@/components/blog/ReadingProgress";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 
@@ -142,6 +143,9 @@ export default async function ArticlePage({ params }: PageProps) {
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-950">
+      {/* Reading progress indicator */}
+      <ReadingProgress />
+
       {/* JSON-LD structured data */}
       <script
         type="application/ld+json"
