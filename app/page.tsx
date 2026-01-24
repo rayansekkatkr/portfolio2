@@ -6,6 +6,7 @@ export default function Home() {
         <p className="mt-4 text-lg text-gray-600 dark:text-gray-300">
           Welcome to your Next.js portfolio project!
         </p>
+        <p className="mt-2 text-sm text-gray-500">✅ Deployed on Vercel</p>
       </main>
     </div>
   );
