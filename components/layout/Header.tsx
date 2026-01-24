@@ -113,10 +113,13 @@ export default function Header() {
         scrolled ? "bg-white/90 shadow-md backdrop-blur-sm dark:bg-gray-900/90" : "bg-transparent"
       }`}
     >
-      <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
+      <nav
+        className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8"
+        aria-label="Main navigation"
+      >
         {/* Logo */}
         <div className="flex lg:flex-1">
-          <Link href="#hero" className="-m-1.5 p-1.5">
+          <Link href="#hero" className="-m-1.5 p-1.5" aria-label="Go to homepage">
             <span className="text-primary-600 dark:text-primary-400 text-xl font-bold">
               Portfolio
             </span>

@@ -95,7 +95,12 @@ export default function SkillsSection() {
   ];
 
   return (
-    <section ref={ref} id="skills" className="bg-white px-6 py-24 sm:py-32 dark:bg-gray-800">
+    <section
+      ref={ref}
+      id="skills"
+      aria-label="Skills and services"
+      className="bg-white px-6 py-24 sm:py-32 dark:bg-gray-800"
+    >
       <div className="mx-auto max-w-7xl">
         <motion.div
           className="text-center"

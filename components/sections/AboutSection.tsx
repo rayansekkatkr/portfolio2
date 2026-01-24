@@ -73,7 +73,12 @@ export default function AboutSection() {
   ];
 
   return (
-    <section ref={ref} id="about" className="bg-white px-6 py-24 sm:py-32 dark:bg-gray-900">
+    <section
+      ref={ref}
+      id="about"
+      aria-label="About me"
+      className="bg-white px-6 py-24 sm:py-32 dark:bg-gray-900"
+    >
       <div className="mx-auto max-w-7xl">
         <motion.h2
           className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl dark:text-white"

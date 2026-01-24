@@ -54,6 +54,7 @@ export default function HeroSection() {
   return (
     <section
       id="hero"
+      aria-label="Hero introduction"
       className="from-primary-50 flex min-h-screen items-center justify-center bg-gradient-to-br to-white px-6 dark:from-gray-900 dark:to-gray-800"
     >
       <div className="mx-auto max-w-5xl">

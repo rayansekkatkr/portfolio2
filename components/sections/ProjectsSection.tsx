@@ -67,7 +67,12 @@ export default function ProjectsSection() {
   };
 
   return (
-    <section ref={ref} id="projects" className="bg-white px-6 py-24 sm:py-32 dark:bg-gray-900">
+    <section
+      ref={ref}
+      id="projects"
+      aria-label="Projects and work"
+      className="bg-white px-6 py-24 sm:py-32 dark:bg-gray-900"
+    >
       <div className="mx-auto max-w-7xl">
         <motion.div
           className="text-center"
