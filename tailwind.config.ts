@@ -10,10 +10,25 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Custom colors prepared for dark mode
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        // Custom semantic colors using CSS variables
+        background: "rgb(var(--background) / <alpha-value>)",
+        foreground: "rgb(var(--foreground) / <alpha-value>)",
+        muted: {
+          DEFAULT: "rgb(var(--muted) / <alpha-value>)",
+          foreground: "rgb(var(--muted-foreground) / <alpha-value>)",
+        },
+        card: {
+          DEFAULT: "rgb(var(--card) / <alpha-value>)",
+          foreground: "rgb(var(--card-foreground) / <alpha-value>)",
+        },
+        border: {
+          DEFAULT: "rgb(var(--border) / <alpha-value>)",
+          light: "rgb(var(--border-light) / <alpha-value>)",
+        },
         primary: {
+          DEFAULT: "rgb(var(--primary) / <alpha-value>)",
+          foreground: "rgb(var(--primary-foreground) / <alpha-value>)",
+          hover: "rgb(var(--primary-hover) / <alpha-value>)",
           50: "#f0f9ff",
           100: "#e0f2fe",
           200: "#bae6fd",
@@ -26,6 +41,28 @@ const config: Config = {
           900: "#0c4a6e",
           950: "#082f49",
         },
+        secondary: {
+          DEFAULT: "rgb(var(--secondary) / <alpha-value>)",
+          foreground: "rgb(var(--secondary-foreground) / <alpha-value>)",
+        },
+        accent: {
+          DEFAULT: "rgb(var(--accent) / <alpha-value>)",
+          foreground: "rgb(var(--accent-foreground) / <alpha-value>)",
+        },
+        destructive: {
+          DEFAULT: "rgb(var(--destructive) / <alpha-value>)",
+          foreground: "rgb(var(--destructive-foreground) / <alpha-value>)",
+        },
+        input: {
+          DEFAULT: "rgb(var(--input) / <alpha-value>)",
+          foreground: "rgb(var(--input-foreground) / <alpha-value>)",
+        },
+        ring: "rgb(var(--ring) / <alpha-value>)",
+      },
+      borderRadius: {
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)",
       },
     },
   },

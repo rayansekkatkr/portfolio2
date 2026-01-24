@@ -1,26 +1,153 @@
 @import "tailwindcss";
 
+/* Light Theme (Default) */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Background Colors */
+  --background: 255 255 255; /* #ffffff */
+  --foreground: 23 23 23; /* #171717 */
+  --muted: 249 250 251; /* gray-50 */
+  --muted-foreground: 107 114 128; /* gray-500 */
+
+  /* Card Colors */
+  --card: 255 255 255; /* #ffffff */
+  --card-foreground: 23 23 23; /* #171717 */
+
+  /* Border Colors */
+  --border: 229 231 235; /* gray-200 */
+  --border-light: 243 244 246; /* gray-100 */
+
+  /* Primary Colors (Sky Blue) */
+  --primary: 14 165 233; /* sky-500 #0ea5e9 */
+  --primary-foreground: 255 255 255; /* white */
+  --primary-hover: 2 132 199; /* sky-600 #0284c7 */
+
+  /* Secondary Colors */
+  --secondary: 244 244 245; /* gray-100 */
+  --secondary-foreground: 24 24 27; /* gray-900 */
+
+  /* Accent Colors */
+  --accent: 240 253 250; /* teal-50 */
+  --accent-foreground: 19 78 74; /* teal-900 */
+
+  /* Destructive Colors */
+  --destructive: 239 68 68; /* red-500 */
+  --destructive-foreground: 255 255 255; /* white */
+
+  /* Input Colors */
+  --input: 229 231 235; /* gray-200 */
+  --input-foreground: 23 23 23; /* #171717 */
+
+  /* Ring/Focus */
+  --ring: 14 165 233; /* sky-500 */
+
+  /* Radius */
+  --radius: 0.5rem;
+}
+
+/* Dark Theme */
+.dark {
+  /* Background Colors */
+  --background: 10 10 10; /* #0a0a0a */
+  --foreground: 237 237 237; /* #ededed */
+  --muted: 31 41 55; /* gray-800 */
+  --muted-foreground: 156 163 175; /* gray-400 */
+
+  /* Card Colors */
+  --card: 17 24 39; /* gray-900 */
+  --card-foreground: 249 250 251; /* gray-50 */
+
+  /* Border Colors */
+  --border: 55 65 81; /* gray-700 */
+  --border-light: 75 85 99; /* gray-600 */
+
+  /* Primary Colors (Lighter sky blue for dark mode) */
+  --primary: 56 189 248; /* sky-400 #38bdf8 */
+  --primary-foreground: 8 47 73; /* sky-950 */
+  --primary-hover: 125 211 252; /* sky-300 #7dd3fc */
+
+  /* Secondary Colors */
+  --secondary: 39 39 42; /* gray-800 */
+  --secondary-foreground: 250 250 250; /* gray-50 */
+
+  /* Accent Colors */
+  --accent: 19 78 74; /* teal-900 */
+  --accent-foreground: 204 251 241; /* teal-100 */
+
+  /* Destructive Colors */
+  --destructive: 248 113 113; /* red-400 */
+  --destructive-foreground: 127 29 29; /* red-900 */
+
+  /* Input Colors */
+  --input: 55 65 81; /* gray-700 */
+  --input-foreground: 249 250 251; /* gray-50 */
+
+  /* Ring/Focus */
+  --ring: 56 189 248; /* sky-400 */
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-background: rgb(var(--background));
+  --color-foreground: rgb(var(--foreground));
+  --color-muted: rgb(var(--muted));
+  --color-muted-foreground: rgb(var(--muted-foreground));
+  --color-card: rgb(var(--card));
+  --color-card-foreground: rgb(var(--card-foreground));
+  --color-border: rgb(var(--border));
+  --color-border-light: rgb(var(--border-light));
+  --color-primary: rgb(var(--primary));
+  --color-primary-foreground: rgb(var(--primary-foreground));
+  --color-primary-hover: rgb(var(--primary-hover));
+  --color-secondary: rgb(var(--secondary));
+  --color-secondary-foreground: rgb(var(--secondary-foreground));
+  --color-accent: rgb(var(--accent));
+  --color-accent-foreground: rgb(var(--accent-foreground));
+  --color-destructive: rgb(var(--destructive));
+  --color-destructive-foreground: rgb(var(--destructive-foreground));
+  --color-input: rgb(var(--input));
+  --color-input-foreground: rgb(var(--input-foreground));
+  --color-ring: rgb(var(--ring));
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
+/* Fallback for system preference (when no class is set) */
 @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  :root:not(.light):not(.dark) {
+    --background: 10 10 10;
+    --foreground: 237 237 237;
+    --muted: 31 41 55;
+    --muted-foreground: 156 163 175;
+    --card: 17 24 39;
+    --card-foreground: 249 250 251;
+    --border: 55 65 81;
+    --border-light: 75 85 99;
+    --primary: 56 189 248;
+    --primary-foreground: 8 47 73;
+    --primary-hover: 125 211 252;
+    --secondary: 39 39 42;
+    --secondary-foreground: 250 250 250;
+    --accent: 19 78 74;
+    --accent-foreground: 204 251 241;
+    --destructive: 248 113 113;
+    --destructive-foreground: 127 29 29;
+    --input: 55 65 81;
+    --input-foreground: 249 250 251;
+    --ring: 56 189 248;
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: rgb(var(--background));
+  color: rgb(var(--foreground));
+  font-family: var(--font-sans, Arial, Helvetica, sans-serif);
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+
+/* Smooth transitions for theme changes */
+* {
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
 }
