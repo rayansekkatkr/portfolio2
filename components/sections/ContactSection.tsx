@@ -136,7 +136,7 @@ export default function ContactSection() {
         <div className="mt-16 grid gap-12 lg:grid-cols-2">
           {/* Contact Form */}
           <motion.div
-            className="rounded-2xl bg-gray-50 p-8 shadow-lg dark:bg-gray-800"
+            className="rounded-2xl bg-gradient-to-br from-gray-50 to-gray-100 p-8 shadow-xl ring-1 ring-gray-200 dark:from-gray-800 dark:to-gray-900 dark:ring-gray-700"
             initial={{ opacity: 0, x: -20 }}
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
             transition={{
@@ -144,9 +144,7 @@ export default function ContactSection() {
               delay: prefersReducedMotion ? 0 : 0.2,
             }}
           >
-            <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
-              Envoyer un message
-            </h3>
+            <h3 className="text-2xl font-bold text-gray-900 dark:text-white">Envoyer un message</h3>
             <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
               Remplissez le formulaire et je vous répondrai dans les plus brefs délais.
             </p>
@@ -197,22 +195,33 @@ export default function ContactSection() {
                 >
                   Nom complet *
                 </label>
-                <input
-                  type="text"
-                  id="name"
-                  {...register("name")}
-                  disabled={submissionState === "loading"}
-                  placeholder="Votre nom"
-                  className={`focus:ring-primary-600 mt-2 block w-full rounded-md border-0 px-4 py-3 text-gray-900 shadow-sm ring-1 ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset disabled:cursor-not-allowed disabled:opacity-50 sm:text-sm sm:leading-6 dark:bg-gray-900 dark:text-white ${
-                    errors.name
-                      ? "ring-red-500 focus:ring-red-500"
-                      : "ring-gray-300 dark:ring-gray-700"
-                  }`}
-                />
+                <div className="relative mt-2">
+                  <input
+                    type="text"
+                    id="name"
+                    {...register("name")}
+                    disabled={submissionState === "loading"}
+                    placeholder="Votre nom"
+                    className={`block w-full rounded-lg border-0 px-4 py-3.5 text-gray-900 shadow-sm ring-1 transition-all duration-200 ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset disabled:cursor-not-allowed disabled:opacity-50 sm:text-sm sm:leading-6 dark:bg-gray-900 dark:text-white ${
+                      errors.name
+                        ? "pr-10 ring-red-500 focus:ring-red-500"
+                        : "focus:ring-primary-600 ring-gray-300 dark:ring-gray-700"
+                    }`}
+                  />
+                  {errors.name && (
+                    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                      <AlertCircle className="h-5 w-5 text-red-500" />
+                    </div>
+                  )}
+                </div>
                 {errors.name && (
-                  <p className="mt-2 text-sm text-red-600 dark:text-red-400">
+                  <motion.p
+                    initial={{ opacity: 0, y: -5 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="mt-2 flex items-center gap-1 text-sm text-red-600 dark:text-red-400"
+                  >
                     {errors.name.message}
-                  </p>
+                  </motion.p>
                 )}
               </div>
 
@@ -223,22 +232,33 @@ export default function ContactSection() {
                 >
                   Email *
                 </label>
-                <input
-                  type="email"
-                  id="email"
-                  {...register("email")}
-                  disabled={submissionState === "loading"}
-                  placeholder="votre.email@exemple.com"
-                  className={`focus:ring-primary-600 mt-2 block w-full rounded-md border-0 px-4 py-3 text-gray-900 shadow-sm ring-1 ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset disabled:cursor-not-allowed disabled:opacity-50 sm:text-sm sm:leading-6 dark:bg-gray-900 dark:text-white ${
-                    errors.email
-                      ? "ring-red-500 focus:ring-red-500"
-                      : "ring-gray-300 dark:ring-gray-700"
-                  }`}
-                />
+                <div className="relative mt-2">
+                  <input
+                    type="email"
+                    id="email"
+                    {...register("email")}
+                    disabled={submissionState === "loading"}
+                    placeholder="votre.email@exemple.com"
+                    className={`block w-full rounded-lg border-0 px-4 py-3.5 text-gray-900 shadow-sm ring-1 transition-all duration-200 ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset disabled:cursor-not-allowed disabled:opacity-50 sm:text-sm sm:leading-6 dark:bg-gray-900 dark:text-white ${
+                      errors.email
+                        ? "pr-10 ring-red-500 focus:ring-red-500"
+                        : "focus:ring-primary-600 ring-gray-300 dark:ring-gray-700"
+                    }`}
+                  />
+                  {errors.email && (
+                    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                      <AlertCircle className="h-5 w-5 text-red-500" />
+                    </div>
+                  )}
+                </div>
                 {errors.email && (
-                  <p className="mt-2 text-sm text-red-600 dark:text-red-400">
+                  <motion.p
+                    initial={{ opacity: 0, y: -5 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="mt-2 flex items-center gap-1 text-sm text-red-600 dark:text-red-400"
+                  >
                     {errors.email.message}
-                  </p>
+                  </motion.p>
                 )}
               </div>
 
@@ -249,38 +269,49 @@ export default function ContactSection() {
                 >
                   Message *
                 </label>
-                <textarea
-                  id="message"
-                  {...register("message")}
-                  disabled={submissionState === "loading"}
-                  rows={5}
-                  placeholder="Décrivez votre projet ou votre demande..."
-                  className={`focus:ring-primary-600 mt-2 block w-full rounded-md border-0 px-4 py-3 text-gray-900 shadow-sm ring-1 ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset disabled:cursor-not-allowed disabled:opacity-50 sm:text-sm sm:leading-6 dark:bg-gray-900 dark:text-white ${
-                    errors.message
-                      ? "ring-red-500 focus:ring-red-500"
-                      : "ring-gray-300 dark:ring-gray-700"
-                  }`}
-                />
+                <div className="relative mt-2">
+                  <textarea
+                    id="message"
+                    {...register("message")}
+                    disabled={submissionState === "loading"}
+                    rows={5}
+                    placeholder="Décrivez votre projet ou votre demande..."
+                    className={`block w-full rounded-lg border-0 px-4 py-3.5 text-gray-900 shadow-sm ring-1 transition-all duration-200 ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset disabled:cursor-not-allowed disabled:opacity-50 sm:text-sm sm:leading-6 dark:bg-gray-900 dark:text-white ${
+                      errors.message
+                        ? "ring-red-500 focus:ring-red-500"
+                        : "focus:ring-primary-600 ring-gray-300 dark:ring-gray-700"
+                    }`}
+                  />
+                  {errors.message && (
+                    <div className="pointer-events-none absolute top-3 right-3">
+                      <AlertCircle className="h-5 w-5 text-red-500" />
+                    </div>
+                  )}
+                </div>
                 {errors.message && (
-                  <p className="mt-2 text-sm text-red-600 dark:text-red-400">
+                  <motion.p
+                    initial={{ opacity: 0, y: -5 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="mt-2 flex items-center gap-1 text-sm text-red-600 dark:text-red-400"
+                  >
                     {errors.message.message}
-                  </p>
+                  </motion.p>
                 )}
               </div>
 
               <button
                 type="submit"
                 disabled={!isValid || !isDirty || submissionState === "loading"}
-                className="bg-primary-600 hover:bg-primary-500 focus-visible:outline-primary-600 shadow-primary-600/20 hover:shadow-primary-600/30 flex w-full items-center justify-center gap-2 rounded-md px-6 py-3 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:scale-105 hover:shadow-lg focus-visible:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:scale-100"
+                className="bg-primary-600 hover:bg-primary-500 focus-visible:outline-primary-600 shadow-primary-600/30 hover:shadow-primary-600/50 flex w-full items-center justify-center gap-2 rounded-lg px-6 py-4 text-base font-semibold text-white shadow-lg transition-all duration-200 hover:scale-[1.02] hover:shadow-xl focus-visible:scale-[1.02] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:scale-100 disabled:hover:shadow-lg"
               >
                 {submissionState === "loading" ? (
                   <>
-                    <Loader2 className="h-4 w-4 animate-spin" />
+                    <Loader2 className="h-5 w-5 animate-spin" />
                     Envoi en cours...
                   </>
                 ) : (
                   <>
-                    <Send className="h-4 w-4" />
+                    <Send className="h-5 w-5" />
                     Envoyer le message
                   </>
                 )}
