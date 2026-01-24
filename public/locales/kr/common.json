@@ -1,0 +1,27 @@
+{
+  "site": {
+    "title": "포트폴리오 | 풀스택 개발자",
+    "description": "AI 기반 풀스택 개발자"
+  },
+  "navigation": {
+    "home": "홈",
+    "about": "소개",
+    "services": "서비스",
+    "projects": "프로젝트",
+    "blog": "블로그",
+    "contact": "연락처"
+  },
+  "hero": {
+    "name": "Rayan Sekkat",
+    "title": "AI 기반 풀스택 개발자",
+    "description": "Next.js, TypeScript 및 최첨단 기술로 현대적인 웹 솔루션을 만드는 개발자입니다.",
+    "cta": {
+      "contact": "문의하기",
+      "projects": "프로젝트 보기"
+    }
+  },
+  "footer": {
+    "copyright": "모든 권리 보유.",
+    "poweredBy": "제공"
+  }
+}

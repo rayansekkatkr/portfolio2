@@ -1,0 +1,27 @@
+{
+  "site": {
+    "title": "Portfolio | Développeur Full-Stack",
+    "description": "Développeur Full-Stack propulsé par l'IA"
+  },
+  "navigation": {
+    "home": "Accueil",
+    "about": "À Propos",
+    "services": "Services",
+    "projects": "Projets",
+    "blog": "Blog",
+    "contact": "Contact"
+  },
+  "hero": {
+    "name": "Rayan Sekkat",
+    "title": "Développeur Full-Stack propulsé par l'IA",
+    "description": "Créateur de solutions web modernes avec Next.js, TypeScript et technologies de pointe.",
+    "cta": {
+      "contact": "Me Contacter",
+      "projects": "Voir les Projets"
+    }
+  },
+  "footer": {
+    "copyright": "Tous droits réservés.",
+    "poweredBy": "Propulsé par"
+  }
+}
