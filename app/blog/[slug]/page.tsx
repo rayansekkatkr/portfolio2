@@ -58,16 +58,28 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     };
   }
 
+  // Truncate description to 160 characters for meta description
+  const description = (article.seoMetaDescription || article.excerpt).slice(0, 160);
+  const articleUrl = `https://rayansekkat.com/blog/${slug}`;
+  const publishDate = article.publishedAt?.toISOString() || new Date().toISOString();
+
   return {
     title: `${article.title} | Rayan Sekkat`,
-    description: article.seoMetaDescription || article.excerpt,
+    description,
     keywords: article.seoKeywords,
+    authors: [{ name: article.author }],
+    alternates: {
+      canonical: articleUrl,
+    },
     openGraph: {
       title: article.title,
-      description: article.seoMetaDescription || article.excerpt,
+      description,
       type: "article",
-      publishedTime: article.publishedAt?.toISOString() || new Date().toISOString(),
+      publishedTime: publishDate,
       authors: [article.author],
+      url: articleUrl,
+      siteName: "Rayan Sekkat Portfolio",
+      locale: "fr_FR",
       images: [
         {
           url: article.coverImage,
@@ -80,8 +92,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     twitter: {
       card: "summary_large_image",
       title: article.title,
-      description: article.seoMetaDescription || article.excerpt,
+      description,
       images: [article.coverImage],
+      creator: "@rayansekkat",
+      site: "@rayansekkat",
     },
   };
 }
@@ -94,8 +108,46 @@ export default async function ArticlePage({ params }: PageProps) {
     notFound();
   }
 
+  const articleUrl = `https://rayansekkat.com/blog/${slug}`;
+  const publishDate = article.publishedAt?.toISOString() || new Date().toISOString();
+
+  // JSON-LD structured data for Article schema
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: article.title,
+    description: article.excerpt,
+    image: article.coverImage,
+    datePublished: publishDate,
+    dateModified: publishDate,
+    author: {
+      "@type": "Person",
+      name: article.author,
+      url: "https://rayansekkat.com",
+    },
+    publisher: {
+      "@type": "Person",
+      name: "Rayan Sekkat",
+      url: "https://rayansekkat.com",
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": articleUrl,
+    },
+    keywords: article.tags.join(", "),
+    articleSection: article.category,
+    inLanguage: "fr-FR",
+    url: articleUrl,
+  };
+
   return (
     <div className="min-h-screen bg-white dark:bg-gray-950">
+      {/* JSON-LD structured data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
       {/* Header with back button */}
       <header className="border-b border-gray-200 dark:border-gray-800">
         <div className="mx-auto max-w-7xl px-6 py-6">
