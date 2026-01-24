@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
+import { sendEmailWithRetry, EMAIL_CONFIG } from "@/lib/email/resend";
+import { generateContactEmailHTML, generateContactEmailText } from "@/lib/email/contact-template";
 
 // Rate limiting store (in-memory for simplicity, use Redis in production)
 const rateLimitStore = new Map<string, { count: number; resetTime: number }>();
@@ -142,17 +144,56 @@ export async function POST(request: NextRequest) {
       message: sanitizeInput(validation.data.message),
     };
 
-    // TODO: In next story, send email using email service
-    // For now, just log the submission
-    console.log(`[CONTACT API] New submission from IP: ${clientIP}`, {
+    // Prepare email data
+    const timestamp = new Date().toISOString();
+    const emailHtml = generateContactEmailHTML({
       name: sanitizedData.name,
       email: sanitizedData.email,
-      messageLength: sanitizedData.message.length,
-      timestamp: new Date().toISOString(),
+      message: sanitizedData.message,
+      timestamp: new Date(timestamp).toLocaleString("en-US", {
+        dateStyle: "full",
+        timeStyle: "long",
+      }),
+    });
+    const emailText = generateContactEmailText({
+      name: sanitizedData.name,
+      email: sanitizedData.email,
+      message: sanitizedData.message,
+      timestamp: new Date(timestamp).toLocaleString("en-US", {
+        dateStyle: "full",
+        timeStyle: "long",
+      }),
     });
 
-    // Simulate email sending delay
-    await new Promise((resolve) => setTimeout(resolve, 500));
+    // Send email with retry logic
+    console.log(`[CONTACT API] Sending email for submission from IP: ${clientIP}`);
+    const emailResult = await sendEmailWithRetry({
+      from: EMAIL_CONFIG.from,
+      to: EMAIL_CONFIG.to,
+      replyTo: EMAIL_CONFIG.replyToEnabled ? sanitizedData.email : undefined,
+      subject: `Portfolio Contact Form Submission from ${sanitizedData.name}`,
+      html: emailHtml,
+      text: emailText,
+    });
+
+    if (!emailResult.success) {
+      console.error(`[CONTACT API] Email delivery failed for IP: ${clientIP}`, emailResult.error);
+      return NextResponse.json(
+        {
+          error: "Email delivery failed",
+          message: "Unable to send your message. Please try again later or contact directly.",
+        },
+        { status: 500 }
+      );
+    }
+
+    console.log(`[CONTACT API] Email sent successfully`, {
+      messageId: emailResult.messageId,
+      ip: clientIP,
+      name: sanitizedData.name,
+      email: sanitizedData.email,
+      timestamp,
+    });
 
     const duration = Date.now() - startTime;
     console.log(`[CONTACT API] Submission successful in ${duration}ms`);
