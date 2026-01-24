@@ -117,7 +117,7 @@ export default function AboutSection() {
                 return (
                   <div
                     key={stat.label}
-                    className="rounded-lg bg-gray-50 p-6 text-center dark:bg-gray-800"
+                    className="rounded-lg bg-white p-6 text-center shadow-sm dark:bg-gray-800"
                   >
                     <Icon className="text-primary-600 dark:text-primary-400 mx-auto mb-3 h-8 w-8" />
                     <div className="text-3xl font-bold text-gray-900 dark:text-white">
@@ -142,7 +142,7 @@ export default function AboutSection() {
                   return (
                     <div
                       key={tech.name}
-                      className="flex items-center gap-3 rounded-lg bg-gray-50 p-4 transition-shadow hover:shadow-md dark:bg-gray-800"
+                      className="flex items-center gap-3 rounded-lg bg-white p-4 shadow-sm transition-shadow hover:shadow-md dark:bg-gray-800"
                     >
                       <Icon className={`h-6 w-6 ${tech.color}`} />
                       <span className="font-medium text-gray-900 dark:text-white">{tech.name}</span>

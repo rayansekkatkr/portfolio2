@@ -479,7 +479,8 @@ export async function POST(req: Request) {
 
 LLM 통합은 혁신적이고 지능적인 사용자 경험을 만들 수 있는 새로운 가능성을 열어줍니다.`,
       },
-      coverImage: "/images/blog/ai-integration.jpg",
+      coverImage:
+        "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&h=630&fit=crop",
       category: "AI/ML",
       tags: ["AI", "Machine Learning", "Web Development", "LLM", "OpenAI"],
       readingTimeMinutes: 8,
@@ -999,7 +1000,8 @@ const HeavyComponent = dynamic(() => import('./Heavy'), {
 
 최적화는 세부 사항에 대한 주의와 정기적인 측정이 필요한 지속적인 프로세스입니다.`,
       },
-      coverImage: "/images/blog/lighthouse.jpg",
+      coverImage:
+        "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&h=630&fit=crop",
       category: "Web Dev",
       tags: ["Performance", "Next.js", "Lighthouse", "Core Web Vitals", "Optimization"],
       readingTimeMinutes: 6,
@@ -1643,7 +1645,8 @@ export async function POST(req: Request) {
 
 잘 설계된 아키텍처는 성공적인 애플리케이션의 기반입니다.`,
       },
-      coverImage: "/images/blog/architecture.jpg",
+      coverImage:
+        "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?w=1200&h=630&fit=crop",
       category: "Backend",
       tags: ["Architecture", "Next.js", "TypeScript", "PostgreSQL", "Prisma"],
       readingTimeMinutes: 7,
