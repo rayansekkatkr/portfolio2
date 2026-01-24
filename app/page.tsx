@@ -1,13 +1,25 @@
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
+import HeroSection from "@/components/sections/HeroSection";
+import AboutSection from "@/components/sections/AboutSection";
+import SkillsSection from "@/components/sections/SkillsSection";
+import ProjectsSection from "@/components/sections/ProjectsSection";
+import BlogSection from "@/components/sections/BlogSection";
+import ContactSection from "@/components/sections/ContactSection";
+
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-white dark:bg-gray-900">
-      <main className="text-center">
-        <h1 className="text-4xl font-bold text-gray-900 dark:text-white">Hello World</h1>
-        <p className="mt-4 text-lg text-gray-600 dark:text-gray-300">
-          Welcome to your Next.js portfolio project!
-        </p>
-        <p className="mt-2 text-sm text-gray-500">✅ Deployed on Vercel</p>
+    <>
+      <Header />
+      <main>
+        <HeroSection />
+        <AboutSection />
+        <SkillsSection />
+        <ProjectsSection />
+        <BlogSection />
+        <ContactSection />
       </main>
-    </div>
+      <Footer />
+    </>
   );
 }
