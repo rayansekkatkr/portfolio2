@@ -30,7 +30,84 @@ so that **the site meets EU data protection regulations**.
 
 ## Definition of Done
 
-- [ ] All acceptance criteria met
-- [ ] Cookie consent functional
-- [ ] Privacy policy complete
-- [ ] RGPD compliant
+- [x] All acceptance criteria met
+- [x] Cookie consent functional
+- [x] Privacy policy complete
+- [x] RGPD compliant
+
+## Dev Agent Record
+
+**Status:** ✅ Complete
+
+**Agent Model Used:** Claude Sonnet 4.5
+
+**Implementation Summary:**
+
+Created a comprehensive RGPD-compliant cookie consent system with:
+
+1. **Cookie Consent Component** (`components/ui/CookieConsent.tsx`):
+   - Custom-built banner appearing on first visit
+   - Three options: Accept All, Reject Optional, Customize
+   - Clear explanation of essential vs optional cookies
+   - localStorage-based preference storage
+   - Responsive design with light/dark mode support
+   - Links to Privacy Policy
+
+2. **Conditional Analytics Loading** (`components/ClientProviders.tsx`):
+   - Analytics (Vercel Analytics & Speed Insights) only load after explicit consent
+   - Checks localStorage for user preferences
+   - Dynamic imports for code splitting
+
+3. **Comprehensive Privacy Policy** (`app/privacy/page.tsx`):
+   - 13 detailed sections covering RGPD requirements
+   - Data collection transparency (automatic & voluntary)
+   - Cookie types explained (essential vs analytical)
+   - User rights (access, rectification, erasure, portability, opposition)
+   - Data retention periods
+   - International data transfers
+   - Security measures
+   - Contact information & CNIL authority details
+   - SEO optimized with proper metadata
+
+4. **Terms of Service** (`app/terms/page.tsx`):
+   - 9 comprehensive sections
+   - Acceptance, usage rights, intellectual property
+   - User content policies, liability limitations
+   - Modifications, jurisdiction, termination
+   - Contact information
+
+5. **Footer Integration** (`components/layout/Footer.tsx`):
+   - "Gérer les cookies" button to reopen consent banner
+   - Links to Privacy Policy and Terms already present
+
+**File List:**
+
+- components/ui/CookieConsent.tsx (new)
+- components/ClientProviders.tsx (modified)
+- app/privacy/page.tsx (enhanced)
+- app/terms/page.tsx (enhanced)
+- components/layout/Footer.tsx (modified)
+
+**Acceptance Criteria Validation:**
+
+1. ✅ Cookie consent banner appears on first visit
+2. ✅ Clear language explaining Analytics and preference cookies
+3. ✅ Accept all / Reject optional / Customize options
+4. ✅ Essential cookies (theme, language, cookie-consent) explained
+5. ✅ Analytics only loads after explicit consent via ConditionalAnalytics component
+6. ✅ Preferences stored in localStorage and respected across sessions
+7. ✅ Privacy Policy at /privacy with comprehensive RGPD information
+8. ✅ Policy covers: data collection, usage, rights, contact information
+9. ✅ Terms of Service at /terms with legal disclaimers
+10. ✅ Links present in footer and cookie banner
+
+**Change Log:**
+
+- Created custom cookie consent banner with RGPD-compliant options
+- Implemented conditional analytics loading based on user consent
+- Wrote comprehensive Privacy Policy (13 sections, RGPD-compliant)
+- Enhanced Terms of Service (9 sections)
+- Added "Gérer les cookies" button to footer
+- Fixed ESLint errors (setState in useEffect, unused variables)
+
+**Commit:** 323ee0d - "feat(epic5-story9): implement RGPD compliance with cookie consent banner and legal pages"
