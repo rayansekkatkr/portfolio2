@@ -41,29 +41,42 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   const [locale, setLocaleState] = useState<Locale>(getInitialLocale);
   const [isLoaded, setIsLoaded] = useState(false);
 
-  // Load translations on mount
-  useEffect(() => {
-    async function loadTranslations() {
-      try {
-        const [frData, enData, krData] = await Promise.all([
-          fetch("/locales/fr/common.json").then((r) => r.json()),
-          fetch("/locales/en/common.json").then((r) => r.json()),
-          fetch("/locales/kr/common.json").then((r) => r.json()),
-        ]);
+  // Load translation for a specific locale (lazy loading)
+  const loadLocaleTranslations = async (localeToLoad: Locale) => {
+    // Skip if already loaded
+    if (translations[localeToLoad] && Object.keys(translations[localeToLoad]).length > 0) {
+      return;
+    }
 
-        translations.fr = frData as TranslationData;
-        translations.en = enData as TranslationData;
-        translations.kr = krData as TranslationData;
+    try {
+      const data = await fetch(`/locales/${localeToLoad}/common.json`).then((r) => r.json());
+      translations[localeToLoad] = data as TranslationData;
+    } catch (error) {
+      console.error(`Failed to load translations for ${localeToLoad}:`, error);
+    }
+  };
+
+  // Load initial locale translations on mount
+  useEffect(() => {
+    async function loadInitialTranslations() {
+      try {
+        await loadLocaleTranslations(locale);
         setIsLoaded(true);
       } catch (error) {
-        console.error("Failed to load translations:", error);
+        console.error("Failed to load initial translations:", error);
       }
     }
 
-    loadTranslations();
+    loadInitialTranslations();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const setLocale = (newLocale: Locale) => {
+  const setLocale = async (newLocale: Locale) => {
+    // Load new locale if not already loaded
+    if (!translations[newLocale] || Object.keys(translations[newLocale]).length === 0) {
+      await loadLocaleTranslations(newLocale);
+    }
+
     setLocaleState(newLocale);
     if (typeof window !== "undefined") {
       localStorage.setItem("locale", newLocale);
