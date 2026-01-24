@@ -1,52 +1,147 @@
+import Image from "next/image";
+import { ExternalLink, CheckCircle2, TrendingUp } from "lucide-react";
+
 export default function ProjectsSection() {
-  const projects = [
-    {
-      title: "Project One",
-      description: "A modern web application built with Next.js and TypeScript.",
-      tags: ["Next.js", "TypeScript", "Tailwind"],
-    },
-    {
-      title: "Project Two",
-      description: "Full-stack application with real-time features and database integration.",
-      tags: ["React", "Node.js", "PostgreSQL"],
-    },
-    {
-      title: "Project Three",
-      description: "Responsive portfolio website with smooth animations and dark mode.",
-      tags: ["Next.js", "Framer Motion", "Prisma"],
-    },
-  ];
+  const project = {
+    name: "pont-facturx.com",
+    tagline: "Plateforme de Facturation Électronique B2B",
+    description:
+      "Développement d'une plateforme web complète permettant aux entreprises de générer, envoyer et gérer leurs factures électroniques conformément aux normes françaises. Solution conçue pour simplifier la transition vers la facturation électronique obligatoire.",
+    technologies: [
+      {
+        name: "Python",
+        color: "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400",
+      },
+      { name: "React", color: "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400" },
+      {
+        name: "FastAPI",
+        color: "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400",
+      },
+      {
+        name: "PostgreSQL",
+        color: "bg-indigo-100 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-400",
+      },
+      { name: "Docker", color: "bg-cyan-100 text-cyan-700 dark:bg-cyan-900/30 dark:text-cyan-400" },
+    ],
+    features: [
+      "Génération automatique de factures au format Factur-X (PDF/XML)",
+      "Interface d'administration intuitive avec tableau de bord analytique",
+      "Validation automatique de conformité aux normes françaises",
+      "Système de notifications et suivi des paiements",
+      "API REST sécurisée pour intégration avec systèmes existants",
+    ],
+    results: [
+      { label: "Réduction du temps de traitement", value: "40%" },
+      { label: "Factures générées par mois", value: "500+" },
+      { label: "Taux de conformité", value: "100%" },
+    ],
+    liveUrl: "https://pont-facturx.com",
+    image: "/projects/pont-facturx-preview.jpg",
+  };
 
   return (
     <section id="projects" className="bg-white px-6 py-24 sm:py-32 dark:bg-gray-900">
       <div className="mx-auto max-w-7xl">
-        <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl dark:text-white">
-          Featured Projects
-        </h2>
-        <div className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {projects.map((project) => (
-            <div
-              key={project.title}
-              className="overflow-hidden rounded-lg bg-gray-50 shadow-md transition-shadow hover:shadow-lg dark:bg-gray-800"
-            >
-              <div className="p-6">
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
-                  {project.title}
-                </h3>
-                <p className="mt-4 text-gray-600 dark:text-gray-300">{project.description}</p>
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {project.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="bg-primary-100 text-primary-700 dark:bg-primary-900/30 dark:text-primary-400 rounded-full px-3 py-1 text-sm"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
+        <div className="text-center">
+          <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl dark:text-white">
+            Projet Phare
+          </h2>
+          <p className="mt-4 text-lg text-gray-600 dark:text-gray-300">
+            Une solution complète développée de A à Z
+          </p>
+        </div>
+
+        <div className="mt-16 overflow-hidden rounded-2xl bg-gradient-to-br from-gray-50 to-gray-100 shadow-2xl dark:from-gray-800 dark:to-gray-900">
+          {/* Project Image */}
+          <div className="from-primary-500 to-primary-700 relative h-64 w-full overflow-hidden bg-gradient-to-br sm:h-96">
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="text-center">
+                <div className="text-6xl font-bold text-white opacity-20">pont-facturx</div>
+                <div className="mt-4 text-xl text-white/80">Facturation Électronique</div>
               </div>
             </div>
-          ))}
+          </div>
+
+          <div className="p-8 sm:p-12">
+            {/* Header */}
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <h3 className="text-3xl font-bold text-gray-900 dark:text-white">{project.name}</h3>
+                <p className="text-primary-600 dark:text-primary-400 mt-2 text-lg">
+                  {project.tagline}
+                </p>
+              </div>
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-primary-600 hover:bg-primary-500 inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold text-white transition-colors"
+              >
+                <ExternalLink className="h-4 w-4" />
+                Voir le site
+              </a>
+            </div>
+
+            {/* Description */}
+            <p className="mt-6 text-lg leading-8 text-gray-700 dark:text-gray-300">
+              {project.description}
+            </p>
+
+            {/* Technologies */}
+            <div className="mt-8">
+              <h4 className="text-sm font-semibold tracking-wide text-gray-500 uppercase dark:text-gray-400">
+                Technologies Utilisées
+              </h4>
+              <div className="mt-4 flex flex-wrap gap-3">
+                {project.technologies.map((tech) => (
+                  <span
+                    key={tech.name}
+                    className={`rounded-full px-4 py-2 text-sm font-medium ${tech.color}`}
+                  >
+                    {tech.name}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* Features */}
+            <div className="mt-8">
+              <h4 className="text-sm font-semibold tracking-wide text-gray-500 uppercase dark:text-gray-400">
+                Fonctionnalités Clés
+              </h4>
+              <ul className="mt-4 space-y-3">
+                {project.features.map((feature, index) => (
+                  <li key={index} className="flex items-start gap-3">
+                    <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-green-600 dark:text-green-400" />
+                    <span className="text-gray-700 dark:text-gray-300">{feature}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Results */}
+            <div className="mt-10">
+              <h4 className="mb-6 flex items-center gap-2 text-sm font-semibold tracking-wide text-gray-500 uppercase dark:text-gray-400">
+                <TrendingUp className="h-5 w-5" />
+                Résultats Mesurables
+              </h4>
+              <div className="grid gap-6 sm:grid-cols-3">
+                {project.results.map((result, index) => (
+                  <div
+                    key={index}
+                    className="rounded-lg bg-white p-6 text-center shadow-md dark:bg-gray-800"
+                  >
+                    <div className="text-primary-600 dark:text-primary-400 text-3xl font-bold">
+                      {result.value}
+                    </div>
+                    <div className="mt-2 text-sm text-gray-600 dark:text-gray-400">
+                      {result.label}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
