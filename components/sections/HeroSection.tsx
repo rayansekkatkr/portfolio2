@@ -69,7 +69,8 @@ export default function HeroSection() {
               <Image
                 src="/avatar-placeholder.svg"
                 alt="Rayan Sekkat - AI-Powered Full-Stack Developer"
-                fill
+                width={256}
+                height={256}
                 className="object-cover"
                 priority
               />

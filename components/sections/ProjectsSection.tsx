@@ -4,6 +4,7 @@ import { ExternalLink, CheckCircle2, TrendingUp } from "lucide-react";
 import { motion, useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import { useLanguageContext } from "@/lib/i18n/LanguageContext";
+import Image from "next/image";
 
 export default function ProjectsSection() {
   const { t } = useLanguageContext();
@@ -62,7 +63,7 @@ export default function ProjectsSection() {
       },
     ],
     liveUrl: "https://pont-facturx.com",
-    image: "/projects/pont-facturx-preview.jpg",
+    image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&h=630&fit=crop",
   };
 
   return (
@@ -91,10 +92,18 @@ export default function ProjectsSection() {
         >
           {/* Project Image */}
           <div className="from-primary-500 to-primary-700 relative h-64 w-full overflow-hidden bg-gradient-to-br sm:h-96">
-            <div className="absolute inset-0 flex items-center justify-center">
+            <Image
+              src={project.image}
+              alt={`${project.name} - ${project.tagline}`}
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
+              className="object-cover opacity-90"
+              priority
+            />
+            <div className="from-primary-500/80 to-primary-700/80 absolute inset-0 flex items-center justify-center bg-gradient-to-br">
               <div className="text-center">
-                <div className="text-6xl font-bold text-white opacity-20">pont-facturx</div>
-                <div className="mt-4 text-xl text-white/80">Facturation Électronique</div>
+                <div className="text-6xl font-bold text-white opacity-90">pont-facturx</div>
+                <div className="mt-4 text-xl text-white/90">Facturation Électronique</div>
               </div>
             </div>
           </div>
