@@ -1,6 +1,23 @@
+"use client";
+
 import { ExternalLink, CheckCircle2, TrendingUp } from "lucide-react";
+import { motion, useInView } from "framer-motion";
+import { useRef, useState, useEffect } from "react";
 
 export default function ProjectsSection() {
+  const ref = useRef<HTMLElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(
+    () =>
+      typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  );
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const handleChange = () => setPrefersReducedMotion(mediaQuery.matches);
+    mediaQuery.addEventListener("change", handleChange);
+    return () => mediaQuery.removeEventListener("change", handleChange);
+  }, []);
   const project = {
     name: "pont-facturx.com",
     tagline: "Plateforme de Facturation Électronique B2B",
@@ -39,18 +56,31 @@ export default function ProjectsSection() {
   };
 
   return (
-    <section id="projects" className="bg-white px-6 py-24 sm:py-32 dark:bg-gray-900">
+    <section ref={ref} id="projects" className="bg-white px-6 py-24 sm:py-32 dark:bg-gray-900">
       <div className="mx-auto max-w-7xl">
-        <div className="text-center">
+        <motion.div
+          className="text-center"
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: prefersReducedMotion ? 0 : 0.5 }}
+        >
           <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl dark:text-white">
             Projet Phare
           </h2>
           <p className="mt-4 text-lg text-gray-600 dark:text-gray-300">
             Une solution complète développée de A à Z
           </p>
-        </div>
+        </motion.div>
 
-        <div className="mt-16 overflow-hidden rounded-2xl bg-gradient-to-br from-gray-50 to-gray-100 shadow-2xl dark:from-gray-800 dark:to-gray-900">
+        <motion.div
+          className="mt-16 overflow-hidden rounded-2xl bg-gradient-to-br from-gray-50 to-gray-100 shadow-2xl dark:from-gray-800 dark:to-gray-900"
+          initial={{ opacity: 0, y: 40 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+          transition={{
+            duration: prefersReducedMotion ? 0 : 0.6,
+            delay: prefersReducedMotion ? 0 : 0.2,
+          }}
+        >
           {/* Project Image */}
           <div className="from-primary-500 to-primary-700 relative h-64 w-full overflow-hidden bg-gradient-to-br sm:h-96">
             <div className="absolute inset-0 flex items-center justify-center">
@@ -141,7 +171,7 @@ export default function ProjectsSection() {
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

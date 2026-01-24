@@ -1,4 +1,22 @@
+"use client";
+
+import { motion, useInView } from "framer-motion";
+import { useRef, useState, useEffect } from "react";
+
 export default function BlogSection() {
+  const ref = useRef<HTMLElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(
+    () =>
+      typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  );
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const handleChange = () => setPrefersReducedMotion(mediaQuery.matches);
+    mediaQuery.addEventListener("change", handleChange);
+    return () => mediaQuery.removeEventListener("change", handleChange);
+  }, []);
   const posts = [
     {
       title: "Getting Started with Next.js 14",
@@ -21,16 +39,27 @@ export default function BlogSection() {
   ];
 
   return (
-    <section id="blog" className="bg-gray-50 px-6 py-24 sm:py-32 dark:bg-gray-800">
+    <section ref={ref} id="blog" className="bg-gray-50 px-6 py-24 sm:py-32 dark:bg-gray-800">
       <div className="mx-auto max-w-7xl">
-        <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl dark:text-white">
+        <motion.h2
+          className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl dark:text-white"
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: prefersReducedMotion ? 0 : 0.5 }}
+        >
           Latest Blog Posts
-        </h2>
+        </motion.h2>
         <div className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {posts.map((post) => (
-            <article
+          {posts.map((post, index) => (
+            <motion.article
               key={post.title}
               className="overflow-hidden rounded-lg bg-white shadow-md transition-shadow hover:shadow-lg dark:bg-gray-900"
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{
+                duration: prefersReducedMotion ? 0 : 0.4,
+                delay: prefersReducedMotion ? 0 : index * 0.1,
+              }}
             >
               <div className="p-6">
                 <time className="text-sm text-gray-500 dark:text-gray-400">{post.date}</time>
@@ -48,7 +77,7 @@ export default function BlogSection() {
                   </a>
                 </div>
               </div>
-            </article>
+            </motion.article>
           ))}
         </div>
       </div>

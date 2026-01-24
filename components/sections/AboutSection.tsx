@@ -1,6 +1,23 @@
+"use client";
+
 import { Sparkles, Code2, Database, Brain, Rocket, Users, Award, Clock } from "lucide-react";
+import { motion, useInView } from "framer-motion";
+import { useRef, useState, useEffect } from "react";
 
 export default function AboutSection() {
+  const ref = useRef<HTMLElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(
+    () =>
+      typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  );
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const handleChange = () => setPrefersReducedMotion(mediaQuery.matches);
+    mediaQuery.addEventListener("change", handleChange);
+    return () => mediaQuery.removeEventListener("change", handleChange);
+  }, []);
   const stats = [
     { label: "Années d'expérience", value: "5+", icon: Clock },
     { label: "Projets livrés", value: "10+", icon: Rocket },
@@ -18,15 +35,28 @@ export default function AboutSection() {
   ];
 
   return (
-    <section id="about" className="bg-white px-6 py-24 sm:py-32 dark:bg-gray-900">
+    <section ref={ref} id="about" className="bg-white px-6 py-24 sm:py-32 dark:bg-gray-900">
       <div className="mx-auto max-w-7xl">
-        <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl dark:text-white">
+        <motion.h2
+          className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl dark:text-white"
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: prefersReducedMotion ? 0 : 0.5 }}
+        >
           À Propos
-        </h2>
+        </motion.h2>
 
         <div className="mt-10 grid gap-12 lg:grid-cols-2 lg:gap-16">
           {/* Biography */}
-          <div className="space-y-6 text-lg leading-8 text-gray-600 dark:text-gray-300">
+          <motion.div
+            className="space-y-6 text-lg leading-8 text-gray-600 dark:text-gray-300"
+            initial={{ opacity: 0, x: -20 }}
+            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+            transition={{
+              duration: prefersReducedMotion ? 0 : 0.5,
+              delay: prefersReducedMotion ? 0 : 0.2,
+            }}
+          >
             <p>
               <strong className="text-primary-600 dark:text-primary-400">
                 Développeur Full-Stack propulsé par l&apos;IA
@@ -48,10 +78,18 @@ export default function AboutSection() {
               repousser les limites du possible grâce à la synergie entre développement moderne et
               intelligence artificielle.
             </p>
-          </div>
+          </motion.div>
 
           {/* Stats & Technologies */}
-          <div className="space-y-8">
+          <motion.div
+            className="space-y-8"
+            initial={{ opacity: 0, x: 20 }}
+            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
+            transition={{
+              duration: prefersReducedMotion ? 0 : 0.5,
+              delay: prefersReducedMotion ? 0 : 0.3,
+            }}
+          >
             {/* Stats Grid */}
             <div className="grid grid-cols-2 gap-4">
               {stats.map((stat) => {
@@ -93,7 +131,7 @@ export default function AboutSection() {
                 })}
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

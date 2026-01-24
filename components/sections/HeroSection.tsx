@@ -1,6 +1,25 @@
+"use client";
+
 import Image from "next/image";
+import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 
 export default function HeroSection() {
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(
+    () =>
+      typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  );
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const handleChange = () => setPrefersReducedMotion(mediaQuery.matches);
+    mediaQuery.addEventListener("change", handleChange);
+    return () => mediaQuery.removeEventListener("change", handleChange);
+  }, []);
+
+  const duration = prefersReducedMotion ? 0 : 0.5;
+  const delay = prefersReducedMotion ? 0 : 0.2;
+
   return (
     <section
       id="hero"
@@ -9,7 +28,12 @@ export default function HeroSection() {
       <div className="mx-auto max-w-5xl">
         <div className="flex flex-col items-center gap-12 lg:flex-row lg:gap-16">
           {/* Profile Image */}
-          <div className="flex-shrink-0">
+          <motion.div
+            className="flex-shrink-0"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration, ease: [0.25, 0.4, 0.25, 1] }}
+          >
             <div className="border-primary-600 relative h-48 w-48 overflow-hidden rounded-full border-4 shadow-xl lg:h-64 lg:w-64">
               <Image
                 src="/avatar-placeholder.svg"
@@ -19,10 +43,15 @@ export default function HeroSection() {
                 priority
               />
             </div>
-          </div>
+          </motion.div>
 
           {/* Content */}
-          <div className="flex-1 text-center lg:text-left">
+          <motion.div
+            className="flex-1 text-center lg:text-left"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration, delay, ease: [0.25, 0.4, 0.25, 1] }}
+          >
             <h1 className="text-5xl font-bold tracking-tight text-gray-900 sm:text-6xl md:text-7xl dark:text-white">
               Rayan Sekkat
             </h1>
@@ -48,7 +77,7 @@ export default function HeroSection() {
                 View Projects
               </a>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

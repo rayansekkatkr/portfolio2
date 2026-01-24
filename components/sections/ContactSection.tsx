@@ -1,9 +1,24 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Mail, Linkedin, Github, Briefcase, Send } from "lucide-react";
+import { motion, useInView } from "framer-motion";
 
 export default function ContactSection() {
+  const ref = useRef<HTMLElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(
+    () =>
+      typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  );
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const handleChange = () => setPrefersReducedMotion(mediaQuery.matches);
+    mediaQuery.addEventListener("change", handleChange);
+    return () => mediaQuery.removeEventListener("change", handleChange);
+  }, []);
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -55,20 +70,33 @@ export default function ContactSection() {
   ];
 
   return (
-    <section id="contact" className="bg-white px-6 py-24 sm:py-32 dark:bg-gray-900">
+    <section ref={ref} id="contact" className="bg-white px-6 py-24 sm:py-32 dark:bg-gray-900">
       <div className="mx-auto max-w-7xl">
-        <div className="text-center">
+        <motion.div
+          className="text-center"
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: prefersReducedMotion ? 0 : 0.5 }}
+        >
           <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl dark:text-white">
             Contactez-moi
           </h2>
           <p className="mt-4 text-lg text-gray-600 dark:text-gray-300">
             Un projet en tête ? Discutons de la manière dont je peux vous aider à le concrétiser.
           </p>
-        </div>
+        </motion.div>
 
         <div className="mt-16 grid gap-12 lg:grid-cols-2">
           {/* Contact Form */}
-          <div className="rounded-2xl bg-gray-50 p-8 shadow-lg dark:bg-gray-800">
+          <motion.div
+            className="rounded-2xl bg-gray-50 p-8 shadow-lg dark:bg-gray-800"
+            initial={{ opacity: 0, x: -20 }}
+            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+            transition={{
+              duration: prefersReducedMotion ? 0 : 0.5,
+              delay: prefersReducedMotion ? 0 : 0.2,
+            }}
+          >
             <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
               Envoyer un message
             </h3>
@@ -146,10 +174,17 @@ export default function ContactSection() {
                 ⚠️ Formulaire en développement - Fonctionnel dans Epic 3
               </p>
             </form>
-          </div>
+          </motion.div>
 
           {/* Professional Links */}
-          <div>
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
+            transition={{
+              duration: prefersReducedMotion ? 0 : 0.5,
+              delay: prefersReducedMotion ? 0 : 0.3,
+            }}
+          >
             <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
               Autres moyens de contact
             </h3>
@@ -204,7 +239,7 @@ export default function ContactSection() {
                 Actuellement disponible pour de nouveaux projets. Temps de réponse moyen : 24-48h.
               </p>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

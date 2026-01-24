@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Brain,
   Code2,
@@ -10,8 +12,23 @@ import {
   Bot,
   Zap,
 } from "lucide-react";
+import { motion, useInView } from "framer-motion";
+import { useRef, useState, useEffect } from "react";
 
 export default function SkillsSection() {
+  const ref = useRef<HTMLElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(
+    () =>
+      typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  );
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const handleChange = () => setPrefersReducedMotion(mediaQuery.matches);
+    mediaQuery.addEventListener("change", handleChange);
+    return () => mediaQuery.removeEventListener("change", handleChange);
+  }, []);
   const services = [
     {
       icon: Brain,
@@ -86,28 +103,39 @@ export default function SkillsSection() {
   ];
 
   return (
-    <section id="skills" className="bg-gray-50 px-6 py-24 sm:py-32 dark:bg-gray-800">
+    <section ref={ref} id="skills" className="bg-gray-50 px-6 py-24 sm:py-32 dark:bg-gray-800">
       <div className="mx-auto max-w-7xl">
-        <div className="text-center">
+        <motion.div
+          className="text-center"
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: prefersReducedMotion ? 0 : 0.5 }}
+        >
           <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl dark:text-white">
             Services & Expertise
           </h2>
           <p className="mt-4 text-lg text-gray-600 dark:text-gray-300">
             Des solutions complètes pour transformer vos idées en applications performantes
           </p>
-        </div>
+        </motion.div>
 
         <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {services.map((service) => {
+          {services.map((service, index) => {
             const Icon = service.icon;
             return (
-              <div
+              <motion.div
                 key={service.title}
                 className={`group relative overflow-hidden rounded-xl bg-white p-8 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl dark:bg-gray-900 ${
                   service.featured
                     ? "border-primary-500 ring-primary-500/20 border-2 ring-2"
                     : "border border-gray-200 dark:border-gray-700"
                 }`}
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                transition={{
+                  duration: prefersReducedMotion ? 0 : 0.4,
+                  delay: prefersReducedMotion ? 0 : index * 0.1,
+                }}
               >
                 {service.featured && (
                   <div className="bg-primary-500 absolute top-0 right-0 rounded-bl-xl px-3 py-1 text-xs font-semibold text-white">
@@ -133,7 +161,7 @@ export default function SkillsSection() {
                   {service.title}
                 </h3>
                 <p className="mt-3 text-gray-600 dark:text-gray-300">{service.description}</p>
-              </div>
+              </motion.div>
             );
           })}
         </div>
