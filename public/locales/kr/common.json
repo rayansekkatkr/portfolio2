@@ -46,14 +46,14 @@
       }
     },
     "techStack": {
-      "title": "기술",
+      "title": "기술 스택",
       "items": {
-        "react": "xxtermxx0xxtermxx & xxtermxx1xxtermxx",
-        "typescript": "xxtermxx2xxtermxx",
-        "nodejs": "xxtermxx3xxtermxx",
-        "python": "xxtermxx7xxtermxx",
-        "postgresql": "xxtermxx4xxtermxx",
-        "docker": "xxtermxx5xxtermxx & xxtermxx6xxtermxx"
+        "react": "React & Next.js",
+        "typescript": "TypeScript",
+        "nodejs": "Node.js",
+        "python": "Python",
+        "postgresql": "PostgreSQL",
+        "docker": "Docker & AWS"
       }
     }
   },
@@ -63,15 +63,15 @@
     "items": {
       "ai": {
         "title": "AI 및 자동화 통합",
-        "description": "인공 지능 솔루션 구현: 운영 최적화를 위한 지능형 챗봇, 비즈니스 프로세스 자동화."
+        "description": "인공 지능 솔루션 구현: LLM, Machine Learning, 지능형 챗봇, 비즈니스 프로세스 자동화로 운영을 최적화합니다."
       },
       "backend": {
-        "title": "백엔드 개발 및API",
-        "description": "고성능의 확장 가능한 애플리케이션을 위해Node.js,TypeScript,API를 사용하여 강력한 백엔드 아키텍처를 구축할 수 있습니다."
+        "title": "백엔드 개발 및 API",
+        "description": "Node.js, TypeScript, RESTful/GraphQL API를 사용하여 고성능의 확장 가능한 애플리케이션을 위한 강력한 백엔드 아키텍처를 구축합니다."
       },
       "saas": {
-        "title": "SAAS생성",
-        "description": "멀티테넌트 아키텍처, 구독 관리, 대시보드, 최적의 사용자 경험 등SAAS플랫폼의 완벽한 개발."
+        "title": "SaaS 플랫폼 개발",
+        "description": "SaaS 플랫폼의 완벽한 개발: 멀티테넌트 아키텍처, 구독 관리, 대시보드, 최적의 사용자 경험."
       },
       "refactoring": {
         "title": "리팩토링 및 현대화",
@@ -79,19 +79,19 @@
       },
       "database": {
         "title": "데이터베이스 관리",
-        "description": "최적화된 스키마 설계, 마이그레이션, 고성능 쿼리(예:PostgreSQL,MongoDB) 및 최신 ORM(예:Prisma)을 사용합니다."
+        "description": "최적화된 스키마 설계, 마이그레이션, PostgreSQL, MongoDB와 Prisma와 같은 최신 ORM을 사용한 고성능 쿼리."
       },
       "payment": {
         "title": "결제 시스템",
-        "description": "결제 솔루션(Stripe, PayPal), 거래 관리, 반복 구독 및 웹훅을 안전하게 통합합니다."
+        "description": "결제 솔루션(Stripe, PayPal)의 안전한 통합, 거래 관리, 반복 구독 및 웹훅."
       },
       "devops": {
-        "title": "배포 및DevOps",
-        "description": "운영 중인 애플리케이션의 인프라 관리 및 모니터링,CI/CD구성,Vercel,AWS,Docker에 배포합니다."
+        "title": "배포 및 DevOps",
+        "description": "CI/CD 구성, Vercel, AWS, Docker에 배포, 운영 중인 애플리케이션의 인프라 관리 및 모니터링."
       },
       "frontend": {
         "title": "최신 프론트엔드 개발",
-        "description": "React,Next.js,Tailwind CSS및 최신 개발 사례를 사용하여 반응형 및 접근성 높은 사용자 인터페이스 만들기."
+        "description": "React, Next.js, Tailwind CSS 및 최신 개발 사례를 사용하여 반응형 및 접근성이 높은 사용자 인터페이스 제작."
       },
       "security": {
         "title": "보안 및 인증",
@@ -99,7 +99,7 @@
       },
       "optimization": {
         "title": "성능 최적화",
-        "description": "성능 분석 및 개선: 번들 크기, 로딩 시간, 기술 SEO 및 최적의Lighthouse점수."
+        "description": "성능 분석 및 개선: 번들 크기, 로딩 시간, 기술 SEO 및 최적의 Lighthouse 점수."
       }
     }
   },
@@ -107,23 +107,23 @@
     "title": "프로젝트",
     "subtitle": "최근 프로젝트 살펴보기",
     "featured": {
-      "title": "xxtermxx25xxtermxx",
-      "description": "중소기업과 프리랜서를 위한 완벽한 인보이스 발행 및 세금 규정 준수 관리 플랫폼입니다. 직관적인 인터페이스, 지능형 자동화, 다양한 통합 기능을 제공합니다.",
+      "title": "pont-facturx.com",
+      "description": "중소기업과 프리랜서를 위한 완벽한 청구 및 세금 규정 준수 관리 SaaS 플랫폼. 직관적인 인터페이스, 지능형 자동화, 다양한 통합 기능.",
       "technologies": "기술",
       "techList": {
-        "nextjs": "xxtermxx1xxtermxx 14",
-        "typescript": "xxtermxx2xxtermxx",
-        "postgresql": "xxtermxx4xxtermxx",
-        "stripe": "xxtermxx18xxtermxx",
-        "prisma": "PrismaORM"
+        "nextjs": "Next.js 14",
+        "typescript": "TypeScript",
+        "postgresql": "PostgreSQL",
+        "stripe": "Stripe",
+        "prisma": "Prisma ORM"
       },
       "features": "주요 기능",
       "featureList": {
-        "invoicing": "규정 준수 송장 자동 생성",
+        "invoicing": "규정 준수 청구서 자동 생성",
         "dashboard": "실시간 분석 대시보드",
-        "integration": "회계 및 뱅킹 통합",
+        "integration": "회계 및 은행 통합",
         "automation": "자동 리마인더 및 결제",
-        "responsive": "반응형 및 접근성 높은 인터페이스"
+        "responsive": "반응형 및 접근성이 높은 인터페이스"
       },
       "results": "결과",
       "resultList": {
@@ -149,19 +149,19 @@
     "comingSoon": "곧 사용 가능",
     "placeholder": {
       "post1": {
-        "title": "애플리케이션에 AI를 통합하는 방법Next.js",
+        "title": "Next.js 애플리케이션에 AI를 통합하는 방법",
         "excerpt": "웹 프로젝트에 인공 지능 기능을 추가하기 위한 완벽한 가이드...",
         "date": "2026년 1월 15일",
         "readTime": "8분"
       },
       "post2": {
-        "title": "확장 가능한SAAS아키텍처(Next.js및PostgreSQL포함)",
-        "excerpt": "고성능의 확장 가능한SAAS플랫폼 구축을 위한 모범 사례...",
+        "title": "Next.js 및 PostgreSQL을 사용한 확장 가능한 SaaS 아키텍처",
+        "excerpt": "고성능의 확장 가능한 SaaS 플랫폼 구축을 위한 모범 사례...",
         "date": "2026년 1월 10일",
         "readTime": "12분"
       },
       "post3": {
-        "title": "성능 최적화:Lighthouse에서 100 달성",
+        "title": "성능 최적화: Lighthouse에서 100점 달성",
         "excerpt": "최신 웹 애플리케이션의 성능을 극대화하기 위한 고급 기술...",
         "date": "2026년 1월 5일",
         "readTime": "10분"
@@ -197,9 +197,9 @@
       "title": "기타 연락 수단",
       "description": "다른 채널을 선호하시나요? 다음 플랫폼을 통해 직접 문의하세요.",
       "email": "이메일",
-      "linkedin": "xxtermxx16xxtermxx",
-      "github": "xxtermxx15xxtermxx",
-      "upwork": "xxtermxx17xxtermxx"
+      "linkedin": "LinkedIn",
+      "github": "GitHub",
+      "upwork": "Upwork"
     },
     "availability": {
       "title": "💡 가용성",
@@ -230,9 +230,9 @@
     "copyright": "모든 권리 보유.",
     "poweredBy": "제공",
     "tech": {
-      "nextjs": "xxtermxx1xxtermxx",
-      "typescript": "xxtermxx2xxtermxx",
-      "tailwind": "xxtermxx26xxtermxx"
+      "nextjs": "Next.js",
+      "typescript": "TypeScript",
+      "tailwind": "Tailwind CSS"
     }
   }
 }

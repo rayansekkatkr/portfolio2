@@ -1,7 +1,7 @@
 {
   "site": {
     "title": "Portfolio | Full-Stack Developer",
-    "description": "Full-Stack developer powered by AI, specialized inNext.js,TypeScriptand modern web solutions"
+    "description": "AI-Powered Full-Stack Developer specialized in Next.js, TypeScript and modern web solutions"
   },
   "navigation": {
     "home": "Home",
@@ -13,8 +13,8 @@
   },
   "hero": {
     "name": "Rayan Sekkat",
-    "title": "Full-Stack Developer powered by AI",
-    "description": "Creator of modern web solutions withNext.js,TypeScriptand cutting-edge technologies. I turn your ideas into high-performance, scalable applications.",
+    "title": "AI-Powered Full-Stack Developer",
+    "description": "Crafting modern web solutions with Next.js, TypeScript and cutting-edge technologies. I turn your ideas into high-performance, scalable applications.",
     "cta": {
       "contact": "Contact me",
       "projects": "See Projects"
@@ -24,7 +24,7 @@
     "title": "About us",
     "biography": {
       "intro": "As an AI-powered full-stack developer, I combine traditional technical expertise with artificial intelligence to create innovative, high-performance web solutions. My specialty: transforming complex ideas into elegant, scalable applications.",
-      "expertise": "With in-depth mastery ofNext.js,TypeScriptandNode.js, and unique expertise in AI integration, I develop applications that not only meet today's needs, but anticipate tomorrow's challenges. My approach combines technical rigor, user-centered design and intelligent automation.",
+      "expertise": "With in-depth mastery of Next.js, TypeScript and Node.js, and unique expertise in AI integration, I develop applications that not only meet today's needs, but anticipate tomorrow's challenges. My approach combines technical rigor, user-centered design and intelligent automation.",
       "passion": "Passionate about innovation and continuous learning, I'm committed to delivering clean, maintainable and documented code. Every project is an opportunity to push back the boundaries of what's possible, thanks to the synergy between modern development and artificial intelligence."
     },
     "stats": {
@@ -46,14 +46,14 @@
       }
     },
     "techStack": {
-      "title": "Technologies",
+      "title": "Tech Stack",
       "items": {
-        "react": "React&Next.js",
+        "react": "React & Next.js",
         "typescript": "TypeScript",
         "nodejs": "Node.js",
         "python": "Python",
         "postgresql": "PostgreSQL",
-        "docker": "Docker&AWS"
+        "docker": "Docker & AWS"
       }
     }
   },
@@ -62,36 +62,36 @@
     "subtitle": "Professional solutions tailored to your needs",
     "items": {
       "ai": {
-        "title": "AI & Automation integration",
-        "description": "Implementation of artificial intelligence solutions:LLM,Machine Learning, intelligent Chatbots, and business process automation to optimize your operations."
+        "title": "AI & Automation Integration",
+        "description": "Implementation of artificial intelligence solutions: LLM, Machine Learning, intelligent Chatbots, and business process automation to optimize your operations."
       },
       "backend": {
-        "title": "Backend development &API",
-        "description": "Creation of robust backend architectures withNode.js,TypeScriptandAPIRESTful/GraphQLfor high-performance, scalable applications."
+        "title": "Backend Development & API",
+        "description": "Creation of robust backend architectures with Node.js, TypeScript and RESTful/GraphQL APIs for high-performance, scalable applications."
       },
       "saas": {
-        "title": "Creation ofSAAS",
-        "description": "Complete development ofSAASplatforms: multi-tenant architecture, subscription management, dashboards and optimal user experience."
+        "title": "SaaS Platform Development",
+        "description": "Complete development of SaaS platforms: multi-tenant architecture, subscription management, dashboards and optimal user experience."
       },
       "refactoring": {
         "title": "Refactoring & Modernization",
         "description": "Redesign of existing sites, migration to modern technologies, performance optimization and improved code maintainability."
       },
       "database": {
-        "title": "Database management",
-        "description": "Optimized schema design, migrations, high-performance queries withPostgreSQL,MongoDBand modern ORMs likePrisma."
+        "title": "Database Management",
+        "description": "Optimized schema design, migrations, high-performance queries with PostgreSQL, MongoDB and modern ORMs like Prisma."
       },
       "payment": {
         "title": "Payment Systems",
-        "description": "Secure integration of payment solutions (Stripe,PayPal), transaction management, recurring subscriptions and webhooks."
+        "description": "Secure integration of payment solutions (Stripe, PayPal), transaction management, recurring subscriptions and webhooks."
       },
       "devops": {
-        "title": "Deployment &DevOps",
-        "description": "ConfigurationCI/CD, deployment onVercel,AWS,Docker, infrastructure management and monitoring of applications in production."
+        "title": "Deployment & DevOps",
+        "description": "CI/CD configuration, deployment on Vercel, AWS, Docker, infrastructure management and monitoring of applications in production."
       },
       "frontend": {
         "title": "Modern Frontend Development",
-        "description": "Creating responsive and accessible user interfaces withReact,Next.js,Tailwind CSSand the latest development practices."
+        "description": "Creating responsive and accessible user interfaces with React, Next.js, Tailwind CSS and the latest development practices."
       },
       "security": {
         "title": "Security & Authentication",
@@ -99,7 +99,7 @@
       },
       "optimization": {
         "title": "Performance Optimization",
-        "description": "Performance analysis and improvement: bundle size, loading time, technical SEO and optimalLighthousescores."
+        "description": "Performance analysis and improvement: bundle size, loading time, technical SEO and optimal Lighthouse scores."
       }
     }
   },
@@ -108,10 +108,10 @@
     "subtitle": "Discover my recent projects",
     "featured": {
       "title": "pont-facturx.com",
-      "description": "SAAScomplete billing and tax compliance management platform for SMEs and freelancers. Intuitive interface, intelligent automation and multiple integrations.",
+      "description": "Complete SaaS platform for billing and tax compliance management for SMEs and freelancers. Intuitive interface, intelligent automation and multiple integrations.",
       "technologies": "Technologies",
       "techList": {
-        "nextjs": "Next.js14",
+        "nextjs": "Next.js 14",
         "typescript": "TypeScript",
         "postgresql": "PostgreSQL",
         "stripe": "Stripe",
@@ -149,29 +149,29 @@
     "comingSoon": "Available soon",
     "placeholder": {
       "post1": {
-        "title": "How to integrate AI into your applicationsNext.js",
-        "excerpt": "A complete guide to adding artificial intelligence to your web projects...",
+        "title": "How to integrate AI into your Next.js applications",
+        "excerpt": "A complete guide to adding artificial intelligence features to your web projects...",
         "date": "January 15, 2026",
         "readTime": "8 min"
       },
       "post2": {
-        "title": "ScalableSAASarchitecture withNext.jsandPostgreSQL",
-        "excerpt": "Best practices for building a high-performance, scalableSAASplatform...",
+        "title": "Scalable SaaS architecture with Next.js and PostgreSQL",
+        "excerpt": "Best practices for building a high-performance, scalable SaaS platform...",
         "date": "January 10, 2026",
         "readTime": "12 min"
       },
       "post3": {
-        "title": "Performance optimization: reach 100 onLighthouse",
+        "title": "Performance optimization: reach 100 on Lighthouse",
         "excerpt": "Advanced techniques to maximize the performance of your modern web applications...",
         "date": "January 5, 2026",
-        "readTime": "10 min."
+        "readTime": "10 min"
       }
     },
     "readMore": "Read more"
   },
   "contact": {
-    "title": "Contact me at",
-    "subtitle": "Got a project in mind? Let's talk about how I can help you make it a reality.",
+    "title": "Get in Touch",
+    "subtitle": "Got a project in mind? Let's discuss how I can help you make it a reality.",
     "form": {
       "title": "Send a message",
       "description": "Fill in the form and I'll get back to you as soon as possible.",
@@ -209,7 +209,7 @@
   "footer": {
     "about": {
       "title": "Rayan Sekkat",
-      "description": "Full-Stack developer specializing in AI integration and modern web solutions. Passionate about creating high-performance applications withNext.js,TypeScriptand cutting-edge technologies."
+      "description": "Full-Stack developer specializing in AI integration and modern web solutions. Passionate about creating high-performance applications with Next.js, TypeScript and cutting-edge technologies."
     },
     "navigation": {
       "title": "Navigation",
