@@ -11,6 +11,9 @@
  *   DEEPL_API_KEY - DeepL API authentication key
  */
 
+// Load environment variables from .env files
+require("dotenv").config({ path: [".env.local", ".env"] });
+
 const fs = require("fs");
 const path = require("path");
 const deepl = require("deepl-node");
@@ -114,8 +117,10 @@ function protectTerms(text) {
   const placeholders = {};
 
   PRESERVE_TERMS.forEach((term, index) => {
-    const placeholder = `__TERM_${index}__`;
-    const regex = new RegExp(term, "gi");
+    const placeholder = `XXTERMXX${index}XXTERMXX`;
+    // Escape special regex characters in the term
+    const escapedTerm = term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const regex = new RegExp(escapedTerm, "gi");
     if (protected.match(regex)) {
       placeholders[placeholder] = term;
       protected = protected.replace(regex, placeholder);
@@ -133,7 +138,12 @@ function restoreTerms(text, placeholders) {
 
   let restored = text;
   Object.entries(placeholders).forEach(([placeholder, term]) => {
-    restored = restored.replace(new RegExp(placeholder, "g"), term);
+    // Escape special regex characters in placeholder
+    const escapedPlaceholder = placeholder.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    // Also handle cases where translator added spaces around placeholder
+    restored = restored.replace(new RegExp(`\\s*${escapedPlaceholder}\\s*`, "g"), term);
+    // Also try without spaces in case some remained
+    restored = restored.replace(new RegExp(escapedPlaceholder, "g"), term);
   });
 
   return restored;
