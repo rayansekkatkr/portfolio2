@@ -2,19 +2,22 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import LanguageSwitcher from "@/components/ui/LanguageSwitcher";
+import { useTranslation } from "@/lib/i18n/useLanguage";
 
 const navigation = [
-  { name: "Home", href: "#hero" },
-  { name: "About", href: "#about" },
-  { name: "Skills", href: "#skills" },
-  { name: "Projects", href: "#projects" },
-  { name: "Blog", href: "#blog" },
-  { name: "Contact", href: "#contact" },
+  { name: "navigation.home", href: "#hero" },
+  { name: "navigation.about", href: "#about" },
+  { name: "navigation.services", href: "#skills" },
+  { name: "navigation.projects", href: "#projects" },
+  { name: "navigation.blog", href: "#blog" },
+  { name: "navigation.contact", href: "#contact" },
 ];
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const t = useTranslation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -42,7 +45,8 @@ export default function Header() {
         </div>
 
         {/* Mobile menu button */}
-        <div className="flex lg:hidden">
+        <div className="flex items-center gap-2 lg:hidden">
+          <LanguageSwitcher />
           <button
             type="button"
             className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700 dark:text-gray-200"
@@ -79,7 +83,7 @@ export default function Header() {
         </div>
 
         {/* Desktop navigation */}
-        <div className="hidden lg:flex lg:gap-x-8">
+        <div className="hidden lg:flex lg:items-center lg:gap-x-8">
           {navigation.map((item) => (
             <a
               key={item.name}
@@ -90,9 +94,10 @@ export default function Header() {
                 element?.scrollIntoView({ behavior: "smooth" });
               }}
             >
-              {item.name}
+              {t(item.name)}
             </a>
           ))}
+          <LanguageSwitcher />
         </div>
       </nav>
 
@@ -139,7 +144,7 @@ export default function Header() {
                         setMobileMenuOpen(false);
                       }}
                     >
-                      {item.name}
+                      {t(item.name)}
                     </a>
                   ))}
                 </div>
