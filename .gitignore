@@ -43,3 +43,5 @@ next-env.d.ts
 # Local environment variables
 .env.local
 .env*.local
+
+/lib/generated/prisma

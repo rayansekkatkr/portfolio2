@@ -1,0 +1,67 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+}
+
+// Blog Post Model - Multilingual support for FR/EN/KR
+model BlogPost {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Multilingual fields stored as JSON
+  title   Json // { fr: "...", en: "...", kr: "..." }
+  slug    Json // { fr: "...", en: "...", kr: "..." }
+  excerpt Json // { fr: "...", en: "...", kr: "..." }
+  content Json // { fr: "...", en: "...", kr: "..." }
+
+  // Media
+  coverImage String
+
+  // Metadata
+  author              String   @default("Rayan Sekkat")
+  publishedAt         DateTime?
+  category            String // "AI/ML" | "Web Dev" | "Backend" | "DevOps"
+  tags                String[] // ["React", "TypeScript", "AI"]
+  readingTimeMinutes  Int      @default(5)
+  viewCount           Int      @default(0)
+  isPublished         Boolean  @default(false)
+
+  // SEO
+  seoMetaDescription Json // { fr: "...", en: "...", kr: "..." }
+  seoKeywords        String[]
+  seoOgImage         String?
+
+  @@index([isPublished, publishedAt])
+  @@index([category])
+  @@map("blog_posts")
+}
+
+// Contact Message Model
+model ContactMessage {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+
+  // Contact Information
+  name    String
+  email   String
+  subject String?
+  message String   @db.Text
+
+  // Metadata
+  isRead     Boolean @default(false)
+  ipAddress  String?
+  userAgent  String?
+  referrer   String?
+
+  @@index([isRead, createdAt])
+  @@map("contact_messages")
+}
