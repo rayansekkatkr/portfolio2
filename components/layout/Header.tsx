@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import LanguageSwitcher from "@/components/ui/LanguageSwitcher";
+import ThemeToggle from "@/components/ui/ThemeToggle";
 import { useTranslation } from "@/lib/i18n/useLanguage";
 
 const navigation = [
@@ -46,6 +47,7 @@ export default function Header() {
 
         {/* Mobile menu button */}
         <div className="flex items-center gap-2 lg:hidden">
+          <ThemeToggle />
           <LanguageSwitcher />
           <button
             type="button"
@@ -97,6 +99,7 @@ export default function Header() {
               {t(item.name)}
             </a>
           ))}
+          <ThemeToggle />
           <LanguageSwitcher />
         </div>
       </nav>

@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { ExternalLink, CheckCircle2, TrendingUp } from "lucide-react";
 
 export default function ProjectsSection() {

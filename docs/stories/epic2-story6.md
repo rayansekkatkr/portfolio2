@@ -30,7 +30,113 @@ so that **the interface is comfortable for my viewing preference**.
 
 ## Definition of Done
 
-- [ ] All acceptance criteria met
-- [ ] System preference detected
-- [ ] Manual toggle works perfectly
-- [ ] No FOUC on page load
+- [x] All acceptance criteria met
+- [x] System preference detected
+- [x] Manual toggle works perfectly
+- [x] No FOUC on page load
+
+---
+
+## Dev Agent Record
+
+**Agent Model Used:** Claude Sonnet 4.5
+
+### Debug Log
+
+_No issues - clean implementation_
+
+### Completion Notes
+
+**Theme Toggle System Complete:**
+
+- ✅ System theme preference detected using `prefers-color-scheme` media query
+- ✅ Dark mode automatically activated if system preference is dark
+- ✅ Manual theme toggle component with sun/moon/monitor icons
+- ✅ Toggle positioned in header (next to language switcher)
+- ✅ Clicking cycles through: light → dark → system → light
+- ✅ Manual selection overrides system preference
+- ✅ Theme saved to localStorage for persistence
+- ✅ Theme persists across browser sessions
+- ✅ No FOUC with beforeInteractive script
+- ✅ Full keyboard accessibility and ARIA labels
+
+**ThemeContext Implementation:**
+
+- Custom React Context for theme management
+- Three theme modes: "light", "dark", "system"
+- Resolved theme computation (system → actual theme)
+- localStorage persistence
+- System preference listener (responds to OS theme changes)
+- Document class updates (adds/removes "light"/"dark")
+- Meta theme-color updates for mobile browsers
+
+**ThemeToggle Component:**
+
+- Sun icon for light mode
+- Moon icon for dark mode
+- Monitor icon for system mode
+- Cycles through modes on click
+- Proper ARIA labels and title attributes
+- Loading state with skeleton to prevent hydration mismatch
+- Smooth hover transitions
+
+**FOUC Prevention:**
+
+- Inline script in layout with `strategy="beforeInteractive"`
+- Runs before React hydration
+- Reads localStorage and applies theme class immediately
+- Synchronous execution prevents flash
+- `suppressHydrationWarning` on html tag
+
+**Header Integration:**
+
+- ThemeToggle added to desktop navigation (before LanguageSwitcher)
+- ThemeToggle added to mobile navigation (before LanguageSwitcher)
+- Consistent spacing and styling
+- Works seamlessly with existing components
+
+**System Preference Features:**
+
+1. Detects OS theme preference on initial load
+2. Applies system theme if no manual selection
+3. Listens for OS theme changes in real-time
+4. Updates UI when OS theme changes (only in "system" mode)
+5. Manual override persists across sessions
+
+**Accessibility:**
+
+- Full keyboard navigation (Tab, Enter)
+- ARIA labels describe current state and action
+- Screen reader friendly
+- Visual focus indicators
+- Semantic button element
+
+### File List
+
+**Added:**
+
+- lib/theme/ThemeContext.tsx (theme management context)
+- lib/theme/useTheme.ts (custom hook export)
+- components/ui/ThemeToggle.tsx (toggle component)
+
+**Modified:**
+
+- app/layout.tsx (ThemeProvider, FOUC prevention script)
+- components/layout/Header.tsx (ThemeToggle integration)
+
+### Change Log
+
+1. Created ThemeContext with theme state management
+2. Implemented getSystemTheme() for prefers-color-scheme detection
+3. Added localStorage persistence for theme preference
+4. Created system theme change listener (mediaQuery.addEventListener)
+5. Implemented theme cycling: light → dark → system
+6. Added document.documentElement class manipulation
+7. Created ThemeToggle component with sun/moon/monitor icons
+8. Implemented loading state to prevent hydration mismatch
+9. Added FOUC prevention script in layout (beforeInteractive)
+10. Integrated ThemeToggle in Header (desktop and mobile)
+11. Added meta theme-color updates for mobile browsers
+12. Tested theme switching - works instantly without flicker
+
+**Status:** Ready for Review
