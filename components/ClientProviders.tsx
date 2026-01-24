@@ -4,6 +4,7 @@ import { ReactNode } from "react";
 import { LanguageProvider } from "@/lib/i18n/LanguageContext";
 import { ThemeProvider } from "@/lib/theme/ThemeContext";
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 import dynamic from "next/dynamic";
 
 const ScrollToTop = dynamic(() => import("@/components/ui/ScrollToTop"), {
@@ -17,6 +18,7 @@ export default function ClientProviders({ children }: { children: ReactNode }) {
         {children}
         <ScrollToTop />
         <Analytics />
+        <SpeedInsights />
       </LanguageProvider>
     </ThemeProvider>
   );

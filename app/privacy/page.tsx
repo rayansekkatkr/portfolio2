@@ -1,5 +1,25 @@
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Privacy Policy",
+  description:
+    "Privacy policy and data protection information for Rayan Sekkat's portfolio website.",
+  alternates: {
+    canonical: "https://portfolio-rayan-sekkat.vercel.app/privacy",
+  },
+  openGraph: {
+    title: "Privacy Policy | Rayan Sekkat",
+    description: "Privacy policy and data protection information",
+    type: "website",
+    url: "https://portfolio-rayan-sekkat.vercel.app/privacy",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+};
 
 export default function PrivacyPage() {
   return (
