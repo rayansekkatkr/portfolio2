@@ -77,7 +77,7 @@ export default function AboutSection() {
       ref={ref}
       id="about"
       aria-label="About me"
-      className="bg-white px-6 py-24 sm:py-32 dark:bg-gray-900"
+      className="px-6 py-24 sm:py-32"
     >
       <div className="mx-auto max-w-7xl">
         <motion.h2
@@ -92,7 +92,7 @@ export default function AboutSection() {
         <div className="mt-10 grid gap-12 lg:grid-cols-2 lg:gap-16">
           {/* Biography */}
           <motion.div
-            className="space-y-6 text-lg leading-8 text-gray-600 dark:text-gray-300"
+            className="space-y-6 text-lg leading-8 text-gray-900 dark:text-gray-300"
             initial={{ opacity: 0, x: -20 }}
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
             transition={{
@@ -122,9 +122,9 @@ export default function AboutSection() {
                 return (
                   <div
                     key={stat.label}
-                    className="rounded-lg bg-white p-6 text-center shadow-sm dark:bg-gray-800"
+                    className="rounded-2xl bg-white border border-gray-300 p-6 text-center shadow-sm dark:bg-slate-800 dark:border-slate-700 transition-all duration-300 hover:shadow-md"
                   >
-                    <Icon className="text-primary-600 dark:text-primary-400 mx-auto mb-3 h-8 w-8" />
+                    <Icon className="text-primary mx-auto mb-3 h-8 w-8" />
                     <div className="text-3xl font-bold text-gray-900 dark:text-white">
                       {stat.value}
                     </div>
@@ -147,7 +147,7 @@ export default function AboutSection() {
                   return (
                     <div
                       key={tech.name}
-                      className="flex items-center gap-3 rounded-lg bg-white p-4 shadow-sm transition-shadow hover:shadow-md dark:bg-gray-800"
+                      className="flex items-center gap-3 rounded-xl bg-white border border-gray-300 p-4 shadow-sm transition-all duration-300 hover:shadow-md dark:bg-slate-800 dark:border-slate-700"
                     >
                       <Icon className={`h-6 w-6 ${tech.color}`} />
                       <span className="font-medium text-gray-900 dark:text-white">{tech.name}</span>

@@ -23,7 +23,7 @@ const translations: Record<Locale, TranslationData> = {
 
 // Helper to get initial locale
 function getInitialLocale(): Locale {
-  if (typeof window === "undefined") return "fr";
+  if (typeof window === "undefined") return "en";
 
   const stored = localStorage.getItem("locale") as Locale | null;
   if (stored && ["fr", "en", "kr"].includes(stored)) {
@@ -32,9 +32,9 @@ function getInitialLocale(): Locale {
 
   // Detect browser language
   const browserLang = navigator.language.split("-")[0];
-  if (browserLang === "en") return "en";
+  if (browserLang === "fr") return "fr";
   if (browserLang === "ko") return "kr";
-  return "fr"; // Default to French
+  return "en"; // Default to English
 }
 
 export function LanguageProvider({ children }: { children: ReactNode }) {

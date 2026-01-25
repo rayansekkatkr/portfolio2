@@ -33,7 +33,7 @@ export default function BlogCard({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
-      className="group flex flex-col overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-all duration-200 hover:shadow-lg dark:border-gray-800 dark:bg-gray-900"
+      className="group flex flex-col overflow-hidden rounded-3xl border border-border bg-background shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
     >
       <Link href={`/blog/${slug}`} className="relative block aspect-video overflow-hidden">
         <Image
@@ -41,7 +41,7 @@ export default function BlogCard({
           alt={title}
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          className="object-cover transition-transform duration-300 group-hover:scale-105"
+          className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
           priority={priority}
           loading={priority ? undefined : "lazy"}
           quality={85}
@@ -49,7 +49,7 @@ export default function BlogCard({
           blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwMCIgaGVpZ2h0PSI2MzAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJnIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNlNWU3ZWIiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNmOWZhZmIiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB3aWR0aD0iMTIwMCIgaGVpZ2h0PSI2MzAiIGZpbGw9InVybCgjZykiLz48L3N2Zz4="
         />
         <div className="absolute top-4 left-4">
-          <span className="bg-primary-600 rounded-full px-3 py-1 text-xs font-semibold text-white">
+          <span className="rounded-full bg-primary px-3 py-1.5 text-xs font-bold text-white shadow-lg">
             {category}
           </span>
         </div>
@@ -57,15 +57,15 @@ export default function BlogCard({
 
       <div className="flex flex-1 flex-col p-6">
         <Link href={`/blog/${slug}`}>
-          <h3 className="group-hover:text-primary-600 dark:group-hover:text-primary-400 mb-2 text-xl font-bold text-gray-900 transition-colors dark:text-white">
+          <h3 className="mb-2 text-xl font-bold text-foreground transition-colors group-hover:text-primary">
             {title}
           </h3>
         </Link>
 
-        <p className="mb-4 line-clamp-3 flex-1 text-gray-600 dark:text-gray-400">{excerpt}</p>
+        <p className="mb-4 line-clamp-3 flex-1 text-muted-foreground">{excerpt}</p>
 
-        <div className="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-500">
-          <div className="flex items-center gap-1">
+        <div className="flex items-center gap-4 text-sm text-muted-foreground">
+          <div className="flex items-center gap-1.5">
             <Calendar className="h-4 w-4" />
             <time dateTime={publishedAt.toISOString()}>
               {new Date(publishedAt).toLocaleDateString("fr-FR", {
@@ -75,7 +75,7 @@ export default function BlogCard({
               })}
             </time>
           </div>
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-1.5">
             <Clock className="h-4 w-4" />
             <span>{readingTime} min</span>
           </div>
@@ -85,7 +85,7 @@ export default function BlogCard({
           {tags.slice(0, 3).map((tag) => (
             <span
               key={tag}
-              className="rounded-md bg-gray-100 px-2 py-1 text-xs text-gray-700 dark:bg-gray-800 dark:text-gray-300"
+              className="rounded-lg bg-muted/50 px-3 py-1 text-xs font-medium text-foreground"
             >
               {tag}
             </span>

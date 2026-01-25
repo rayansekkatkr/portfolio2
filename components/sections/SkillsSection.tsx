@@ -99,7 +99,7 @@ export default function SkillsSection() {
       ref={ref}
       id="skills"
       aria-label="Skills and services"
-      className="bg-white px-6 py-24 sm:py-32 dark:bg-gray-800"
+      className="px-6 py-24 sm:py-32"
     >
       <div className="mx-auto max-w-7xl">
         <motion.div
@@ -108,22 +108,35 @@ export default function SkillsSection() {
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: prefersReducedMotion ? 0 : 0.5 }}
         >
-          <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl dark:text-white">
+          <h2 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
             {t("services.title")}
           </h2>
-          <p className="mt-4 text-lg text-gray-600 dark:text-gray-300">{t("services.subtitle")}</p>
+          <p className="mt-4 text-lg text-muted-foreground">{t("services.subtitle")}</p>
         </motion.div>
 
-        <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {services.map((service, index) => {
             const Icon = service.icon;
+            const iconColors = [
+              "bg-blue-500/10 text-blue-600 dark:text-blue-400",
+              "bg-purple-500/10 text-purple-600 dark:text-purple-400",
+              "bg-amber-500/10 text-amber-600 dark:text-amber-400",
+              "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400",
+              "bg-rose-500/10 text-rose-600 dark:text-rose-400",
+              "bg-cyan-500/10 text-cyan-600 dark:text-cyan-400",
+              "bg-violet-500/10 text-violet-600 dark:text-violet-400",
+              "bg-orange-500/10 text-orange-600 dark:text-orange-400",
+              "bg-teal-500/10 text-teal-600 dark:text-teal-400",
+              "bg-pink-500/10 text-pink-600 dark:text-pink-400",
+            ];
+
             return (
               <motion.div
                 key={service.title}
-                className={`group relative overflow-hidden rounded-xl bg-white p-8 shadow-md transition-all duration-200 focus-within:-translate-y-1 focus-within:scale-[1.02] focus-within:shadow-2xl hover:-translate-y-1 hover:scale-[1.02] hover:shadow-2xl dark:bg-gray-900 ${
+                className={`group relative overflow-hidden rounded-[2rem] border bg-background/50 p-8 shadow-sm backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ${
                   service.featured
-                    ? "border-primary-500 ring-primary-500/20 hover:ring-primary-500/40 focus-within:ring-primary-500/40 border-2 ring-2"
-                    : "hover:border-primary-300 dark:hover:border-primary-700 focus-within:border-primary-300 dark:focus-within:border-primary-700 border border-gray-200 dark:border-gray-700"
+                    ? "lg:col-span-2 border-primary bg-charcoal-950 text-white dark:bg-charcoal-950"
+                    : "border-slate-200 hover:border-primary/30 dark:border-charcoal-800"
                 }`}
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
@@ -133,29 +146,33 @@ export default function SkillsSection() {
                 }}
               >
                 {service.featured && (
-                  <div className="bg-primary-500 absolute top-0 right-0 rounded-bl-xl px-3 py-1 text-xs font-semibold text-white">
-                    ⭐ Spécialité
+                  <div className="absolute top-6 right-6 rounded-full bg-primary/20 px-4 py-1.5 text-xs font-bold tracking-wide text-primary backdrop-blur-sm">
+                    SPÉCIALITÉ ⭐
                   </div>
                 )}
                 <div
-                  className={`mb-4 inline-flex h-12 w-12 items-center justify-center rounded-lg transition-colors ${
+                  className={`mb-6 inline-flex h-14 w-14 items-center justify-center rounded-2xl transition-transform duration-300 group-hover:scale-110 ${
                     service.featured
-                      ? "bg-primary-100 text-primary-600 dark:bg-primary-900/30 dark:text-primary-400"
-                      : "group-hover:bg-primary-100 group-hover:text-primary-600 dark:group-hover:bg-primary-900/30 dark:group-hover:text-primary-400 bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-400"
+                      ? "bg-primary/20 text-primary"
+                      : iconColors[index % iconColors.length]
                   }`}
                 >
-                  <Icon className="h-6 w-6" />
+                  <Icon className="h-7 w-7" strokeWidth={2} />
                 </div>
                 <h3
-                  className={`text-xl font-semibold ${
-                    service.featured
-                      ? "text-primary-600 dark:text-primary-400"
-                      : "text-gray-900 dark:text-white"
+                  className={`text-2xl font-bold ${
+                    service.featured ? "text-white" : "text-foreground"
                   }`}
                 >
                   {service.title}
                 </h3>
-                <p className="mt-3 text-gray-600 dark:text-gray-300">{service.description}</p>
+                <p
+                  className={`mt-4 text-base leading-relaxed ${
+                    service.featured ? "text-gray-900 dark:text-slate-300" : "text-muted-foreground"
+                  }`}
+                >
+                  {service.description}
+                </p>
               </motion.div>
             );
           })}

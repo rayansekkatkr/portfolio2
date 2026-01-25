@@ -59,10 +59,10 @@ export default function ScrollToTop() {
           transition={{ duration }}
           onClick={scrollToTop}
           onKeyDown={handleKeyDown}
-          className="bg-primary-600 hover:bg-primary-700 dark:bg-primary-500 dark:hover:bg-primary-600 focus-visible:ring-primary-500 dark:shadow-primary-900/20 fixed right-8 bottom-8 z-50 flex h-12 w-12 items-center justify-center rounded-full shadow-lg transition-all duration-200 will-change-transform hover:scale-110 hover:shadow-xl focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
+          className="glow-hover fixed right-8 bottom-8 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-primary text-white shadow-lg shadow-primary/30 transition-all duration-300 will-change-transform hover:scale-110 hover:shadow-xl hover:shadow-primary/50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
           aria-label="Scroll to top"
         >
-          <ArrowUp className="h-6 w-6 text-white" />
+          <ArrowUp className="h-6 w-6" />
         </motion.button>
       )}
     </AnimatePresence>

@@ -49,20 +49,29 @@ export default function Footer() {
 
   return (
     <footer
-      className="border-t border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900"
+      className="relative overflow-hidden border-t border-border bg-gradient-to-b from-background to-muted/20"
       role="contentinfo"
     >
-      <div className="mx-auto max-w-7xl px-6 py-12 lg:px-8 lg:py-16">
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
+      {/* Gradient decorations */}
+      <div className="absolute -left-32 top-0 h-64 w-64 rounded-full bg-primary/5 blur-[100px]" />
+      <div className="absolute -right-32 bottom-0 h-64 w-64 rounded-full bg-indigo-400/5 blur-[100px]" />
+      
+      <div className="relative mx-auto max-w-7xl px-6 py-16 lg:px-8 lg:py-20">
+        <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-4">
           {/* About Section */}
           <div className="lg:col-span-2">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Rayan Sekkat</h3>
-            <p className="mt-4 text-sm leading-6 text-gray-600 dark:text-gray-400">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="h-10 w-10 bg-primary rounded-xl flex items-center justify-center font-bold text-white shadow-lg shadow-primary/20">
+                RS
+              </div>
+              <h3 className="text-xl font-bold text-foreground">Rayan Sekkat</h3>
+            </div>
+            <p className="text-sm leading-6 text-muted-foreground">
               Développeur Full-Stack spécialisé dans l&apos;intégration d&apos;IA et les solutions
               web modernes. Passionné par la création d&apos;applications performantes avec Next.js,
               TypeScript et les technologies de pointe.
             </p>
-            <div className="mt-6 flex space-x-4">
+            <div className="mt-6 flex gap-3">
               {professionalLinks.map((link) => {
                 const Icon = link.icon;
                 return (
@@ -71,10 +80,10 @@ export default function Footer() {
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="hover:text-primary-600 dark:hover:text-primary-400 text-gray-500 transition-colors dark:text-gray-400"
+                    className="flex h-10 w-10 items-center justify-center rounded-full bg-muted/50 text-muted-foreground transition-all duration-300 hover:bg-primary hover:text-white hover:scale-110 hover:shadow-lg"
                     aria-label={link.ariaLabel}
                   >
-                    <Icon className="h-6 w-6" />
+                    <Icon className="h-5 w-5" />
                   </a>
                 );
               })}
@@ -83,16 +92,17 @@ export default function Footer() {
 
           {/* Navigation Links */}
           <div>
-            <h3 className="text-sm font-semibold tracking-wider text-gray-900 uppercase dark:text-white">
+            <h3 className="text-xs font-bold uppercase tracking-wider text-foreground mb-4">
               Navigation
             </h3>
-            <ul className="mt-4 space-y-3">
+            <ul className="space-y-2.5">
               {navigationLinks.map((link) => (
                 <li key={link.name}>
                   <a
                     href={link.href}
-                    className="hover:text-primary-600 dark:hover:text-primary-400 text-sm text-gray-600 transition-colors dark:text-gray-400"
+                    className="text-sm text-muted-foreground transition-colors hover:text-primary inline-flex items-center gap-1 group"
                   >
+                    <span className="h-1 w-1 rounded-full bg-muted-foreground transition-colors group-hover:bg-primary" />
                     {link.name}
                   </a>
                 </li>
@@ -102,16 +112,17 @@ export default function Footer() {
 
           {/* Legal Links */}
           <div>
-            <h3 className="text-sm font-semibold tracking-wider text-gray-900 uppercase dark:text-white">
+            <h3 className="text-xs font-bold uppercase tracking-wider text-foreground mb-4">
               Légal
             </h3>
-            <ul className="mt-4 space-y-3">
+            <ul className="space-y-2.5">
               {legalLinks.map((link) => (
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="hover:text-primary-600 dark:hover:text-primary-400 text-sm text-gray-600 transition-colors dark:text-gray-400"
+                    className="text-sm text-muted-foreground transition-colors hover:text-primary inline-flex items-center gap-1 group"
                   >
+                    <span className="h-1 w-1 rounded-full bg-muted-foreground transition-colors group-hover:bg-primary" />
                     {link.name}
                   </Link>
                 </li>
@@ -122,8 +133,9 @@ export default function Footer() {
                     localStorage.removeItem("cookie-consent");
                     window.location.reload();
                   }}
-                  className="hover:text-primary-600 dark:hover:text-primary-400 text-sm text-gray-600 transition-colors dark:text-gray-400"
+                  className="text-sm text-muted-foreground transition-colors hover:text-primary inline-flex items-center gap-1 group"
                 >
+                  <span className="h-1 w-1 rounded-full bg-muted-foreground transition-colors group-hover:bg-primary" />
                   Gérer les cookies
                 </button>
               </li>
@@ -132,18 +144,18 @@ export default function Footer() {
         </div>
 
         {/* Bottom Section */}
-        <div className="mt-12 border-t border-gray-200 pt-8 dark:border-gray-800">
-          <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
-            <p className="text-sm text-gray-600 dark:text-gray-400">
+        <div className="mt-12 border-t border-border/50 pt-8">
+          <div className="flex flex-col items-center justify-between gap-4 text-center md:flex-row md:text-left">
+            <p className="text-sm text-muted-foreground">
               © {currentYear} Rayan Sekkat. Tous droits réservés.
             </p>
-            <p className="text-sm text-gray-500 dark:text-gray-500">
+            <p className="text-xs text-muted-foreground/70">
               Propulsé par{" "}
               <a
                 href="https://nextjs.org"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300 font-medium"
+                className="font-medium text-primary hover:underline"
               >
                 Next.js
               </a>
@@ -152,7 +164,7 @@ export default function Footer() {
                 href="https://www.typescriptlang.org"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300 font-medium"
+                className="font-medium text-primary hover:underline"
               >
                 TypeScript
               </a>{" "}
@@ -161,7 +173,7 @@ export default function Footer() {
                 href="https://tailwindcss.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300 font-medium"
+                className="font-medium text-primary hover:underline"
               >
                 Tailwind CSS
               </a>

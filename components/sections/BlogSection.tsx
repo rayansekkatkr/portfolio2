@@ -54,7 +54,7 @@ export default async function BlogSection() {
     <section
       id="blog"
       aria-label="Blog articles"
-      className="bg-white px-6 py-24 sm:py-32 dark:bg-gray-800"
+      className="px-6 py-24 sm:py-32"
     >
       <div className="mx-auto max-w-7xl">
         <div className="mb-12">

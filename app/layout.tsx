@@ -1,21 +1,15 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Plus_Jakarta_Sans } from "next/font/google";
 import ClientProviders from "@/components/ClientProviders";
 import ProgressBar from "@/components/ui/ProgressBar";
 import Script from "next/script";
 import "./globals.css";
 import "./nprogress.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const plusJakarta = Plus_Jakarta_Sans({
+  variable: "--font-plus-jakarta",
   subsets: ["latin"],
-  display: "swap",
-  preload: true,
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800"],
   display: "swap",
   preload: true,
 });
@@ -86,24 +80,10 @@ export const metadata: Metadata = {
   },
 };
 
-// Script to prevent FOUC (Flash of Unstyled Content)
+// Script to prevent FOUC (Flash of Unstyled Content) - Force dark theme
 const themeScript = `
   (function() {
-    function getTheme() {
-      const theme = localStorage.getItem('theme');
-      if (theme && ['light', 'dark', 'system'].includes(theme)) {
-        return theme;
-      }
-      return 'system';
-    }
-    
-    function getSystemTheme() {
-      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    }
-    
-    const theme = getTheme();
-    const resolvedTheme = theme === 'system' ? getSystemTheme() : theme;
-    document.documentElement.classList.add(resolvedTheme);
+    document.documentElement.classList.add('dark');
   })();
 `;
 
@@ -154,9 +134,9 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        <meta name="theme-color" content="#ffffff" />
+        <meta name="theme-color" content="#0f0f19" />
       </head>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body className={`${plusJakarta.variable} antialiased`}>
         <ProgressBar />
         <ClientProviders>{children}</ClientProviders>
       </body>

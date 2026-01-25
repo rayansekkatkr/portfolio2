@@ -26,14 +26,8 @@ function getSystemTheme(): "light" | "dark" {
 }
 
 function getInitialTheme(): Theme {
-  if (typeof window === "undefined") return "light";
-
-  const savedTheme = localStorage.getItem("theme") as Theme | null;
-  if (savedTheme && ["light", "dark", "system"].includes(savedTheme)) {
-    return savedTheme;
-  }
-
-  return "light";
+  // Force dark theme
+  return "dark";
 }
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {

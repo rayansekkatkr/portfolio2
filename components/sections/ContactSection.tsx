@@ -21,7 +21,6 @@ import { useLanguageContext } from "@/lib/i18n/LanguageContext";
 type SubmissionState = "idle" | "loading" | "success" | "error";
 
 export default function ContactSection() {
-  const { t } = useLanguageContext();
   const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(
@@ -91,61 +90,17 @@ export default function ContactSection() {
     }
   };
 
-  const professionalLinks = [
-    {
-      name: "Email",
-      icon: Mail,
-      href: "mailto:rayan.sekkat@example.com",
-      label: "rayan.sekkat@example.com",
-      color: "text-red-600 dark:text-red-400",
-    },
-    {
-      name: "LinkedIn",
-      icon: Linkedin,
-      href: "https://linkedin.com/in/rayan-sekkat",
-      label: "linkedin.com/in/rayan-sekkat",
-      color: "text-blue-600 dark:text-blue-400",
-    },
-    {
-      name: "GitHub",
-      icon: Github,
-      href: "https://github.com/rayan-sekkat",
-      label: "github.com/rayan-sekkat",
-      color: "text-gray-900 dark:text-gray-100",
-    },
-    {
-      name: "Upwork",
-      icon: Briefcase,
-      href: "https://upwork.com/freelancers/rayan-sekkat",
-      label: "upwork.com/freelancers/rayan-sekkat",
-      color: "text-green-600 dark:text-green-400",
-    },
-  ];
-
   return (
     <section
       ref={ref}
       id="contact"
       aria-label="Contact information and form"
-      className="bg-white px-6 py-24 sm:py-32 dark:bg-gray-900"
+      className="mx-4 sm:mx-10 my-24 rounded-[3rem] bg-charcoal-950 dark:bg-charcoal-950 px-6 py-24 sm:px-12 sm:py-32"
     >
-      <div className="mx-auto max-w-7xl">
-        <motion.div
-          className="text-center"
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: prefersReducedMotion ? 0 : 0.5 }}
-        >
-          <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl dark:text-white">
-            {t("contact.title")}
-          </h2>
-          <p className="mt-4 text-lg text-gray-600 dark:text-gray-300">{t("contact.subtitle")}</p>
-        </motion.div>
-
-        <div className="mt-16 grid gap-12 lg:grid-cols-2">
-          {/* Contact Form */}
+      <div className="mx-auto max-w-7xl relative">
+        <div className="grid gap-12 lg:grid-cols-2">
+          {/* Left Column - Title, Description & Links */}
           <motion.div
-            className="rounded-2xl bg-gradient-to-br from-gray-50 to-gray-100 p-8 shadow-xl ring-1 ring-gray-200 dark:from-gray-800 dark:to-gray-900 dark:ring-gray-700"
             initial={{ opacity: 0, x: -20 }}
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
             transition={{
@@ -153,28 +108,111 @@ export default function ContactSection() {
               delay: prefersReducedMotion ? 0 : 0.2,
             }}
           >
-            <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
-              {t("contact.form.title")}
-            </h3>
-            <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-              {t("contact.form.description")}
+            {/* Title with "projet" highlighted */}
+            <h2 className="text-4xl sm:text-5xl font-bold tracking-tight text-white leading-tight">
+              Démarrons votre{" "}
+              <span className="text-primary">projet</span>.
+            </h2>
+            
+            <p className="mt-6 text-lg text-slate-300 leading-relaxed">
+              Besoin d&apos;un expert pour votre prochain SaaS ou une intégration IA stratégique ? Discutons de vos objectifs.
             </p>
 
-            <form onSubmit={handleSubmit(onSubmit)} className="mt-8 space-y-6">
+            <div className="mt-10 space-y-4">
+              <div className="flex items-center gap-3">
+                <Mail className="h-5 w-5 text-slate-400" />
+                <div>
+                  <div className="text-xs uppercase tracking-wider text-slate-500 font-semibold">EMAIL</div>
+                  <a href="mailto:rayan.sekkat@gmail.com" className="text-white font-medium hover:text-primary transition-colors">
+                    rayan.sekkat@gmail.com
+                  </a>
+                </div>
+              </div>
+              
+              <div className="flex items-center gap-3">
+                <Linkedin className="h-5 w-5 text-slate-400" />
+                <div>
+                  <div className="text-xs uppercase tracking-wider text-slate-500 font-semibold">LINKEDIN</div>
+                  <a 
+                    href="https://www.linkedin.com/in/rayan-sekkat-3911a9294" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-white font-medium hover:text-primary transition-colors"
+                  >
+                    linkedin.com/in/rayan-sekkat
+                  </a>
+                </div>
+              </div>
+              
+              <div className="flex items-center gap-3">
+                <Github className="h-5 w-5 text-slate-400" />
+                <div>
+                  <div className="text-xs uppercase tracking-wider text-slate-500 font-semibold">GITHUB</div>
+                  <a 
+                    href="https://github.com/rayansekkatkr" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-white font-medium hover:text-primary transition-colors"
+                  >
+                    github.com/rayansekkatkr
+                  </a>
+                </div>
+              </div>
+              
+              <div className="flex items-center gap-3">
+                <Briefcase className="h-5 w-5 text-slate-400" />
+                <div>
+                  <div className="text-xs uppercase tracking-wider text-slate-500 font-semibold">UPWORK</div>
+                  <a 
+                    href="https://www.upwork.com/freelancers/~01642eb253cc5d3d22" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-white font-medium hover:text-primary transition-colors"
+                  >
+                    upwork.com/freelancers/rayan-sekkat
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            {/* Response Time Badge */}
+            <div className="mt-10 inline-flex items-center gap-2 rounded-full bg-white/5 border border-white/10 px-4 py-2.5 backdrop-blur-sm">
+              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/20">
+                <svg className="h-4 w-4 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                </svg>
+              </div>
+              <span className="text-sm text-slate-300">
+                Temps de réponse moyen: <span className="font-bold text-white">2-4h</span>
+              </span>
+            </div>
+          </motion.div>
+
+          {/* Right Column - Contact Form */}
+          <motion.div
+            className="rounded-3xl bg-slate-900/50 border border-white/10 p-8 backdrop-blur-sm"
+            initial={{ opacity: 0, x: 20 }}
+            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
+            transition={{
+              duration: prefersReducedMotion ? 0 : 0.5,
+              delay: prefersReducedMotion ? 0 : 0.2,
+            }}
+          >
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
               {/* Success Message */}
               {submissionState === "success" && (
                 <motion.div
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="flex items-start gap-3 rounded-lg border border-green-500 bg-green-50 p-4 dark:bg-green-900/20"
+                  className="flex items-start gap-3 rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-4"
                 >
-                  <CheckCircle className="h-5 w-5 flex-shrink-0 text-green-600 dark:text-green-400" />
+                  <CheckCircle className="h-5 w-5 flex-shrink-0 text-emerald-400" />
                   <div className="flex-1">
-                    <h4 className="font-semibold text-green-900 dark:text-green-100">
-                      Message sent successfully!
+                    <h4 className="font-semibold text-emerald-100">
+                      Message envoyé avec succès!
                     </h4>
-                    <p className="mt-1 text-sm text-green-800 dark:text-green-200">
-                      Thank you for reaching out. I&apos;ll get back to you as soon as possible.
+                    <p className="mt-1 text-sm text-emerald-200/80">
+                      Merci de m&apos;avoir contacté. Je vous répondrai dans les plus brefs délais.
                     </p>
                   </div>
                 </motion.div>
@@ -185,15 +223,15 @@ export default function ContactSection() {
                 <motion.div
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="flex items-start gap-3 rounded-lg border border-red-500 bg-red-50 p-4 dark:bg-red-900/20"
+                  className="flex items-start gap-3 rounded-2xl border border-red-500/30 bg-red-500/10 p-4"
                 >
-                  <AlertCircle className="h-5 w-5 flex-shrink-0 text-red-600 dark:text-red-400" />
+                  <AlertCircle className="h-5 w-5 flex-shrink-0 text-red-400" />
                   <div className="flex-1">
-                    <h4 className="font-semibold text-red-900 dark:text-red-100">
-                      Failed to send message
+                    <h4 className="font-semibold text-red-100">
+                      Échec de l'envoi
                     </h4>
-                    <p className="mt-1 text-sm text-red-800 dark:text-red-200">
-                      {errorMessage || "An error occurred. Please try again later."}
+                    <p className="mt-1 text-sm text-red-200/80">
+                      {errorMessage || "Une erreur s&apos;est produite. Veuillez réessayer."}
                     </p>
                   </div>
                 </motion.div>
@@ -202,26 +240,24 @@ export default function ContactSection() {
               <div>
                 <label
                   htmlFor="name"
-                  className="block text-sm leading-6 font-semibold text-gray-900 dark:text-white"
+                  className="block text-sm font-medium leading-6 text-slate-300 mb-2"
                 >
-                  {t("contact.form.name.label")} *
+                  Nom complet
                 </label>
-                <div className="relative mt-2">
+                <div className="relative">
                   <input
                     type="text"
                     id="name"
                     {...register("name")}
                     disabled={submissionState === "loading"}
-                    placeholder={t("contact.form.name.placeholder")}
-                    className={`block w-full rounded-lg border-0 px-4 py-3.5 text-gray-900 shadow-sm ring-1 transition-all duration-200 ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset disabled:cursor-not-allowed disabled:opacity-50 sm:text-sm sm:leading-6 dark:bg-gray-900 dark:text-white ${
-                      errors.name
-                        ? "pr-10 ring-red-500 focus:ring-red-500"
-                        : "focus:ring-primary-600 ring-gray-300 dark:ring-gray-700"
+                    placeholder="Votre nom"
+                    className={`block w-full rounded-xl border-0 bg-white/5 px-4 py-3.5 text-white shadow-sm ring-1 ring-inset ring-white/10 transition-all duration-200 placeholder:text-slate-500 focus:bg-white/10 focus:ring-2 focus:ring-inset focus:ring-primary disabled:cursor-not-allowed disabled:opacity-50 sm:text-sm sm:leading-6 ${
+                      errors.name ? "pr-10 ring-red-500/50 focus:ring-red-500" : ""
                     }`}
                   />
                   {errors.name && (
                     <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
-                      <AlertCircle className="h-5 w-5 text-red-500" />
+                      <AlertCircle className="h-5 w-5 text-red-400" />
                     </div>
                   )}
                 </div>
@@ -229,7 +265,7 @@ export default function ContactSection() {
                   <motion.p
                     initial={{ opacity: 0, y: -5 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="mt-2 flex items-center gap-1 text-sm text-red-600 dark:text-red-400"
+                    className="mt-2 text-sm text-red-400"
                   >
                     {errors.name.message}
                   </motion.p>
@@ -239,26 +275,24 @@ export default function ContactSection() {
               <div>
                 <label
                   htmlFor="email"
-                  className="block text-sm leading-6 font-semibold text-gray-900 dark:text-white"
+                  className="block text-sm font-medium leading-6 text-slate-300 mb-2"
                 >
-                  {t("contact.form.email.label")} *
+                  Email professionnel
                 </label>
-                <div className="relative mt-2">
+                <div className="relative">
                   <input
                     type="email"
                     id="email"
                     {...register("email")}
                     disabled={submissionState === "loading"}
-                    placeholder={t("contact.form.email.placeholder")}
-                    className={`block w-full rounded-lg border-0 px-4 py-3.5 text-gray-900 shadow-sm ring-1 transition-all duration-200 ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset disabled:cursor-not-allowed disabled:opacity-50 sm:text-sm sm:leading-6 dark:bg-gray-900 dark:text-white ${
-                      errors.email
-                        ? "pr-10 ring-red-500 focus:ring-red-500"
-                        : "focus:ring-primary-600 ring-gray-300 dark:ring-gray-700"
+                    placeholder="email@entreprise.com"
+                    className={`block w-full rounded-xl border-0 bg-white/5 px-4 py-3.5 text-white shadow-sm ring-1 ring-inset ring-white/10 transition-all duration-200 placeholder:text-slate-500 focus:bg-white/10 focus:ring-2 focus:ring-inset focus:ring-primary disabled:cursor-not-allowed disabled:opacity-50 sm:text-sm sm:leading-6 ${
+                      errors.email ? "pr-10 ring-red-500/50 focus:ring-red-500" : ""
                     }`}
                   />
                   {errors.email && (
                     <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
-                      <AlertCircle className="h-5 w-5 text-red-500" />
+                      <AlertCircle className="h-5 w-5 text-red-400" />
                     </div>
                   )}
                 </div>
@@ -266,7 +300,7 @@ export default function ContactSection() {
                   <motion.p
                     initial={{ opacity: 0, y: -5 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="mt-2 flex items-center gap-1 text-sm text-red-600 dark:text-red-400"
+                    className="mt-2 text-sm text-red-400"
                   >
                     {errors.email.message}
                   </motion.p>
@@ -276,26 +310,24 @@ export default function ContactSection() {
               <div>
                 <label
                   htmlFor="message"
-                  className="block text-sm leading-6 font-semibold text-gray-900 dark:text-white"
+                  className="block text-sm font-medium leading-6 text-slate-300 mb-2"
                 >
-                  {t("contact.form.message.label")} *
+                  Votre besoin
                 </label>
-                <div className="relative mt-2">
+                <div className="relative">
                   <textarea
                     id="message"
                     {...register("message")}
                     disabled={submissionState === "loading"}
                     rows={5}
-                    placeholder={t("contact.form.message.placeholder")}
-                    className={`block w-full rounded-lg border-0 px-4 py-3.5 text-gray-900 shadow-sm ring-1 transition-all duration-200 ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset disabled:cursor-not-allowed disabled:opacity-50 sm:text-sm sm:leading-6 dark:bg-gray-900 dark:text-white ${
-                      errors.message
-                        ? "ring-red-500 focus:ring-red-500"
-                        : "focus:ring-primary-600 ring-gray-300 dark:ring-gray-700"
+                    placeholder="Décrivez brièvement votre projet..."
+                    className={`block w-full rounded-xl border-0 bg-white/5 px-4 py-3.5 text-white shadow-sm ring-1 ring-inset ring-white/10 transition-all duration-200 placeholder:text-slate-500 focus:bg-white/10 focus:ring-2 focus:ring-inset focus:ring-primary disabled:cursor-not-allowed disabled:opacity-50 sm:text-sm sm:leading-6 resize-none ${
+                      errors.message ? "ring-red-500/50 focus:ring-red-500" : ""
                     }`}
                   />
                   {errors.message && (
                     <div className="pointer-events-none absolute top-3 right-3">
-                      <AlertCircle className="h-5 w-5 text-red-500" />
+                      <AlertCircle className="h-5 w-5 text-red-400" />
                     </div>
                   )}
                 </div>
@@ -303,7 +335,7 @@ export default function ContactSection() {
                   <motion.p
                     initial={{ opacity: 0, y: -5 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="mt-2 flex items-center gap-1 text-sm text-red-600 dark:text-red-400"
+                    className="mt-2 text-sm text-red-400"
                   >
                     {errors.message.message}
                   </motion.p>
@@ -313,7 +345,7 @@ export default function ContactSection() {
               <button
                 type="submit"
                 disabled={!isValid || !isDirty || submissionState === "loading"}
-                className="bg-primary-600 hover:bg-primary-500 focus-visible:outline-primary-600 shadow-primary-600/30 hover:shadow-primary-600/50 flex w-full items-center justify-center gap-2 rounded-lg px-6 py-4 text-base font-semibold text-white shadow-lg transition-all duration-200 hover:scale-[1.02] hover:shadow-xl focus-visible:scale-[1.02] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:scale-100 disabled:hover:shadow-lg"
+                className="flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-6 py-4 text-base font-semibold text-white shadow-lg shadow-primary/20 transition-all duration-300 hover:bg-primary-hover hover:shadow-xl hover:shadow-primary/30 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:shadow-lg"
               >
                 {submissionState === "loading" ? (
                   <>
@@ -322,77 +354,12 @@ export default function ContactSection() {
                   </>
                 ) : (
                   <>
+                    Envoyer le message
                     <Send className="h-5 w-5" />
-                    {t("contact.form.submit")}
                   </>
                 )}
               </button>
             </form>
-          </motion.div>
-
-          {/* Professional Links */}
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
-            transition={{
-              duration: prefersReducedMotion ? 0 : 0.5,
-              delay: prefersReducedMotion ? 0 : 0.3,
-            }}
-          >
-            <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
-              {t("contact.links.title")}
-            </h3>
-            <p className="mt-2 text-gray-600 dark:text-gray-400">
-              {t("contact.links.description")}
-            </p>
-
-            <div className="mt-8 space-y-4">
-              {professionalLinks.map((link) => {
-                const Icon = link.icon;
-                return (
-                  <a
-                    key={link.name}
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group hover:border-primary-500 dark:hover:border-primary-500 focus-visible:border-primary-500 dark:focus-visible:border-primary-500 flex items-center gap-4 rounded-lg border border-gray-200 bg-white p-4 transition-all duration-200 hover:scale-[1.02] hover:shadow-md focus-visible:scale-[1.02] focus-visible:shadow-md dark:border-gray-700 dark:bg-gray-800"
-                  >
-                    <div
-                      className={`group-hover:bg-primary-50 dark:group-hover:bg-primary-900/20 flex h-12 w-12 items-center justify-center rounded-lg bg-gray-100 transition-all duration-200 group-hover:scale-110 group-focus-visible:scale-110 dark:bg-gray-700`}
-                    >
-                      <Icon className={`h-6 w-6 ${link.color}`} />
-                    </div>
-                    <div className="flex-1">
-                      <div className="font-semibold text-gray-900 dark:text-white">{link.name}</div>
-                      <div className="text-sm text-gray-600 dark:text-gray-400">{link.label}</div>
-                    </div>
-                    <svg
-                      className="group-hover:text-primary-600 dark:group-hover:text-primary-400 h-5 w-5 text-gray-400 transition-transform group-hover:translate-x-1"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M9 5l7 7-7 7"
-                      />
-                    </svg>
-                  </a>
-                );
-              })}
-            </div>
-
-            {/* Additional Info */}
-            <div className="bg-primary-50 dark:bg-primary-900/20 mt-8 rounded-lg p-6">
-              <h4 className="text-primary-900 dark:text-primary-100 font-semibold">
-                {t("contact.availability.title")}
-              </h4>
-              <p className="text-primary-800 dark:text-primary-200 mt-2 text-sm">
-                {t("contact.availability.description")}
-              </p>
-            </div>
           </motion.div>
         </div>
       </div>
