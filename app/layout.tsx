@@ -136,7 +136,7 @@ export default function RootLayout({
         />
         <meta name="theme-color" content="#0f0f19" />
       </head>
-      <body className={`${plusJakarta.variable} antialiased`}>
+      <body className={`${plusJakarta.variable} antialiased`} suppressHydrationWarning>
         <ProgressBar />
         <ClientProviders>{children}</ClientProviders>
       </body>
