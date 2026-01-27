@@ -9,6 +9,7 @@ const navigation = [
   { name: "navigation.about", href: "#about" },
   { name: "navigation.services", href: "#skills" },
   { name: "navigation.projects", href: "#projects" },
+  { name: "Services", href: "#services" },
   { name: "navigation.blog", href: "#blog" },
   { name: "navigation.contact", href: "#contact" },
 ];
@@ -95,21 +96,21 @@ export default function Header() {
   }, []);
 
   return (
-    <header className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-full max-w-4xl px-4">
+    <header className="fixed top-6 left-1/2 z-50 w-full max-w-4xl -translate-x-1/2 px-4">
       <nav
-        className="nav-glass px-6 py-3 rounded-full flex items-center justify-between shadow-glass"
+        className="nav-glass shadow-glass flex items-center justify-between rounded-full px-6 py-3"
         aria-label="Main navigation"
       >
         {/* Logo */}
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center font-bold text-white shadow-lg shadow-primary/20">
+          <div className="bg-primary shadow-primary/20 flex h-8 w-8 items-center justify-center rounded-lg font-bold text-white shadow-lg">
             RS
           </div>
-          <span className="font-bold hidden sm:block text-foreground">Portfolio</span>
+          <span className="text-foreground hidden font-bold sm:block">Portfolio</span>
         </div>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center gap-8 text-sm font-semibold text-muted-foreground">
+        <div className="text-muted-foreground hidden items-center gap-8 text-sm font-semibold md:flex">
           {navigation.map((item) => (
             <a
               key={item.name}
@@ -133,7 +134,7 @@ export default function Header() {
           {/* Mobile menu button */}
           <button
             type="button"
-            className="md:hidden p-2 rounded-full hover:bg-muted transition-colors"
+            className="hover:bg-muted rounded-full p-2 transition-colors md:hidden"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -171,23 +172,23 @@ export default function Header() {
       {mobileMenuOpen && (
         <>
           {/* Backdrop */}
-          <div 
-            className="fixed inset-0 bg-black/20 backdrop-blur-sm z-40"
+          <div
+            className="fixed inset-0 z-40 bg-black/20 backdrop-blur-sm"
             onClick={() => setMobileMenuOpen(false)}
           />
-          
+
           {/* Sidebar */}
-          <div className="fixed inset-y-0 right-0 z-50 w-full max-w-sm glass-dark p-6 overflow-y-auto">
-            <div className="flex items-center justify-between mb-8">
+          <div className="glass-dark fixed inset-y-0 right-0 z-50 w-full max-w-sm overflow-y-auto p-6">
+            <div className="mb-8 flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center font-bold text-white shadow-lg shadow-primary/20">
+                <div className="bg-primary shadow-primary/20 flex h-8 w-8 items-center justify-center rounded-lg font-bold text-white shadow-lg">
                   RS
                 </div>
-                <span className="font-bold text-foreground">Portfolio</span>
+                <span className="text-foreground font-bold">Portfolio</span>
               </div>
               <button
                 type="button"
-                className="p-2 rounded-full hover:bg-muted/20 transition-colors"
+                className="hover:bg-muted/20 rounded-full p-2 transition-colors"
                 onClick={() => setMobileMenuOpen(false)}
                 aria-label="Close menu"
               >
@@ -224,7 +225,7 @@ export default function Header() {
               ))}
             </div>
 
-            <div className="mt-8 pt-8 border-t border-border/20 flex items-center justify-center gap-4">
+            <div className="border-border/20 mt-8 flex items-center justify-center gap-4 border-t pt-8">
               <LanguageSwitcher />
             </div>
           </div>
