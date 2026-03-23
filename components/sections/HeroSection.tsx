@@ -266,7 +266,7 @@ export default function HeroSection() {
             className="font-mono text-[9px] tracking-[0.22em] uppercase"
             style={{ color: "rgba(255,255,255,0.14)" }}
           >
-            Available on
+            {t("hero.availableOn")}
           </span>
           {[
             {

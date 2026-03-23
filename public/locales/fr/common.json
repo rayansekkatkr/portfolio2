@@ -7,6 +7,7 @@
   },
   "hero": {
     "available": "Disponible pour de nouveaux projets",
+    "availableOn": "Disponible sur",
     "role": "Developpeur Full-Stack & Product Engineer",
     "description": "Je concois et construis des produits numeriques modernes, performants et evolutifs. Des plateformes SaaS aux integrations IA. Ingenierie de precision pour des projets ambitieux.",
     "cta": {

@@ -7,6 +7,7 @@
   },
   "hero": {
     "available": "Open to new projects",
+    "availableOn": "Available on",
     "role": "Full-Stack Developer & Product Engineer",
     "description": "I design and build digital products that are modern, performant, and built to scale. From SaaS platforms to AI integrations. Precision engineering for ambitious projects.",
     "cta": {
