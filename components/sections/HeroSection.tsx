@@ -1,181 +1,323 @@
 "use client";
 
-import Image from "next/image";
-import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
-import { useLanguageContext } from "@/lib/i18n/LanguageContext";
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { ArrowRight, ArrowDown } from "lucide-react";
+import dynamic from "next/dynamic";
+import { useRef } from "react";
+import { ShimmerButton } from "@/components/ui/magic/ShimmerButton";
+import { MagneticButton } from "@/components/ui/magic/MagneticButton";
+import { useTranslation } from "@/lib/i18n/useLanguage";
+
+const HeroScene = dynamic(() => import("@/components/3d/HeroScene"), {
+  ssr: false,
+});
+
+const spring = { type: "spring" as const, damping: 28, stiffness: 100 };
 
 export default function HeroSection() {
-  const { t } = useLanguageContext();
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(
-    () =>
-      typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches
-  );
-  const [displayedTitle, setDisplayedTitle] = useState("");
-  const [isTypingComplete, setIsTypingComplete] = useState(false);
+  const prefersReducedMotion = useReducedMotion();
+  const { t } = useTranslation();
+  const sectionRef = useRef<HTMLElement>(null);
 
-  const fullTitle = t("hero.title");
+  // Parallax on scroll
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
+  const textY = useTransform(scrollYProgress, [0, 1], [0, 150]);
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
-  useEffect(() => {
-    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const handleChange = () => setPrefersReducedMotion(mediaQuery.matches);
-    mediaQuery.addEventListener("change", handleChange);
-    return () => mediaQuery.removeEventListener("change", handleChange);
-  }, []);
+  const fadeUp = (delay: number) =>
+    prefersReducedMotion
+      ? { initial: {}, animate: {} }
+      : {
+          initial: { opacity: 0, y: 24 },
+          animate: { opacity: 1, y: 0 },
+          transition: { ...spring, delay },
+        };
 
-  // Typing animation effect
-  useEffect(() => {
-    if (prefersReducedMotion || !fullTitle) {
-      setDisplayedTitle(fullTitle);
-      setIsTypingComplete(true);
-      return;
-    }
+  const slideUp = (delay: number) =>
+    prefersReducedMotion
+      ? { initial: {}, animate: {} }
+      : {
+          initial: { y: "110%" },
+          animate: { y: 0 },
+          transition: { ...spring, delay },
+        };
 
-    setDisplayedTitle("");
-    setIsTypingComplete(false);
-    let currentIndex = 0;
-
-    const typingInterval = setInterval(() => {
-      if (currentIndex <= fullTitle.length) {
-        setDisplayedTitle(fullTitle.slice(0, currentIndex));
-        currentIndex++;
-      } else {
-        setIsTypingComplete(true);
-        clearInterval(typingInterval);
-      }
-    }, 50); // 50ms per character for natural typing speed
-
-    return () => clearInterval(typingInterval);
-  }, [fullTitle, prefersReducedMotion]);
-
-  const duration = prefersReducedMotion ? 0 : 0.5;
-  const delay = prefersReducedMotion ? 0 : 0.2;
+  const charReveal = (delay: number) =>
+    prefersReducedMotion
+      ? { initial: {}, animate: {} }
+      : {
+          initial: { y: "120%", rotateX: -40 },
+          animate: { y: 0, rotateX: 0 },
+          transition: {
+            type: "spring" as const,
+            damping: 30,
+            stiffness: 80,
+            delay,
+          },
+        };
 
   return (
     <section
+      ref={sectionRef}
       id="hero"
       aria-label="Hero introduction"
-      className="relative flex min-h-screen items-center justify-center overflow-hidden px-6 py-24"
+      className="relative min-h-screen flex flex-col justify-center overflow-hidden px-6 py-32 lg:px-16 xl:px-24"
     >
-      {/* Gradient blur backgrounds */}
-      <div className="absolute -left-24 top-1/4 h-96 w-96 rounded-full bg-primary/10 blur-[120px]" />
-      <div className="absolute -right-24 bottom-1/4 h-96 w-96 rounded-full bg-indigo-200/40 blur-[120px] dark:bg-indigo-900/20" />
+      {/* 3D scene */}
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0">
+        <HeroScene />
+        {/* Left vignette for text readability */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(90deg, #050506 20%, rgba(5,5,6,0.72) 50%, transparent 100%)",
+          }}
+        />
+        {/* Bottom fade */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background: "linear-gradient(to top, #050506 0%, transparent 30%)",
+          }}
+        />
+        {/* Top subtle vignette */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background: "radial-gradient(ellipse at 50% 0%, rgba(0,212,255,0.03) 0%, transparent 50%)",
+          }}
+        />
+      </div>
 
-      <div className="relative z-10 mx-auto max-w-6xl">
-        <div className="flex flex-col items-center gap-16 lg:flex-row lg:gap-20">
-          {/* Profile Image with glass badge */}
-          <motion.div
-            className="group relative flex-shrink-0"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration, ease: [0.25, 0.4, 0.25, 1] }}
+      {/* Subtle grid texture */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 opacity-[0.015]"
+        style={{
+          backgroundImage:
+            "linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)",
+          backgroundSize: "80px 80px",
+        }}
+      />
+
+      <motion.div
+        className="relative z-10 mx-auto w-full max-w-6xl"
+        style={prefersReducedMotion ? {} : { y: textY, opacity }}
+      >
+        {/* Available badge */}
+        <motion.div {...fadeUp(0.05)} className="mb-12 inline-flex">
+          <span
+            className="inline-flex items-center gap-2.5 rounded-full border px-5 py-2 text-[10px] font-mono tracking-[0.2em] uppercase backdrop-blur-sm"
+            style={{
+              borderColor: "rgba(52,211,153,0.15)",
+              background: "rgba(52,211,153,0.04)",
+              color: "rgba(52,211,153,0.9)",
+            }}
           >
-            <div className="relative h-64 w-64 overflow-hidden rounded-[2.5rem] border-6 border-white shadow-2xl transition-transform duration-300 group-hover:scale-105 dark:border-charcoal-800 lg:h-80 lg:w-80">
-              <Image
-                src="/images/profile.jpg"
-                alt="Rayan Sekkat - AI-Powered Full-Stack Developer"
-                width={320}
-                height={320}
-                className="object-cover"
-                priority
+            <span className="relative flex h-1.5 w-1.5">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
+            </span>
+            {t("hero.available")}
+          </span>
+        </motion.div>
+
+        {/* Headline - dramatic oversized type */}
+        <div className="relative">
+          {/* RAYAN */}
+          <div className="overflow-hidden" style={{ perspective: "600px" }}>
+            <motion.h1
+              {...charReveal(0.12)}
+              className="font-cormorant font-bold leading-[0.82] tracking-[-0.02em] text-white"
+              style={{ fontSize: "clamp(5rem, 15vw, 13rem)" }}
+            >
+              RAYAN
+            </motion.h1>
+          </div>
+
+          {/* SEKKAT. */}
+          <div className="overflow-hidden" style={{ perspective: "600px" }}>
+            <motion.div
+              {...charReveal(0.22)}
+              className="flex items-baseline gap-0 leading-[0.82]"
+            >
+              <h1
+                className="font-cormorant font-bold tracking-[-0.02em] text-white"
+                style={{ fontSize: "clamp(5rem, 15vw, 13rem)" }}
+              >
+                SEKKAT
+              </h1>
+              <motion.span
+                className="font-cormorant font-bold"
+                style={{
+                  fontSize: "clamp(5rem, 15vw, 13rem)",
+                  lineHeight: 0.82,
+                }}
+                initial={prefersReducedMotion ? {} : { opacity: 0, scale: 0 }}
+                animate={prefersReducedMotion ? {} : { opacity: 1, scale: 1 }}
+                transition={{ type: "spring", damping: 15, stiffness: 200, delay: 0.6 }}
+              >
+                <span style={{ color: "#00D4FF" }}>.</span>
+              </motion.span>
+            </motion.div>
+          </div>
+
+          {/* Floating role label positioned creatively */}
+          <motion.div
+            {...fadeUp(0.5)}
+            className="absolute -right-2 bottom-2 hidden lg:block"
+          >
+            <div
+              className="flex items-center gap-3 rounded-full border px-5 py-2.5 backdrop-blur-md"
+              style={{
+                borderColor: "rgba(255,255,255,0.06)",
+                background: "rgba(255,255,255,0.02)",
+              }}
+            >
+              <div
+                className="h-6 w-px"
+                style={{ background: "rgba(0,212,255,0.3)" }}
               />
-            </div>
-            {/* Glass badge overlay */}
-            <div className="absolute -bottom-4 -right-4 glass-card rounded-2xl p-4 shadow-xl">
-              <div className="flex items-center gap-2">
-                <div className="h-10 w-10 rounded-lg bg-primary/20 flex items-center justify-center">
-                  <svg className="h-5 w-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                  </svg>
-                </div>
-                <div className="text-left">
-                  <p className="text-xs font-medium text-muted-foreground">Expertise</p>
-                  <p className="text-sm font-bold text-foreground">Next.js & OpenAI</p>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Content */}
-          <motion.div
-            className="flex-1 text-center lg:text-left"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration, delay, ease: [0.25, 0.4, 0.25, 1] }}
-          >
-            {/* Availability badge */}
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-emerald-50 px-4 py-2 text-sm font-semibold text-emerald-600 dark:bg-emerald-900/20 dark:text-emerald-400">
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500"></span>
-              </span>
-              DISPONIBLE
-            </div>
-
-            <h1 className="text-5xl font-extrabold tracking-tight text-foreground sm:text-6xl lg:text-7xl">
-              {t("hero.name")}
-            </h1>
-            <h2 className="mt-4 bg-gradient-to-r from-primary via-indigo-600 to-purple-600 bg-clip-text text-3xl font-bold text-transparent sm:text-4xl dark:from-primary dark:via-indigo-400 dark:to-purple-400">
-              <span className="sr-only">{fullTitle}</span>
-              <span aria-hidden="true">
-                {displayedTitle}
-                {!isTypingComplete && (
-                  <motion.span
-                    className="ml-1 inline-block h-8 w-0.5 bg-primary"
-                    animate={{ opacity: [1, 0] }}
-                    transition={{ duration: 0.8, repeat: Infinity, ease: "easeInOut" }}
-                  />
-                )}
-              </span>
-            </h2>
-            <p className="mt-6 text-lg leading-8 text-muted-foreground sm:text-xl">
-              {t("hero.description")}
-            </p>
-
-            {/* CTAs */}
-            <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row lg:justify-start">
-              <a
-                href="#contact"
-                className="glow-hover group w-full rounded-2xl bg-primary px-8 py-4 text-center text-sm font-bold text-white shadow-lg shadow-primary/25 transition-all duration-300 hover:shadow-xl hover:shadow-primary/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:w-auto"
+              <span
+                className="font-mono text-[10px] uppercase tracking-[0.25em]"
+                style={{ color: "rgba(0,212,255,0.6)" }}
               >
-                {t("hero.cta.contact")}
-              </a>
-              <a
-                href="#projects"
-                className="group w-full rounded-2xl border-2 border-border bg-background/50 px-8 py-4 text-center text-sm font-bold text-foreground backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/30 hover:bg-background hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:w-auto"
-              >
-                {t("hero.cta.projects")}
-              </a>
-            </div>
-
-            {/* Social proof badges */}
-            <div className="mt-12 flex flex-wrap items-center justify-center gap-6 lg:justify-start">
-              <div className="flex items-center gap-2 grayscale transition-all duration-300 hover:grayscale-0">
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10">
-                  <svg className="h-5 w-5 text-primary" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                  </svg>
-                </div>
-                <div className="text-left">
-                  <p className="text-xs font-medium text-muted-foreground">Top Rated</p>
-                  <p className="text-sm font-bold text-foreground">5.0 ★★★★★</p>
-                </div>
-              </div>
-              <div className="flex items-center gap-2 grayscale transition-all duration-300 hover:grayscale-0">
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-100 dark:bg-emerald-900/20">
-                  <svg className="h-5 w-5 text-emerald-600 dark:text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </div>
-                <div className="text-left">
-                  <p className="text-xs font-medium text-muted-foreground">Verified</p>
-                  <p className="text-sm font-bold text-foreground">Expert-Vetted</p>
-                </div>
-              </div>
+                {t("hero.role")}
+              </span>
             </div>
           </motion.div>
         </div>
-      </div>
+
+        {/* Divider line - animated beam */}
+        <motion.div
+          aria-hidden="true"
+          initial={prefersReducedMotion ? {} : { scaleX: 0, opacity: 0 }}
+          animate={prefersReducedMotion ? {} : { scaleX: 1, opacity: 1 }}
+          transition={{ duration: 1.2, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
+          className="mt-10 h-px origin-left"
+          style={{
+            background:
+              "linear-gradient(90deg, rgba(255,255,255,0.12) 0%, rgba(0,212,255,0.4) 25%, rgba(201,165,92,0.2) 60%, transparent 100%)",
+          }}
+        />
+
+        {/* Role (mobile) + description + CTAs */}
+        <div className="mt-10 grid gap-10 lg:grid-cols-2 lg:items-end">
+          <motion.div {...fadeUp(0.5)}>
+            <p
+              className="mb-3 font-mono text-[10px] uppercase tracking-[0.25em] lg:hidden"
+              style={{ color: "rgba(0,212,255,0.55)" }}
+            >
+              {t("hero.role")}
+            </p>
+            <p
+              className="max-w-md text-lg leading-relaxed"
+              style={{ color: "rgba(240,238,233,0.45)" }}
+            >
+              {t("hero.description")}
+            </p>
+          </motion.div>
+
+          <motion.div
+            {...fadeUp(0.6)}
+            className="flex flex-col gap-3 sm:flex-row lg:justify-end"
+          >
+            <MagneticButton strength={0.15} className="inline-flex">
+              <ShimmerButton
+                as="a"
+                href="#contact"
+                background="#00D4FF"
+                shimmerColor="rgba(255,255,255,0.2)"
+                className="group inline-flex items-center gap-2.5 px-8 py-4 text-sm font-bold text-[#050506] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+              >
+                {t("hero.cta.primary")}
+                <ArrowRight
+                  className="h-4 w-4 transition-transform group-hover:translate-x-1"
+                  aria-hidden="true"
+                />
+              </ShimmerButton>
+            </MagneticButton>
+
+            <MagneticButton strength={0.15} className="inline-flex">
+              <a
+                href="#projects"
+                className="group inline-flex items-center justify-center gap-2.5 rounded-full border px-8 py-4 text-sm font-medium transition-all duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+                style={{
+                  borderColor: "rgba(255,255,255,0.1)",
+                  color: "rgba(240,238,233,0.55)",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = "rgba(0,212,255,0.25)";
+                  e.currentTarget.style.color = "rgba(240,238,233,1)";
+                  e.currentTarget.style.background = "rgba(0,212,255,0.04)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)";
+                  e.currentTarget.style.color = "rgba(240,238,233,0.55)";
+                  e.currentTarget.style.background = "transparent";
+                }}
+              >
+                {t("hero.cta.secondary")}
+                <ArrowDown
+                  className="h-4 w-4 transition-transform group-hover:translate-y-0.5"
+                  aria-hidden="true"
+                />
+              </a>
+            </MagneticButton>
+          </motion.div>
+        </div>
+
+        {/* Bottom ticker - cinematic lower third */}
+        <motion.div
+          {...fadeUp(0.8)}
+          className="mt-24 flex items-center gap-8 border-t pt-6"
+          style={{ borderColor: "rgba(255,255,255,0.05)" }}
+        >
+          <div className="hidden items-center gap-6 lg:flex">
+            {["Next.js", "React", "TypeScript", "Python", "AI"].map((tech, i) => (
+              <span
+                key={tech}
+                className="flex items-center gap-4 font-mono text-[11px] tracking-wide"
+                style={{ color: "rgba(255,255,255,0.16)" }}
+              >
+                {tech}
+                {i < 4 && (
+                  <span
+                    aria-hidden="true"
+                    className="h-3 w-px"
+                    style={{ background: "rgba(255,255,255,0.06)" }}
+                  />
+                )}
+              </span>
+            ))}
+          </div>
+
+          {/* Scroll indicator */}
+          <motion.div
+            className="ml-auto flex items-center gap-3"
+            animate={prefersReducedMotion ? {} : { y: [0, 4, 0] }}
+            transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <span
+              className="font-mono text-[10px] tracking-widest uppercase"
+              style={{ color: "rgba(255,255,255,0.12)" }}
+            >
+              {t("hero.location")}
+            </span>
+            <div
+              className="h-8 w-px"
+              style={{
+                background:
+                  "linear-gradient(to bottom, rgba(0,212,255,0.3), transparent)",
+              }}
+            />
+          </motion.div>
+        </motion.div>
+      </motion.div>
     </section>
   );
 }

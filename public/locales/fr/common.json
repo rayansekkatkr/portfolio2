@@ -1,221 +1,141 @@
 {
-  "site": {
-    "title": "Portfolio | Développeur Full-Stack",
-    "description": "Développeur Full-Stack propulsé par l'IA, spécialisé en Next.js, TypeScript et solutions web modernes"
-  },
   "navigation": {
-    "home": "Accueil",
-    "about": "À Propos",
+    "about": "A propos",
     "services": "Services",
     "projects": "Projets",
-    "blog": "Blog",
     "contact": "Contact"
   },
   "hero": {
-    "name": "Rayan Sekkat",
-    "title": "Développeur Full-Stack propulsé par l'IA",
-    "description": "Créateur de solutions web modernes avec Next.js, TypeScript et technologies de pointe. Je transforme vos idées en applications performantes et scalables.",
+    "available": "Disponible pour de nouveaux projets",
+    "role": "Developpeur Full-Stack & Product Engineer",
+    "description": "Je concois et construis des produits numeriques modernes, performants et evolutifs. Des plateformes SaaS aux integrations IA. Ingenierie de precision pour des projets ambitieux.",
     "cta": {
-      "contact": "Me Contacter",
-      "projects": "Voir les Projets"
-    }
+      "primary": "Demarrer un projet",
+      "secondary": "Voir mes travaux"
+    },
+    "location": "Base au Maroc"
   },
   "about": {
-    "title": "À Propos",
-    "biography": {
-      "intro": "Développeur Full-Stack propulsé par l'IA, je combine expertise technique traditionnelle et intelligence artificielle pour créer des solutions web innovantes et performantes. Ma spécialité : transformer des idées complexes en applications élégantes et scalables.",
-      "expertise": "Avec une maîtrise approfondie de Next.js, TypeScript et Node.js, et une expertise unique en intégration d'IA, je développe des applications qui non seulement répondent aux besoins actuels, mais anticipent les défis de demain. Mon approche allie rigueur technique, design centré utilisateur et automatisation intelligente.",
-      "passion": "Passionné par l'innovation et l'apprentissage continu, je m'engage à livrer du code propre, maintenable et documenté. Chaque projet est une opportunité de repousser les limites du possible grâce à la synergie entre développement moderne et intelligence artificielle."
-    },
+    "label": "// a propos",
+    "headline": "Concevoir des produits numeriques avec <accent>precision</accent> et intention.",
+    "description": "Je construis des plateformes SaaS, des applications IA et des experiences web modernes pour des clients qui ont besoin de plus que du code. Ils ont besoin d'un partenaire technique qui comprend le produit, le design et le business.",
     "stats": {
-      "experience": {
-        "label": "Années d'expérience",
-        "value": "5+"
-      },
-      "projects": {
-        "label": "Projets livrés",
-        "value": "10+"
-      },
-      "clients": {
-        "label": "Clients satisfaits",
-        "value": "8+"
-      },
-      "technologies": {
-        "label": "Technologies maîtrisées",
-        "value": "15+"
-      }
+      "years": { "label": "Annees d'experience" },
+      "projects": { "label": "Projets livres" },
+      "technologies": { "label": "Technologies maitrisees" },
+      "satisfaction": { "label": "Satisfaction client" }
     },
-    "techStack": {
-      "title": "Technologies",
-      "items": {
-        "react": "React & Next.js",
-        "typescript": "TypeScript",
-        "nodejs": "Node.js",
-        "python": "Python",
-        "postgresql": "PostgreSQL",
-        "docker": "Docker & AWS"
+    "expertise": {
+      "01": {
+        "title": "Ingenierie Produit",
+        "desc": "Plateformes SaaS full-stack de l'architecture au deploiement. Next.js, React, TypeScript, PostgreSQL, integrations Stripe."
+      },
+      "02": {
+        "title": "Integration IA",
+        "desc": "Fonctionnalites LLM, automatisation intelligente, chatbots et pipelines IA personnalises integres dans des applications en production."
+      },
+      "03": {
+        "title": "Craft Frontend",
+        "desc": "Interfaces pixel-perfect, animations avancees, experiences web 3D et design responsive obsede par la performance."
       }
     }
   },
-  "services": {
-    "title": "Services",
-    "subtitle": "Solutions professionnelles adaptées à vos besoins",
-    "items": {
+  "skills": {
+    "label": "// services",
+    "headline": "Ce que je construis.",
+    "coreExpertise": "Expertise principale",
+    "services": {
       "ai": {
-        "title": "Intégration IA & Automatisation",
-        "description": "Implémentation de solutions d'intelligence artificielle : LLM, Machine Learning, Chatbots intelligents, et automatisation de processus métier pour optimiser vos opérations."
+        "title": "IA & Automatisation",
+        "desc": "LLMs, chatbots, pipelines intelligents et automatisation des processus metier."
       },
       "backend": {
-        "title": "Développement Backend & API",
-        "description": "Création d'architectures backend robustes avec Node.js, TypeScript et API RESTful/GraphQL pour des applications performantes et scalables."
+        "title": "Backend & APIs",
+        "desc": "Node.js, Python, FastAPI. Architectures RESTful et GraphQL a grande echelle."
       },
       "saas": {
-        "title": "Création de SAAS",
-        "description": "Développement complet de plateformes SAAS : architecture multi-tenant, gestion d'abonnements, tableaux de bord et expérience utilisateur optimale."
+        "title": "Plateformes SaaS",
+        "desc": "Architecture multi-tenant, facturation, dashboards et gestion utilisateurs."
       },
-      "refactoring": {
-        "title": "Refactoring & Modernisation",
-        "description": "Refonte de sites existants, migration vers des technologies modernes, optimisation des performances et amélioration de la maintenabilité du code."
+      "modernization": {
+        "title": "Modernisation",
+        "desc": "Migration legacy, optimisation des performances et maintenabilite du code."
       },
       "database": {
-        "title": "Gestion de Bases de Données",
-        "description": "Conception de schémas optimisés, migrations, requêtes performantes avec PostgreSQL, MongoDB et ORMs modernes comme Prisma."
+        "title": "Couche Donnees",
+        "desc": "PostgreSQL, Prisma ORM, conception de schemas et requetes haute performance."
       },
-      "payment": {
-        "title": "Systèmes de Paiement",
-        "description": "Intégration sécurisée de solutions de paiement (Stripe, PayPal), gestion de transactions, abonnements récurrents et webhooks."
+      "payments": {
+        "title": "Paiements",
+        "desc": "Integration Stripe, abonnements, webhooks et gestion de transactions."
       },
       "devops": {
-        "title": "Déploiement & DevOps",
-        "description": "Configuration CI/CD, déploiement sur Vercel, AWS, Docker, gestion d'infrastructure et monitoring des applications en production."
-      },
-      "frontend": {
-        "title": "Développement Frontend Moderne",
-        "description": "Création d'interfaces utilisateur réactives et accessibles avec React, Next.js, Tailwind CSS et les dernières pratiques de développement."
+        "title": "DevOps",
+        "desc": "CI/CD, Docker, Vercel, deploiement et monitoring AWS."
       },
       "security": {
-        "title": "Sécurité & Authentification",
-        "description": "Implémentation de systèmes d'authentification sécurisés, gestion des rôles, protection des données et conformité aux standards de sécurité."
+        "title": "Securite",
+        "desc": "Systemes d'authentification, gestion des roles et standards de conformite."
       },
-      "optimization": {
-        "title": "Optimisation des Performances",
-        "description": "Analyse et amélioration des performances : bundle size, temps de chargement, SEO technique et scores Lighthouse optimaux."
+      "performance": {
+        "title": "Performance",
+        "desc": "Optimisation du bundle, Core Web Vitals et scores Lighthouse 100."
       }
     }
   },
   "projects": {
-    "title": "Projets",
-    "subtitle": "Découvrez mes réalisations récentes",
-    "featured": {
-      "title": "pont-facturx.com",
-      "description": "Plateforme SAAS complète de gestion de facturation et conformité fiscale pour PME et freelances. Interface intuitive, automatisation intelligente et intégrations multiples.",
-      "technologies": "Technologies",
-      "techList": {
-        "nextjs": "Next.js 14",
-        "typescript": "TypeScript",
-        "postgresql": "PostgreSQL",
-        "stripe": "Stripe",
-        "prisma": "Prisma ORM"
-      },
-      "features": "Fonctionnalités Clés",
-      "featureList": {
-        "invoicing": "Génération automatique de factures conformes",
-        "dashboard": "Tableau de bord analytique en temps réel",
-        "integration": "Intégration comptable et bancaire",
-        "automation": "Automatisation des relances et paiements",
-        "responsive": "Interface responsive et accessible"
-      },
-      "results": "Résultats",
-      "resultList": {
-        "users": {
-          "value": "500+",
-          "label": "Utilisateurs actifs"
-        },
-        "satisfaction": {
-          "value": "98%",
-          "label": "Satisfaction client"
-        },
-        "time": {
-          "value": "60%",
-          "label": "Temps de facturation réduit"
-        }
-      },
-      "cta": "Visiter le site"
+    "label": "// projets phares",
+    "headline": "Etudes de cas.",
+    "visitSite": "Visiter le site",
+    "project1": {
+      "tagline": "SaaS / Facturation & Conformite Fiscale",
+      "description": "Plateforme SaaS complete de facturation et conformite Factur-X. Concue pour les PME et freelances ayant besoin de facturation automatisee, d'analyses en temps reel et de workflows de paiement integres.",
+      "results": {
+        "users": "Utilisateurs actifs",
+        "satisfaction": "Satisfaction",
+        "time": "Temps economise"
+      }
+    },
+    "project2": {
+      "tagline": "IA / Extraction de Factures & Automatisation AP",
+      "description": "Plateforme d'extraction de factures par IA pour les cabinets comptables. Automatise la capture des factures fournisseurs avec 99,2% de precision, workflow axe sur les exceptions, et integrations natives QuickBooks, Xero et API personnalisees.",
+      "results": {
+        "accuracy": "Precision d'extraction",
+        "exceptions": "Exceptions seulement",
+        "time": "Temps economise"
+      }
     }
   },
-  "blog": {
-    "title": "Derniers Articles",
-    "subtitle": "Expertise technique et partage de connaissances",
-    "comingSoon": "Articles à venir prochainement",
-    "viewAll": "Voir tous les articles",
-    "readMore": "Lire la suite",
-    "readTime": "min",
-    "noArticles": "Aucun article publié pour le moment. Revenez bientôt !"
-  },
   "contact": {
-    "title": "Contactez-moi",
-    "subtitle": "Un projet en tête ? Discutons de la manière dont je peux vous aider à le concrétiser.",
-    "form": {
-      "title": "Envoyer un message",
-      "description": "Remplissez le formulaire et je vous répondrai dans les plus brefs délais.",
-      "name": {
-        "label": "Nom complet",
-        "placeholder": "Votre nom",
-        "required": true
-      },
-      "email": {
-        "label": "Email",
-        "placeholder": "votre.email@exemple.com",
-        "required": true
-      },
-      "message": {
-        "label": "Message",
-        "placeholder": "Décrivez votre projet ou votre demande...",
-        "required": true
-      },
-      "submit": "Envoyer le message",
-      "comingSoon": "⚠️ Formulaire en développement - Fonctionnel dans Epic 3"
-    },
+    "label": "// contact",
+    "headline": "Construisons quelque chose <accent>ensemble</accent>.",
+    "description": "Un projet en tete ? Je suis disponible pour de nouvelles collaborations. Discutons de vos objectifs et concretisons-les.",
     "links": {
-      "title": "Autres moyens de contact",
-      "description": "Vous préférez un autre canal ? Contactez-moi directement via ces plateformes.",
       "email": "Email",
       "linkedin": "LinkedIn",
-      "github": "GitHub",
-      "upwork": "Upwork"
+      "github": "GitHub"
     },
-    "availability": {
-      "title": "💡 Disponibilité",
-      "description": "Actuellement disponible pour de nouveaux projets. Temps de réponse moyen : 24-48h."
+    "responseTime": "Reponse moyenne :",
+    "responseValue": "2-4h",
+    "form": {
+      "name": { "label": "Nom complet", "placeholder": "Votre nom" },
+      "email": { "label": "Email", "placeholder": "email@entreprise.com" },
+      "message": { "label": "Details du projet", "placeholder": "Parlez-moi de votre projet..." },
+      "submit": "Envoyer le message",
+      "sending": "Envoi..."
+    },
+    "success": {
+      "title": "Message envoye",
+      "description": "Merci. Je vous repondrai rapidement."
+    },
+    "error": {
+      "title": "Echec de l'envoi",
+      "description": "Une erreur est survenue. Veuillez reessayer."
     }
   },
   "footer": {
-    "about": {
-      "title": "Rayan Sekkat",
-      "description": "Développeur Full-Stack spécialisé dans l'intégration d'IA et les solutions web modernes. Passionné par la création d'applications performantes avec Next.js, TypeScript et les technologies de pointe."
-    },
-    "navigation": {
-      "title": "Navigation",
-      "links": {
-        "home": "Accueil",
-        "about": "À Propos",
-        "services": "Services",
-        "projects": "Projets",
-        "blog": "Blog",
-        "contact": "Contact"
-      }
-    },
-    "legal": {
-      "title": "Légal",
-      "privacy": "Politique de Confidentialité",
-      "terms": "Conditions d'Utilisation"
-    },
-    "copyright": "Tous droits réservés.",
-    "poweredBy": "Propulsé par",
-    "tech": {
-      "nextjs": "Next.js",
-      "typescript": "TypeScript",
-      "tailwind": "Tailwind CSS"
-    }
+    "tagline": "Developpeur Full-Stack & Ingenieur IA",
+    "copyright": "Rayan Sekkat",
+    "builtWith": "Construit avec Next.js, Three.js & Framer Motion"
   }
 }

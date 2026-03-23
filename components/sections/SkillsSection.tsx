@@ -1,178 +1,195 @@
 "use client";
 
-import {
-  Brain,
-  Code2,
-  Database,
-  Lock,
-  ShoppingCart,
-  Wrench,
-  Cloud,
-  Layers,
-  Bot,
-  Zap,
-} from "lucide-react";
-import { motion, useInView } from "framer-motion";
-import { useRef, useState, useEffect } from "react";
-import { useLanguageContext } from "@/lib/i18n/LanguageContext";
+import { Brain, Code2, Layers, Wrench, Database, Cloud, Zap, Lock, ShoppingCart } from "lucide-react";
+import { motion, useInView, useReducedMotion } from "framer-motion";
+import { useRef } from "react";
+import { Marquee } from "@/components/ui/magic/Marquee";
+import { GlowCard } from "@/components/ui/magic/GlowCard";
+import { useTranslation } from "@/lib/i18n/useLanguage";
+
+const SERVICES = [
+  { icon: Brain, key: "ai", featured: true },
+  { icon: Code2, key: "backend" },
+  { icon: Layers, key: "saas" },
+  { icon: Wrench, key: "modernization" },
+  { icon: Database, key: "database" },
+  { icon: ShoppingCart, key: "payments" },
+  { icon: Cloud, key: "devops" },
+  { icon: Lock, key: "security" },
+  { icon: Zap, key: "performance" },
+];
+
+const TECH_STACK = [
+  "Next.js",
+  "React",
+  "TypeScript",
+  "Python",
+  "FastAPI",
+  "Node.js",
+  "PostgreSQL",
+  "Prisma",
+  "Docker",
+  "Supabase",
+  "OpenAI",
+  "LangChain",
+  "Stripe",
+  "Vercel",
+  "Tailwind CSS",
+  "Three.js",
+  "Framer Motion",
+];
 
 export default function SkillsSection() {
-  const { t } = useLanguageContext();
   const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(
-    () =>
-      typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches
-  );
+  const prefersReducedMotion = useReducedMotion();
+  const { t } = useTranslation();
 
-  useEffect(() => {
-    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const handleChange = () => setPrefersReducedMotion(mediaQuery.matches);
-    mediaQuery.addEventListener("change", handleChange);
-    return () => mediaQuery.removeEventListener("change", handleChange);
-  }, []);
-  const services = [
-    {
-      icon: Brain,
-      title: t("services.items.ai.title"),
-      description: t("services.items.ai.description"),
-      featured: true,
-    },
-    {
-      icon: Code2,
-      title: t("services.items.backend.title"),
-      description: t("services.items.backend.description"),
-      featured: false,
-    },
-    {
-      icon: Layers,
-      title: t("services.items.saas.title"),
-      description: t("services.items.saas.description"),
-      featured: false,
-    },
-    {
-      icon: Wrench,
-      title: t("services.items.refactoring.title"),
-      description: t("services.items.refactoring.description"),
-      featured: false,
-    },
-    {
-      icon: Database,
-      title: t("services.items.database.title"),
-      description: t("services.items.database.description"),
-      featured: false,
-    },
-    {
-      icon: ShoppingCart,
-      title: t("services.items.payment.title"),
-      description: t("services.items.payment.description"),
-      featured: false,
-    },
-    {
-      icon: Cloud,
-      title: t("services.items.devops.title"),
-      description: t("services.items.devops.description"),
-      featured: false,
-    },
-    {
-      icon: Lock,
-      title: t("services.items.security.title"),
-      description: t("services.items.security.description"),
-      featured: false,
-    },
-    {
-      icon: Bot,
-      title: t("services.items.frontend.title"),
-      description: t("services.items.frontend.description"),
-      featured: false,
-    },
-    {
-      icon: Zap,
-      title: t("services.items.optimization.title"),
-      description: t("services.items.optimization.description"),
-      featured: false,
-    },
-  ];
+  const dur = (v: number) => (prefersReducedMotion ? 0 : v);
+  const del = (v: number) => (prefersReducedMotion ? 0 : v);
 
   return (
     <section
       ref={ref}
       id="skills"
       aria-label="Skills and services"
-      className="px-6 py-24 sm:py-32"
+      className="py-28 sm:py-36"
     >
-      <div className="mx-auto max-w-7xl">
+      {/* Tech marquee - cinematic ticker */}
+      <div
+        className="border-y py-4 overflow-hidden mb-24"
+        style={{ borderColor: "rgba(255,255,255,0.04)" }}
+      >
+        <Marquee className="[--gap:3rem] [--duration:25s]" pauseOnHover>
+          {TECH_STACK.map((tech) => (
+            <span
+              key={tech}
+              className="font-mono text-[11px] uppercase tracking-[0.2em] px-6 select-none flex items-center gap-4"
+              style={{ color: "rgba(255,255,255,0.12)" }}
+            >
+              <span>{tech}</span>
+              <span
+                aria-hidden="true"
+                className="h-1 w-1 rounded-full"
+                style={{ background: "rgba(0,212,255,0.25)" }}
+              />
+            </span>
+          ))}
+        </Marquee>
+      </div>
+
+      <div className="px-6 lg:px-16 mx-auto max-w-6xl">
+        {/* Section label with line */}
         <motion.div
-          className="text-center"
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: prefersReducedMotion ? 0 : 0.5 }}
+          className="flex items-center gap-4 mb-6"
+          initial={{ opacity: 0, y: 10 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: dur(0.4) }}
         >
-          <h2 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
-            {t("services.title")}
-          </h2>
-          <p className="mt-4 text-lg text-muted-foreground">{t("services.subtitle")}</p>
+          <div
+            className="h-px w-8"
+            style={{ background: "rgba(0,212,255,0.4)" }}
+          />
+          <p
+            className="font-mono text-[10px] uppercase tracking-[0.25em]"
+            style={{ color: "rgba(0,212,255,0.55)" }}
+          >
+            {t("skills.label")}
+          </p>
         </motion.div>
 
-        <div className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {services.map((service, index) => {
-            const Icon = service.icon;
-            const iconColors = [
-              "bg-blue-500/10 text-blue-600 dark:text-blue-400",
-              "bg-purple-500/10 text-purple-600 dark:text-purple-400",
-              "bg-amber-500/10 text-amber-600 dark:text-amber-400",
-              "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400",
-              "bg-rose-500/10 text-rose-600 dark:text-rose-400",
-              "bg-cyan-500/10 text-cyan-600 dark:text-cyan-400",
-              "bg-violet-500/10 text-violet-600 dark:text-violet-400",
-              "bg-orange-500/10 text-orange-600 dark:text-orange-400",
-              "bg-teal-500/10 text-teal-600 dark:text-teal-400",
-              "bg-pink-500/10 text-pink-600 dark:text-pink-400",
-            ];
+        {/* Heading */}
+        <motion.h2
+          className="font-cormorant font-bold text-4xl sm:text-5xl lg:text-6xl mb-20"
+          style={{ color: "#F0EEE9" }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: dur(0.5), delay: del(0.05) }}
+        >
+          {t("skills.headline")}
+        </motion.h2>
 
+        {/* Bento grid service cards */}
+        <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
+          {SERVICES.map((service, index) => {
+            const Icon = service.icon;
             return (
               <motion.div
-                key={service.title}
-                className={`group relative overflow-hidden rounded-[2rem] border bg-background/50 p-8 shadow-sm backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ${
-                  service.featured
-                    ? "lg:col-span-2 border-primary bg-charcoal-950 text-white dark:bg-charcoal-950"
-                    : "border-slate-200 hover:border-primary/30 dark:border-charcoal-800"
-                }`}
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                key={service.key}
+                initial={{ opacity: 0, y: 16 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{
-                  duration: prefersReducedMotion ? 0 : 0.4,
-                  delay: prefersReducedMotion ? 0 : index * 0.1,
+                  duration: dur(0.35),
+                  delay: del(0.1 + index * 0.04),
                 }}
+                className={service.featured ? "lg:col-span-2" : ""}
               >
-                {service.featured && (
-                  <div className="absolute top-6 right-6 rounded-full bg-primary/20 px-4 py-1.5 text-xs font-bold tracking-wide text-primary backdrop-blur-sm">
-                    SPÉCIALITÉ ⭐
-                  </div>
-                )}
-                <div
-                  className={`mb-6 inline-flex h-14 w-14 items-center justify-center rounded-2xl transition-transform duration-300 group-hover:scale-110 ${
+                <GlowCard
+                  className={`rounded-2xl transition-all duration-300 ${
+                    service.featured ? "" : ""
+                  }`}
+                  glowColor={
                     service.featured
-                      ? "bg-primary/20 text-primary"
-                      : iconColors[index % iconColors.length]
-                  }`}
+                      ? "rgba(0,212,255,0.12)"
+                      : "rgba(0,212,255,0.08)"
+                  }
                 >
-                  <Icon className="h-7 w-7" strokeWidth={2} />
-                </div>
-                <h3
-                  className={`text-2xl font-bold ${
-                    service.featured ? "text-white" : "text-foreground"
-                  }`}
-                >
-                  {service.title}
-                </h3>
-                <p
-                  className={`mt-4 text-base leading-relaxed ${
-                    service.featured ? "text-gray-900 dark:text-slate-300" : "text-muted-foreground"
-                  }`}
-                >
-                  {service.description}
-                </p>
+                  <div
+                    className="relative p-8 sm:p-9 rounded-2xl h-full"
+                    style={{
+                      border: service.featured
+                        ? "1px solid rgba(0,212,255,0.15)"
+                        : "1px solid rgba(255,255,255,0.05)",
+                      background: service.featured
+                        ? "rgba(0,212,255,0.02)"
+                        : "rgba(255,255,255,0.015)",
+                    }}
+                  >
+                    {/* Featured badge */}
+                    {service.featured && (
+                      <span
+                        className="mb-6 inline-block font-mono text-[9px] tracking-[0.2em] uppercase"
+                        style={{ color: "rgba(0,212,255,0.55)" }}
+                      >
+                        {t("skills.coreExpertise")}
+                      </span>
+                    )}
+
+                    {/* Icon with glow */}
+                    <div className="relative mb-6 inline-flex">
+                      <Icon
+                        className="h-7 w-7"
+                        style={{
+                          color: service.featured
+                            ? "rgba(0,212,255,0.7)"
+                            : "rgba(255,255,255,0.3)",
+                        }}
+                        strokeWidth={1.5}
+                      />
+                      {service.featured && (
+                        <div
+                          aria-hidden="true"
+                          className="absolute -inset-3 rounded-full opacity-40 blur-xl"
+                          style={{ background: "rgba(0,212,255,0.2)" }}
+                        />
+                      )}
+                    </div>
+
+                    <h3
+                      className="text-lg font-semibold mb-2"
+                      style={{ color: "rgba(255,255,255,0.88)" }}
+                    >
+                      {t(`skills.services.${service.key}.title`)}
+                    </h3>
+
+                    <p
+                      className="text-sm leading-relaxed"
+                      style={{ color: "rgba(255,255,255,0.35)" }}
+                    >
+                      {t(`skills.services.${service.key}.desc`)}
+                    </p>
+                  </div>
+                </GlowCard>
               </motion.div>
             );
           })}

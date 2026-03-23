@@ -1,184 +1,94 @@
 "use client";
 
-import Link from "next/link";
-import { Mail, Linkedin, Github, Briefcase } from "lucide-react";
+import { Mail, Linkedin, Github, ArrowUpRight } from "lucide-react";
+import { useTranslation } from "@/lib/i18n/useLanguage";
+
+const SOCIAL = [
+  {
+    name: "LinkedIn",
+    href: "https://www.linkedin.com/in/rayan-sekkat-3911a9294",
+    icon: Linkedin,
+  },
+  {
+    name: "GitHub",
+    href: "https://github.com/rayansekkatkr",
+    icon: Github,
+  },
+  {
+    name: "Email",
+    href: "mailto:rayan.sekkat@gmail.com",
+    icon: Mail,
+  },
+];
+
+const NAV_KEYS = [
+  { key: "navigation.about", href: "#about" },
+  { key: "navigation.services", href: "#skills" },
+  { key: "navigation.projects", href: "#projects" },
+  { key: "navigation.contact", href: "#contact" },
+];
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
-
-  const professionalLinks = [
-    {
-      name: "LinkedIn",
-      href: "https://linkedin.com/in/rayan-sekkat",
-      icon: Linkedin,
-      ariaLabel: "Visitez mon profil LinkedIn",
-    },
-    {
-      name: "GitHub",
-      href: "https://github.com/rayan-sekkat",
-      icon: Github,
-      ariaLabel: "Consultez mon GitHub",
-    },
-    {
-      name: "Upwork",
-      href: "https://upwork.com/freelancers/rayan-sekkat",
-      icon: Briefcase,
-      ariaLabel: "Voir mon profil Upwork",
-    },
-    {
-      name: "Email",
-      href: "mailto:rayan.sekkat@example.com",
-      icon: Mail,
-      ariaLabel: "Envoyez-moi un email",
-    },
-  ];
-
-  const navigationLinks = [
-    { name: "Accueil", href: "#hero" },
-    { name: "À Propos", href: "#about" },
-    { name: "Services", href: "#skills" },
-    { name: "Projets", href: "#projects" },
-    { name: "Blog", href: "#blog" },
-    { name: "Contact", href: "#contact" },
-  ];
-
-  const legalLinks = [
-    { name: "Politique de Confidentialité", href: "/privacy" },
-    { name: "Conditions d&apos;Utilisation", href: "/terms" },
-  ];
+  const { t } = useTranslation();
 
   return (
-    <footer
-      className="relative overflow-hidden border-t border-border bg-gradient-to-b from-background to-muted/20"
-      role="contentinfo"
-    >
-      {/* Gradient decorations */}
-      <div className="absolute -left-32 top-0 h-64 w-64 rounded-full bg-primary/5 blur-[100px]" />
-      <div className="absolute -right-32 bottom-0 h-64 w-64 rounded-full bg-indigo-400/5 blur-[100px]" />
-      
-      <div className="relative mx-auto max-w-7xl px-6 py-16 lg:px-8 lg:py-20">
-        <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-4">
-          {/* About Section */}
-          <div className="lg:col-span-2">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="h-10 w-10 bg-primary rounded-xl flex items-center justify-center font-bold text-white shadow-lg shadow-primary/20">
-                RS
-              </div>
-              <h3 className="text-xl font-bold text-foreground">Rayan Sekkat</h3>
-            </div>
-            <p className="text-sm leading-6 text-muted-foreground">
-              Développeur Full-Stack spécialisé dans l&apos;intégration d&apos;IA et les solutions
-              web modernes. Passionné par la création d&apos;applications performantes avec Next.js,
-              TypeScript et les technologies de pointe.
+    <footer className="border-t border-white/[0.04]" role="contentinfo">
+      <div className="py-20 px-6 lg:px-16 max-w-6xl mx-auto">
+        {/* Top: monogram + social */}
+        <div className="flex flex-col gap-8 sm:flex-row sm:items-start sm:justify-between mb-14">
+          <div>
+            <span className="font-cormorant font-bold text-3xl text-white">
+              RS<span style={{ color: "#00D4FF" }}>.</span>
+            </span>
+            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/20 mt-2 max-w-xs leading-relaxed">
+              {t("footer.tagline")}
             </p>
-            <div className="mt-6 flex gap-3">
-              {professionalLinks.map((link) => {
-                const Icon = link.icon;
-                return (
-                  <a
-                    key={link.name}
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex h-10 w-10 items-center justify-center rounded-full bg-muted/50 text-muted-foreground transition-all duration-300 hover:bg-primary hover:text-white hover:scale-110 hover:shadow-lg"
-                    aria-label={link.ariaLabel}
-                  >
-                    <Icon className="h-5 w-5" />
-                  </a>
-                );
-              })}
-            </div>
           </div>
 
-          {/* Navigation Links */}
-          <div>
-            <h3 className="text-xs font-bold uppercase tracking-wider text-foreground mb-4">
-              Navigation
-            </h3>
-            <ul className="space-y-2.5">
-              {navigationLinks.map((link) => (
-                <li key={link.name}>
-                  <a
-                    href={link.href}
-                    className="text-sm text-muted-foreground transition-colors hover:text-primary inline-flex items-center gap-1 group"
-                  >
-                    <span className="h-1 w-1 rounded-full bg-muted-foreground transition-colors group-hover:bg-primary" />
-                    {link.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Legal Links */}
-          <div>
-            <h3 className="text-xs font-bold uppercase tracking-wider text-foreground mb-4">
-              Légal
-            </h3>
-            <ul className="space-y-2.5">
-              {legalLinks.map((link) => (
-                <li key={link.name}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-muted-foreground transition-colors hover:text-primary inline-flex items-center gap-1 group"
-                  >
-                    <span className="h-1 w-1 rounded-full bg-muted-foreground transition-colors group-hover:bg-primary" />
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-              <li>
-                <button
-                  onClick={() => {
-                    localStorage.removeItem("cookie-consent");
-                    window.location.reload();
-                  }}
-                  className="text-sm text-muted-foreground transition-colors hover:text-primary inline-flex items-center gap-1 group"
+          <div className="flex items-center gap-2">
+            {SOCIAL.map((link) => {
+              const Icon = link.icon;
+              return (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  target={link.href.startsWith("mailto") ? undefined : "_blank"}
+                  rel={link.href.startsWith("mailto") ? undefined : "noopener noreferrer"}
+                  aria-label={link.name}
+                  className="group h-10 w-10 rounded-full border border-white/[0.06] flex items-center justify-center text-white/25 hover:border-[#00D4FF]/25 hover:text-[#00D4FF]/70 hover:bg-[rgba(0,212,255,0.03)] transition-all duration-300"
                 >
-                  <span className="h-1 w-1 rounded-full bg-muted-foreground transition-colors group-hover:bg-primary" />
-                  Gérer les cookies
-                </button>
-              </li>
-            </ul>
+                  <Icon className="h-4 w-4" />
+                </a>
+              );
+            })}
           </div>
         </div>
 
-        {/* Bottom Section */}
-        <div className="mt-12 border-t border-border/50 pt-8">
-          <div className="flex flex-col items-center justify-between gap-4 text-center md:flex-row md:text-left">
-            <p className="text-sm text-muted-foreground">
-              © {currentYear} Rayan Sekkat. Tous droits réservés.
-            </p>
-            <p className="text-xs text-muted-foreground/70">
-              Propulsé par{" "}
-              <a
-                href="https://nextjs.org"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-medium text-primary hover:underline"
-              >
-                Next.js
-              </a>
-              ,{" "}
-              <a
-                href="https://www.typescriptlang.org"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-medium text-primary hover:underline"
-              >
-                TypeScript
-              </a>{" "}
-              et{" "}
-              <a
-                href="https://tailwindcss.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-medium text-primary hover:underline"
-              >
-                Tailwind CSS
-              </a>
-            </p>
-          </div>
+        {/* Nav */}
+        <div className="flex flex-wrap gap-x-8 gap-y-3 mb-14">
+          {NAV_KEYS.map((link) => (
+            <a
+              key={link.key}
+              href={link.href}
+              className="font-mono text-[10px] uppercase tracking-[0.15em] text-white/25 hover:text-white/55 transition-colors duration-300"
+            >
+              {t(link.key)}
+            </a>
+          ))}
+        </div>
+
+        {/* Bottom - premium divider */}
+        <div
+          className="border-t pt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between"
+          style={{ borderColor: "rgba(255,255,255,0.04)" }}
+        >
+          <p className="font-mono text-[10px] text-white/15">
+            &copy; {currentYear} {t("footer.copyright")}
+          </p>
+          <p className="font-mono text-[10px] text-white/15">
+            {t("footer.builtWith")}
+          </p>
         </div>
       </div>
     </footer>

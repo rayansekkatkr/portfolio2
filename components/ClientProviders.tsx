@@ -6,6 +6,7 @@ import { ThemeProvider } from "@/lib/theme/ThemeContext";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 import dynamic from "next/dynamic";
+import { GrainOverlay } from "@/components/ui/magic/GrainOverlay";
 
 const ScrollToTop = dynamic(() => import("@/components/ui/ScrollToTop"), {
   ssr: false,
@@ -44,6 +45,7 @@ export default function ClientProviders({ children }: { children: ReactNode }) {
     <ThemeProvider>
       <LanguageProvider>
         {children}
+        <GrainOverlay opacity={0.025} />
         <ScrollToTop />
         <ConditionalAnalytics />
         <CookieConsent />

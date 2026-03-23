@@ -1,241 +1,141 @@
 {
-  "site": {
-    "title": "포트폴리오 | 풀스택 개발자",
-    "description": "AI 기반의 풀스택 개발사로,Next.js,TypeScript및 최신 웹 솔루션을 전문으로 합니다."
-  },
   "navigation": {
-    "home": "홈",
-    "about": "회사 소개",
+    "about": "소개",
     "services": "서비스",
     "projects": "프로젝트",
-    "blog": "블로그",
     "contact": "연락처"
   },
   "hero": {
-    "name": "레이얀 세캇",
-    "title": "AI로 구동되는 풀스택 개발자",
-    "description": "Next.js,TypeScript및 최첨단 기술을 사용한 최신 웹 솔루션 제작자. 여러분의 아이디어를 고성능의 확장 가능한 애플리케이션으로 구현합니다.",
+    "available": "새 프로젝트 수락 가능",
+    "role": "풀스택 개발자 & 프로덕트 엔지니어",
+    "description": "현대적이고 고성능이며 확장 가능한 디지털 제품을 설계하고 구축합니다. SaaS 플랫폼부터 AI 통합까지. 야심찬 프로젝트를 위한 정밀 엔지니어링.",
     "cta": {
-      "contact": "문의하기",
-      "projects": "프로젝트 보기"
-    }
+      "primary": "프로젝트 시작하기",
+      "secondary": "작업 보기"
+    },
+    "location": "모로코 기반"
   },
   "about": {
-    "title": "회사 소개",
-    "biography": {
-      "intro": "AI 기반의 풀스택 개발자로서 저는 전통적인 기술 전문 지식과 인공지능을 결합하여 혁신적인 고성능 웹 솔루션을 개발합니다. 저의 전문 분야는 복잡한 아이디어를 우아하고 확장 가능한 애플리케이션으로 전환하는 것입니다.",
-      "expertise": "저는Next.js,TypeScript,Node.js에 대한 심도 있는 지식과 AI 통합에 대한 고유한 전문성을 바탕으로 오늘날의 요구 사항을 충족할 뿐만 아니라 미래의 과제를 예측하는 애플리케이션을 개발합니다. 저의 접근 방식은 기술적 엄격함, 사용자 중심 설계, 지능형 자동화를 결합합니다.",
-      "passion": "혁신과 지속적인 학습에 열정적인 저는 깔끔하고 유지 관리가 용이하며 문서화된 코드를 제공하기 위해 최선을 다하고 있습니다. 모든 프로젝트는 최신 개발과 인공 지능의 시너지 덕분에 가능성의 한계를 뛰어넘을 수 있는 기회입니다."
-    },
+    "label": "// 소개",
+    "headline": "<accent>정밀함</accent>과 목적을 가진 디지털 제품 엔지니어링.",
+    "description": "코드 이상의 것이 필요한 클라이언트를 위해 프로덕션급 SaaS 플랫폼, AI 기반 애플리케이션 및 최신 웹 경험을 구축합니다. 제품, 디자인 및 비즈니스를 이해하는 기술 파트너가 필요합니다.",
     "stats": {
-      "experience": {
-        "label": "수년간의 경험",
-        "value": "5+"
-      },
-      "projects": {
-        "label": "제공된 프로젝트",
-        "value": "10+"
-      },
-      "clients": {
-        "label": "만족한 고객",
-        "value": "8+"
-      },
-      "technologies": {
-        "label": "마스터 기술",
-        "value": "15+"
-      }
+      "years": { "label": "제품 개발 경력" },
+      "projects": { "label": "완료된 프로젝트" },
+      "technologies": { "label": "숙련된 기술" },
+      "satisfaction": { "label": "고객 만족도" }
     },
-    "techStack": {
-      "title": "기술 스택",
-      "items": {
-        "react": "React & Next.js",
-        "typescript": "TypeScript",
-        "nodejs": "Node.js",
-        "python": "Python",
-        "postgresql": "PostgreSQL",
-        "docker": "Docker & AWS"
+    "expertise": {
+      "01": {
+        "title": "프로덕트 엔지니어링",
+        "desc": "아키텍처부터 배포까지 풀스택 SaaS 플랫폼. Next.js, React, TypeScript, PostgreSQL, Stripe 통합."
+      },
+      "02": {
+        "title": "AI 통합",
+        "desc": "LLM 기반 기능, 지능형 자동화, 챗봇 및 프로덕션 애플리케이션에 통합된 맞춤형 AI 파이프라인."
+      },
+      "03": {
+        "title": "프론트엔드 크래프트",
+        "desc": "픽셀 퍼펙트 인터페이스, 고급 애니메이션, 3D 웹 경험 및 성능에 집착하는 반응형 디자인."
       }
     }
   },
-  "services": {
-    "title": "서비스",
-    "subtitle": "고객의 요구에 맞춘 전문 솔루션",
-    "items": {
+  "skills": {
+    "label": "// 서비스",
+    "headline": "제가 구축하는 것.",
+    "coreExpertise": "핵심 전문 분야",
+    "services": {
       "ai": {
-        "title": "AI 및 자동화 통합",
-        "description": "인공 지능 솔루션 구현: LLM, Machine Learning, 지능형 챗봇, 비즈니스 프로세스 자동화로 운영을 최적화합니다."
+        "title": "AI & 자동화",
+        "desc": "LLM, 챗봇, 지능형 파이프라인 및 비즈니스 프로세스 자동화."
       },
       "backend": {
-        "title": "백엔드 개발 및 API",
-        "description": "Node.js, TypeScript, RESTful/GraphQL API를 사용하여 고성능의 확장 가능한 애플리케이션을 위한 강력한 백엔드 아키텍처를 구축합니다."
+        "title": "백엔드 & API",
+        "desc": "Node.js, Python, FastAPI. 대규모 RESTful 및 GraphQL 아키텍처."
       },
       "saas": {
-        "title": "SaaS 플랫폼 개발",
-        "description": "SaaS 플랫폼의 완벽한 개발: 멀티테넌트 아키텍처, 구독 관리, 대시보드, 최적의 사용자 경험."
+        "title": "SaaS 플랫폼",
+        "desc": "멀티테넌트 아키텍처, 결제, 대시보드 및 사용자 관리."
       },
-      "refactoring": {
-        "title": "리팩토링 및 현대화",
-        "description": "기존 사이트를 재설계하고, 최신 기술로 마이그레이션하고, 성능을 최적화하고, 코드 유지보수성을 개선합니다."
+      "modernization": {
+        "title": "현대화",
+        "desc": "레거시 마이그레이션, 성능 최적화 및 코드 유지보수성."
       },
       "database": {
-        "title": "데이터베이스 관리",
-        "description": "최적화된 스키마 설계, 마이그레이션, PostgreSQL, MongoDB와 Prisma와 같은 최신 ORM을 사용한 고성능 쿼리."
+        "title": "데이터 레이어",
+        "desc": "PostgreSQL, Prisma ORM, 스키마 설계 및 고성능 쿼리."
       },
-      "payment": {
-        "title": "결제 시스템",
-        "description": "결제 솔루션(Stripe, PayPal)의 안전한 통합, 거래 관리, 반복 구독 및 웹훅."
+      "payments": {
+        "title": "결제",
+        "desc": "Stripe 통합, 구독, 웹훅 및 거래 관리."
       },
       "devops": {
-        "title": "배포 및 DevOps",
-        "description": "CI/CD 구성, Vercel, AWS, Docker에 배포, 운영 중인 애플리케이션의 인프라 관리 및 모니터링."
-      },
-      "frontend": {
-        "title": "최신 프론트엔드 개발",
-        "description": "React, Next.js, Tailwind CSS 및 최신 개발 사례를 사용하여 반응형 및 접근성이 높은 사용자 인터페이스 제작."
+        "title": "DevOps",
+        "desc": "CI/CD, Docker, Vercel, AWS 배포 및 모니터링."
       },
       "security": {
-        "title": "보안 및 인증",
-        "description": "보안 인증 시스템 구현, 역할 관리, 데이터 보호 및 보안 표준 준수."
+        "title": "보안",
+        "desc": "인증 시스템, 역할 관리 및 규정 준수 표준."
       },
-      "optimization": {
-        "title": "성능 최적화",
-        "description": "성능 분석 및 개선: 번들 크기, 로딩 시간, 기술 SEO 및 최적의 Lighthouse 점수."
+      "performance": {
+        "title": "성능",
+        "desc": "번들 최적화, Core Web Vitals 및 Lighthouse 100점."
       }
     }
   },
   "projects": {
-    "title": "프로젝트",
-    "subtitle": "최근 프로젝트 살펴보기",
-    "featured": {
-      "title": "pont-facturx.com",
-      "description": "중소기업과 프리랜서를 위한 완벽한 청구 및 세금 규정 준수 관리 SaaS 플랫폼. 직관적인 인터페이스, 지능형 자동화, 다양한 통합 기능.",
-      "technologies": "기술",
-      "techList": {
-        "nextjs": "Next.js 14",
-        "typescript": "TypeScript",
-        "postgresql": "PostgreSQL",
-        "stripe": "Stripe",
-        "prisma": "Prisma ORM"
-      },
-      "features": "주요 기능",
-      "featureList": {
-        "invoicing": "규정 준수 청구서 자동 생성",
-        "dashboard": "실시간 분석 대시보드",
-        "integration": "회계 및 은행 통합",
-        "automation": "자동 리마인더 및 결제",
-        "responsive": "반응형 및 접근성이 높은 인터페이스"
-      },
-      "results": "결과",
-      "resultList": {
-        "users": {
-          "value": "500+",
-          "label": "활성 사용자"
-        },
-        "satisfaction": {
-          "value": "98%",
-          "label": "고객 만족도"
-        },
-        "time": {
-          "value": "60%",
-          "label": "인보이스 발행 시간 단축"
-        }
-      },
-      "cta": "웹사이트 방문하기"
-    }
-  },
-  "blog": {
-    "title": "최신 기사",
-    "subtitle": "기술 전문성과 지식 공유",
-    "comingSoon": "곧 기사가 게시됩니다",
-    "viewAll": "모든 기사 보기",
-    "readMore": "자세히 보기",
-    "readTime": "분",
-    "noArticles": "아직 게시된 기사가 없습니다. 곧 확인하세요!",
-    "placeholder": {
-      "post1": {
-        "title": "Next.js 애플리케이션에 AI를 통합하는 방법",
-        "excerpt": "웹 프로젝트에 인공 지능 기능을 추가하기 위한 완벽한 가이드...",
-        "date": "2026년 1월 15일",
-        "readTime": "8분"
-      },
-      "post2": {
-        "title": "Next.js 및 PostgreSQL을 사용한 확장 가능한 SaaS 아키텍처",
-        "excerpt": "고성능의 확장 가능한 SaaS 플랫폼 구축을 위한 모범 사례...",
-        "date": "2026년 1월 10일",
-        "readTime": "12분"
-      },
-      "post3": {
-        "title": "성능 최적화: Lighthouse에서 100점 달성",
-        "excerpt": "최신 웹 애플리케이션의 성능을 극대화하기 위한 고급 기술...",
-        "date": "2026년 1월 5일",
-        "readTime": "10분"
+    "label": "// 주요 작업",
+    "headline": "사례 연구.",
+    "visitSite": "사이트 방문",
+    "project1": {
+      "tagline": "SaaS / 청구 & 세금 규정 준수",
+      "description": "청구 및 Factur-X 규정 준수를 위한 완전한 SaaS 플랫폼. 자동 청구, 실시간 분석 및 통합 결제 워크플로가 필요한 중소기업 및 프리랜서를 위해 구축.",
+      "results": {
+        "users": "활성 사용자",
+        "satisfaction": "만족도",
+        "time": "시간 절약"
+      }
+    },
+    "project2": {
+      "tagline": "AI / 인보이스 추출 & AP 자동화",
+      "description": "회계법인을 위한 AI 기반 인보이스 추출 플랫폼. 99.2% 정확도로 공급업체 인보이스 캡처를 자동화하고, 예외 처리 중심 워크플로, QuickBooks, Xero 및 커스텀 API 연동.",
+      "results": {
+        "accuracy": "추출 정확도",
+        "exceptions": "예외 케이스만",
+        "time": "시간 절약"
       }
     }
   },
   "contact": {
-    "title": "다음 연락처로 문의하세요.",
-    "subtitle": "구상 중인 프로젝트가 있나요? 프로젝트를 실현할 수 있도록 도와드릴 수 있는 방법을 알려드릴게요.",
-    "form": {
-      "title": "메시지 보내기",
-      "description": "양식을 작성해 주시면 최대한 빨리 연락드리겠습니다.",
-      "name": {
-        "label": "전체 이름",
-        "placeholder": "사용자 이름",
-        "required": true
-      },
-      "email": {
-        "label": "이메일",
-        "placeholder": "votre.email@exemple.com",
-        "required": true
-      },
-      "message": {
-        "label": "메시지",
-        "placeholder": "프로젝트 또는 요청에 대해 설명하세요...",
-        "required": true
-      },
-      "submit": "메시지 보내기",
-      "comingSoon": "⚠️ 양식 개발 중 - 에픽 3에서 기능 제공"
-    },
+    "label": "// 연락하기",
+    "headline": "<accent>함께</accent> 무언가를 만들어봅시다.",
+    "description": "프로젝트를 구상 중이신가요? 새로운 협업이 가능합니다. 목표를 논의하고 현실로 만들어봅시다.",
     "links": {
-      "title": "기타 연락 수단",
-      "description": "다른 채널을 선호하시나요? 다음 플랫폼을 통해 직접 문의하세요.",
       "email": "이메일",
       "linkedin": "LinkedIn",
-      "github": "GitHub",
-      "upwork": "Upwork"
+      "github": "GitHub"
     },
-    "availability": {
-      "title": "💡 가용성",
-      "description": "현재 새 프로젝트에 사용할 수 있습니다. 평균 응답 시간: 24-48시간."
+    "responseTime": "평균 응답 시간:",
+    "responseValue": "2-4시간",
+    "form": {
+      "name": { "label": "성명", "placeholder": "이름을 입력하세요" },
+      "email": { "label": "이메일", "placeholder": "email@company.com" },
+      "message": { "label": "프로젝트 세부사항", "placeholder": "프로젝트에 대해 알려주세요..." },
+      "submit": "메시지 보내기",
+      "sending": "전송 중..."
+    },
+    "success": {
+      "title": "메시지 전송 완료",
+      "description": "감사합니다. 곧 답변 드리겠습니다."
+    },
+    "error": {
+      "title": "전송 실패",
+      "description": "문제가 발생했습니다. 다시 시도해주세요."
     }
   },
   "footer": {
-    "about": {
-      "title": "레이얀 세캇",
-      "description": "AI 통합 및 최신 웹 솔루션을 전문으로 하는 풀스택 개발자. Next.js, TypeScript 및 최첨단 기술을 사용하여 고성능 애플리케이션을 만드는 데 열정을 쏟고 있습니다."
-    },
-    "navigation": {
-      "title": "탐색",
-      "links": {
-        "home": "홈",
-        "about": "회사 소개",
-        "services": "서비스",
-        "projects": "프로젝트",
-        "blog": "블로그",
-        "contact": "연락처"
-      }
-    },
-    "legal": {
-      "title": "법률",
-      "privacy": "개인정보 보호정책",
-      "terms": "이용 약관"
-    },
-    "copyright": "모든 권리 보유.",
-    "poweredBy": "제공",
-    "tech": {
-      "nextjs": "Next.js",
-      "typescript": "TypeScript",
-      "tailwind": "Tailwind CSS"
-    }
+    "tagline": "풀스택 개발자 & AI 엔지니어",
+    "copyright": "Rayan Sekkat",
+    "builtWith": "Next.js, Three.js & Framer Motion으로 제작"
   }
 }
