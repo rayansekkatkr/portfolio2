@@ -140,9 +140,7 @@ export default function Header() {
 
           {/* Right controls */}
           <div className="flex items-center gap-4">
-            <div className="hidden md:block">
-              <LanguageSwitcher />
-            </div>
+            <LanguageSwitcher />
 
             {/* Mobile hamburger */}
             <button
