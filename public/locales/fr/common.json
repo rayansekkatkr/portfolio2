@@ -134,6 +134,41 @@
       "description": "Une erreur est survenue. Veuillez reessayer."
     }
   },
+  "services_pro": {
+    "title": "Services Professionnels",
+    "subtitle": "Services disponibles directement sur Fiverr et Upwork",
+    "viewDetails": "Voir les details →",
+    "fixedPrice": "Prix fixe",
+    "fiverrSection": "Services Fiverr",
+    "upworkSection": "Services Upwork",
+    "gigs": {
+      "fullstack": {
+        "title": "Developpement Web Full-Stack",
+        "description": "Applications web sur mesure avec Next.js, React et les technologies modernes",
+        "price": "A partir de $500"
+      },
+      "ai": {
+        "title": "Integration IA & Automatisation",
+        "description": "Integrez des modeles IA, chatbots et automatisation dans vos applications",
+        "price": "A partir de $400"
+      },
+      "saas": {
+        "title": "Developpement SaaS",
+        "description": "Developpement complet de plateforme SaaS avec authentification et integration de paiements",
+        "price": "A partir de $800"
+      },
+      "stripe": {
+        "title": "Integration Stripe Subscriptions & Webhooks",
+        "description": "Integration Stripe complete avec gestion des abonnements et webhooks",
+        "price": "Prix fixe"
+      },
+      "mvp": {
+        "title": "SaaS MVP : Next.js + FastAPI + PostgreSQL",
+        "description": "Developpement SaaS full-stack avec authentification, base de donnees et deploiement",
+        "price": "Prix fixe"
+      }
+    }
+  },
   "footer": {
     "tagline": "Developpeur Full-Stack & Ingenieur IA",
     "copyright": "Rayan Sekkat",

@@ -3,8 +3,7 @@ import { Metadata } from "next";
 import { prisma } from "@/lib/prisma";
 import BlogPost from "@/components/blog/BlogPost";
 import ReadingProgress from "@/components/blog/ReadingProgress";
-import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
+import BlogHeader from "@/components/layout/BlogHeader";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -142,7 +141,7 @@ export default async function ArticlePage({ params }: PageProps) {
   };
 
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-950" lang="fr">
+    <div className="min-h-screen bg-white dark:bg-gray-950">
       {/* Skip to content link for keyboard navigation */}
       <a
         href="#main-content"
@@ -160,18 +159,7 @@ export default async function ArticlePage({ params }: PageProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      {/* Header with back button */}
-      <header className="border-b border-gray-200 dark:border-gray-800">
-        <div className="mx-auto max-w-7xl px-6 py-6">
-          <Link
-            href="/#blog"
-            className="inline-flex items-center gap-2 text-sm text-gray-600 transition-colors hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            Retour au blog
-          </Link>
-        </div>
-      </header>
+      <BlogHeader backHref="/blog" backLabel="Retour au blog" />
 
       {/* Article content */}
       <main id="main-content" className="mx-auto max-w-7xl px-6 py-12">

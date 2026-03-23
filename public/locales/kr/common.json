@@ -134,6 +134,41 @@
       "description": "문제가 발생했습니다. 다시 시도해주세요."
     }
   },
+  "services_pro": {
+    "title": "전문 서비스",
+    "subtitle": "Fiverr 및 Upwork에서 바로 예약 가능한 서비스",
+    "viewDetails": "자세히 보기 →",
+    "fixedPrice": "고정 가격",
+    "fiverrSection": "Fiverr 서비스",
+    "upworkSection": "Upwork 서비스",
+    "gigs": {
+      "fullstack": {
+        "title": "풀스택 웹 개발",
+        "description": "Next.js, React 및 최신 기술로 맞춤형 웹 애플리케이션 개발",
+        "price": "$500부터"
+      },
+      "ai": {
+        "title": "AI 통합 & 자동화",
+        "description": "AI 모델, 챗봇 및 자동화를 애플리케이션에 통합",
+        "price": "$400부터"
+      },
+      "saas": {
+        "title": "SaaS 개발",
+        "description": "인증 및 결제 통합을 포함한 완전한 SaaS 플랫폼 개발",
+        "price": "$800부터"
+      },
+      "stripe": {
+        "title": "Stripe 구독 & 웹훅 통합",
+        "description": "구독 관리 및 웹훅 처리를 포함한 완전한 Stripe 결제 통합",
+        "price": "고정 가격"
+      },
+      "mvp": {
+        "title": "SaaS MVP: Next.js + FastAPI + PostgreSQL",
+        "description": "인증, 데이터베이스 및 배포를 포함한 풀스택 SaaS 개발",
+        "price": "고정 가격"
+      }
+    }
+  },
   "footer": {
     "tagline": "풀스택 개발자 & AI 엔지니어",
     "copyright": "Rayan Sekkat",

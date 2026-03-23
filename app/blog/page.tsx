@@ -1,8 +1,7 @@
 import { Metadata } from "next";
 import { prisma } from "@/lib/prisma";
 import BlogPageClient from "@/components/blog/BlogPageClient";
-import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
+import BlogHeader from "@/components/layout/BlogHeader";
 
 export const metadata: Metadata = {
   title: "Blog | Rayan Sekkat",
@@ -82,7 +81,7 @@ export default async function BlogPage({ searchParams }: PageProps) {
   const selectedTags = tags ? tags.split(",").filter(Boolean) : [];
 
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-950" lang="fr">
+    <div className="min-h-screen bg-white dark:bg-gray-950">
       {/* Skip to content link */}
       <a
         href="#main-content"
@@ -91,18 +90,7 @@ export default async function BlogPage({ searchParams }: PageProps) {
         Aller au contenu principal
       </a>
 
-      {/* Header with back button */}
-      <header className="border-b border-gray-200 dark:border-gray-800">
-        <div className="mx-auto max-w-7xl px-6 py-6">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 text-sm text-gray-600 transition-colors hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            Retour à l&apos;accueil
-          </Link>
-        </div>
-      </header>
+      <BlogHeader />
 
       {/* Blog content */}
       <main id="main-content" className="mx-auto max-w-7xl px-6 py-12">

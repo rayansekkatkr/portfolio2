@@ -134,6 +134,41 @@
       "description": "Something went wrong. Please try again."
     }
   },
+  "services_pro": {
+    "title": "Professional Services",
+    "subtitle": "Ready-to-book services on Fiverr and Upwork",
+    "viewDetails": "View Details →",
+    "fixedPrice": "Fixed Price",
+    "fiverrSection": "Fiverr Services",
+    "upworkSection": "Upwork Services",
+    "gigs": {
+      "fullstack": {
+        "title": "Full-Stack Web Development",
+        "description": "Custom web applications with Next.js, React, and modern technologies",
+        "price": "Starting at $500"
+      },
+      "ai": {
+        "title": "AI Integration & Automation",
+        "description": "Integrate AI models, chatbots, and automation into your applications",
+        "price": "Starting at $400"
+      },
+      "saas": {
+        "title": "SaaS Development",
+        "description": "Complete SaaS platform development with authentication and payment integration",
+        "price": "Starting at $800"
+      },
+      "stripe": {
+        "title": "Stripe Subscriptions & Webhooks Integration",
+        "description": "Complete Stripe payment integration with subscription management and webhook handling",
+        "price": "Fixed Price"
+      },
+      "mvp": {
+        "title": "SaaS MVP: Next.js + FastAPI + PostgreSQL",
+        "description": "Full-stack SaaS development with authentication, database, and deployment",
+        "price": "Fixed Price"
+      }
+    }
+  },
   "footer": {
     "tagline": "Full-Stack Developer & AI Engineer",
     "copyright": "Rayan Sekkat",
