@@ -15,7 +15,7 @@ const plusJakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://portfolio-rayan-sekkat.vercel.app"),
+  metadataBase: new URL("https://rayansekkat.com"),
   title: {
     default: "Rayan Sekkat | Full-Stack Developer Portfolio",
     template: "%s | Rayan Sekkat",
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     "Software Engineer",
     "Portfolio",
   ],
-  authors: [{ name: "Rayan Sekkat", url: "https://portfolio-rayan-sekkat.vercel.app" }],
+  authors: [{ name: "Rayan Sekkat", url: "https://rayansekkat.com" }],
   creator: "Rayan Sekkat",
   publisher: "Rayan Sekkat",
   robots: {
@@ -51,7 +51,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://portfolio-rayan-sekkat.vercel.app",
+    url: "https://rayansekkat.com",
     siteName: "Rayan Sekkat Portfolio",
     title: "Rayan Sekkat | Full-Stack Developer Portfolio",
     description:
@@ -73,7 +73,7 @@ export const metadata: Metadata = {
     images: ["https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1200&h=630&fit=crop"],
   },
   alternates: {
-    canonical: "https://portfolio-rayan-sekkat.vercel.app",
+    canonical: "https://rayansekkat.com",
   },
   verification: {
     google: "google-site-verification-code",
@@ -97,7 +97,7 @@ export default function RootLayout({
     "@type": "Person",
     name: "Rayan Sekkat",
     jobTitle: "Full-Stack Developer",
-    url: "https://portfolio-rayan-sekkat.vercel.app",
+    url: "https://rayansekkat.com",
     sameAs: [
       "https://github.com/rayan-sekkat",
       "https://linkedin.com/in/rayan-sekkat",

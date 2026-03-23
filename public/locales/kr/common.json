@@ -88,17 +88,17 @@
     "headline": "사례 연구.",
     "visitSite": "사이트 방문",
     "project1": {
-      "tagline": "SaaS / 청구 & 세금 규정 준수",
-      "description": "청구 및 Factur-X 규정 준수를 위한 완전한 SaaS 플랫폼. 자동 청구, 실시간 분석 및 통합 결제 워크플로가 필요한 중소기업 및 프리랜서를 위해 구축.",
+      "tagline": "SaaS / Factur-X 준수 · CEO & 단독 개발자",
+      "description": "처음부터 끝까지 단독 개발. 프랑스 e-인보이싱 의무화(EN 16931, Chorus Pro, 2026년 시행)에 대응해 99.9% OCR 정확도, 10초 이내 처리, RGPD 준수 Factur-X 변환 SaaS 플랫폼 구축. 서버 프랑스 내, AES-256 암호화.",
       "results": {
-        "users": "활성 사용자",
-        "satisfaction": "만족도",
+        "precision": "OCR 정확도",
+        "speed": "처리 시간 (최대)",
         "time": "시간 절약"
       }
     },
     "project2": {
-      "tagline": "AI / 인보이스 추출 & AP 자동화",
-      "description": "회계법인을 위한 AI 기반 인보이스 추출 플랫폼. 99.2% 정확도로 공급업체 인보이스 캡처를 자동화하고, 예외 처리 중심 워크플로, QuickBooks, Xero 및 커스텀 API 연동.",
+      "tagline": "AI / 인보이스 추출 & AP 자동화 · CEO & 단독 개발자",
+      "description": "처음부터 끝까지 단독 개발. 회계법인의 수동 인보이스 처리 문제 해결. 99.2% 추출 정확도로 입력 인보이스의 94%를 자동 처리하고, 예외 처리 중심 워크플로와 QuickBooks, Xero, REST API 연동 제공. 도입까지 1일.",
       "results": {
         "accuracy": "추출 정확도",
         "exceptions": "예외 케이스만",

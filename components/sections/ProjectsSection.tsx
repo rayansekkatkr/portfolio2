@@ -19,8 +19,8 @@ const PROJECTS = [
     translationKey: "project1",
     technologies: ["Next.js 14", "TypeScript", "PostgreSQL", "Stripe", "Prisma"],
     results: [
-      { value: 500, suffix: "+", key: "projects.project1.results.users" },
-      { value: 98, suffix: "%", key: "projects.project1.results.satisfaction" },
+      { value: 99, suffix: ".9%", key: "projects.project1.results.precision" },
+      { value: 10, suffix: "s", key: "projects.project1.results.speed" },
       { value: 60, suffix: "%", key: "projects.project1.results.time" },
     ],
     accentColor: "#8B5CF6",
@@ -61,7 +61,7 @@ function ProjectCard({
 
   return (
     <motion.div
-      className="relative rounded-3xl overflow-hidden"
+      className="relative overflow-hidden rounded-3xl"
       style={{
         border: "1px solid rgba(255,255,255,0.06)",
         background: "rgba(255,255,255,0.015)",
@@ -79,46 +79,43 @@ function ProjectCard({
 
       <div className="grid lg:grid-cols-2">
         {/* Left: content */}
-        <div className="p-10 sm:p-14 flex flex-col justify-between order-2 lg:order-1">
+        <div className="order-2 flex flex-col justify-between p-10 sm:p-14 lg:order-1">
           <div>
             {/* Project header */}
-            <div className="flex items-center gap-4 mb-8">
+            <div className="mb-8 flex items-center gap-4">
               <span
                 className="font-mono text-[10px] tracking-widest"
                 style={{ color: `${project.accentColor}66` }}
               >
                 {project.num}
               </span>
-              <div
-                className="h-px flex-1"
-                style={{ background: "rgba(255,255,255,0.05)" }}
-              />
+              <div className="h-px flex-1" style={{ background: "rgba(255,255,255,0.05)" }} />
             </div>
 
-            <h3 className="text-2xl sm:text-3xl font-semibold text-white/90 mb-2 break-all sm:break-normal">
+            <h3 className="mb-2 text-2xl font-semibold break-all text-white/90 sm:text-3xl sm:break-normal">
               {project.name}
             </h3>
 
             <p
-              className="font-mono text-[10px] uppercase tracking-[0.2em] mb-8"
+              className="mb-8 font-mono text-[10px] tracking-[0.2em] uppercase"
               style={{ color: `${project.accentColor}88` }}
             >
               {t(`projects.${project.translationKey}.tagline`)}
             </p>
 
             <p
-              className="text-sm leading-7 mb-10 max-w-md"
+              className="mb-10 max-w-md text-sm leading-7"
               style={{ color: "rgba(240,238,233,0.42)" }}
             >
               {t(`projects.${project.translationKey}.description`)}
             </p>
 
             {/* Tech stack pills */}
-            <div className="flex flex-wrap gap-2 mb-12">
+            <div className="mb-12 flex flex-wrap gap-2">
               {project.technologies.map((tech) => (
                 <span
                   key={tech}
-                  className="font-mono text-[10px] px-3 py-1.5 rounded-full"
+                  className="rounded-full px-3 py-1.5 font-mono text-[10px]"
                   style={{
                     border: "1px solid rgba(255,255,255,0.06)",
                     background: "rgba(255,255,255,0.02)",
@@ -133,10 +130,10 @@ function ProjectCard({
 
           {/* Metrics + CTA */}
           <div>
-            <div className="flex gap-8 sm:gap-10 mb-10 flex-wrap">
+            <div className="mb-10 flex flex-wrap gap-8 sm:gap-10">
               {project.results.map((r) => (
                 <div key={r.key}>
-                  <div className="font-mono text-2xl sm:text-3xl font-bold text-white">
+                  <div className="font-mono text-2xl font-bold text-white sm:text-3xl">
                     {isInView ? (
                       <NumberTicker value={r.value} suffix={r.suffix} />
                     ) : (
@@ -144,7 +141,7 @@ function ProjectCard({
                     )}
                   </div>
                   <div
-                    className="text-[10px] mt-1.5 font-mono uppercase tracking-wide"
+                    className="mt-1.5 font-mono text-[10px] tracking-wide uppercase"
                     style={{ color: "rgba(255,255,255,0.22)" }}
                   >
                     {t(r.key)}
@@ -184,7 +181,7 @@ function ProjectCard({
 
         {/* Right: animated browser mockup */}
         <div
-          className="relative h-[360px] lg:h-auto flex items-center justify-center p-10 lg:p-14 order-1 lg:order-2"
+          className="relative order-1 flex h-[360px] items-center justify-center p-10 lg:order-2 lg:h-auto lg:p-14"
           style={{ background: "rgba(255,255,255,0.01)" }}
         >
           {/* Ambient glow */}
@@ -246,20 +243,17 @@ export default function ProjectsSection() {
           animate={isInView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: dur(0.5) }}
         >
-          <div className="flex items-center gap-4 mb-6">
-            <div
-              className="h-px w-8"
-              style={{ background: "rgba(0,212,255,0.4)" }}
-            />
+          <div className="mb-6 flex items-center gap-4">
+            <div className="h-px w-8" style={{ background: "rgba(0,212,255,0.4)" }} />
             <p
-              className="font-mono text-[10px] uppercase tracking-[0.25em]"
+              className="font-mono text-[10px] tracking-[0.25em] uppercase"
               style={{ color: "rgba(0,212,255,0.5)" }}
             >
               {t("projects.label")}
             </p>
           </div>
           <h2
-            className="font-cormorant font-bold text-4xl sm:text-5xl lg:text-6xl"
+            className="font-cormorant text-4xl font-bold sm:text-5xl lg:text-6xl"
             style={{ color: "#F0EEE9" }}
           >
             {t("projects.headline")}
@@ -269,12 +263,7 @@ export default function ProjectsSection() {
         {/* Projects stack */}
         <div className="space-y-6">
           {PROJECTS.map((project, index) => (
-            <ProjectCard
-              key={project.name}
-              project={project}
-              index={index}
-              isInView={isInView}
-            />
+            <ProjectCard key={project.name} project={project} index={index} isInView={isInView} />
           ))}
         </div>
       </div>

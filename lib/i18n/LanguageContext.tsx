@@ -86,7 +86,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   // Translation function
   const t = (key: string): string => {
-    if (!isLoaded) return key;
+    if (!isLoaded) return "";
 
     const keys = key.split(".");
     let value: string | TranslationData = translations[locale];

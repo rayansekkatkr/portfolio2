@@ -88,17 +88,17 @@
     "headline": "Case studies.",
     "visitSite": "Visit live site",
     "project1": {
-      "tagline": "SaaS / Billing & Tax Compliance",
-      "description": "Complete SaaS platform for billing and Factur-X compliance. Built for SMEs and freelancers who need automated invoicing, real-time analytics, and integrated payment workflows.",
+      "tagline": "SaaS / Factur-X Compliance · CEO & Sole Developer",
+      "description": "Built solo — architecture to production. France's mandatory e-invoicing law (EN 16931, Chorus Pro) takes effect in 2026. I built a SaaS that converts invoices to Factur-X format with 99.9% OCR precision, sub-10s processing, and full GDPR compliance. Servers in France, AES-256 encryption.",
       "results": {
-        "users": "Active users",
-        "satisfaction": "Satisfaction",
+        "precision": "OCR precision",
+        "speed": "Processing time (max)",
         "time": "Time saved"
       }
     },
     "project2": {
-      "tagline": "AI / Invoice Extraction & AP Automation",
-      "description": "AI-powered invoice extraction platform for accounting firms. Automates supplier invoice capture with 99.2% accuracy, exception-first workflow, and native integrations with QuickBooks, Xero, and custom APIs.",
+      "tagline": "AI / Invoice Extraction & AP Automation · CEO & Sole Developer",
+      "description": "Built solo — architecture to production. Accounting firms were processing supplier invoices manually. I built an AI platform that auto-processes 94% of incoming invoices with 99.2% extraction accuracy, an exception-first workflow, and native integrations for QuickBooks, Xero, and REST API. 1 day to go live.",
       "results": {
         "accuracy": "Extraction accuracy",
         "exceptions": "Exceptions only",

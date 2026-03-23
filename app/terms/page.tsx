@@ -6,13 +6,13 @@ export const metadata: Metadata = {
   title: "Terms of Use",
   description: "Terms and conditions of use for Rayan Sekkat's portfolio website.",
   alternates: {
-    canonical: "https://portfolio-rayan-sekkat.vercel.app/terms",
+    canonical: "https://rayansekkat.com/terms",
   },
   openGraph: {
     title: "Terms of Use | Rayan Sekkat",
     description: "Terms and conditions of use",
     type: "website",
-    url: "https://portfolio-rayan-sekkat.vercel.app/terms",
+    url: "https://rayansekkat.com/terms",
   },
   robots: {
     index: true,
@@ -46,10 +46,9 @@ export default function TermsPage() {
               1. Acceptation des Conditions
             </h2>
             <p className="mt-4 text-gray-600 dark:text-gray-400">
-              En accédant et en utilisant ce site web (portfolio-rayan-sekkat.vercel.app), vous
-              acceptez d&apos;être lié par ces conditions d&apos;utilisation et par notre politique
-              de confidentialité. Si vous n&apos;acceptez pas ces conditions, veuillez ne pas
-              utiliser ce site.
+              En accédant et en utilisant ce site web (rayansekkat.com), vous acceptez d&apos;être
+              lié par ces conditions d&apos;utilisation et par notre politique de confidentialité.
+              Si vous n&apos;acceptez pas ces conditions, veuillez ne pas utiliser ce site.
             </p>
           </section>
 
@@ -111,10 +110,10 @@ export default function TermsPage() {
             <p className="mt-2 text-gray-600 dark:text-gray-400">
               Pour toute demande d&apos;utilisation du contenu, contactez-moi à{" "}
               <a
-                href="mailto:rayan.sekkat@example.com"
+                href="mailto:rayan.sekkat@gmail.com"
                 className="text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300"
               >
-                rayan.sekkat@example.com
+                rayan.sekkat@gmail.com
               </a>
               .
             </p>
@@ -208,10 +207,10 @@ export default function TermsPage() {
               <li>
                 Email :{" "}
                 <a
-                  href="mailto:rayan.sekkat@example.com"
+                  href="mailto:rayan.sekkat@gmail.com"
                   className="text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300"
                 >
-                  rayan.sekkat@example.com
+                  rayan.sekkat@gmail.com
                 </a>
               </li>
             </ul>

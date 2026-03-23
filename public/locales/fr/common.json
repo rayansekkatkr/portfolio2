@@ -88,17 +88,17 @@
     "headline": "Etudes de cas.",
     "visitSite": "Visiter le site",
     "project1": {
-      "tagline": "SaaS / Facturation & Conformite Fiscale",
-      "description": "Plateforme SaaS complete de facturation et conformite Factur-X. Concue pour les PME et freelances ayant besoin de facturation automatisee, d'analyses en temps reel et de workflows de paiement integres.",
+      "tagline": "SaaS / Conformite Factur-X · CEO & Seul Developpeur",
+      "description": "Concu et deploye en solo. Face a l'obligation legale d'e-facturation (norme EN 16931, Chorus Pro, echeance 2026), j'ai construit un SaaS qui convertit les factures au format Factur-X avec 99,9% de precision OCR, traitement en moins de 10s et conformite RGPD. Serveurs en France, chiffrement AES-256.",
       "results": {
-        "users": "Utilisateurs actifs",
-        "satisfaction": "Satisfaction",
+        "precision": "Precision OCR",
+        "speed": "Temps de traitement (max)",
         "time": "Temps economise"
       }
     },
     "project2": {
-      "tagline": "IA / Extraction de Factures & Automatisation AP",
-      "description": "Plateforme d'extraction de factures par IA pour les cabinets comptables. Automatise la capture des factures fournisseurs avec 99,2% de precision, workflow axe sur les exceptions, et integrations natives QuickBooks, Xero et API personnalisees.",
+      "tagline": "IA / Extraction de Factures & Automatisation AP · CEO & Seul Developpeur",
+      "description": "Concu et deploye en solo. Les cabinets comptables traitaient leurs factures fournisseurs manuellement. J'ai construit une plateforme IA qui automatise 94% des factures entrantes avec 99,2% de precision d'extraction, un workflow centre sur les exceptions et des integrations natives QuickBooks, Xero et API REST. Demarrage en 1 jour.",
       "results": {
         "accuracy": "Precision d'extraction",
         "exceptions": "Exceptions seulement",

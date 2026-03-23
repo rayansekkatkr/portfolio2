@@ -64,7 +64,7 @@ export default function HeroSection() {
       ref={sectionRef}
       id="hero"
       aria-label="Hero introduction"
-      className="relative min-h-screen flex flex-col justify-center overflow-hidden px-6 py-20 md:py-32 lg:px-16 xl:px-24"
+      className="relative flex min-h-screen flex-col justify-center overflow-hidden px-6 py-20 md:py-32 lg:px-16 xl:px-24"
     >
       {/* 3D scene */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
@@ -88,7 +88,8 @@ export default function HeroSection() {
         <div
           className="absolute inset-0"
           style={{
-            background: "radial-gradient(ellipse at 50% 0%, rgba(0,212,255,0.03) 0%, transparent 50%)",
+            background:
+              "radial-gradient(ellipse at 50% 0%, rgba(0,212,255,0.03) 0%, transparent 50%)",
           }}
         />
       </div>
@@ -111,7 +112,7 @@ export default function HeroSection() {
         {/* Available badge */}
         <motion.div {...fadeUp(0.05)} className="mb-12 inline-flex">
           <span
-            className="inline-flex items-center gap-2.5 rounded-full border px-5 py-2 text-[10px] font-mono tracking-[0.2em] uppercase backdrop-blur-sm"
+            className="inline-flex items-center gap-2.5 rounded-full border px-5 py-2 font-mono text-[10px] tracking-[0.2em] uppercase backdrop-blur-sm"
             style={{
               borderColor: "rgba(52,211,153,0.15)",
               background: "rgba(52,211,153,0.04)",
@@ -132,7 +133,7 @@ export default function HeroSection() {
           <div className="overflow-hidden" style={{ perspective: "600px" }}>
             <motion.h1
               {...charReveal(0.12)}
-              className="font-cormorant font-bold leading-[0.82] tracking-[-0.02em] text-white"
+              className="font-cormorant leading-[0.82] font-bold tracking-[-0.02em] text-white"
               style={{ fontSize: "clamp(3rem, 13vw, 13rem)" }}
             >
               RAYAN
@@ -141,10 +142,7 @@ export default function HeroSection() {
 
           {/* SEKKAT. */}
           <div className="overflow-hidden" style={{ perspective: "600px" }}>
-            <motion.div
-              {...charReveal(0.22)}
-              className="flex items-baseline gap-0 leading-[0.82]"
-            >
+            <motion.div {...charReveal(0.22)} className="flex items-baseline gap-0 leading-[0.82]">
               <h1
                 className="font-cormorant font-bold tracking-[-0.02em] text-white"
                 style={{ fontSize: "clamp(3rem, 13vw, 13rem)" }}
@@ -167,10 +165,7 @@ export default function HeroSection() {
           </div>
 
           {/* Floating role label positioned creatively */}
-          <motion.div
-            {...fadeUp(0.5)}
-            className="absolute -right-2 bottom-2 hidden lg:block"
-          >
+          <motion.div {...fadeUp(0.5)} className="absolute -right-2 bottom-2 hidden lg:block">
             <div
               className="flex items-center gap-3 rounded-full border px-5 py-2.5 backdrop-blur-md"
               style={{
@@ -178,12 +173,9 @@ export default function HeroSection() {
                 background: "rgba(255,255,255,0.02)",
               }}
             >
-              <div
-                className="h-6 w-px"
-                style={{ background: "rgba(0,212,255,0.3)" }}
-              />
+              <div className="h-6 w-px" style={{ background: "rgba(0,212,255,0.3)" }} />
               <span
-                className="font-mono text-[10px] uppercase tracking-[0.25em]"
+                className="font-mono text-[10px] tracking-[0.25em] uppercase"
                 style={{ color: "rgba(0,212,255,0.6)" }}
               >
                 {t("hero.role")}
@@ -209,23 +201,20 @@ export default function HeroSection() {
         <div className="mt-10 grid gap-10 lg:grid-cols-2 lg:items-end">
           <motion.div {...fadeUp(0.5)}>
             <p
-              className="mb-3 font-mono text-[10px] uppercase tracking-[0.25em] lg:hidden"
+              className="mb-3 font-mono text-[10px] tracking-[0.25em] uppercase lg:hidden"
               style={{ color: "rgba(0,212,255,0.55)" }}
             >
               {t("hero.role")}
             </p>
             <p
-              className="max-w-md text-base md:text-lg leading-relaxed"
+              className="max-w-md text-base leading-relaxed md:text-lg"
               style={{ color: "rgba(240,238,233,0.45)" }}
             >
               {t("hero.description")}
             </p>
           </motion.div>
 
-          <motion.div
-            {...fadeUp(0.6)}
-            className="flex flex-col gap-3 sm:flex-row lg:justify-end"
-          >
+          <motion.div {...fadeUp(0.6)} className="flex flex-col gap-3 sm:flex-row lg:justify-end">
             <MagneticButton strength={0.15} className="inline-flex">
               <ShimmerButton
                 as="a"
@@ -271,10 +260,64 @@ export default function HeroSection() {
           </motion.div>
         </div>
 
+        {/* Platform trust badges */}
+        <motion.div {...fadeUp(0.72)} className="mt-10 flex flex-wrap items-center gap-5">
+          <span
+            className="font-mono text-[9px] tracking-[0.22em] uppercase"
+            style={{ color: "rgba(255,255,255,0.14)" }}
+          >
+            Available on
+          </span>
+          {[
+            {
+              label: "Fiverr",
+              href: "https://www.fiverr.com/sellers/r_sekkat/",
+            },
+            {
+              label: "Upwork",
+              href: "https://www.upwork.com/freelancers/~01642eb253cc5d3d22?viewMode=1",
+            },
+          ].map(({ label, href }) => (
+            <a
+              key={label}
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex items-center gap-1.5 rounded-full border px-4 py-1.5 font-mono text-[10px] tracking-wide transition-all duration-200"
+              style={{
+                borderColor: "rgba(255,255,255,0.07)",
+                color: "rgba(255,255,255,0.32)",
+                background: "rgba(255,255,255,0.015)",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = "rgba(0,212,255,0.2)";
+                e.currentTarget.style.color = "rgba(0,212,255,0.7)";
+                e.currentTarget.style.background = "rgba(0,212,255,0.04)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = "rgba(255,255,255,0.07)";
+                e.currentTarget.style.color = "rgba(255,255,255,0.32)";
+                e.currentTarget.style.background = "rgba(255,255,255,0.015)";
+              }}
+            >
+              {label}
+              <svg width="8" height="8" viewBox="0 0 8 8" fill="none" aria-hidden="true">
+                <path
+                  d="M1.5 6.5L6.5 1.5M6.5 1.5H3M6.5 1.5V5"
+                  stroke="currentColor"
+                  strokeWidth="1.2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </a>
+          ))}
+        </motion.div>
+
         {/* Bottom ticker - cinematic lower third */}
         <motion.div
           {...fadeUp(0.8)}
-          className="mt-12 md:mt-24 flex items-center gap-8 border-t pt-6"
+          className="mt-10 flex items-center gap-8 border-t pt-6 md:mt-16"
           style={{ borderColor: "rgba(255,255,255,0.05)" }}
         >
           <div className="hidden items-center gap-6 lg:flex">
@@ -311,8 +354,7 @@ export default function HeroSection() {
             <div
               className="h-8 w-px"
               style={{
-                background:
-                  "linear-gradient(to bottom, rgba(0,212,255,0.3), transparent)",
+                background: "linear-gradient(to bottom, rgba(0,212,255,0.3), transparent)",
               }}
             />
           </motion.div>

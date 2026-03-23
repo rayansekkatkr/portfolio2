@@ -97,8 +97,10 @@ export default function BlogPageClient({ posts, locale }: BlogPageClientProps) {
   return (
     <Suspense
       fallback={
-        <div className="py-12 text-center">
-          <p className="text-lg text-gray-600 dark:text-gray-400">Chargement...</p>
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          {Array.from({ length: 6 }).map((_, i) => (
+            <div key={i} className="h-72 animate-pulse rounded-2xl bg-gray-100 dark:bg-gray-800" />
+          ))}
         </div>
       }
     >

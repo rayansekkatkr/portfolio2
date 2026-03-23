@@ -1,12 +1,10 @@
 "use client";
 
 import ReactMarkdown from "react-markdown";
-import rehypeHighlight from "rehype-highlight";
 import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
 import { Clock, Calendar, User } from "lucide-react";
 import CodeBlock from "./CodeBlock";
-import "highlight.js/styles/github-dark.css";
 
 interface BlogPostProps {
   title: string;
@@ -59,7 +57,7 @@ export default function BlogPost({
       <div className="prose prose-lg prose-gray dark:prose-invert max-w-none">
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}
-          rehypePlugins={[rehypeHighlight, rehypeRaw]}
+          rehypePlugins={[rehypeRaw]}
           components={{
             code(props: React.ComponentPropsWithoutRef<"code"> & { inline?: boolean }) {
               const { inline, className, children, ...rest } = props;

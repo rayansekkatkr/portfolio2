@@ -6,12 +6,12 @@ export const metadata: Metadata = {
   title: "Privacy Policy",
   description:
     "Privacy policy and data protection information for Rayan Sekkat's portfolio website.",
-  alternates: { canonical: "https://portfolio-rayan-sekkat.vercel.app/privacy" },
+  alternates: { canonical: "https://rayansekkat.com/privacy" },
   openGraph: {
     title: "Privacy Policy | Rayan Sekkat",
     description: "Privacy policy and data protection information",
     type: "website",
-    url: "https://portfolio-rayan-sekkat.vercel.app/privacy",
+    url: "https://rayansekkat.com/privacy",
   },
   robots: { index: true, follow: true },
 };
@@ -59,10 +59,10 @@ export default function PrivacyPage() {
               <li>
                 Email :{" "}
                 <a
-                  href="mailto:rayan.sekkat@example.com"
+                  href="mailto:rayan.sekkat@gmail.com"
                   className="text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300"
                 >
-                  rayan.sekkat@example.com
+                  rayan.sekkat@gmail.com
                 </a>
               </li>
             </ul>
@@ -232,10 +232,10 @@ export default function PrivacyPage() {
             <p className="mt-4 text-gray-600 dark:text-gray-400">
               Pour exercer ces droits, contactez-nous à{" "}
               <a
-                href="mailto:rayan.sekkat@example.com"
+                href="mailto:rayan.sekkat@gmail.com"
                 className="text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300"
               >
-                rayan.sekkat@example.com
+                rayan.sekkat@gmail.com
               </a>
               .
             </p>
@@ -289,10 +289,10 @@ export default function PrivacyPage() {
               <li>
                 Email :{" "}
                 <a
-                  href="mailto:rayan.sekkat@example.com"
+                  href="mailto:rayan.sekkat@gmail.com"
                   className="text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300"
                 >
-                  rayan.sekkat@example.com
+                  rayan.sekkat@gmail.com
                 </a>
               </li>
               <li>Délai de réponse : Maximum 1 mois</li>
