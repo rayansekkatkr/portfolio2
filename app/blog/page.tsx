@@ -70,9 +70,16 @@ async function getAllPosts(): Promise<BlogPost[]> {
   }
 }
 
-export default async function BlogPage() {
+interface PageProps {
+  searchParams: Promise<{ search?: string; tags?: string }>;
+}
+
+export default async function BlogPage({ searchParams }: PageProps) {
   const posts = await getAllPosts();
-  const locale = "fr"; // TODO: Get from context or headers
+  const locale = "fr";
+  const { search = "", tags = "" } = await searchParams;
+  const searchQuery = search;
+  const selectedTags = tags ? tags.split(",").filter(Boolean) : [];
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-950" lang="fr">
@@ -108,15 +115,12 @@ export default async function BlogPage() {
           </p>
         </div>
 
-        {posts.length > 0 ? (
-          <BlogPageClient posts={posts} locale={locale} />
-        ) : (
-          <div className="py-12 text-center">
-            <p className="text-lg text-gray-600 dark:text-gray-400">
-              Aucun article publié pour le moment. Revenez bientôt !
-            </p>
-          </div>
-        )}
+        <BlogPageClient
+          posts={posts}
+          locale={locale}
+          searchQuery={searchQuery}
+          selectedTags={selectedTags}
+        />
       </main>
     </div>
   );

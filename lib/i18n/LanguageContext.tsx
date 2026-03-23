@@ -1,6 +1,9 @@
 "use client";
 
-import { createContext, useContext, useState, useEffect, ReactNode } from "react";
+import { createContext, useContext, useState, ReactNode } from "react";
+import fr from "@/public/locales/fr/common.json";
+import en from "@/public/locales/en/common.json";
+import kr from "@/public/locales/kr/common.json";
 
 type Locale = "fr" | "en" | "kr";
 
@@ -12,71 +15,27 @@ interface LanguageContextType {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
-// Translation storage
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type TranslationData = Record<string, any>;
-const translations: Record<Locale, TranslationData> = {
-  fr: {},
-  en: {},
-  kr: {},
-};
 
-// Helper to get initial locale
+const translations: Record<Locale, TranslationData> = { fr, en, kr };
+
 function getInitialLocale(): Locale {
-  if (typeof window === "undefined") return "en";
+  if (typeof window === "undefined") return "fr";
 
   const stored = localStorage.getItem("locale") as Locale | null;
-  if (stored && ["fr", "en", "kr"].includes(stored)) {
-    return stored;
-  }
+  if (stored && ["fr", "en", "kr"].includes(stored)) return stored;
 
-  // Detect browser language
   const browserLang = navigator.language.split("-")[0];
   if (browserLang === "fr") return "fr";
   if (browserLang === "ko") return "kr";
-  return "en"; // Default to English
+  return "en";
 }
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [locale, setLocaleState] = useState<Locale>(getInitialLocale);
-  const [isLoaded, setIsLoaded] = useState(false);
 
-  // Load translation for a specific locale (lazy loading)
-  const loadLocaleTranslations = async (localeToLoad: Locale) => {
-    // Skip if already loaded
-    if (translations[localeToLoad] && Object.keys(translations[localeToLoad]).length > 0) {
-      return;
-    }
-
-    try {
-      const data = await fetch(`/locales/${localeToLoad}/common.json`).then((r) => r.json());
-      translations[localeToLoad] = data as TranslationData;
-    } catch (error) {
-      console.error(`Failed to load translations for ${localeToLoad}:`, error);
-    }
-  };
-
-  // Load initial locale translations on mount
-  useEffect(() => {
-    async function loadInitialTranslations() {
-      try {
-        await loadLocaleTranslations(locale);
-        setIsLoaded(true);
-      } catch (error) {
-        console.error("Failed to load initial translations:", error);
-      }
-    }
-
-    loadInitialTranslations();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const setLocale = async (newLocale: Locale) => {
-    // Load new locale if not already loaded
-    if (!translations[newLocale] || Object.keys(translations[newLocale]).length === 0) {
-      await loadLocaleTranslations(newLocale);
-    }
-
+  const setLocale = (newLocale: Locale) => {
     setLocaleState(newLocale);
     if (typeof window !== "undefined") {
       localStorage.setItem("locale", newLocale);
@@ -84,18 +43,15 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  // Translation function
   const t = (key: string): string => {
-    if (!isLoaded) return "";
-
     const keys = key.split(".");
     let value: string | TranslationData = translations[locale];
 
     for (const k of keys) {
       if (value && typeof value === "object" && k in value) {
-        value = value[k];
+        value = (value as TranslationData)[k];
       } else {
-        return key; // Return key if not found
+        return key;
       }
     }
 
