@@ -19,9 +19,9 @@ const PROJECTS = [
     translationKey: "project1",
     technologies: ["Next.js 14", "TypeScript", "PostgreSQL", "Stripe", "Prisma"],
     results: [
-      { value: 99, suffix: ".9%", key: "projects.project1.results.precision" },
-      { value: 10, suffix: "s", key: "projects.project1.results.speed" },
-      { value: 60, suffix: "%", key: "projects.project1.results.time" },
+      { value: 99.9, suffix: "%", decimalPlaces: 1, key: "projects.project1.results.precision" },
+      { value: 10, suffix: "s", decimalPlaces: 0, key: "projects.project1.results.speed" },
+      { value: 60, suffix: "%", decimalPlaces: 0, key: "projects.project1.results.time" },
     ],
     accentColor: "#8B5CF6",
     secondaryColor: "#06B6D4",
@@ -34,9 +34,9 @@ const PROJECTS = [
     translationKey: "project2",
     technologies: ["Next.js", "TypeScript", "Python", "OpenAI", "PostgreSQL", "REST API"],
     results: [
-      { value: 99, suffix: ".2%", key: "projects.project2.results.accuracy" },
-      { value: 8, suffix: "%", key: "projects.project2.results.exceptions" },
-      { value: 80, suffix: "%", key: "projects.project2.results.time" },
+      { value: 99.2, suffix: "%", decimalPlaces: 1, key: "projects.project2.results.accuracy" },
+      { value: 8, suffix: "%", decimalPlaces: 0, key: "projects.project2.results.exceptions" },
+      { value: 80, suffix: "%", decimalPlaces: 0, key: "projects.project2.results.time" },
     ],
     accentColor: "#10B981",
     secondaryColor: "#F59E0B",
@@ -135,7 +135,11 @@ function ProjectCard({
                 <div key={r.key}>
                   <div className="font-mono text-2xl font-bold text-white sm:text-3xl">
                     {isInView ? (
-                      <NumberTicker value={r.value} suffix={r.suffix} />
+                      <NumberTicker
+                        value={r.value}
+                        suffix={r.suffix}
+                        decimalPlaces={r.decimalPlaces}
+                      />
                     ) : (
                       <span>0{r.suffix}</span>
                     )}
