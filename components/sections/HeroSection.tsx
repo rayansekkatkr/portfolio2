@@ -64,7 +64,7 @@ export default function HeroSection() {
       ref={sectionRef}
       id="hero"
       aria-label="Hero introduction"
-      className="relative min-h-screen flex flex-col justify-center overflow-hidden px-6 py-32 lg:px-16 xl:px-24"
+      className="relative min-h-screen flex flex-col justify-center overflow-hidden px-6 py-20 md:py-32 lg:px-16 xl:px-24"
     >
       {/* 3D scene */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
@@ -133,7 +133,7 @@ export default function HeroSection() {
             <motion.h1
               {...charReveal(0.12)}
               className="font-cormorant font-bold leading-[0.82] tracking-[-0.02em] text-white"
-              style={{ fontSize: "clamp(5rem, 15vw, 13rem)" }}
+              style={{ fontSize: "clamp(3rem, 13vw, 13rem)" }}
             >
               RAYAN
             </motion.h1>
@@ -147,7 +147,7 @@ export default function HeroSection() {
             >
               <h1
                 className="font-cormorant font-bold tracking-[-0.02em] text-white"
-                style={{ fontSize: "clamp(5rem, 15vw, 13rem)" }}
+                style={{ fontSize: "clamp(3rem, 13vw, 13rem)" }}
               >
                 SEKKAT
               </h1>
@@ -215,7 +215,7 @@ export default function HeroSection() {
               {t("hero.role")}
             </p>
             <p
-              className="max-w-md text-lg leading-relaxed"
+              className="max-w-md text-base md:text-lg leading-relaxed"
               style={{ color: "rgba(240,238,233,0.45)" }}
             >
               {t("hero.description")}
@@ -274,7 +274,7 @@ export default function HeroSection() {
         {/* Bottom ticker - cinematic lower third */}
         <motion.div
           {...fadeUp(0.8)}
-          className="mt-24 flex items-center gap-8 border-t pt-6"
+          className="mt-12 md:mt-24 flex items-center gap-8 border-t pt-6"
           style={{ borderColor: "rgba(255,255,255,0.05)" }}
         >
           <div className="hidden items-center gap-6 lg:flex">

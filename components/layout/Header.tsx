@@ -90,7 +90,7 @@ export default function Header() {
       }}
     >
       <nav
-        className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4 lg:px-16"
+        className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 md:px-6 md:py-4 lg:px-16"
         style={{
           background: "rgba(5,5,6,0.85)",
           backdropFilter: "blur(20px)",
@@ -171,7 +171,7 @@ export default function Header() {
             onClick={() => setMobileMenuOpen(false)}
           />
           <div
-            className="fixed inset-y-0 right-0 z-50 w-full max-w-xs overflow-y-auto p-8"
+            className="fixed inset-y-0 right-0 z-50 w-full max-w-xs overflow-y-auto p-6 pt-safe-top"
             style={{
               background: "rgba(5,5,6,0.96)",
               borderLeft: "1px solid rgba(255,255,255,0.06)",
