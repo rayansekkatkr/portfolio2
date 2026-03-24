@@ -105,6 +105,7 @@
     "label": "// featured work",
     "headline": "Case studies.",
     "visitSite": "Visit live site",
+    "liveDemo": "Live demo →",
     "project1": {
       "tagline": "SaaS / Factur-X Compliance · CEO & Sole Developer",
       "description": "Built solo — architecture to production. France's mandatory e-invoicing law (EN 16931, Chorus Pro) takes effect in 2026. I built a SaaS that converts invoices to Factur-X format with 99.9% OCR precision, sub-10s processing, and full GDPR compliance. Servers in France, AES-256 encryption.",
@@ -201,6 +202,76 @@
         "title": "SaaS MVP: Next.js + FastAPI + PostgreSQL",
         "description": "Full-stack SaaS development with authentication, database, and deployment",
         "price": "Fixed Price"
+      }
+    }
+  },
+  "process": {
+    "label": "// method",
+    "headline": "How I work",
+    "steps": {
+      "brief": {
+        "title": "Brief & Discovery",
+        "desc": "We start with a 30-min call to understand your vision, constraints, and business goals. I ask the real questions before writing the first line of code."
+      },
+      "spec": {
+        "title": "Specification & Architecture",
+        "desc": "I write a detailed technical document: stack, database schema, API routes, component structure. You know exactly what will be built before it starts."
+      },
+      "dev": {
+        "title": "Iterative Development",
+        "desc": "One-week sprints, preview deployments after each iteration. You see progress in real time and can adjust priorities at any point."
+      },
+      "deploy": {
+        "title": "Deployment & Launch",
+        "desc": "Production deployment on Vercel, Railway, or your infrastructure. CI/CD configured, monitoring in place, documentation delivered. Zero surprises on launch day."
+      },
+      "support": {
+        "title": "Post-Launch Support",
+        "desc": "30 days of support included. Quick fixes, UX adjustments, roadmap advice. I stay available when it matters most."
+      }
+    },
+    "pricing": {
+      "label": "// pricing",
+      "headline": "Transparent investment",
+      "popular": "Popular",
+      "cta": "Start this project",
+      "plans": {
+        "mvp": {
+          "name": "MVP",
+          "price": "€800",
+          "duration": "/ fixed project",
+          "features": [
+            "Complete web application",
+            "User authentication",
+            "Database + API",
+            "Deployment included",
+            "14 days of support"
+          ]
+        },
+        "saas": {
+          "name": "Full SaaS",
+          "price": "€3,000",
+          "duration": "/ fixed project",
+          "features": [
+            "Everything in MVP +",
+            "Stripe payments & subscriptions",
+            "Admin dashboard",
+            "Third-party integrations (AI, email...)",
+            "30 days of support"
+          ]
+        },
+        "consulting": {
+          "name": "Consulting",
+          "price": "€80",
+          "duration": "/ hour",
+          "features": [
+            "Technical audit & code review",
+            "Architecture & stack advice",
+            "Sprint unblocking",
+            "Mentoring & training",
+            "Flexible availability"
+          ]
+        }
       }
     }
   },

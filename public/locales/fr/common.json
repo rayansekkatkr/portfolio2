@@ -105,6 +105,7 @@
     "label": "// projets phares",
     "headline": "Etudes de cas.",
     "visitSite": "Visiter le site",
+    "liveDemo": "Demo live →",
     "project1": {
       "tagline": "SaaS / Conformite Factur-X · CEO & Seul Developpeur",
       "description": "Concu et deploye en solo. Face a l'obligation legale d'e-facturation (norme EN 16931, Chorus Pro, echeance 2026), j'ai construit un SaaS qui convertit les factures au format Factur-X avec 99,9% de precision OCR, traitement en moins de 10s et conformite RGPD. Serveurs en France, chiffrement AES-256.",
@@ -201,6 +202,76 @@
         "title": "SaaS MVP : Next.js + FastAPI + PostgreSQL",
         "description": "Developpement SaaS full-stack avec authentification, base de donnees et deploiement",
         "price": "Prix fixe"
+      }
+    }
+  },
+  "process": {
+    "label": "// methode",
+    "headline": "Comment je travaille",
+    "steps": {
+      "brief": {
+        "title": "Brief & Decouverte",
+        "desc": "On commence par un appel de 30 min pour comprendre votre vision, vos contraintes et vos objectifs business. Je pose les vraies questions avant d'ecrire la premiere ligne de code."
+      },
+      "spec": {
+        "title": "Specification & Architecture",
+        "desc": "Je redige un document technique detaille : stack, schema de base de donnees, routes API, structure des composants. Vous savez exactement ce qui sera construit avant le debut."
+      },
+      "dev": {
+        "title": "Developpement Itératif",
+        "desc": "Sprints d'une semaine, deploiements preview apres chaque iteration. Vous voyez les progres en temps reel, vous pouvez ajuster les priorites a tout moment."
+      },
+      "deploy": {
+        "title": "Deploiement & Lancement",
+        "desc": "Mise en production sur Vercel, Railway ou votre infrastructure. CI/CD configure, monitoring en place, documentation livree. Zero surprise le jour J."
+      },
+      "support": {
+        "title": "Support Post-Lancement",
+        "desc": "30 jours de support inclus. Corrections rapides, ajustements UX, conseils sur la roadmap. Je reste disponible quand ca compte le plus."
+      }
+    },
+    "pricing": {
+      "label": "// tarifs",
+      "headline": "Investissement transparent",
+      "popular": "Populaire",
+      "cta": "Demarrer ce projet",
+      "plans": {
+        "mvp": {
+          "name": "MVP",
+          "price": "800€",
+          "duration": "/ projet fixe",
+          "features": [
+            "Application web complete",
+            "Authentification utilisateurs",
+            "Base de donnees + API",
+            "Deploiement inclus",
+            "14 jours de support"
+          ]
+        },
+        "saas": {
+          "name": "SaaS Complet",
+          "price": "3 000€",
+          "duration": "/ projet fixe",
+          "features": [
+            "Tout le MVP +",
+            "Paiements Stripe & abonnements",
+            "Dashboard admin",
+            "Integrations tierces (IA, email...)",
+            "30 jours de support"
+          ]
+        },
+        "consulting": {
+          "name": "Consulting",
+          "price": "80€",
+          "duration": "/ heure",
+          "features": [
+            "Audit technique & code review",
+            "Architecture & conseil stack",
+            "Deblocage de sprint",
+            "Mentoring & formation",
+            "Disponibilite flexible"
+          ]
+        }
       }
     }
   },

@@ -47,6 +47,7 @@ const PROJECTS = [
     num: "03",
     name: "pick4me.be",
     url: "https://pick4me.be",
+    demoUrl: "https://pick4me.be",
     translationKey: "project3",
     technologies: [
       "NestJS",
@@ -180,32 +181,49 @@ function ProjectCard({
               ))}
             </div>
 
-            <a
-              href={project.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group inline-flex items-center gap-2.5 rounded-full border px-7 py-3.5 text-sm font-medium transition-all duration-300"
-              style={{
-                borderColor: "rgba(255,255,255,0.08)",
-                color: "rgba(240,238,233,0.6)",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = `${project.accentColor}4D`;
-                e.currentTarget.style.color = "#F0EEE9";
-                e.currentTarget.style.background = `${project.accentColor}08`;
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)";
-                e.currentTarget.style.color = "rgba(240,238,233,0.6)";
-                e.currentTarget.style.background = "transparent";
-              }}
-            >
-              {t("projects.visitSite")}
-              <ArrowUpRight
-                className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                aria-hidden="true"
-              />
-            </a>
+            <div className="flex flex-wrap items-center gap-3">
+              <a
+                href={project.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex items-center gap-2.5 rounded-full border px-7 py-3.5 text-sm font-medium transition-all duration-300"
+                style={{
+                  borderColor: "rgba(255,255,255,0.08)",
+                  color: "rgba(240,238,233,0.6)",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = `${project.accentColor}4D`;
+                  e.currentTarget.style.color = "#F0EEE9";
+                  e.currentTarget.style.background = `${project.accentColor}08`;
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)";
+                  e.currentTarget.style.color = "rgba(240,238,233,0.6)";
+                  e.currentTarget.style.background = "transparent";
+                }}
+              >
+                {t("projects.visitSite")}
+                <ArrowUpRight
+                  className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                  aria-hidden="true"
+                />
+              </a>
+              {"demoUrl" in project && (
+                <a
+                  href={(project as { demoUrl: string }).demoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 rounded-full px-5 py-3.5 text-sm font-medium transition-all duration-300"
+                  style={{
+                    background: `${project.accentColor}18`,
+                    color: project.accentColor,
+                    border: `1px solid ${project.accentColor}33`,
+                  }}
+                >
+                  {t("projects.liveDemo")}
+                </a>
+              )}
+            </div>
           </div>
         </div>
 
