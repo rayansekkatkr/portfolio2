@@ -9,22 +9,34 @@
     "available": "Disponible pour de nouveaux projets",
     "availableOn": "Disponible sur",
     "role": "Developpeur Full-Stack & Product Engineer",
-    "description": "Je concois et construis des produits numeriques modernes, performants et evolutifs. Des plateformes SaaS aux integrations IA. Ingenierie de precision pour des projets ambitieux.",
+    "description": "Je construis des SaaS et des outils IA qui passent en production — de l'architecture jusqu'au premier utilisateur payant. Pas de template, pas de racourcis.",
     "cta": {
       "primary": "Demarrer un projet",
       "secondary": "Voir mes travaux"
     },
-    "location": "Base au Maroc"
+    "location": "Base au Maroc",
+    "saasProduction": "3 SaaS en production"
   },
   "about": {
     "label": "// a propos",
     "headline": "Concevoir des produits numeriques avec <accent>precision</accent> et intention.",
     "description": "Je construis des plateformes SaaS, des applications IA et des experiences web modernes pour des clients qui ont besoin de plus que du code. Ils ont besoin d'un partenaire technique qui comprend le produit, le design et le business.",
     "stats": {
-      "years": { "label": "Annees d'experience" },
-      "projects": { "label": "Projets livres" },
-      "technologies": { "label": "Technologies maitrisees" },
-      "satisfaction": { "label": "Satisfaction client" }
+      "years": {
+        "label": "Annees d'experience"
+      },
+      "projects": {
+        "label": "Projets livres"
+      },
+      "technologies": {
+        "label": "Technologies maitrisees"
+      },
+      "satisfaction": {
+        "label": "Taux de livraison"
+      },
+      "saas": {
+        "label": "SaaS en production"
+      }
     },
     "expertise": {
       "01": {
@@ -39,6 +51,11 @@
         "title": "Craft Frontend",
         "desc": "Interfaces pixel-perfect, animations avancees, experiences web 3D et design responsive obsede par la performance."
       }
+    },
+    "testimonial": {
+      "quote": "Rayan a livre en 3 semaines ce qu on estimait a 2 mois. Architecture solide, code propre, et une vraie comprehension du produit. Je recommande sans hesitation.",
+      "author": "Client — Projet e-commerce B2B",
+      "label": "Ce que disent les clients"
     }
   },
   "skills": {
@@ -105,6 +122,15 @@
         "exceptions": "Exceptions seulement",
         "time": "Temps economise"
       }
+    },
+    "project3": {
+      "tagline": "App Mobile / Plateforme de services a la demande · Lead Dev Backend & Site",
+      "description": "Conception et developpement du backend complet et du site vitrine. Architecture temps reel avec Socket.IO (chat + tracking GPS), paiements via Revolut Business API et Stripe Issuing, notifications push Firebase FCM, geolocalisation Mapbox, et deploiement VPS Hetzner avec reverse proxy Caddy (HTTPS auto).",
+      "results": {
+        "latency": "Latence WebSocket",
+        "integrations": "Integrations paiement",
+        "uptime": "Uptime cible VPS"
+      }
     }
   },
   "contact": {
@@ -119,9 +145,18 @@
     "responseTime": "Reponse moyenne :",
     "responseValue": "2-4h",
     "form": {
-      "name": { "label": "Nom complet", "placeholder": "Votre nom" },
-      "email": { "label": "Email", "placeholder": "email@entreprise.com" },
-      "message": { "label": "Details du projet", "placeholder": "Parlez-moi de votre projet..." },
+      "name": {
+        "label": "Nom complet",
+        "placeholder": "Votre nom"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "email@entreprise.com"
+      },
+      "message": {
+        "label": "Details du projet",
+        "placeholder": "Parlez-moi de votre projet..."
+      },
       "submit": "Envoyer le message",
       "sending": "Envoi..."
     },

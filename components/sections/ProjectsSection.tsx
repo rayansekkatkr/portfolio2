@@ -9,6 +9,7 @@ import { SectionDivider } from "@/components/ui/magic/SectionDivider";
 import { AnimatedBrowser } from "@/components/ui/magic/AnimatedBrowser";
 import { FacturxMockup } from "@/components/ui/magic/FacturxMockup";
 import { DocExtractMockup } from "@/components/ui/magic/DocExtractMockup";
+import { Pick4meMockup } from "@/components/ui/magic/Pick4meMockup";
 import { useTranslation } from "@/lib/i18n/useLanguage";
 
 const PROJECTS = [
@@ -41,6 +42,30 @@ const PROJECTS = [
     accentColor: "#10B981",
     secondaryColor: "#F59E0B",
     Mockup: DocExtractMockup,
+  },
+  {
+    num: "03",
+    name: "pick4me.be",
+    url: "https://pick4me.be",
+    translationKey: "project3",
+    technologies: [
+      "NestJS",
+      "PostgreSQL",
+      "Redis",
+      "Socket.IO",
+      "Mapbox",
+      "Stripe",
+      "Revolut API",
+      "Docker",
+    ],
+    results: [
+      { value: 100, suffix: "ms", decimalPlaces: 0, key: "projects.project3.results.latency" },
+      { value: 2, suffix: "+", decimalPlaces: 0, key: "projects.project3.results.integrations" },
+      { value: 99.9, suffix: "%", decimalPlaces: 1, key: "projects.project3.results.uptime" },
+    ],
+    accentColor: "#F97316",
+    secondaryColor: "#EF4444",
+    Mockup: Pick4meMockup,
   },
 ] as const;
 

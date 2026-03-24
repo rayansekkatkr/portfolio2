@@ -9,22 +9,34 @@
     "available": "Open to new projects",
     "availableOn": "Available on",
     "role": "Full-Stack Developer & Product Engineer",
-    "description": "I design and build digital products that are modern, performant, and built to scale. From SaaS platforms to AI integrations. Precision engineering for ambitious projects.",
+    "description": "I build SaaS platforms and AI tools that ship to production — from architecture to the first paying user. No templates, no shortcuts.",
     "cta": {
       "primary": "Start a project",
       "secondary": "View work"
     },
-    "location": "Based in Morocco"
+    "location": "Based in Morocco",
+    "saasProduction": "3 SaaS in production"
   },
   "about": {
     "label": "// about",
     "headline": "Engineering digital products with <accent>precision</accent> and purpose.",
     "description": "I build production-grade SaaS platforms, AI-powered applications, and modern web experiences for clients who need more than just code. They need a technical partner who understands product, design, and business.",
     "stats": {
-      "years": { "label": "Years building products" },
-      "projects": { "label": "Projects shipped" },
-      "technologies": { "label": "Technologies mastered" },
-      "satisfaction": { "label": "Client satisfaction" }
+      "years": {
+        "label": "Years building products"
+      },
+      "projects": {
+        "label": "Projects shipped"
+      },
+      "technologies": {
+        "label": "Technologies mastered"
+      },
+      "satisfaction": {
+        "label": "Delivery rate"
+      },
+      "saas": {
+        "label": "SaaS in production"
+      }
     },
     "expertise": {
       "01": {
@@ -39,6 +51,11 @@
         "title": "Frontend Craft",
         "desc": "Pixel-perfect interfaces, advanced animations, 3D web experiences, and performance-obsessed responsive design."
       }
+    },
+    "testimonial": {
+      "quote": "Rayan delivered in 3 weeks what we estimated at 2 months. Solid architecture, clean code, and a real understanding of the product. Highly recommended.",
+      "author": "Client — B2B e-commerce project",
+      "label": "What clients say"
     }
   },
   "skills": {
@@ -105,6 +122,15 @@
         "exceptions": "Exceptions only",
         "time": "Time saved"
       }
+    },
+    "project3": {
+      "tagline": "Mobile App / On-Demand Services Platform · Lead Backend Dev & Website",
+      "description": "Designed and built the full backend architecture and marketing website. Real-time stack with Socket.IO (chat + GPS tracking), payments via Revolut Business API and Stripe Issuing, Firebase FCM push notifications, Mapbox geolocation, and Hetzner VPS deployment with Caddy reverse proxy (auto-HTTPS).",
+      "results": {
+        "latency": "WebSocket latency",
+        "integrations": "Payment integrations",
+        "uptime": "Target VPS uptime"
+      }
     }
   },
   "contact": {
@@ -119,9 +145,18 @@
     "responseTime": "Average response:",
     "responseValue": "2-4h",
     "form": {
-      "name": { "label": "Full name", "placeholder": "Your name" },
-      "email": { "label": "Email", "placeholder": "email@company.com" },
-      "message": { "label": "Project details", "placeholder": "Tell me about your project..." },
+      "name": {
+        "label": "Full name",
+        "placeholder": "Your name"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "email@company.com"
+      },
+      "message": {
+        "label": "Project details",
+        "placeholder": "Tell me about your project..."
+      },
       "submit": "Send message",
       "sending": "Sending..."
     },

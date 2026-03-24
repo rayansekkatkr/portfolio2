@@ -2,7 +2,12 @@
 
 /* Plus Jakarta Sans font as default */
 * {
-  font-family: var(--font-plus-jakarta), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family:
+    var(--font-plus-jakarta),
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
 }
 
 /* Light Theme (Default) */
@@ -135,14 +140,14 @@
 }
 
 .glow-hover::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   border-radius: inherit;
   padding: 2px;
   background: linear-gradient(135deg, rgb(var(--primary)), rgb(129 140 248));
-  -webkit-mask: 
-    linear-gradient(#fff 0 0) content-box, 
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
     linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
@@ -266,6 +271,37 @@ body {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border-width: 0;
+}
+
+/* Custom cursor — hide default on non-touch devices */
+@media (hover: hover) and (pointer: fine) {
+  *,
+  *::before,
+  *::after {
+    cursor: none !important;
+  }
+}
+
+/* Animated gradient text for hero role label */
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.hero-gradient-text {
+  background: linear-gradient(90deg, #00d4ff 0%, #818cf8 40%, #c9a55c 70%, #00d4ff 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-shift 5s ease infinite;
 }
 
 /* Touch device hover prevention - prevent sticky hover states on mobile */

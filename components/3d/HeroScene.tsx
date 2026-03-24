@@ -5,6 +5,18 @@ import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Float } from "@react-three/drei";
 import * as THREE from "three";
 
+// Particle positions generated at module level (avoids impure Math.random during render)
+const PARTICLE_POSITIONS = (() => {
+  const count = 1500;
+  const pos = new Float32Array(count * 3);
+  for (let i = 0; i < count; i++) {
+    pos[i * 3] = (Math.random() - 0.5) * 28;
+    pos[i * 3 + 1] = (Math.random() - 0.5) * 18;
+    pos[i * 3 + 2] = (Math.random() - 0.5) * 12;
+  }
+  return pos;
+})();
+
 // ── Fresnel glass sphere with enhanced iridescence ─────────────────────────
 function GlassSphere() {
   const meshRef = useRef<THREE.Mesh>(null);
@@ -54,10 +66,10 @@ function GlassSphere() {
       vec3 color  = mix(cyan, mix(indigo, mix(gold, violet, shift2 * 0.2), shift * 0.35), fresnel * 0.5);
 
       // Edge glow - sharper and brighter
-      float alpha = fresnel * 0.95 + 0.012;
+      float alpha = fresnel * 0.98 + 0.04;
 
-      // Inner ambient glow
-      float innerGlow = smoothstep(0.45, 0.0, fresnel) * 0.03;
+      // Inner ambient glow — increased for more presence
+      float innerGlow = smoothstep(0.45, 0.0, fresnel) * 0.1;
       color += cyan * innerGlow;
       alpha += innerGlow;
 
@@ -90,7 +102,7 @@ function GlassSphere() {
   });
 
   return (
-    <mesh ref={meshRef} position={[1.0, 0, 0]} scale={2.2}>
+    <mesh ref={meshRef} position={[1.0, 0, 0]} scale={2.6}>
       <icosahedronGeometry args={[1, 24]} />
       <shaderMaterial
         ref={matRef}
@@ -197,18 +209,8 @@ function Satellites() {
 function ParticleField() {
   const ref = useRef<THREE.Points>(null);
 
-  const { positions, sizes } = useMemo(() => {
-    const count = 1500;
-    const pos = new Float32Array(count * 3);
-    const sz = new Float32Array(count);
-    for (let i = 0; i < count; i++) {
-      pos[i * 3] = (Math.random() - 0.5) * 28;
-      pos[i * 3 + 1] = (Math.random() - 0.5) * 18;
-      pos[i * 3 + 2] = (Math.random() - 0.5) * 12;
-      sz[i] = Math.random() * 0.015 + 0.008;
-    }
-    return { positions: pos, sizes: sz };
-  }, []);
+  // Generated at module level to avoid impure call during render
+  const positions = PARTICLE_POSITIONS;
 
   useFrame(({ clock }) => {
     if (ref.current) ref.current.rotation.y = clock.elapsedTime * 0.006;
@@ -221,6 +223,105 @@ function ParticleField() {
       </bufferGeometry>
       <pointsMaterial size={0.02} color="#ffffff" transparent opacity={0.18} sizeAttenuation />
     </points>
+  );
+}
+
+// ── Floating holographic glass panels ────────────────────────────────────────
+function FloatingGlassPanel({
+  position,
+  rotation = [0, 0, 0] as [number, number, number],
+  width = 1.4,
+  height = 0.85,
+  speed = 1.0,
+  color = "#00D4FF",
+}: {
+  position: [number, number, number];
+  rotation?: [number, number, number];
+  width?: number;
+  height?: number;
+  speed?: number;
+  color?: string;
+}) {
+  return (
+    <Float speed={speed} rotationIntensity={0.06} floatIntensity={0.45}>
+      <group position={position} rotation={rotation}>
+        {/* Glass fill */}
+        <mesh>
+          <planeGeometry args={[width, height]} />
+          <meshBasicMaterial
+            color={color}
+            transparent
+            opacity={0.04}
+            side={THREE.DoubleSide}
+            depthWrite={false}
+          />
+        </mesh>
+        {/* Top edge glow */}
+        <mesh position={[0, height / 2, 0]}>
+          <planeGeometry args={[width, 0.005]} />
+          <meshBasicMaterial color={color} transparent opacity={0.55} />
+        </mesh>
+        {/* Bottom edge */}
+        <mesh position={[0, -height / 2, 0]}>
+          <planeGeometry args={[width, 0.005]} />
+          <meshBasicMaterial color={color} transparent opacity={0.18} />
+        </mesh>
+        {/* Left edge */}
+        <mesh position={[-width / 2, 0, 0]}>
+          <planeGeometry args={[0.005, height]} />
+          <meshBasicMaterial color={color} transparent opacity={0.3} />
+        </mesh>
+        {/* Right edge */}
+        <mesh position={[width / 2, 0, 0]}>
+          <planeGeometry args={[0.005, height]} />
+          <meshBasicMaterial color={color} transparent opacity={0.12} />
+        </mesh>
+        {/* Scanline UI content simulation */}
+        {[0.22, 0.0, -0.2].map((y, i) => (
+          <mesh key={i} position={[-(i * 0.06), y, 0.001]}>
+            <planeGeometry args={[width * (0.65 - i * 0.08), 0.012]} />
+            <meshBasicMaterial color={color} transparent opacity={0.18} />
+          </mesh>
+        ))}
+      </group>
+    </Float>
+  );
+}
+
+// ── Neon platform ring under the sphere ──────────────────────────────────────
+function NeonPlatform() {
+  const ringRef = useRef<THREE.Mesh>(null);
+
+  useFrame(({ clock }) => {
+    if (ringRef.current && ringRef.current.material instanceof THREE.MeshBasicMaterial) {
+      ringRef.current.material.opacity = 0.4 + Math.sin(clock.elapsedTime * 1.4) * 0.15;
+    }
+  });
+
+  return (
+    <group position={[1.0, -2.55, 0]}>
+      {/* Main neon ring */}
+      <mesh ref={ringRef} rotation={[Math.PI / 2, 0, 0]}>
+        <torusGeometry args={[1.7, 0.018, 16, 128]} />
+        <meshBasicMaterial color="#FF2D78" transparent opacity={0.45} />
+      </mesh>
+      {/* Inner glow disk */}
+      <mesh rotation={[Math.PI / 2, 0, 0]}>
+        <circleGeometry args={[1.7, 64]} />
+        <meshBasicMaterial
+          color="#FF2D78"
+          transparent
+          opacity={0.012}
+          side={THREE.DoubleSide}
+          depthWrite={false}
+        />
+      </mesh>
+      {/* Outer ambient ring */}
+      <mesh rotation={[Math.PI / 2, 0, 0]}>
+        <torusGeometry args={[2.4, 0.006, 16, 128]} />
+        <meshBasicMaterial color="#5E3AEE" transparent opacity={0.18} />
+      </mesh>
+    </group>
   );
 }
 
@@ -237,22 +338,68 @@ export default function HeroScene() {
       <pointLight position={[5, 3, 4]} color="#00D4FF" intensity={2.5} distance={16} />
       <pointLight position={[-4, -2, 3]} color="#C9A55C" intensity={0.8} distance={12} />
       <pointLight position={[0, 5, -3]} color="#5E3AEE" intensity={0.5} distance={10} />
-      <spotLight
-        position={[0, 7, 5]}
-        angle={0.35}
-        penumbra={0.9}
-        intensity={1.5}
-        color="#ffffff"
-      />
+      {/* Magenta accent light for neon platform */}
+      <pointLight position={[1.0, -3.2, 2]} color="#FF2D78" intensity={1.8} distance={9} />
+      <spotLight position={[0, 7, 5]} angle={0.35} penumbra={0.9} intensity={1.5} color="#ffffff" />
 
       {/* Scene elements */}
       <ParticleField />
-      <OrbitalRing radius={3.1} color="#00D4FF" opacity={0.25} tiltX={Math.PI / 2.2} rotSpeed={0.04} />
-      <OrbitalRing radius={3.5} color="#C9A55C" opacity={0.1} tiltX={Math.PI / 3} rotSpeed={-0.03} />
-      <OrbitalRing radius={2.6} color="#5E3AEE" opacity={0.08} tiltX={Math.PI / 4} rotSpeed={0.02} />
+      <OrbitalRing
+        radius={3.1}
+        color="#00D4FF"
+        opacity={0.35}
+        tiltX={Math.PI / 2.2}
+        rotSpeed={0.04}
+      />
+      <OrbitalRing
+        radius={3.5}
+        color="#C9A55C"
+        opacity={0.15}
+        tiltX={Math.PI / 3}
+        rotSpeed={-0.03}
+      />
+      <OrbitalRing
+        radius={2.6}
+        color="#5E3AEE"
+        opacity={0.12}
+        tiltX={Math.PI / 4}
+        rotSpeed={0.02}
+      />
+      {/* Background glow sphere — gives depth and presence to the main sphere */}
+      <mesh position={[1.0, 0, -1.5]} scale={3.8}>
+        <sphereGeometry args={[1, 16, 16]} />
+        <meshBasicMaterial color="#00D4FF" transparent opacity={0.018} depthWrite={false} />
+      </mesh>
       <GlassSphere />
       <InnerCore />
       <Satellites />
+      <NeonPlatform />
+
+      {/* Floating holographic glass panels */}
+      <FloatingGlassPanel
+        position={[-2.3, 0.9, -1.2]}
+        rotation={[0, 0.4, 0]}
+        width={1.6}
+        height={0.9}
+        speed={0.8}
+        color="#00D4FF"
+      />
+      <FloatingGlassPanel
+        position={[3.9, 0.3, -0.6]}
+        rotation={[0, -0.3, 0.05]}
+        width={1.4}
+        height={0.8}
+        speed={1.1}
+        color="#818cf8"
+      />
+      <FloatingGlassPanel
+        position={[2.9, -1.6, 0.9]}
+        rotation={[0.08, -0.5, 0]}
+        width={1.2}
+        height={0.7}
+        speed={0.9}
+        color="#00D4FF"
+      />
     </Canvas>
   );
 }

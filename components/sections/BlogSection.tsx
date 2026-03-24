@@ -15,6 +15,9 @@ export interface BlogPost {
 }
 
 async function getLatestPosts(): Promise<BlogPost[]> {
+  const dbUrl = process.env.POSTGRES_PRISMA_URL ?? "";
+  if (!dbUrl || dbUrl.includes("user:password@localhost")) return [];
+
   try {
     const posts = await prisma.blogPost.findMany({
       where: {
@@ -51,11 +54,7 @@ export default async function BlogSection() {
   const locale = "fr"; // Default to French for now
 
   return (
-    <section
-      id="blog"
-      aria-label="Blog articles"
-      className="px-6 py-24 sm:py-32"
-    >
+    <section id="blog" aria-label="Blog articles" className="px-6 py-24 sm:py-32">
       <div className="mx-auto max-w-7xl">
         <div className="mb-12">
           <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl dark:text-white">
