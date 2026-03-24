@@ -9,7 +9,7 @@
     "available": "Open to new projects",
     "availableOn": "Available on",
     "role": "Full-Stack Developer & Product Engineer",
-    "description": "I build SaaS platforms and AI tools that ship to production — from architecture to the first paying user. No templates, no shortcuts.",
+    "description": "I build SaaS platforms and AI tools that ship to production. From architecture to the first paying user. No templates, no shortcuts.",
     "cta": {
       "primary": "Start a project",
       "secondary": "View work"
@@ -54,7 +54,7 @@
     },
     "testimonial": {
       "quote": "Rayan delivered in 3 weeks what we estimated at 2 months. Solid architecture, clean code, and a real understanding of the product. Highly recommended.",
-      "author": "Client — B2B e-commerce project",
+      "author": "Client, B2B e-commerce project",
       "label": "What clients say"
     }
   },
@@ -108,7 +108,7 @@
     "liveDemo": "Live demo →",
     "project1": {
       "tagline": "SaaS / Factur-X Compliance · CEO & Sole Developer",
-      "description": "Built solo — architecture to production. France's mandatory e-invoicing law (EN 16931, Chorus Pro) takes effect in 2026. I built a SaaS that converts invoices to Factur-X format with 99.9% OCR precision, sub-10s processing, and full GDPR compliance. Servers in France, AES-256 encryption.",
+      "description": "Built solo, from architecture to production. France's mandatory e-invoicing law (EN 16931, Chorus Pro) takes effect in 2026. I built a SaaS that converts invoices to Factur-X format with 99.9% OCR precision, sub-10s processing, and full GDPR compliance. Servers in France, AES-256 encryption.",
       "results": {
         "precision": "OCR precision",
         "speed": "Processing time (max)",
@@ -117,7 +117,7 @@
     },
     "project2": {
       "tagline": "AI / Invoice Extraction & AP Automation · CEO & Sole Developer",
-      "description": "Built solo — architecture to production. Accounting firms were processing supplier invoices manually. I built an AI platform that auto-processes 94% of incoming invoices with 99.2% extraction accuracy, an exception-first workflow, and native integrations for QuickBooks, Xero, and REST API. 1 day to go live.",
+      "description": "Built solo, from architecture to production. Accounting firms were processing supplier invoices manually. I built an AI platform that auto-processes 94% of incoming invoices with 99.2% extraction accuracy, an exception-first workflow, and native integrations for QuickBooks, Xero, and REST API. 1 day to go live.",
       "results": {
         "accuracy": "Extraction accuracy",
         "exceptions": "Exceptions only",

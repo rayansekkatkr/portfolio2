@@ -9,7 +9,7 @@
     "available": "Disponible pour de nouveaux projets",
     "availableOn": "Disponible sur",
     "role": "Developpeur Full-Stack & Product Engineer",
-    "description": "Je construis des SaaS et des outils IA qui passent en production — de l'architecture jusqu'au premier utilisateur payant. Pas de template, pas de racourcis.",
+    "description": "Je construis des SaaS et des outils IA qui passent en production. De l'architecture au premier utilisateur payant. Pas de template, pas de raccourcis.",
     "cta": {
       "primary": "Demarrer un projet",
       "secondary": "Voir mes travaux"
@@ -54,7 +54,7 @@
     },
     "testimonial": {
       "quote": "Rayan a livre en 3 semaines ce qu on estimait a 2 mois. Architecture solide, code propre, et une vraie comprehension du produit. Je recommande sans hesitation.",
-      "author": "Client — Projet e-commerce B2B",
+      "author": "Client, Projet e-commerce B2B",
       "label": "Ce que disent les clients"
     }
   },

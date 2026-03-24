@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
-export const alt = "Rayan Sekkat — Full-Stack Developer & Product Engineer";
+export const alt = "Rayan Sekkat, Full-Stack Developer & Product Engineer";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -99,7 +99,7 @@ export default function OgImage() {
             lineHeight: 1.6,
           }}
         >
-          Building SaaS platforms and AI tools that ship to production — from architecture to the
+          Building SaaS platforms and AI tools that ship to production. From architecture to the
           first paying user.
         </div>
       </div>
