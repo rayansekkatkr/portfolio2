@@ -9,6 +9,7 @@ import dynamic from "next/dynamic";
 import { GrainOverlay } from "@/components/ui/magic/GrainOverlay";
 import { CustomCursor } from "@/components/ui/CustomCursor";
 import { ScrollProgress } from "@/components/ui/ScrollProgress";
+import { GlobalBackground } from "@/components/ui/GlobalBackground";
 
 const ScrollToTop = dynamic(() => import("@/components/ui/ScrollToTop"), {
   ssr: false,
@@ -46,6 +47,7 @@ export default function ClientProviders({ children }: { children: ReactNode }) {
   return (
     <ThemeProvider>
       <LanguageProvider>
+        <GlobalBackground />
         {children}
         <CustomCursor />
         <ScrollProgress />

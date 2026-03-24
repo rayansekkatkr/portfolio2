@@ -7,6 +7,7 @@ import ProjectsSection from "@/components/sections/ProjectsSection";
 import ServicesSection from "@/components/sections/ServicesSection";
 import BlogSection from "@/components/sections/BlogSection";
 import ContactSection from "@/components/sections/ContactSection";
+import { SectionReveal } from "@/components/ui/SectionReveal";
 
 export default function Home() {
   return (
@@ -20,12 +21,24 @@ export default function Home() {
       <Header />
       <main id="main">
         <HeroSection />
-        <AboutSection />
-        <SkillsSection />
-        <ProjectsSection />
-        <ServicesSection />
-        <BlogSection />
-        <ContactSection />
+        <SectionReveal>
+          <AboutSection />
+        </SectionReveal>
+        <SectionReveal>
+          <SkillsSection />
+        </SectionReveal>
+        <SectionReveal>
+          <ProjectsSection />
+        </SectionReveal>
+        <SectionReveal>
+          <ServicesSection />
+        </SectionReveal>
+        <SectionReveal>
+          <BlogSection />
+        </SectionReveal>
+        <SectionReveal>
+          <ContactSection />
+        </SectionReveal>
       </main>
       <Footer />
     </>

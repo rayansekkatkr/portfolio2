@@ -91,9 +91,10 @@ function ProjectCard({
         border: "1px solid rgba(255,255,255,0.06)",
         background: "rgba(255,255,255,0.015)",
       }}
-      initial={{ opacity: 0, y: 30 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: dur(0.6), delay: del(0.15 + index * 0.12) }}
+      initial={prefersReducedMotion ? {} : { opacity: 0, y: 48, scale: 0.97 }}
+      whileInView={prefersReducedMotion ? {} : { opacity: 1, y: 0, scale: 1 }}
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{ duration: dur(0.65), delay: del(index * 0.1), ease: [0.16, 1, 0.3, 1] }}
     >
       <BorderBeam
         size={220}

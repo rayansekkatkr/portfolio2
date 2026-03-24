@@ -88,9 +88,14 @@ export default function ServicesSection() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group border-border bg-card hover:border-primary relative overflow-hidden rounded-2xl border p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                transition={{ duration: dur(0.5), delay: del(0.1 + index * 0.1) }}
+                initial={{ opacity: 0, y: 40, scale: 0.96 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{
+                  duration: dur(0.55),
+                  delay: del(index * 0.08),
+                  ease: [0.16, 1, 0.3, 1],
+                }}
               >
                 <div className="mb-4 flex items-start justify-between">
                   <span className="inline-flex items-center rounded-full bg-green-500/10 px-3 py-1 text-xs font-medium text-green-500">
@@ -141,9 +146,14 @@ export default function ServicesSection() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group border-border bg-card hover:border-primary relative overflow-hidden rounded-2xl border p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                transition={{ duration: dur(0.5), delay: del(0.5 + index * 0.1) }}
+                initial={{ opacity: 0, y: 40, scale: 0.96 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{
+                  duration: dur(0.55),
+                  delay: del(index * 0.08),
+                  ease: [0.16, 1, 0.3, 1],
+                }}
               >
                 <div className="mb-4 flex items-start justify-between">
                   <span className="inline-flex items-center rounded-full bg-green-600/10 px-3 py-1 text-xs font-medium text-green-600">

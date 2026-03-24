@@ -214,8 +214,12 @@
   }
 }
 
-body {
+html {
   background: rgb(var(--background));
+}
+
+body {
+  background: transparent;
   color: rgb(var(--foreground));
   font-family: var(--font-sans, Arial, Helvetica, sans-serif);
 }

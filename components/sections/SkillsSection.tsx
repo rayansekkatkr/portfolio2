@@ -1,10 +1,21 @@
 "use client";
 
-import { Brain, Code2, Layers, Wrench, Database, Cloud, Zap, Lock, ShoppingCart } from "lucide-react";
+import {
+  Brain,
+  Code2,
+  Layers,
+  Wrench,
+  Database,
+  Cloud,
+  Zap,
+  Lock,
+  ShoppingCart,
+} from "lucide-react";
 import { motion, useInView, useReducedMotion } from "framer-motion";
 import { useRef } from "react";
 import { Marquee } from "@/components/ui/magic/Marquee";
 import { GlowCard } from "@/components/ui/magic/GlowCard";
+import { CardReveal } from "@/components/ui/CardReveal";
 import { useTranslation } from "@/lib/i18n/useLanguage";
 
 const SERVICES = [
@@ -49,22 +60,17 @@ export default function SkillsSection() {
   const del = (v: number) => (prefersReducedMotion ? 0 : v);
 
   return (
-    <section
-      ref={ref}
-      id="skills"
-      aria-label="Skills and services"
-      className="py-28 sm:py-36"
-    >
+    <section ref={ref} id="skills" aria-label="Skills and services" className="py-28 sm:py-36">
       {/* Tech marquee - cinematic ticker */}
       <div
-        className="border-y py-4 overflow-hidden mb-24"
+        className="mb-24 overflow-hidden border-y py-4"
         style={{ borderColor: "rgba(255,255,255,0.04)" }}
       >
-        <Marquee className="[--gap:3rem] [--duration:25s]" pauseOnHover>
+        <Marquee className="[--duration:25s] [--gap:3rem]" pauseOnHover>
           {TECH_STACK.map((tech) => (
             <span
               key={tech}
-              className="font-mono text-[11px] uppercase tracking-[0.2em] px-6 select-none flex items-center gap-4"
+              className="flex items-center gap-4 px-6 font-mono text-[11px] tracking-[0.2em] uppercase select-none"
               style={{ color: "rgba(255,255,255,0.12)" }}
             >
               <span>{tech}</span>
@@ -78,20 +84,17 @@ export default function SkillsSection() {
         </Marquee>
       </div>
 
-      <div className="px-6 lg:px-16 mx-auto max-w-6xl">
+      <div className="mx-auto max-w-6xl px-6 lg:px-16">
         {/* Section label with line */}
         <motion.div
-          className="flex items-center gap-4 mb-6"
+          className="mb-6 flex items-center gap-4"
           initial={{ opacity: 0, y: 10 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: dur(0.4) }}
         >
-          <div
-            className="h-px w-8"
-            style={{ background: "rgba(0,212,255,0.4)" }}
-          />
+          <div className="h-px w-8" style={{ background: "rgba(0,212,255,0.4)" }} />
           <p
-            className="font-mono text-[10px] uppercase tracking-[0.25em]"
+            className="font-mono text-[10px] tracking-[0.25em] uppercase"
             style={{ color: "rgba(0,212,255,0.55)" }}
           >
             {t("skills.label")}
@@ -100,7 +103,7 @@ export default function SkillsSection() {
 
         {/* Heading */}
         <motion.h2
-          className="font-cormorant font-bold text-4xl sm:text-5xl lg:text-6xl mb-20"
+          className="font-cormorant mb-20 text-4xl font-bold sm:text-5xl lg:text-6xl"
           style={{ color: "#F0EEE9" }}
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -114,28 +117,19 @@ export default function SkillsSection() {
           {SERVICES.map((service, index) => {
             const Icon = service.icon;
             return (
-              <motion.div
+              <CardReveal
                 key={service.key}
-                initial={{ opacity: 0, y: 16 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{
-                  duration: dur(0.35),
-                  delay: del(0.1 + index * 0.04),
-                }}
+                index={index}
                 className={service.featured ? "lg:col-span-2" : ""}
               >
                 <GlowCard
                   className={`rounded-2xl transition-all duration-300 ${
                     service.featured ? "" : ""
                   }`}
-                  glowColor={
-                    service.featured
-                      ? "rgba(0,212,255,0.12)"
-                      : "rgba(0,212,255,0.08)"
-                  }
+                  glowColor={service.featured ? "rgba(0,212,255,0.12)" : "rgba(0,212,255,0.08)"}
                 >
                   <div
-                    className="relative p-8 sm:p-9 rounded-2xl h-full"
+                    className="relative h-full rounded-2xl p-8 sm:p-9"
                     style={{
                       border: service.featured
                         ? "1px solid rgba(0,212,255,0.15)"
@@ -160,9 +154,7 @@ export default function SkillsSection() {
                       <Icon
                         className="h-7 w-7"
                         style={{
-                          color: service.featured
-                            ? "rgba(0,212,255,0.7)"
-                            : "rgba(255,255,255,0.3)",
+                          color: service.featured ? "rgba(0,212,255,0.7)" : "rgba(255,255,255,0.3)",
                         }}
                         strokeWidth={1.5}
                       />
@@ -176,7 +168,7 @@ export default function SkillsSection() {
                     </div>
 
                     <h3
-                      className="text-lg font-semibold mb-2"
+                      className="mb-2 text-lg font-semibold"
                       style={{ color: "rgba(255,255,255,0.88)" }}
                     >
                       {t(`skills.services.${service.key}.title`)}
@@ -190,7 +182,7 @@ export default function SkillsSection() {
                     </p>
                   </div>
                 </GlowCard>
-              </motion.div>
+              </CardReveal>
             );
           })}
         </div>
