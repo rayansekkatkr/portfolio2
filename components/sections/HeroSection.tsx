@@ -2,15 +2,11 @@
 
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, ArrowDown } from "lucide-react";
-import dynamic from "next/dynamic";
 import { useRef } from "react";
 import { ShimmerButton } from "@/components/ui/magic/ShimmerButton";
 import { MagneticButton } from "@/components/ui/magic/MagneticButton";
+import { DotMatrix } from "@/components/ui/DotMatrix";
 import { useTranslation } from "@/lib/i18n/useLanguage";
-
-const HeroScene = dynamic(() => import("@/components/3d/HeroScene"), {
-  ssr: false,
-});
 
 const spring = { type: "spring" as const, damping: 28, stiffness: 100 };
 
@@ -36,15 +32,6 @@ export default function HeroSection() {
           transition: { ...spring, delay },
         };
 
-  const slideUp = (delay: number) =>
-    prefersReducedMotion
-      ? { initial: {}, animate: {} }
-      : {
-          initial: { y: "110%" },
-          animate: { y: 0 },
-          transition: { ...spring, delay },
-        };
-
   const charReveal = (delay: number) =>
     prefersReducedMotion
       ? { initial: {}, animate: {} }
@@ -66,38 +53,28 @@ export default function HeroSection() {
       aria-label="Hero introduction"
       className="relative flex min-h-screen flex-col justify-center overflow-hidden px-6 py-20 md:py-32 lg:px-16 xl:px-24"
     >
-      {/* 3D scene */}
+      {/* Dot matrix background */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-        <HeroScene />
-        {/* Left vignette for text readability */}
+        <DotMatrix />
+        {/* Edge vignettes for depth */}
         <div
           className="absolute inset-0"
           style={{
-            background:
-              "linear-gradient(90deg, #050506 20%, rgba(5,5,6,0.72) 50%, transparent 100%)",
+            background: "radial-gradient(ellipse at 50% 50%, transparent 40%, #050506 100%)",
           }}
         />
         {/* Bottom fade */}
         <div
           className="absolute inset-0"
           style={{
-            background: "linear-gradient(to top, #050506 0%, transparent 30%)",
+            background: "linear-gradient(to top, #050506 0%, transparent 35%)",
           }}
         />
-        {/* Top subtle vignette */}
+        {/* Top fade */}
         <div
           className="absolute inset-0"
           style={{
-            background:
-              "radial-gradient(ellipse at 50% 0%, rgba(0,212,255,0.03) 0%, transparent 50%)",
-          }}
-        />
-        {/* Bottom magenta glow matching neon platform */}
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(ellipse at 60% 100%, rgba(255,45,120,0.06) 0%, transparent 45%)",
+            background: "linear-gradient(to bottom, #050506 0%, transparent 20%)",
           }}
         />
       </div>
