@@ -103,6 +103,75 @@
   --glass-border: 51 65 85; /* slate-700 */
 }
 
+/* ─── Design tokens (used via var() in inline styles + CSS) ─── */
+
+/* Light mode tokens (default / :root) */
+:root {
+  --t-primary: rgba(15, 15, 25, 0.88);
+  --t-secondary: rgba(15, 15, 25, 0.55);
+  --t-muted: rgba(15, 15, 25, 0.35);
+  --card-bg: rgba(255, 255, 255, 0.65);
+  --card-border: rgba(0, 0, 0, 0.07);
+  --card-border-top: rgba(255, 255, 255, 0.95);
+  --card-shadow: 0 8px 40px rgba(0, 0, 0, 0.08), 0 1px 0 rgba(255, 255, 255, 0.9) inset;
+  --card-backdrop: blur(24px) saturate(180%);
+  --section-line: rgba(0, 0, 0, 0.07);
+  --pill-bg: rgba(0, 0, 0, 0.03);
+  --pill-border: rgba(0, 0, 0, 0.07);
+  --pill-text: rgba(15, 15, 25, 0.5);
+  --nav-bg: rgba(255, 255, 255, 0.88);
+  --nav-border: rgba(0, 0, 0, 0.07);
+  --nav-text: rgba(15, 15, 25, 0.45);
+  --nav-active: rgba(0, 100, 180, 0.9);
+  --page-bg: #fafafa;
+  --stats-bg: rgba(255, 255, 255, 0.9);
+  --stats-gap: rgba(0, 0, 0, 0.06);
+  --footer-border: rgba(0, 0, 0, 0.06);
+  --footer-text: rgba(15, 15, 25, 0.28);
+  --marquee-border: rgba(0, 0, 0, 0.06);
+  --marquee-text: rgba(15, 15, 25, 0.2);
+}
+
+/* Dark mode token overrides */
+.dark {
+  --t-primary: rgba(240, 238, 233, 0.9);
+  --t-secondary: rgba(240, 238, 233, 0.5);
+  --t-muted: rgba(240, 238, 233, 0.32);
+  --card-bg: rgba(5, 7, 12, 0.76);
+  --card-border: rgba(255, 255, 255, 0.07);
+  --card-border-top: rgba(255, 255, 255, 0.14);
+  --card-shadow: 0 12px 40px rgba(0, 0, 0, 0.5), 0 1px 0 rgba(255, 255, 255, 0.05) inset;
+  --card-backdrop: blur(24px) saturate(160%);
+  --section-line: rgba(255, 255, 255, 0.05);
+  --pill-bg: rgba(255, 255, 255, 0.02);
+  --pill-border: rgba(255, 255, 255, 0.06);
+  --pill-text: rgba(255, 255, 255, 0.4);
+  --nav-bg: rgba(5, 5, 6, 0.85);
+  --nav-border: rgba(255, 255, 255, 0.06);
+  --nav-text: rgba(255, 255, 255, 0.35);
+  --nav-active: rgba(0, 212, 255, 0.9);
+  --page-bg: #050506;
+  --stats-bg: rgba(5, 5, 6, 0.95);
+  --stats-gap: rgba(255, 255, 255, 0.05);
+  --footer-border: rgba(255, 255, 255, 0.04);
+  --footer-text: rgba(255, 255, 255, 0.15);
+  --marquee-border: rgba(255, 255, 255, 0.04);
+  --marquee-text: rgba(255, 255, 255, 0.12);
+}
+
+/* Theme transition */
+html,
+body {
+  transition:
+    background-color 0.35s ease,
+    color 0.35s ease;
+}
+
+/* Contact form inputs - placeholder adapts to theme */
+.contact-input::placeholder {
+  color: var(--t-muted);
+}
+
 /* Glassmorphism utility classes */
 .glass {
   background: rgba(var(--glass-bg) / 0.9);
@@ -215,7 +284,7 @@
 }
 
 html {
-  background: rgb(var(--background));
+  background: var(--page-bg);
 }
 
 body {

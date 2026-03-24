@@ -26,7 +26,9 @@ function getSystemTheme(): "light" | "dark" {
 }
 
 function getInitialTheme(): Theme {
-  // Force dark theme
+  if (typeof window === "undefined") return "dark";
+  const stored = localStorage.getItem("theme");
+  if (stored === "light" || stored === "dark" || stored === "system") return stored;
   return "dark";
 }
 

@@ -2,10 +2,13 @@
 
 import { useEffect, useRef } from "react";
 import { useReducedMotion } from "framer-motion";
+import { useTheme } from "@/lib/theme/useTheme";
 
 export function GlobalBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const prefersReducedMotion = useReducedMotion();
+  const { resolvedTheme } = useTheme();
+  const isLight = resolvedTheme === "light";
 
   useEffect(() => {
     if (!canvasRef.current) return;
@@ -34,6 +37,8 @@ export function GlobalBackground() {
     window.addEventListener("resize", resize);
 
     // Blobs: each has independent 3D trajectory + parallax depth factor
+    // In light mode: softer pastel tones, reduced opacity
+    const opacityMul = isLight ? 0.45 : 1;
     const blobs = [
       {
         // Cyan — top right, fast parallax
@@ -42,15 +47,15 @@ export function GlobalBackground() {
         z: 1.0,
         vx: 0.00014,
         vy: 0.0001,
-        r: 0,
-        g: 212,
+        r: isLight ? 100 : 0,
+        g: isLight ? 160 : 212,
         b: 255,
         radius: 0.55,
-        baseOpacity: 0.18,
+        baseOpacity: 0.18 * opacityMul,
         phaseX: 0,
         phaseY: 1.2,
         speedMul: 1.0,
-        parallaxFactor: 0.25, // moves 25% of scroll speed
+        parallaxFactor: 0.25,
       },
       {
         // Indigo — bottom left, slow parallax
@@ -59,11 +64,11 @@ export function GlobalBackground() {
         z: 0.5,
         vx: -0.0001,
         vy: -0.00008,
-        r: 94,
-        g: 58,
+        r: isLight ? 120 : 94,
+        g: isLight ? 100 : 58,
         b: 238,
         radius: 0.6,
-        baseOpacity: 0.15,
+        baseOpacity: 0.15 * opacityMul,
         phaseX: 2.1,
         phaseY: 0.5,
         speedMul: 0.8,
@@ -80,7 +85,7 @@ export function GlobalBackground() {
         g: 165,
         b: 92,
         radius: 0.4,
-        baseOpacity: 0.1,
+        baseOpacity: 0.1 * opacityMul,
         phaseX: 4.2,
         phaseY: 3.1,
         speedMul: 1.2,
@@ -97,7 +102,7 @@ export function GlobalBackground() {
         g: 40,
         b: 220,
         radius: 0.7,
-        baseOpacity: 0.09,
+        baseOpacity: 0.09 * opacityMul,
         phaseX: 1.5,
         phaseY: 4.8,
         speedMul: 0.6,
@@ -110,11 +115,11 @@ export function GlobalBackground() {
         z: 1.2,
         vx: 0.00006,
         vy: -0.00005,
-        r: 0,
-        g: 200,
+        r: isLight ? 80 : 0,
+        g: isLight ? 160 : 200,
         b: 255,
         radius: 0.45,
-        baseOpacity: 0.13,
+        baseOpacity: 0.13 * opacityMul,
         phaseX: 3.0,
         phaseY: 2.0,
         speedMul: 1.4,
@@ -216,7 +221,7 @@ export function GlobalBackground() {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", resize);
     };
-  }, [prefersReducedMotion]);
+  }, [prefersReducedMotion, isLight]);
 
   return (
     <canvas

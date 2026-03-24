@@ -30,11 +30,8 @@ export default function CookieConsent() {
   });
 
   const enableAnalytics = () => {
-    // Enable Vercel Analytics and GA4
     if (typeof window !== "undefined") {
       window.localStorage.setItem("analytics-enabled", "true");
-      // Reload to activate analytics
-      window.location.reload();
     }
   };
 
@@ -86,28 +83,26 @@ export default function CookieConsent() {
 
   return (
     <div className="fixed inset-x-0 bottom-0 z-50 px-4 pb-4 sm:px-6 sm:pb-6">
-      <div className="glass-card mx-auto max-w-4xl overflow-hidden rounded-3xl border border-border shadow-2xl">
+      <div className="glass-card border-border mx-auto max-w-4xl overflow-hidden rounded-3xl border shadow-2xl">
         {!showSettings ? (
           <div className="p-6">
             <div className="flex items-start gap-4">
               <div className="flex-shrink-0">
-                <Cookie className="h-6 w-6 text-primary" />
+                <Cookie className="text-primary h-6 w-6" />
               </div>
               <div className="flex-1">
-                <h3 className="text-lg font-bold text-foreground">
-                  Respect de votre vie privée
-                </h3>
-                <p className="mt-2 text-sm text-muted-foreground">
+                <h3 className="text-foreground text-lg font-bold">Respect de votre vie privée</h3>
+                <p className="text-muted-foreground mt-2 text-sm">
                   Ce site utilise des cookies essentiels pour son fonctionnement (thème, langue) et
                   des cookies optionnels pour analyser l&apos;utilisation du site (Vercel Analytics,
                   Google Analytics). Vous pouvez accepter tous les cookies, refuser les cookies
                   optionnels, ou personnaliser vos préférences.
                 </p>
-                <p className="mt-2 text-sm text-muted-foreground">
+                <p className="text-muted-foreground mt-2 text-sm">
                   Consultez notre{" "}
                   <Link
                     href="/privacy"
-                    className="font-medium text-primary underline hover:no-underline"
+                    className="text-primary font-medium underline hover:no-underline"
                   >
                     Politique de Confidentialité
                   </Link>{" "}
@@ -116,19 +111,19 @@ export default function CookieConsent() {
                 <div className="mt-4 flex flex-wrap gap-3">
                   <button
                     onClick={acceptAll}
-                    className="rounded-2xl bg-primary px-5 py-2.5 text-sm font-bold text-white shadow-lg shadow-primary/30 transition-all duration-300 hover:shadow-xl hover:shadow-primary/50 focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-primary"
+                    className="bg-primary shadow-primary/30 hover:shadow-primary/50 focus:outline-primary rounded-2xl px-5 py-2.5 text-sm font-bold text-white shadow-lg transition-all duration-300 hover:shadow-xl focus:outline focus:outline-2 focus:outline-offset-2"
                   >
                     Accepter tout
                   </button>
                   <button
                     onClick={rejectOptional}
-                    className="rounded-2xl border border-border bg-background/50 px-5 py-2.5 text-sm font-semibold text-foreground backdrop-blur-sm transition-all duration-300 hover:bg-background focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-primary"
+                    className="border-border bg-background/50 text-foreground hover:bg-background focus:outline-primary rounded-2xl border px-5 py-2.5 text-sm font-semibold backdrop-blur-sm transition-all duration-300 focus:outline focus:outline-2 focus:outline-offset-2"
                   >
                     Refuser les cookies optionnels
                   </button>
                   <button
                     onClick={() => setShowSettings(true)}
-                    className="inline-flex items-center gap-2 rounded-2xl border border-border bg-background/50 px-5 py-2.5 text-sm font-semibold text-foreground backdrop-blur-sm transition-all duration-300 hover:bg-background focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-primary"
+                    className="border-border bg-background/50 text-foreground hover:bg-background focus:outline-primary inline-flex items-center gap-2 rounded-2xl border px-5 py-2.5 text-sm font-semibold backdrop-blur-sm transition-all duration-300 focus:outline focus:outline-2 focus:outline-offset-2"
                   >
                     <Settings className="h-4 w-4" />
                     Personnaliser
@@ -137,7 +132,7 @@ export default function CookieConsent() {
               </div>
               <button
                 onClick={rejectOptional}
-                className="flex-shrink-0 rounded-lg p-1 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                className="text-muted-foreground hover:bg-muted hover:text-foreground flex-shrink-0 rounded-lg p-1 transition-colors"
                 aria-label="Fermer"
               >
                 <X className="h-5 w-5" />
@@ -147,48 +142,50 @@ export default function CookieConsent() {
         ) : (
           <div className="p-6">
             <div className="flex items-start justify-between">
-              <h3 className="text-lg font-bold text-foreground">
-                Préférences de cookies
-              </h3>
+              <h3 className="text-foreground text-lg font-bold">Préférences de cookies</h3>
               <button
                 onClick={() => setShowSettings(false)}
-                className="rounded-lg p-1 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                className="text-muted-foreground hover:bg-muted hover:text-foreground rounded-lg p-1 transition-colors"
                 aria-label="Retour"
               >
                 <X className="h-5 w-5" />
               </button>
             </div>
             <div className="mt-4 space-y-4">
-              <div className="flex items-start gap-3 rounded-2xl border border-border bg-muted/30 p-4">
+              <div className="border-border bg-muted/30 flex items-start gap-3 rounded-2xl border p-4">
                 <input
                   type="checkbox"
                   checked={preferences.essential}
                   disabled
-                  className="mt-1 h-4 w-4 rounded border-border text-primary focus:ring-primary"
+                  className="border-border text-primary focus:ring-primary mt-1 h-4 w-4 rounded"
                 />
                 <div className="flex-1">
-                  <div className="font-semibold text-foreground">
+                  <div className="text-foreground font-semibold">
                     Cookies essentiels{" "}
-                    <span className="ml-2 text-xs font-normal text-muted-foreground">(Obligatoires)</span>
+                    <span className="text-muted-foreground ml-2 text-xs font-normal">
+                      (Obligatoires)
+                    </span>
                   </div>
-                  <p className="mt-1 text-sm text-muted-foreground">
+                  <p className="text-muted-foreground mt-1 text-sm">
                     Nécessaires au fonctionnement du site (préférences de thème et de langue).
                   </p>
                 </div>
               </div>
-              <div className="flex items-start gap-3 rounded-2xl border border-border p-4">
+              <div className="border-border flex items-start gap-3 rounded-2xl border p-4">
                 <input
                   type="checkbox"
                   checked={preferences.analytics}
                   onChange={(e) => setPreferences({ ...preferences, analytics: e.target.checked })}
-                  className="mt-1 h-4 w-4 rounded border-border text-primary focus:ring-primary"
+                  className="border-border text-primary focus:ring-primary mt-1 h-4 w-4 rounded"
                 />
                 <div className="flex-1">
-                  <div className="font-semibold text-foreground">
+                  <div className="text-foreground font-semibold">
                     Cookies analytiques{" "}
-                    <span className="ml-2 text-xs font-normal text-muted-foreground">(Optionnels)</span>
+                    <span className="text-muted-foreground ml-2 text-xs font-normal">
+                      (Optionnels)
+                    </span>
                   </div>
-                  <p className="mt-1 text-sm text-muted-foreground">
+                  <p className="text-muted-foreground mt-1 text-sm">
                     Nous permettent de comprendre comment vous utilisez le site pour
                     l&apos;améliorer (Vercel Analytics, Google Analytics 4).
                   </p>
@@ -198,13 +195,13 @@ export default function CookieConsent() {
             <div className="mt-6 flex flex-wrap gap-3">
               <button
                 onClick={savePreferences}
-                className="rounded-2xl bg-primary px-5 py-2.5 text-sm font-bold text-white shadow-lg shadow-primary/30 transition-all duration-300 hover:shadow-xl hover:shadow-primary/50 focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-primary"
+                className="bg-primary shadow-primary/30 hover:shadow-primary/50 focus:outline-primary rounded-2xl px-5 py-2.5 text-sm font-bold text-white shadow-lg transition-all duration-300 hover:shadow-xl focus:outline focus:outline-2 focus:outline-offset-2"
               >
                 Enregistrer mes préférences
               </button>
               <button
                 onClick={() => setShowSettings(false)}
-                className="rounded-2xl border border-border bg-background/50 px-5 py-2.5 text-sm font-semibold text-foreground backdrop-blur-sm transition-all duration-300 hover:bg-background focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-primary"
+                className="border-border bg-background/50 text-foreground hover:bg-background focus:outline-primary rounded-2xl border px-5 py-2.5 text-sm font-semibold backdrop-blur-sm transition-all duration-300 focus:outline focus:outline-2 focus:outline-offset-2"
               >
                 Annuler
               </button>

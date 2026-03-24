@@ -233,45 +233,57 @@
     "pricing": {
       "label": "// pricing",
       "headline": "Transparent investment",
-      "popular": "Popular",
-      "cta": "Start this project",
+      "intro": "I don't quote a serious project on a vague brief. Every collaboration starts with a scoping phase to clarify the scope, priorities, technical risks, and business objectives. Then I propose a realistic budget envelope for development, with a clear plan and no surprises.",
+      "popular": "Recommended",
+      "reassurance": "50% of the scoping fee is deducted from the final quote if we proceed with development together.",
       "plans": {
         "mvp": {
-          "name": "MVP",
-          "price": "€800",
-          "duration": "/ fixed project",
+          "name": "Discovery call",
+          "price": "Free",
+          "duration": "/ 20 min",
+          "cta": "Book a call",
           "features": [
-            "Complete web application",
-            "User authentication",
-            "Database + API",
-            "Deployment included",
-            "14 days of support"
+            "First exchange to understand your need",
+            "Project & expertise fit validation",
+            "Technical and product challenge identification",
+            "Recommendation on the best next step"
           ]
         },
         "saas": {
-          "name": "Full SaaS",
-          "price": "€3,000",
-          "duration": "/ fixed project",
+          "name": "Strategic & technical scoping",
+          "price": "from €690",
+          "duration": "/ short engagement",
+          "cta": "Book a scoping session",
           "features": [
-            "Everything in MVP +",
-            "Stripe payments & subscriptions",
-            "Admin dashboard",
-            "Third-party integrations (AI, email...)",
-            "30 days of support"
+            "In-depth scoping workshop",
+            "MVP scope clarification",
+            "Recommended architecture",
+            "Priority & risk breakdown",
+            "Budget envelope and estimated timeline"
           ]
         },
         "consulting": {
-          "name": "Consulting",
-          "price": "€80",
+          "name": "Advisory & fractional CTO",
+          "price": "€110",
           "duration": "/ hour",
+          "cta": "Book a slot",
           "features": [
             "Technical audit & code review",
-            "Architecture & stack advice",
+            "Architecture & stack choices",
             "Sprint unblocking",
-            "Mentoring & training",
-            "Flexible availability"
+            "API / Stripe / AI / performance review",
+            "Product & delivery coaching"
           ]
         }
+      },
+      "envelopes": {
+        "title": "Indicative build budgets, after scoping",
+        "note": "Final budget depends on exact scope, level of polish, third-party integrations, data constraints, and deadlines.",
+        "items": [
+          "Business MVP: €4,000 – €8,000",
+          "Full SaaS: €8,000 – €15,000+",
+          "AI & automation: €6,000 – €18,000+"
+        ]
       }
     }
   },

@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { useTranslation } from "@/lib/i18n/useLanguage";
 import LanguageSwitcher from "@/components/ui/LanguageSwitcher";
+import ThemeToggle from "@/components/ui/ThemeToggle";
 
 const navigation = [
   { key: "navigation.about", href: "#about" },
@@ -71,19 +72,16 @@ export default function Header() {
     return () => observer.disconnect();
   }, []);
 
-  const handleNavClick = useCallback(
-    (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-      e.preventDefault();
-      smoothScrollTo(href);
-      setActiveSection(href);
-    },
-    []
-  );
+  const handleNavClick = useCallback((e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    smoothScrollTo(href);
+    setActiveSection(href);
+  }, []);
 
   return (
     <>
       <header
-        className="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
+        className="fixed top-0 right-0 left-0 z-50 transition-all duration-500"
         style={{
           opacity: scrolled ? 1 : 0,
           transform: scrolled ? "translateY(0)" : "translateY(-100%)",
@@ -93,10 +91,10 @@ export default function Header() {
         <nav
           className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 md:px-6 md:py-4 lg:px-16"
           style={{
-            background: "rgba(5,5,6,0.85)",
+            background: "var(--nav-bg)",
             backdropFilter: "blur(20px)",
             WebkitBackdropFilter: "blur(20px)",
-            borderBottom: "1px solid rgba(255,255,255,0.06)",
+            borderBottom: "1px solid var(--nav-border)",
           }}
           aria-label="Main navigation"
         >
@@ -104,7 +102,8 @@ export default function Header() {
           <a
             href="#hero"
             onClick={(e) => handleNavClick(e, "#hero")}
-            className="font-cormorant text-xl font-bold text-white transition-opacity hover:opacity-80"
+            className="font-cormorant text-xl font-bold transition-opacity hover:opacity-80"
+            style={{ color: "var(--t-primary)" }}
           >
             RS
             <span style={{ color: "#00D4FF" }}>.</span>
@@ -117,20 +116,15 @@ export default function Header() {
                 key={item.href}
                 href={item.href}
                 onClick={(e) => handleNavClick(e, item.href)}
-                className="font-mono text-[11px] uppercase tracking-[0.15em] transition-colors duration-200"
+                className="font-mono text-[11px] tracking-[0.15em] uppercase transition-colors duration-200"
                 style={{
-                  color:
-                    activeSection === item.href
-                      ? "rgba(0,212,255,0.9)"
-                      : "rgba(255,255,255,0.35)",
+                  color: activeSection === item.href ? "var(--nav-active)" : "var(--nav-text)",
                 }}
                 onMouseEnter={(e) => {
-                  if (activeSection !== item.href)
-                    e.currentTarget.style.color = "rgba(255,255,255,0.7)";
+                  if (activeSection !== item.href) e.currentTarget.style.color = "var(--t-primary)";
                 }}
                 onMouseLeave={(e) => {
-                  if (activeSection !== item.href)
-                    e.currentTarget.style.color = "rgba(255,255,255,0.35)";
+                  if (activeSection !== item.href) e.currentTarget.style.color = "var(--nav-text)";
                 }}
               >
                 {t(item.key)}
@@ -140,6 +134,7 @@ export default function Header() {
 
           {/* Right controls */}
           <div className="flex items-center gap-4">
+            <ThemeToggle />
             <LanguageSwitcher />
 
             {/* Mobile hamburger */}
@@ -150,12 +145,28 @@ export default function Header() {
               aria-label="Toggle menu"
             >
               {mobileMenuOpen ? (
-                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
+                <svg
+                  className="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                >
                   <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                 </svg>
               ) : (
-                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 9h16.5m-16.5 6.75h16.5" />
+                <svg
+                  className="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M3.75 9h16.5m-16.5 6.75h16.5"
+                  />
                 </svg>
               )}
             </button>
@@ -173,12 +184,17 @@ export default function Header() {
           <div
             className="fixed inset-y-0 right-0 z-50 w-full max-w-xs overflow-y-auto p-6"
             style={{
-              background: "rgba(5,5,6,0.96)",
-              borderLeft: "1px solid rgba(255,255,255,0.06)",
+              background: "var(--nav-bg)",
+              backdropFilter: "blur(24px)",
+              WebkitBackdropFilter: "blur(24px)",
+              borderLeft: "1px solid var(--nav-border)",
             }}
           >
             <div className="mb-10 flex items-center justify-between">
-              <span className="font-cormorant text-xl font-bold text-white">
+              <span
+                className="font-cormorant text-xl font-bold"
+                style={{ color: "var(--t-primary)" }}
+              >
                 RS<span style={{ color: "#00D4FF" }}>.</span>
               </span>
               <button
@@ -187,7 +203,13 @@ export default function Header() {
                 onClick={() => setMobileMenuOpen(false)}
                 aria-label="Close menu"
               >
-                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
+                <svg
+                  className="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                >
                   <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </button>
@@ -200,10 +222,7 @@ export default function Header() {
                   href={item.href}
                   className="block rounded-lg px-4 py-3 font-mono text-sm tracking-wide transition-colors"
                   style={{
-                    color:
-                      activeSection === item.href
-                        ? "rgba(0,212,255,0.9)"
-                        : "rgba(255,255,255,0.5)",
+                    color: activeSection === item.href ? "var(--nav-active)" : "var(--nav-text)",
                   }}
                   onClick={(e) => {
                     handleNavClick(e, item.href);

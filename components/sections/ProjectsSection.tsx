@@ -4,7 +4,6 @@ import { ArrowUpRight } from "lucide-react";
 import { motion, useInView, useReducedMotion } from "framer-motion";
 import { useRef } from "react";
 import { NumberTicker } from "@/components/ui/magic/NumberTicker";
-import { BorderBeam } from "@/components/ui/magic/BorderBeam";
 import { SectionDivider } from "@/components/ui/magic/SectionDivider";
 import { AnimatedBrowser } from "@/components/ui/magic/AnimatedBrowser";
 import { FacturxMockup } from "@/components/ui/magic/FacturxMockup";
@@ -89,24 +88,21 @@ function ProjectCard({
     <motion.div
       className="relative overflow-hidden rounded-3xl"
       style={{
-        border: "1px solid rgba(255,255,255,0.06)",
-        background: "rgba(255,255,255,0.015)",
+        background: "var(--card-bg)",
+        backdropFilter: "var(--card-backdrop)",
+        WebkitBackdropFilter: "var(--card-backdrop)",
+        border: "1px solid var(--card-border)",
+        borderTop: "1px solid var(--card-border-top)",
+        boxShadow: "var(--card-shadow)",
       }}
       initial={prefersReducedMotion ? {} : { opacity: 0, y: 48, scale: 0.97 }}
       whileInView={prefersReducedMotion ? {} : { opacity: 1, y: 0, scale: 1 }}
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: dur(0.65), delay: del(index * 0.1), ease: [0.16, 1, 0.3, 1] }}
     >
-      <BorderBeam
-        size={220}
-        duration={14 + index * 2}
-        colorFrom={project.accentColor}
-        colorTo={project.secondaryColor}
-      />
-
       <div className="grid lg:grid-cols-2">
         {/* Left: content */}
-        <div className="order-2 flex flex-col justify-between p-10 sm:p-14 lg:order-1">
+        <div className="relative order-2 flex flex-col justify-between p-10 sm:p-14 lg:order-1">
           <div>
             {/* Project header */}
             <div className="mb-8 flex items-center gap-4">
@@ -119,7 +115,10 @@ function ProjectCard({
               <div className="h-px flex-1" style={{ background: "rgba(255,255,255,0.05)" }} />
             </div>
 
-            <h3 className="mb-2 text-2xl font-semibold break-all text-white/90 sm:text-3xl sm:break-normal">
+            <h3
+              className="mb-2 text-2xl font-semibold break-all sm:text-3xl sm:break-normal"
+              style={{ color: "var(--t-primary)" }}
+            >
               {project.name}
             </h3>
 
@@ -130,10 +129,7 @@ function ProjectCard({
               {t(`projects.${project.translationKey}.tagline`)}
             </p>
 
-            <p
-              className="mb-10 max-w-md text-sm leading-7"
-              style={{ color: "rgba(240,238,233,0.42)" }}
-            >
+            <p className="mb-10 max-w-md text-sm leading-7" style={{ color: "var(--t-secondary)" }}>
               {t(`projects.${project.translationKey}.description`)}
             </p>
 
@@ -160,7 +156,10 @@ function ProjectCard({
             <div className="mb-10 flex flex-wrap gap-8 sm:gap-10">
               {project.results.map((r) => (
                 <div key={r.key}>
-                  <div className="font-mono text-2xl font-bold text-white sm:text-3xl">
+                  <div
+                    className="font-mono text-2xl font-bold sm:text-3xl"
+                    style={{ color: "var(--t-primary)" }}
+                  >
                     {isInView ? (
                       <NumberTicker
                         value={r.value}
@@ -173,7 +172,7 @@ function ProjectCard({
                   </div>
                   <div
                     className="mt-1.5 font-mono text-[10px] tracking-wide uppercase"
-                    style={{ color: "rgba(255,255,255,0.22)" }}
+                    style={{ color: "var(--t-muted)" }}
                   >
                     {t(r.key)}
                   </div>
@@ -232,15 +231,6 @@ function ProjectCard({
           className="relative order-1 flex h-[360px] items-center justify-center p-10 lg:order-2 lg:h-auto lg:p-14"
           style={{ background: "rgba(255,255,255,0.01)" }}
         >
-          {/* Ambient glow */}
-          <div
-            aria-hidden="true"
-            className="absolute inset-0 opacity-40"
-            style={{
-              background: `radial-gradient(ellipse at 60% 50%, ${project.accentColor}14 0%, transparent 60%)`,
-            }}
-          />
-
           <div className="relative w-full max-w-lg">
             <AnimatedBrowser
               url={project.url.replace("https://", "").replace("www.", "")}
@@ -302,7 +292,7 @@ export default function ProjectsSection() {
           </div>
           <h2
             className="font-cormorant text-4xl font-bold sm:text-5xl lg:text-6xl"
-            style={{ color: "#F0EEE9" }}
+            style={{ color: "var(--t-primary)" }}
           >
             {t("projects.headline")}
           </h2>

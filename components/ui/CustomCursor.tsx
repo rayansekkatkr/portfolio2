@@ -17,11 +17,7 @@ export function CustomCursor() {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
-  // Ring follows with spring lag — the "premium" feel
-  const ringX = useSpring(mouseX, { damping: 26, stiffness: 160 });
-  const ringY = useSpring(mouseY, { damping: 26, stiffness: 160 });
-
-  // Dot snaps instantly
+  // Both ring and dot follow instantly
   const dotX = useSpring(mouseX, { damping: 50, stiffness: 600 });
   const dotY = useSpring(mouseY, { damping: 50, stiffness: 600 });
 
@@ -35,29 +31,23 @@ export function CustomCursor() {
     };
     const onLeave = () => setIsVisible(false);
     const onEnter = () => setIsVisible(true);
+    const onOver = (e: MouseEvent) => {
+      const hit = (e.target as Element)?.closest(
+        "a, button, [role='button'], label, input, textarea, select"
+      );
+      setIsHovering(!!hit);
+    };
 
     window.addEventListener("mousemove", onMove);
     document.documentElement.addEventListener("mouseleave", onLeave);
     document.documentElement.addEventListener("mouseenter", onEnter);
-
-    const attachHover = () => {
-      document
-        .querySelectorAll("a, button, [role='button'], label, input, textarea, select")
-        .forEach((el) => {
-          el.addEventListener("mouseenter", () => setIsHovering(true));
-          el.addEventListener("mouseleave", () => setIsHovering(false));
-        });
-    };
-    attachHover();
-
-    const observer = new MutationObserver(attachHover);
-    observer.observe(document.body, { childList: true, subtree: true });
+    document.addEventListener("mouseover", onOver);
 
     return () => {
       window.removeEventListener("mousemove", onMove);
       document.documentElement.removeEventListener("mouseleave", onLeave);
       document.documentElement.removeEventListener("mouseenter", onEnter);
-      observer.disconnect();
+      document.removeEventListener("mouseover", onOver);
     };
   }, [isTouchDevice, mouseX, mouseY]);
 
@@ -69,8 +59,8 @@ export function CustomCursor() {
       <motion.div
         className="pointer-events-none fixed top-0 left-0 z-[99999] rounded-full"
         style={{
-          x: ringX,
-          y: ringY,
+          x: mouseX,
+          y: mouseY,
           translateX: "-50%",
           translateY: "-50%",
           opacity: isVisible ? 1 : 0,
@@ -112,7 +102,7 @@ export function CustomCursor() {
           translateY: "-50%",
           width: isHovering ? 5 : 4,
           height: isHovering ? 5 : 4,
-          background: isHovering ? "#00D4FF" : "rgba(255,255,255,0.9)",
+          background: isHovering ? "#00D4FF" : "rgba(0,212,255,0.6)",
           opacity: isVisible ? 1 : 0,
           transition: "width 0.2s, height 0.2s, background 0.2s, opacity 0.3s",
         }}

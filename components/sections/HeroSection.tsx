@@ -60,21 +60,21 @@ export default function HeroSection() {
         <div
           className="absolute inset-0"
           style={{
-            background: "radial-gradient(ellipse at 50% 50%, transparent 40%, #050506 100%)",
+            background: "radial-gradient(ellipse at 50% 50%, transparent 40%, var(--page-bg) 100%)",
           }}
         />
         {/* Bottom fade */}
         <div
           className="absolute inset-0"
           style={{
-            background: "linear-gradient(to top, #050506 0%, transparent 35%)",
+            background: "linear-gradient(to top, var(--page-bg) 0%, transparent 35%)",
           }}
         />
         {/* Top fade */}
         <div
           className="absolute inset-0"
           style={{
-            background: "linear-gradient(to bottom, #050506 0%, transparent 20%)",
+            background: "linear-gradient(to bottom, var(--page-bg) 0%, transparent 20%)",
           }}
         />
       </div>
@@ -118,8 +118,8 @@ export default function HeroSection() {
           <div className="overflow-hidden" style={{ perspective: "600px" }}>
             <motion.h1
               {...charReveal(0.12)}
-              className="font-cormorant leading-[0.82] font-bold tracking-[-0.02em] text-white"
-              style={{ fontSize: "clamp(3rem, 13vw, 13rem)" }}
+              className="font-cormorant leading-[0.82] font-bold tracking-[-0.02em]"
+              style={{ fontSize: "clamp(3rem, 13vw, 13rem)", color: "var(--t-primary)" }}
             >
               RAYAN
             </motion.h1>
@@ -129,8 +129,8 @@ export default function HeroSection() {
           <div className="overflow-hidden" style={{ perspective: "600px" }}>
             <motion.div {...charReveal(0.22)} className="flex items-baseline gap-0 leading-[0.82]">
               <h1
-                className="font-cormorant font-bold tracking-[-0.02em] text-white"
-                style={{ fontSize: "clamp(3rem, 13vw, 13rem)" }}
+                className="font-cormorant font-bold tracking-[-0.02em]"
+                style={{ fontSize: "clamp(3rem, 13vw, 13rem)", color: "var(--t-primary)" }}
               >
                 SEKKAT
               </h1>
@@ -154,8 +154,8 @@ export default function HeroSection() {
             <div
               className="flex items-center gap-3 rounded-full border px-5 py-2.5 backdrop-blur-md"
               style={{
-                borderColor: "rgba(255,255,255,0.06)",
-                background: "rgba(255,255,255,0.02)",
+                borderColor: "var(--pill-border)",
+                background: "var(--pill-bg)",
               }}
             >
               <div className="h-6 w-px" style={{ background: "rgba(0,212,255,0.3)" }} />
@@ -187,7 +187,7 @@ export default function HeroSection() {
             </p>
             <p
               className="max-w-md text-base leading-relaxed md:text-lg"
-              style={{ color: "rgba(240,238,233,0.45)" }}
+              style={{ color: "var(--t-secondary)" }}
             >
               {t("hero.description")}
             </p>
@@ -200,7 +200,7 @@ export default function HeroSection() {
                 href="#contact"
                 background="#00D4FF"
                 shimmerColor="rgba(255,255,255,0.2)"
-                className="group inline-flex items-center gap-2.5 px-8 py-4 text-sm font-bold text-[#050506] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+                className="group px-8 py-4 text-sm font-bold text-[#050506] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
               >
                 {t("hero.cta.primary")}
                 <ArrowRight
@@ -215,17 +215,15 @@ export default function HeroSection() {
                 href="#projects"
                 className="group inline-flex items-center justify-center gap-2.5 rounded-full border px-8 py-4 text-sm font-medium transition-all duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
                 style={{
-                  borderColor: "rgba(255,255,255,0.1)",
-                  color: "rgba(240,238,233,0.55)",
+                  borderColor: "var(--section-line)",
+                  color: "var(--t-secondary)",
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = "rgba(0,212,255,0.25)";
-                  e.currentTarget.style.color = "rgba(240,238,233,1)";
-                  e.currentTarget.style.background = "rgba(0,212,255,0.04)";
+                  e.currentTarget.style.borderColor = "rgba(0,212,255,0.35)";
+                  e.currentTarget.style.background = "rgba(0,212,255,0.06)";
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)";
-                  e.currentTarget.style.color = "rgba(240,238,233,0.55)";
+                  e.currentTarget.style.borderColor = "";
                   e.currentTarget.style.background = "transparent";
                 }}
               >
@@ -254,10 +252,7 @@ export default function HeroSection() {
             {t("hero.saasProduction")}
           </span>
 
-          <div
-            className="hidden h-3 w-px sm:block"
-            style={{ background: "rgba(255,255,255,0.08)" }}
-          />
+          <div className="hidden h-3 w-px sm:block" style={{ background: "var(--section-line)" }} />
 
           {/* GitHub */}
           <a
@@ -266,17 +261,15 @@ export default function HeroSection() {
             rel="noopener noreferrer"
             className="group inline-flex items-center gap-2 rounded-full border px-4 py-1.5 font-mono text-[10px] tracking-wide transition-all duration-200"
             style={{
-              borderColor: "rgba(255,255,255,0.07)",
-              color: "rgba(255,255,255,0.3)",
-              background: "rgba(255,255,255,0.015)",
+              borderColor: "var(--pill-border)",
+              color: "var(--t-secondary)",
+              background: "var(--pill-bg)",
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.borderColor = "rgba(255,255,255,0.15)";
-              e.currentTarget.style.color = "rgba(255,255,255,0.7)";
+              e.currentTarget.style.borderColor = "rgba(0,212,255,0.3)";
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.borderColor = "rgba(255,255,255,0.07)";
-              e.currentTarget.style.color = "rgba(255,255,255,0.3)";
+              e.currentTarget.style.borderColor = "";
             }}
           >
             <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -292,17 +285,15 @@ export default function HeroSection() {
             rel="noopener noreferrer"
             className="group inline-flex items-center gap-2 rounded-full border px-4 py-1.5 font-mono text-[10px] tracking-wide transition-all duration-200"
             style={{
-              borderColor: "rgba(255,255,255,0.07)",
-              color: "rgba(255,255,255,0.3)",
-              background: "rgba(255,255,255,0.015)",
+              borderColor: "var(--pill-border)",
+              color: "var(--t-secondary)",
+              background: "var(--pill-bg)",
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.borderColor = "rgba(10,102,194,0.3)";
-              e.currentTarget.style.color = "rgba(255,255,255,0.7)";
+              e.currentTarget.style.borderColor = "rgba(10,102,194,0.4)";
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.borderColor = "rgba(255,255,255,0.07)";
-              e.currentTarget.style.color = "rgba(255,255,255,0.3)";
+              e.currentTarget.style.borderColor = "";
             }}
           >
             <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -316,14 +307,14 @@ export default function HeroSection() {
         <motion.div
           {...fadeUp(0.8)}
           className="mt-10 flex items-center gap-8 border-t pt-6 md:mt-16"
-          style={{ borderColor: "rgba(255,255,255,0.05)" }}
+          style={{ borderColor: "var(--section-line)" }}
         >
           <div className="hidden items-center gap-6 lg:flex">
             {["Next.js", "React", "TypeScript", "Python", "AI"].map((tech, i) => (
               <span
                 key={tech}
                 className="flex items-center gap-4 font-mono text-[11px] tracking-wide"
-                style={{ color: "rgba(255,255,255,0.16)" }}
+                style={{ color: "var(--t-muted)" }}
               >
                 {tech}
                 {i < 4 && (
@@ -336,26 +327,6 @@ export default function HeroSection() {
               </span>
             ))}
           </div>
-
-          {/* Scroll indicator */}
-          <motion.div
-            className="ml-auto flex items-center gap-3"
-            animate={prefersReducedMotion ? {} : { y: [0, 4, 0] }}
-            transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-          >
-            <span
-              className="font-mono text-[10px] tracking-widest uppercase"
-              style={{ color: "rgba(255,255,255,0.12)" }}
-            >
-              {t("hero.location")}
-            </span>
-            <div
-              className="h-8 w-px"
-              style={{
-                background: "linear-gradient(to bottom, rgba(0,212,255,0.3), transparent)",
-              }}
-            />
-          </motion.div>
         </motion.div>
       </motion.div>
     </section>

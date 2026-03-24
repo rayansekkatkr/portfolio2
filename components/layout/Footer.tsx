@@ -33,15 +33,21 @@ export default function Footer() {
   const { t } = useTranslation();
 
   return (
-    <footer className="border-t border-white/[0.04]" role="contentinfo">
-      <div className="py-20 px-6 lg:px-16 max-w-6xl mx-auto">
+    <footer className="border-t" style={{ borderColor: "var(--footer-border)" }} role="contentinfo">
+      <div className="mx-auto max-w-6xl px-6 py-20 lg:px-16">
         {/* Top: monogram + social */}
-        <div className="flex flex-col gap-8 sm:flex-row sm:items-start sm:justify-between mb-14">
+        <div className="mb-14 flex flex-col gap-8 sm:flex-row sm:items-start sm:justify-between">
           <div>
-            <span className="font-cormorant font-bold text-3xl text-white">
+            <span
+              className="font-cormorant text-3xl font-bold"
+              style={{ color: "var(--t-primary)" }}
+            >
               RS<span style={{ color: "#00D4FF" }}>.</span>
             </span>
-            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/20 mt-2 max-w-xs leading-relaxed">
+            <p
+              className="mt-2 max-w-xs font-mono text-[10px] leading-relaxed tracking-[0.2em] uppercase"
+              style={{ color: "var(--footer-text)" }}
+            >
               {t("footer.tagline")}
             </p>
           </div>
@@ -56,7 +62,8 @@ export default function Footer() {
                   target={link.href.startsWith("mailto") ? undefined : "_blank"}
                   rel={link.href.startsWith("mailto") ? undefined : "noopener noreferrer"}
                   aria-label={link.name}
-                  className="group h-10 w-10 rounded-full border border-white/[0.06] flex items-center justify-center text-white/25 hover:border-[#00D4FF]/25 hover:text-[#00D4FF]/70 hover:bg-[rgba(0,212,255,0.03)] transition-all duration-300"
+                  className="group flex h-10 w-10 items-center justify-center rounded-full transition-all duration-300 hover:border-[#00D4FF]/25 hover:bg-[rgba(0,212,255,0.03)] hover:text-[#00D4FF]/70"
+                  style={{ border: "1px solid var(--card-border)", color: "var(--footer-text)" }}
                 >
                   <Icon className="h-4 w-4" />
                 </a>
@@ -66,12 +73,13 @@ export default function Footer() {
         </div>
 
         {/* Nav */}
-        <div className="flex flex-wrap gap-x-8 gap-y-3 mb-14">
+        <div className="mb-14 flex flex-wrap gap-x-8 gap-y-3">
           {NAV_KEYS.map((link) => (
             <a
               key={link.key}
               href={link.href}
-              className="font-mono text-[10px] uppercase tracking-[0.15em] text-white/25 hover:text-white/55 transition-colors duration-300"
+              className="font-mono text-[10px] tracking-[0.15em] uppercase transition-colors duration-300 hover:opacity-75"
+              style={{ color: "var(--footer-text)" }}
             >
               {t(link.key)}
             </a>
@@ -80,13 +88,13 @@ export default function Footer() {
 
         {/* Bottom - premium divider */}
         <div
-          className="border-t pt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between"
-          style={{ borderColor: "rgba(255,255,255,0.04)" }}
+          className="flex flex-col gap-3 border-t pt-8 sm:flex-row sm:items-center sm:justify-between"
+          style={{ borderColor: "var(--footer-border)" }}
         >
-          <p className="font-mono text-[10px] text-white/15">
+          <p className="font-mono text-[10px]" style={{ color: "var(--footer-text)" }}>
             &copy; {currentYear} {t("footer.copyright")}
           </p>
-          <p className="font-mono text-[10px] text-white/15">
+          <p className="font-mono text-[10px]" style={{ color: "var(--footer-text)" }}>
             {t("footer.builtWith")}
           </p>
         </div>

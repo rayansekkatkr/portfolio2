@@ -58,7 +58,7 @@ export default function AboutSection() {
           <div className="flex-1">
             <motion.h2
               className="font-cormorant mb-6 max-w-3xl text-4xl font-bold sm:text-5xl lg:text-6xl"
-              style={{ color: "#F0EEE9" }}
+              style={{ color: "var(--t-primary)" }}
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: dur(0.5), delay: del(0.05) }}
@@ -76,7 +76,7 @@ export default function AboutSection() {
 
             <motion.p
               className="max-w-xl text-base leading-8"
-              style={{ color: "rgba(240,238,233,0.5)" }}
+              style={{ color: "var(--t-secondary)" }}
               initial={{ opacity: 0, y: 16 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: dur(0.5), delay: del(0.1) }}
@@ -85,58 +85,78 @@ export default function AboutSection() {
             </motion.p>
           </div>
 
-          {/* Right: avatar */}
+          {/* Right: avatar glass card */}
           <motion.div
             className="mt-10 flex-shrink-0 lg:mt-0"
-            initial={{ opacity: 0, scale: 0.92 }}
-            animate={isInView ? { opacity: 1, scale: 1 } : {}}
-            transition={{ duration: dur(0.6), delay: del(0.2) }}
+            initial={{ opacity: 0, scale: 0.94, y: 12 }}
+            animate={isInView ? { opacity: 1, scale: 1, y: 0 } : {}}
+            transition={{ duration: dur(0.65), delay: del(0.2) }}
+            whileHover={prefersReducedMotion ? {} : { y: -4, scale: 1.01 }}
           >
-            <div className="relative h-52 w-52 lg:h-60 lg:w-60">
-              {/* Glow ring */}
+            {/* Ambient glow blob behind card */}
+            <div
+              aria-hidden="true"
+              className="absolute -inset-8 rounded-3xl opacity-60"
+              style={{
+                background:
+                  "radial-gradient(ellipse at 50% 40%, rgba(0,212,255,0.18) 0%, rgba(94,58,238,0.1) 50%, transparent 75%)",
+                filter: "blur(20px)",
+              }}
+            />
+
+            {/* Glass card */}
+            <div
+              className="relative h-56 w-52 overflow-hidden rounded-3xl lg:h-64 lg:w-60"
+              style={{
+                backdropFilter: "blur(28px) saturate(160%)",
+                WebkitBackdropFilter: "blur(28px) saturate(160%)",
+                background: "var(--card-bg)",
+                boxShadow: "var(--card-shadow)",
+                border: "1px solid var(--card-border)",
+                borderTop: "1px solid var(--card-border-top)",
+              }}
+            >
+              {/* Top-left reflection — glass catching light */}
               <div
-                className="absolute inset-0 rounded-2xl"
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-x-0 top-0 h-28 rounded-t-3xl"
                 style={{
-                  background:
-                    "radial-gradient(ellipse at 40% 30%, rgba(0,212,255,0.18) 0%, transparent 70%)",
-                  filter: "blur(12px)",
+                  background: "linear-gradient(160deg, rgba(255,255,255,0.06) 0%, transparent 60%)",
                 }}
               />
-              {/* Outer border */}
-              <div
-                className="absolute inset-0 rounded-2xl"
-                style={{ border: "1px solid rgba(0,212,255,0.18)" }}
+
+              {/* Photo — PNG with transparent background */}
+              <Image
+                src="/images/profile.png"
+                alt="Rayan Sekkat"
+                fill
+                className="object-cover object-top"
+                style={{ filter: "contrast(1.02) saturate(0.92)" }}
+                sizes="(max-width: 1024px) 208px, 240px"
+                priority
               />
-              {/* Photo */}
-              <div className="relative h-full w-full overflow-hidden rounded-2xl">
-                <Image
-                  src="/avatar.jpg"
-                  alt="Rayan Sekkat"
-                  fill
-                  className="object-cover object-top"
-                  style={{ filter: "contrast(1.05) saturate(0.85)" }}
-                  sizes="(max-width: 1024px) 208px, 240px"
-                  priority
-                />
-                {/* Subtle dark overlay on bottom for depth */}
-                <div
-                  className="absolute inset-0"
-                  style={{
-                    background: "linear-gradient(to top, rgba(5,5,6,0.3) 0%, transparent 50%)",
-                  }}
-                />
-              </div>
-              {/* Name tag */}
+
+              {/* Bottom gradient fade */}
               <div
-                className="absolute -bottom-3 left-1/2 -translate-x-1/2 rounded-full px-4 py-1.5 font-mono text-[10px] tracking-widest whitespace-nowrap uppercase"
+                className="absolute inset-x-0 bottom-0 h-20"
                 style={{
-                  background: "rgba(5,5,6,0.9)",
-                  border: "1px solid rgba(0,212,255,0.15)",
-                  color: "rgba(0,212,255,0.7)",
+                  background: "linear-gradient(to top, rgba(5,5,6,0.55) 0%, transparent 100%)",
+                }}
+              />
+
+              {/* Name badge inside card at bottom */}
+              <div
+                className="absolute bottom-3 left-1/2 -translate-x-1/2 rounded-full px-4 py-1.5 font-mono text-[9px] tracking-widest whitespace-nowrap uppercase"
+                style={{
+                  background: "var(--card-bg)",
+                  border: "1px solid var(--card-border)",
+                  borderTop: "1px solid var(--card-border-top)",
+                  color: "var(--t-secondary)",
                   backdropFilter: "blur(8px)",
+                  WebkitBackdropFilter: "blur(8px)",
                 }}
               >
-                Rayan Sekkat · Full-Stack Engineer
+                Rayan Sekkat · Full-Stack
               </div>
             </div>
           </motion.div>
@@ -145,7 +165,7 @@ export default function AboutSection() {
         {/* Stats row - premium card style */}
         <motion.div
           className="mb-24 grid grid-cols-2 gap-px overflow-hidden rounded-2xl lg:grid-cols-4"
-          style={{ background: "rgba(255,255,255,0.05)" }}
+          style={{ background: "var(--stats-gap)" }}
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: dur(0.5), delay: del(0.15) }}
@@ -154,7 +174,7 @@ export default function AboutSection() {
             <div
               key={stat.key}
               className="group relative p-8 text-center transition-colors duration-300 sm:p-10"
-              style={{ background: "rgba(5,5,6,0.95)" }}
+              style={{ background: "var(--stats-bg)" }}
             >
               {/* Hover glow */}
               <div
@@ -166,7 +186,10 @@ export default function AboutSection() {
                 }}
               />
               <div className="relative">
-                <div className="mb-2 font-mono text-3xl font-bold text-white sm:text-4xl">
+                <div
+                  className="mb-2 font-mono text-3xl font-bold sm:text-4xl"
+                  style={{ color: "var(--t-primary)" }}
+                >
                   {isInView ? (
                     <NumberTicker value={stat.value} suffix={stat.suffix} />
                   ) : (
@@ -175,7 +198,7 @@ export default function AboutSection() {
                 </div>
                 <div
                   className="font-mono text-[10px] tracking-[0.15em] uppercase"
-                  style={{ color: "rgba(255,255,255,0.3)" }}
+                  style={{ color: "var(--t-secondary)" }}
                 >
                   {t(stat.key)}
                 </div>
@@ -196,7 +219,7 @@ export default function AboutSection() {
             <motion.div
               key={num}
               className="group grid gap-4 border-t py-12 transition-all duration-300 md:grid-cols-[5rem_1fr_2fr] md:items-start md:gap-8"
-              style={{ borderColor: "rgba(255,255,255,0.05)" }}
+              style={{ borderColor: "var(--section-line)" }}
               initial={{ opacity: 0, y: 16 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{
@@ -213,14 +236,14 @@ export default function AboutSection() {
 
               <h3
                 className="text-xl font-semibold transition-colors duration-300 group-hover:text-[#00D4FF]"
-                style={{ color: "rgba(240,238,233,0.9)" }}
+                style={{ color: "var(--t-primary)" }}
               >
                 {t(`about.expertise.${num}.title`)}
               </h3>
 
               <p
-                className="text-sm leading-7 transition-colors duration-300 group-hover:text-white/50"
-                style={{ color: "rgba(240,238,233,0.35)" }}
+                className="text-sm leading-7 transition-colors duration-300 group-hover:text-white/60"
+                style={{ color: "var(--t-secondary)" }}
               >
                 {t(`about.expertise.${num}.desc`)}
               </p>
@@ -247,8 +270,8 @@ export default function AboutSection() {
             <div
               className="relative overflow-hidden rounded-2xl p-8 sm:p-10"
               style={{
-                border: "1px solid rgba(255,255,255,0.05)",
-                background: "rgba(255,255,255,0.015)",
+                border: "1px solid var(--section-line)",
+                background: "var(--pill-bg)",
               }}
             >
               {/* Giant quote mark */}
@@ -261,15 +284,15 @@ export default function AboutSection() {
               </span>
               <p
                 className="relative mb-6 max-w-2xl text-base leading-8 sm:text-lg"
-                style={{ color: "rgba(240,238,233,0.65)" }}
+                style={{ color: "var(--t-primary)" }}
               >
                 {t("about.testimonial.quote")}
               </p>
               <p
                 className="font-mono text-[10px] tracking-widest uppercase"
-                style={{ color: "rgba(255,255,255,0.22)" }}
+                style={{ color: "var(--t-muted)" }}
               >
-                — {t("about.testimonial.author")}
+                {t("about.testimonial.author")}
               </p>
             </div>
           </GlowCard>

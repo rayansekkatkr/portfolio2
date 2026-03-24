@@ -64,14 +64,14 @@ export default function SkillsSection() {
       {/* Tech marquee - cinematic ticker */}
       <div
         className="mb-24 overflow-hidden border-y py-4"
-        style={{ borderColor: "rgba(255,255,255,0.04)" }}
+        style={{ borderColor: "var(--marquee-border)" }}
       >
         <Marquee className="[--duration:25s] [--gap:3rem]" pauseOnHover>
           {TECH_STACK.map((tech) => (
             <span
               key={tech}
               className="flex items-center gap-4 px-6 font-mono text-[11px] tracking-[0.2em] uppercase select-none"
-              style={{ color: "rgba(255,255,255,0.12)" }}
+              style={{ color: "var(--marquee-text)" }}
             >
               <span>{tech}</span>
               <span
@@ -104,7 +104,7 @@ export default function SkillsSection() {
         {/* Heading */}
         <motion.h2
           className="font-cormorant mb-20 text-4xl font-bold sm:text-5xl lg:text-6xl"
-          style={{ color: "#F0EEE9" }}
+          style={{ color: "var(--t-primary)" }}
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: dur(0.5), delay: del(0.05) }}
@@ -129,16 +129,28 @@ export default function SkillsSection() {
                   glowColor={service.featured ? "rgba(0,212,255,0.12)" : "rgba(0,212,255,0.08)"}
                 >
                   <div
-                    className="relative h-full rounded-2xl p-8 sm:p-9"
+                    className="relative h-full overflow-hidden rounded-2xl p-8 sm:p-9"
                     style={{
-                      border: service.featured
-                        ? "1px solid rgba(0,212,255,0.15)"
-                        : "1px solid rgba(255,255,255,0.05)",
-                      background: service.featured
-                        ? "rgba(0,212,255,0.02)"
-                        : "rgba(255,255,255,0.015)",
+                      background: "var(--card-bg)",
+                      backdropFilter: "var(--card-backdrop)",
+                      WebkitBackdropFilter: "var(--card-backdrop)",
+                      border: "1px solid var(--card-border)",
+                      borderTop: service.featured
+                        ? "1px solid rgba(0,212,255,0.28)"
+                        : "1px solid var(--card-border-top)",
+                      boxShadow: "var(--card-shadow)",
                     }}
                   >
+                    {/* Top reflection gradient — simulates glass catching light */}
+                    <div
+                      aria-hidden="true"
+                      className="pointer-events-none absolute inset-x-0 top-0 h-24 rounded-t-2xl"
+                      style={{
+                        background: service.featured
+                          ? "linear-gradient(to bottom, rgba(0,212,255,0.04) 0%, transparent 100%)"
+                          : "linear-gradient(to bottom, rgba(255,255,255,0.04) 0%, transparent 100%)",
+                      }}
+                    />
                     {/* Featured badge */}
                     {service.featured && (
                       <span
@@ -154,7 +166,7 @@ export default function SkillsSection() {
                       <Icon
                         className="h-7 w-7"
                         style={{
-                          color: service.featured ? "rgba(0,212,255,0.7)" : "rgba(255,255,255,0.3)",
+                          color: service.featured ? "rgba(0,212,255,0.85)" : "var(--t-secondary)",
                         }}
                         strokeWidth={1.5}
                       />
@@ -169,15 +181,12 @@ export default function SkillsSection() {
 
                     <h3
                       className="mb-2 text-lg font-semibold"
-                      style={{ color: "rgba(255,255,255,0.88)" }}
+                      style={{ color: "var(--t-primary)" }}
                     >
                       {t(`skills.services.${service.key}.title`)}
                     </h3>
 
-                    <p
-                      className="text-sm leading-relaxed"
-                      style={{ color: "rgba(255,255,255,0.35)" }}
-                    >
+                    <p className="text-sm leading-relaxed" style={{ color: "var(--t-secondary)" }}>
                       {t(`skills.services.${service.key}.desc`)}
                     </p>
                   </div>

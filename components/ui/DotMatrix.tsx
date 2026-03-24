@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import { useReducedMotion } from "framer-motion";
 
 const FOV = 400;
-const RADIUS = 130;
+const RADIUS = 90;
 
 export function DotMatrix() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -107,8 +107,8 @@ export function DotMatrix() {
       const H = canvas.height;
       ctx.clearRect(0, 0, W, H);
 
-      smooth.x += (mouse.x - smooth.x) * 0.08;
-      smooth.y += (mouse.y - smooth.y) * 0.08;
+      smooth.x += (mouse.x - smooth.x) * 0.14;
+      smooth.y += (mouse.y - smooth.y) * 0.14;
 
       if (!isTouch) {
         tilt.x += (tilt.tx - tilt.x) * 0.05;

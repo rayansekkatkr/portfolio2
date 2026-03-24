@@ -108,7 +108,7 @@
     "liveDemo": "Demo live →",
     "project1": {
       "tagline": "SaaS / Conformite Factur-X · CEO & Seul Developpeur",
-      "description": "Concu et deploye en solo. Face a l'obligation legale d'e-facturation (norme EN 16931, Chorus Pro, echeance 2026), j'ai construit un SaaS qui convertit les factures au format Factur-X avec 99,9% de precision OCR, traitement en moins de 10s et conformite RGPD. Serveurs en France, chiffrement AES-256.",
+      "description": "Conçu et déployé seul. Face à l'obligation légale d'e-facturation (norme EN 16931, Chorus Pro, échéance 2026), j'ai construit un SaaS qui convertit les factures au format Factur-X avec 99,9% de précision OCR, traitement en moins de 10s et conformité RGPD. Serveurs en France, chiffrement AES-256.",
       "results": {
         "precision": "Precision OCR",
         "speed": "Temps de traitement (max)",
@@ -117,7 +117,7 @@
     },
     "project2": {
       "tagline": "IA / Extraction de Factures & Automatisation AP · CEO & Seul Developpeur",
-      "description": "Concu et deploye en solo. Les cabinets comptables traitaient leurs factures fournisseurs manuellement. J'ai construit une plateforme IA qui automatise 94% des factures entrantes avec 99,2% de precision d'extraction, un workflow centre sur les exceptions et des integrations natives QuickBooks, Xero et API REST. Demarrage en 1 jour.",
+      "description": "Conçu et déployé seul. Les cabinets comptables traitaient leurs factures fournisseurs manuellement. J'ai construit une plateforme IA qui automatise 94% des factures entrantes avec 99,2% de précision d'extraction, un workflow centré sur les exceptions et des intégrations natives QuickBooks, Xero et API REST. Démarrage en 1 jour.",
       "results": {
         "accuracy": "Precision d'extraction",
         "exceptions": "Exceptions seulement",
@@ -233,45 +233,57 @@
     "pricing": {
       "label": "// tarifs",
       "headline": "Investissement transparent",
-      "popular": "Populaire",
-      "cta": "Demarrer ce projet",
+      "intro": "Je ne chiffre pas un projet serieux sur un brief flou. Chaque collaboration commence par une phase de cadrage pour clarifier le perimetre, les priorites, les risques techniques et les objectifs business. Ensuite, je propose une enveloppe realiste pour le developpement, avec un plan clair et sans surprise.",
+      "popular": "Recommande",
+      "reassurance": "50% du cadrage est deduit du devis final si nous lancons le developpement ensemble.",
       "plans": {
         "mvp": {
-          "name": "MVP",
-          "price": "800€",
-          "duration": "/ projet fixe",
+          "name": "Appel decouverte",
+          "price": "Gratuit",
+          "duration": "/ 20 min",
+          "cta": "Reserver un appel",
           "features": [
-            "Application web complete",
-            "Authentification utilisateurs",
-            "Base de donnees + API",
-            "Deploiement inclus",
-            "14 jours de support"
+            "Premier echange pour comprendre votre besoin",
+            "Validation du fit projet & expertise",
+            "Identification des enjeux techniques et produit",
+            "Recommandation sur la meilleure suite"
           ]
         },
         "saas": {
-          "name": "SaaS Complet",
-          "price": "3 000€",
-          "duration": "/ projet fixe",
+          "name": "Cadrage strategique & technique",
+          "price": "a partir de 690€",
+          "duration": "/ mission courte",
+          "cta": "Reserver un cadrage",
           "features": [
-            "Tout le MVP +",
-            "Paiements Stripe & abonnements",
-            "Dashboard admin",
-            "Integrations tierces (IA, email...)",
-            "30 jours de support"
+            "Atelier de cadrage approfondi",
+            "Clarification du perimetre MVP",
+            "Architecture recommandee",
+            "Decoupe des priorites & risques",
+            "Enveloppe budgetaire et planning estimatif"
           ]
         },
         "consulting": {
-          "name": "Consulting",
-          "price": "80€",
+          "name": "Conseil & CTO ponctuel",
+          "price": "110€",
           "duration": "/ heure",
+          "cta": "Reserver un creneau",
           "features": [
             "Audit technique & code review",
-            "Architecture & conseil stack",
+            "Architecture & choix de stack",
             "Deblocage de sprint",
-            "Mentoring & formation",
-            "Disponibilite flexible"
+            "Revue API / Stripe / IA / performance",
+            "Accompagnement produit & delivery"
           ]
         }
+      },
+      "envelopes": {
+        "title": "Enveloppes indicatives apres cadrage",
+        "note": "Le budget final depend du perimetre exact, du niveau de finition, des integrations tierces, des contraintes data et des delais.",
+        "items": [
+          "MVP metier : 4 000€ – 8 000€",
+          "SaaS complet : 8 000€ – 15 000€+",
+          "IA & automatisation : 6 000€ – 18 000€+"
+        ]
       }
     }
   },

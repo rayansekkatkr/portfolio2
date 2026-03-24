@@ -1,13 +1,21 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { Mail, Linkedin, Github, Send, CheckCircle, AlertCircle, Loader2, ArrowUpRight } from "lucide-react";
+import {
+  Mail,
+  Linkedin,
+  Github,
+  Send,
+  CheckCircle,
+  AlertCircle,
+  Loader2,
+  ArrowUpRight,
+} from "lucide-react";
 import { motion, useInView, useReducedMotion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { contactSchema, type ContactFormData } from "@/lib/validations/contact";
 import { startProgress, doneProgress } from "@/components/ui/ProgressBar";
-import { BorderBeam } from "@/components/ui/magic/BorderBeam";
 import { ShimmerButton } from "@/components/ui/magic/ShimmerButton";
 import { SectionDivider } from "@/components/ui/magic/SectionDivider";
 import { useTranslation } from "@/lib/i18n/useLanguage";
@@ -75,9 +83,7 @@ export default function ContactSection() {
       console.error("Form submission error:", error);
       doneProgress();
       setSubmissionState("error");
-      setErrorMessage(
-        error instanceof Error ? error.message : "Failed to send message."
-      );
+      setErrorMessage(error instanceof Error ? error.message : "Failed to send message.");
       setTimeout(() => setSubmissionState("idle"), 5000);
     }
   };
@@ -90,12 +96,7 @@ export default function ContactSection() {
   const headlineParts = rawHeadline.split(/<accent>(.*?)<\/accent>/);
 
   return (
-    <section
-      ref={ref}
-      id="contact"
-      aria-label="Contact"
-      className="py-28 sm:py-36 px-6 lg:px-16"
-    >
+    <section ref={ref} id="contact" aria-label="Contact" className="px-6 py-28 sm:py-36 lg:px-16">
       <div className="mx-auto max-w-6xl">
         {/* Premium divider */}
         <SectionDivider className="mb-20" />
@@ -107,13 +108,10 @@ export default function ContactSection() {
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: dur(0.5), delay: del(0.1) }}
           >
-            <div className="flex items-center gap-4 mb-6">
-              <div
-                className="h-px w-8"
-                style={{ background: "rgba(0,212,255,0.4)" }}
-              />
+            <div className="mb-6 flex items-center gap-4">
+              <div className="h-px w-8" style={{ background: "rgba(0,212,255,0.4)" }} />
               <p
-                className="font-mono text-[10px] uppercase tracking-[0.25em]"
+                className="font-mono text-[10px] tracking-[0.25em] uppercase"
                 style={{ color: "rgba(0,212,255,0.55)" }}
               >
                 {t("contact.label")}
@@ -121,12 +119,14 @@ export default function ContactSection() {
             </div>
 
             <h2
-              className="font-cormorant font-bold text-4xl sm:text-5xl leading-tight mb-6"
-              style={{ color: "#F0EEE9" }}
+              className="font-cormorant mb-6 text-4xl leading-tight font-bold sm:text-5xl"
+              style={{ color: "var(--t-primary)" }}
             >
               {headlineParts.map((part, i) =>
                 i % 2 === 1 ? (
-                  <span key={i} style={{ color: "#00D4FF" }}>{part}</span>
+                  <span key={i} style={{ color: "#00D4FF" }}>
+                    {part}
+                  </span>
                 ) : (
                   <span key={i}>{part}</span>
                 )
@@ -134,8 +134,8 @@ export default function ContactSection() {
             </h2>
 
             <p
-              className="text-base leading-relaxed mb-14 max-w-md"
-              style={{ color: "rgba(240,238,233,0.38)" }}
+              className="mb-14 max-w-md text-base leading-relaxed"
+              style={{ color: "var(--t-muted)" }}
             >
               {t("contact.description")}
             </p>
@@ -150,7 +150,7 @@ export default function ContactSection() {
                     href={link.href}
                     target={link.href.startsWith("mailto") ? undefined : "_blank"}
                     rel={link.href.startsWith("mailto") ? undefined : "noopener noreferrer"}
-                    className="group flex items-center gap-5 p-4 -mx-4 rounded-xl transition-all duration-300"
+                    className="group -mx-4 flex items-center gap-5 rounded-xl p-4 transition-all duration-300"
                     style={{ background: "transparent" }}
                     onMouseEnter={(e) => {
                       e.currentTarget.style.background = "rgba(255,255,255,0.02)";
@@ -162,24 +162,30 @@ export default function ContactSection() {
                     <div
                       className="flex h-10 w-10 items-center justify-center rounded-full border transition-all duration-300 group-hover:border-[#00D4FF]/25 group-hover:bg-[rgba(0,212,255,0.04)]"
                       style={{
-                        borderColor: "rgba(255,255,255,0.06)",
-                        background: "rgba(255,255,255,0.02)",
+                        borderColor: "var(--card-border)",
+                        background: "var(--pill-bg)",
                       }}
                     >
-                      <Icon className="h-4 w-4 text-white/25 group-hover:text-[#00D4FF] transition-colors duration-300" />
+                      <Icon
+                        className="h-4 w-4 transition-colors duration-300 group-hover:text-[#00D4FF]"
+                        style={{ color: "var(--t-muted)" }}
+                      />
                     </div>
                     <div className="flex-1">
                       <span
-                        className="font-mono text-[9px] tracking-[0.2em] uppercase block mb-0.5"
-                        style={{ color: "rgba(255,255,255,0.2)" }}
+                        className="mb-0.5 block font-mono text-[9px] tracking-[0.2em] uppercase"
+                        style={{ color: "var(--t-muted)" }}
                       >
                         {t(link.key)}
                       </span>
-                      <span className="font-mono text-sm text-white/55 group-hover:text-white transition-colors duration-300">
+                      <span
+                        className="font-mono text-sm transition-colors duration-300 group-hover:text-[#00D4FF]"
+                        style={{ color: "var(--t-secondary)" }}
+                      >
                         {link.value}
                       </span>
                     </div>
-                    <ArrowUpRight className="h-4 w-4 text-white/0 group-hover:text-white/30 transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    <ArrowUpRight className="h-4 w-4 text-white/0 transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-white/30" />
                   </a>
                 );
               })}
@@ -191,9 +197,9 @@ export default function ContactSection() {
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-50" />
                 <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
               </div>
-              <span className="font-mono text-[10px] text-white/30">
+              <span className="font-mono text-[10px]" style={{ color: "var(--t-muted)" }}>
                 {t("contact.responseTime")}{" "}
-                <span className="text-white/55">{t("contact.responseValue")}</span>
+                <span style={{ color: "var(--t-secondary)" }}>{t("contact.responseValue")}</span>
               </span>
             </div>
           </motion.div>
@@ -205,17 +211,40 @@ export default function ContactSection() {
             transition={{ duration: dur(0.5), delay: del(0.2) }}
           >
             <div
-              className={`relative rounded-2xl border p-8 sm:p-10 transition-all duration-500 ${
-                submissionState === "success"
-                  ? "border-emerald-500/20 bg-emerald-500/[0.04]"
-                  : submissionState === "error"
-                    ? "border-red-500/20 bg-red-500/[0.04]"
-                    : "border-white/[0.06] bg-white/[0.015]"
-              }`}
+              className="relative overflow-hidden rounded-2xl p-8 transition-all duration-500 sm:p-10"
+              style={{
+                background:
+                  submissionState === "success"
+                    ? "rgba(4,14,8,0.78)"
+                    : submissionState === "error"
+                      ? "rgba(14,4,4,0.78)"
+                      : "var(--card-bg)",
+                backdropFilter: "var(--card-backdrop)",
+                WebkitBackdropFilter: "var(--card-backdrop)",
+                border:
+                  submissionState === "success"
+                    ? "1px solid rgba(52,211,153,0.18)"
+                    : submissionState === "error"
+                      ? "1px solid rgba(239,68,68,0.18)"
+                      : "1px solid var(--card-border)",
+                borderTop:
+                  submissionState === "success"
+                    ? "1px solid rgba(52,211,153,0.3)"
+                    : submissionState === "error"
+                      ? "1px solid rgba(239,68,68,0.3)"
+                      : "1px solid var(--card-border-top)",
+                boxShadow: "var(--card-shadow)",
+              }}
             >
-              {submissionState === "idle" && (
-                <BorderBeam size={160} duration={12} colorFrom="#00D4FF" colorTo="#C9A55C" />
-              )}
+              {/* Top reflection */}
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-x-0 top-0 h-20 rounded-t-2xl"
+                style={{
+                  background:
+                    "linear-gradient(to bottom, rgba(255,255,255,0.04) 0%, transparent 100%)",
+                }}
+              />
 
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                 {/* Success */}
@@ -227,7 +256,9 @@ export default function ContactSection() {
                   >
                     <CheckCircle className="h-5 w-5 flex-shrink-0 text-emerald-400" />
                     <div>
-                      <h4 className="font-semibold text-emerald-100">{t("contact.success.title")}</h4>
+                      <h4 className="font-semibold text-emerald-100">
+                        {t("contact.success.title")}
+                      </h4>
                       <p className="mt-1 text-sm text-emerald-200/80">
                         {t("contact.success.description")}
                       </p>
@@ -256,7 +287,8 @@ export default function ContactSection() {
                 <div>
                   <label
                     htmlFor="name"
-                    className="font-mono text-[9px] tracking-[0.2em] uppercase text-white/35 mb-2.5 block"
+                    className="mb-2.5 block font-mono text-[9px] tracking-[0.2em] uppercase"
+                    style={{ color: "var(--t-muted)" }}
                   >
                     {t("contact.form.name.label")}
                   </label>
@@ -266,9 +298,14 @@ export default function ContactSection() {
                     {...register("name")}
                     disabled={submissionState === "loading"}
                     placeholder={t("contact.form.name.placeholder")}
-                    className={`block w-full bg-white/[0.03] border rounded-xl px-4 py-3.5 text-white text-sm placeholder:text-white/15 focus:border-[#00D4FF]/30 focus:bg-white/[0.04] focus:ring-0 outline-none transition-all duration-200 disabled:opacity-50 ${
+                    className={`contact-input block w-full rounded-xl border px-4 py-3.5 text-sm transition-all duration-200 outline-none focus:border-[#00D4FF]/30 focus:ring-0 disabled:opacity-50 ${
                       errors.name ? "border-red-500/40" : "border-white/[0.06]"
                     }`}
+                    style={{
+                      background: "var(--pill-bg)",
+                      color: "var(--t-primary)",
+                      borderColor: errors.name ? undefined : "var(--card-border)",
+                    }}
                   />
                   {errors.name && (
                     <p className="mt-1.5 font-mono text-[10px] text-red-400">
@@ -281,7 +318,8 @@ export default function ContactSection() {
                 <div>
                   <label
                     htmlFor="email"
-                    className="font-mono text-[9px] tracking-[0.2em] uppercase text-white/35 mb-2.5 block"
+                    className="mb-2.5 block font-mono text-[9px] tracking-[0.2em] uppercase"
+                    style={{ color: "var(--t-muted)" }}
                   >
                     {t("contact.form.email.label")}
                   </label>
@@ -291,9 +329,14 @@ export default function ContactSection() {
                     {...register("email")}
                     disabled={submissionState === "loading"}
                     placeholder={t("contact.form.email.placeholder")}
-                    className={`block w-full bg-white/[0.03] border rounded-xl px-4 py-3.5 text-white text-sm placeholder:text-white/15 focus:border-[#00D4FF]/30 focus:bg-white/[0.04] focus:ring-0 outline-none transition-all duration-200 disabled:opacity-50 ${
+                    className={`contact-input block w-full rounded-xl border px-4 py-3.5 text-sm transition-all duration-200 outline-none focus:border-[#00D4FF]/30 focus:ring-0 disabled:opacity-50 ${
                       errors.email ? "border-red-500/40" : "border-white/[0.06]"
                     }`}
+                    style={{
+                      background: "var(--pill-bg)",
+                      color: "var(--t-primary)",
+                      borderColor: errors.email ? undefined : "var(--card-border)",
+                    }}
                   />
                   {errors.email && (
                     <p className="mt-1.5 font-mono text-[10px] text-red-400">
@@ -306,7 +349,8 @@ export default function ContactSection() {
                 <div>
                   <label
                     htmlFor="message"
-                    className="font-mono text-[9px] tracking-[0.2em] uppercase text-white/35 mb-2.5 block"
+                    className="mb-2.5 block font-mono text-[9px] tracking-[0.2em] uppercase"
+                    style={{ color: "var(--t-muted)" }}
                   >
                     {t("contact.form.message.label")}
                   </label>
@@ -316,9 +360,14 @@ export default function ContactSection() {
                     disabled={submissionState === "loading"}
                     rows={5}
                     placeholder={t("contact.form.message.placeholder")}
-                    className={`block w-full resize-none bg-white/[0.03] border rounded-xl px-4 py-3.5 text-white text-sm placeholder:text-white/15 focus:border-[#00D4FF]/30 focus:bg-white/[0.04] focus:ring-0 outline-none transition-all duration-200 disabled:opacity-50 ${
+                    className={`contact-input block w-full resize-none rounded-xl border px-4 py-3.5 text-sm transition-all duration-200 outline-none focus:border-[#00D4FF]/30 focus:ring-0 disabled:opacity-50 ${
                       errors.message ? "border-red-500/40" : "border-white/[0.06]"
                     }`}
+                    style={{
+                      background: "var(--pill-bg)",
+                      color: "var(--t-primary)",
+                      borderColor: errors.message ? undefined : "var(--card-border)",
+                    }}
                   />
                   {errors.message && (
                     <p className="mt-1.5 font-mono text-[10px] text-red-400">
@@ -333,7 +382,7 @@ export default function ContactSection() {
                   disabled={!isValid || !isDirty || submissionState === "loading"}
                   background="#00D4FF"
                   shimmerColor="rgba(255,255,255,0.15)"
-                  className="flex w-full items-center justify-center gap-2 py-4 text-sm font-bold text-[#050506] disabled:opacity-35 disabled:cursor-not-allowed"
+                  className="flex w-full items-center justify-center gap-2 py-4 text-sm font-bold text-[#050506] disabled:cursor-not-allowed disabled:opacity-35"
                   borderRadius="0.75rem"
                 >
                   {submissionState === "loading" ? (

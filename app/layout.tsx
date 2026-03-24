@@ -80,10 +80,15 @@ export const metadata: Metadata = {
   },
 };
 
-// Script to prevent FOUC (Flash of Unstyled Content) - Force dark theme
+// Script to prevent FOUC - reads localStorage before first paint
 const themeScript = `
   (function() {
-    document.documentElement.classList.add('dark');
+    var stored = localStorage.getItem('theme');
+    if (stored === 'light') {
+      document.documentElement.classList.remove('dark');
+    } else {
+      document.documentElement.classList.add('dark');
+    }
   })();
 `;
 

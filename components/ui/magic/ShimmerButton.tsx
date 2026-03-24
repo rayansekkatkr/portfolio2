@@ -72,7 +72,18 @@ export function ShimmerButton({
           100% { transform: rotate(360deg); }
         }
       `}</style>
-      <span style={{ position: "relative", zIndex: 1 }}>{children}</span>
+      <span
+        style={{
+          position: "relative",
+          zIndex: 1,
+          display: "inline-flex",
+          alignItems: "center",
+          gap: "0.625rem",
+          whiteSpace: "nowrap",
+        }}
+      >
+        {children}
+      </span>
     </>
   );
 
