@@ -16,6 +16,24 @@ export function DotMatrix() {
     let raf: number;
     let t = 0;
 
+    // Smoothed mouse position (lerped for fluid feel)
+    const mouse = { x: -9999, y: -9999 };
+    const smooth = { x: -9999, y: -9999 };
+    const RADIUS = 120; // influence radius in px
+
+    function onMouseMove(e: MouseEvent) {
+      const rect = canvas.getBoundingClientRect();
+      mouse.x = e.clientX - rect.left;
+      mouse.y = e.clientY - rect.top;
+    }
+    function onMouseLeave() {
+      mouse.x = -9999;
+      mouse.y = -9999;
+    }
+
+    window.addEventListener("mousemove", onMouseMove);
+    canvas.addEventListener("mouseleave", onMouseLeave);
+
     const GAP = 28;
     type Dot = { x: number; y: number; phase: number; speed: number };
     let dots: Dot[] = [];
@@ -52,6 +70,10 @@ export function DotMatrix() {
       const { width: W, height: H } = canvas;
       ctx.clearRect(0, 0, W, H);
 
+      // Lerp mouse for fluid feel
+      smooth.x += (mouse.x - smooth.x) * 0.1;
+      smooth.y += (mouse.y - smooth.y) * 0.1;
+
       const cx = W / 2;
       const cy = H / 2;
       const maxDist = Math.hypot(cx, cy);
@@ -69,15 +91,26 @@ export function DotMatrix() {
         const wave = prefersReducedMotion ? 0 : Math.sin(t * d.speed + d.phase) * 0.5 + 0.5;
         const pulse = prefersReducedMotion ? 0 : Math.sin(t * 0.7 - dist * 5) * 0.5 + 0.5;
 
-        const size = 1.2 + wave * 0.7 + pulse * (1 - dist) * 1.4;
-        const baseAlpha = 0.06 + (1 - dist) * 0.14;
-        const alpha = baseAlpha + pulse * (1 - dist) * 0.28 + wave * 0.06;
+        // Mouse proximity — smoothstep falloff
+        const mouseDist = Math.hypot(d.x - smooth.x, d.y - smooth.y);
+        const p = prefersReducedMotion ? 0 : Math.max(0, 1 - mouseDist / RADIUS);
+        const magnetism = p * p * (3 - 2 * p);
 
-        // Color: cyan near center, indigo mid, white edges
-        const r = dist < 0.35 ? 0 : dist < 0.65 ? Math.round(((dist - 0.35) / 0.3) * 94) : 94;
-        const g = dist < 0.35 ? 212 : Math.round(212 * (1 - (dist - 0.35) / 0.65));
-        const b =
+        const size = 1.2 + wave * 0.7 + pulse * (1 - dist) * 1.4 + magnetism * 4.5;
+        const baseAlpha = 0.06 + (1 - dist) * 0.14;
+        const alpha = Math.min(
+          1,
+          baseAlpha + pulse * (1 - dist) * 0.28 + wave * 0.06 + magnetism * 0.6
+        );
+
+        // Color: cyan near center, indigo mid — blend to #00D4FF near cursor
+        const rBase = dist < 0.35 ? 0 : dist < 0.65 ? Math.round(((dist - 0.35) / 0.3) * 94) : 94;
+        const gBase = dist < 0.35 ? 212 : Math.round(212 * (1 - (dist - 0.35) / 0.65));
+        const bBase =
           dist < 0.35 ? 255 : dist < 0.65 ? 255 : Math.round(255 * (1 - (dist - 0.65) / 0.35));
+        const r = Math.round(rBase + (0 - rBase) * magnetism);
+        const g = Math.round(gBase + (212 - gBase) * magnetism);
+        const b = Math.round(bBase + (255 - bBase) * magnetism);
 
         ctx.beginPath();
         ctx.arc(d.x, d.y, Math.max(0.5, size), 0, Math.PI * 2);
@@ -94,6 +127,8 @@ export function DotMatrix() {
     return () => {
       cancelAnimationFrame(raf);
       ro.disconnect();
+      window.removeEventListener("mousemove", onMouseMove);
+      canvas.removeEventListener("mouseleave", onMouseLeave);
     };
   }, [prefersReducedMotion]);
 
