@@ -3,7 +3,8 @@
     "about": "About",
     "services": "Services",
     "projects": "Projects",
-    "contact": "Contact"
+    "contact": "Contact",
+    "cv": "CV"
   },
   "hero": {
     "available": "Open to new projects",
@@ -15,7 +16,8 @@
       "secondary": "View work"
     },
     "location": "Based in Morocco",
-    "saasProduction": "3 SaaS in production"
+    "saasProduction": "3 SaaS in production",
+    "downloadCV": "Download CV"
   },
   "about": {
     "label": "// about",
@@ -231,58 +233,59 @@
       }
     },
     "pricing": {
-      "label": "// pricing",
-      "headline": "Transparent investment",
-      "intro": "I don't quote a serious project on a vague brief. Every collaboration starts with a scoping phase to clarify the scope, priorities, technical risks, and business objectives. Then I propose a realistic budget envelope for development, with a clear plan and no surprises.",
-      "popular": "Recommended",
-      "reassurance": "50% of the scoping fee is deducted from the final quote if we proceed with development together.",
+      "label": "// offerings",
+      "headline": "Tailored pricing",
+      "intro": "Every project is unique. I don't use fixed prices because the time needed depends on the actual scope. We start with a free call, then I send you a clear, detailed quote.",
+      "popular": "Most requested",
+      "reassurance": "Free quote, no commitment — just a conversation.",
       "plans": {
         "mvp": {
-          "name": "Discovery call",
-          "price": "Free",
-          "duration": "/ 20 min",
-          "cta": "Book a call",
+          "name": "Short mission",
+          "price": "On request",
+          "duration": "Feature, fix, or integration",
+          "cta": "Request a quote",
           "features": [
-            "First exchange to understand your need",
-            "Project & expertise fit validation",
-            "Technical and product challenge identification",
-            "Recommendation on the best next step"
+            "Targeted feature development",
+            "Bug fix and debugging",
+            "API / third-party integration",
+            "Performance optimization",
+            "Fast delivery, direct communication"
           ]
         },
         "saas": {
-          "name": "Strategic & technical scoping",
-          "price": "from €690",
-          "duration": "/ short engagement",
-          "cta": "Book a scoping session",
+          "name": "Complete project",
+          "price": "On request",
+          "duration": "MVP to production",
+          "cta": "Discuss my project",
           "features": [
-            "In-depth scoping workshop",
-            "MVP scope clarification",
-            "Recommended architecture",
-            "Priority & risk breakdown",
-            "Budget envelope and estimated timeline"
+            "Full-stack development end-to-end",
+            "Architecture, database & DevOps",
+            "Authentication & payment integration",
+            "Iterative development with weekly demos",
+            "30-day post-launch support included"
           ]
         },
         "consulting": {
-          "name": "Advisory & fractional CTO",
-          "price": "€110",
-          "duration": "/ hour",
-          "cta": "Book a slot",
+          "name": "Monthly retainer",
+          "price": "On request",
+          "duration": "Ongoing collaboration",
+          "cta": "Request a quote",
           "features": [
-            "Technical audit & code review",
-            "Architecture & stack choices",
-            "Sprint unblocking",
-            "API / Stripe / AI / performance review",
-            "Product & delivery coaching"
+            "Dedicated development bandwidth",
+            "Code review & architecture guidance",
+            "Roadmap & sprint planning",
+            "Priority availability",
+            "Flexible scope each month"
           ]
         }
       },
       "envelopes": {
-        "title": "Indicative build budgets, after scoping",
-        "note": "Final budget depends on exact scope, level of polish, third-party integrations, data constraints, and deadlines.",
+        "title": "How it works",
+        "note": "No surprises, no hidden commitment. A clear quote before we start.",
         "items": [
-          "Business MVP: €4,000 – €8,000",
-          "Full SaaS: €8,000 – €15,000+",
-          "AI & automation: €6,000 – €18,000+"
+          "Free 20-min discovery call to understand your project",
+          "Scope proposal with timeline and budget estimate",
+          "Development starts once the quote is approved"
         ]
       }
     }

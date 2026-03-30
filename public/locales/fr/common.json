@@ -3,7 +3,8 @@
     "about": "A propos",
     "services": "Services",
     "projects": "Projets",
-    "contact": "Contact"
+    "contact": "Contact",
+    "cv": "CV"
   },
   "hero": {
     "available": "Disponible pour de nouveaux projets",
@@ -15,7 +16,8 @@
       "secondary": "Voir mes travaux"
     },
     "location": "Base au Maroc",
-    "saasProduction": "3 SaaS en production"
+    "saasProduction": "3 SaaS en production",
+    "downloadCV": "Télécharger CV"
   },
   "about": {
     "label": "// a propos",
@@ -231,58 +233,59 @@
       }
     },
     "pricing": {
-      "label": "// tarifs",
-      "headline": "Investissement transparent",
-      "intro": "Je ne chiffre pas un projet serieux sur un brief flou. Chaque collaboration commence par une phase de cadrage pour clarifier le perimetre, les priorites, les risques techniques et les objectifs business. Ensuite, je propose une enveloppe realiste pour le developpement, avec un plan clair et sans surprise.",
-      "popular": "Recommande",
-      "reassurance": "50% du cadrage est deduit du devis final si nous lancons le developpement ensemble.",
+      "label": "// offres",
+      "headline": "Des tarifs sur mesure",
+      "intro": "Chaque projet est unique. Je ne pratique pas de prix fixes car le temps passe depend du perimetre reel. On commence par un echange gratuit, puis je vous soumets un devis clair et detaille.",
+      "popular": "Le plus demande",
+      "reassurance": "Devis gratuit et sans engagement — juste une conversation.",
       "plans": {
         "mvp": {
-          "name": "Appel decouverte",
-          "price": "Gratuit",
-          "duration": "/ 20 min",
-          "cta": "Reserver un appel",
+          "name": "Mission courte",
+          "price": "Sur devis",
+          "duration": "Feature, fix ou integration",
+          "cta": "Demander un devis",
           "features": [
-            "Premier echange pour comprendre votre besoin",
-            "Validation du fit projet & expertise",
-            "Identification des enjeux techniques et produit",
-            "Recommandation sur la meilleure suite"
+            "Developpement d'une fonctionnalite ciblee",
+            "Correction de bug et debugging",
+            "Integration API / service tiers",
+            "Optimisation des performances",
+            "Livraison rapide, communication directe"
           ]
         },
         "saas": {
-          "name": "Cadrage strategique & technique",
-          "price": "a partir de 690€",
-          "duration": "/ mission courte",
-          "cta": "Reserver un cadrage",
+          "name": "Projet complet",
+          "price": "Sur devis",
+          "duration": "MVP jusqu'a la production",
+          "cta": "Discuter de mon projet",
           "features": [
-            "Atelier de cadrage approfondi",
-            "Clarification du perimetre MVP",
-            "Architecture recommandee",
-            "Decoupe des priorites & risques",
-            "Enveloppe budgetaire et planning estimatif"
+            "Developpement full-stack de A a Z",
+            "Architecture, base de donnees & DevOps",
+            "Authentification & integration paiement",
+            "Developpement iteratif avec demos hebdo",
+            "30 jours de support post-lancement inclus"
           ]
         },
         "consulting": {
-          "name": "Conseil & CTO ponctuel",
-          "price": "110€",
-          "duration": "/ heure",
-          "cta": "Reserver un creneau",
+          "name": "Retainer mensuel",
+          "price": "Sur devis",
+          "duration": "Collaboration continue",
+          "cta": "Demander un devis",
           "features": [
-            "Audit technique & code review",
-            "Architecture & choix de stack",
-            "Deblocage de sprint",
-            "Revue API / Stripe / IA / performance",
-            "Accompagnement produit & delivery"
+            "Bande passante dediee chaque mois",
+            "Code review & conseil architecture",
+            "Planification roadmap & sprints",
+            "Disponibilite prioritaire",
+            "Perimetre flexible selon les besoins"
           ]
         }
       },
       "envelopes": {
-        "title": "Enveloppes indicatives apres cadrage",
-        "note": "Le budget final depend du perimetre exact, du niveau de finition, des integrations tierces, des contraintes data et des delais.",
+        "title": "Comment ca marche",
+        "note": "Pas de surprise ni d'engagement cache. Un devis clair avant de commencer.",
         "items": [
-          "MVP metier : 4 000€ – 8 000€",
-          "SaaS complet : 8 000€ – 15 000€+",
-          "IA & automatisation : 6 000€ – 18 000€+"
+          "Appel decouverte gratuit (20 min) pour comprendre votre besoin",
+          "Proposition de perimetre avec estimation et planning",
+          "Demarrage du developpement une fois le devis valide"
         ]
       }
     }

@@ -12,6 +12,8 @@ const navigation = [
   { key: "navigation.contact", href: "#contact" },
 ];
 
+const CV_LINK = { key: "navigation.cv", href: "/cv" };
+
 function smoothScrollTo(targetId: string, offset = 80, duration = 700) {
   const target = document.querySelector(targetId);
   if (!target) return;
@@ -130,6 +132,19 @@ export default function Header() {
                 {t(item.key)}
               </a>
             ))}
+            <a
+              href={CV_LINK.href}
+              className="font-mono text-[11px] tracking-[0.15em] uppercase transition-colors duration-200"
+              style={{ color: "var(--nav-text)" }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.color = "#00D4FF";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.color = "var(--nav-text)";
+              }}
+            >
+              {t(CV_LINK.key)}
+            </a>
           </div>
 
           {/* Right controls */}
@@ -232,6 +247,14 @@ export default function Header() {
                   {t(item.key)}
                 </a>
               ))}
+              <a
+                href={CV_LINK.href}
+                className="block rounded-lg px-4 py-3 font-mono text-sm tracking-wide transition-colors"
+                style={{ color: "var(--nav-text)" }}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {t(CV_LINK.key)}
+              </a>
             </div>
 
             <div className="mt-10 border-t border-white/[0.06] pt-6">

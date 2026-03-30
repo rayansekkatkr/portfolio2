@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
-import { ArrowRight, ArrowDown } from "lucide-react";
+import { ArrowRight, ArrowDown, FileDown } from "lucide-react";
 import { useRef } from "react";
 import { ShimmerButton } from "@/components/ui/magic/ShimmerButton";
 import { MagneticButton } from "@/components/ui/magic/MagneticButton";
@@ -20,8 +20,8 @@ export default function HeroSection() {
     target: sectionRef,
     offset: ["start start", "end start"],
   });
-  const textY = useTransform(scrollYProgress, [0, 1], [0, 150]);
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+  const textY = useTransform(scrollYProgress, [0, 1], [0, 80]);
+  const opacity = useTransform(scrollYProgress, [0, 0.4], [1, 0]);
 
   const fadeUp = (delay: number) =>
     prefersReducedMotion
@@ -152,10 +152,10 @@ export default function HeroSection() {
           {/* Floating role label positioned creatively */}
           <motion.div {...fadeUp(0.5)} className="absolute -right-2 bottom-2 hidden lg:block">
             <div
-              className="flex items-center gap-3 rounded-full border px-5 py-2.5 backdrop-blur-md"
+              className="flex items-center gap-3 rounded-full border px-5 py-2.5"
               style={{
                 borderColor: "var(--pill-border)",
-                background: "var(--pill-bg)",
+                background: "var(--nav-bg)",
               }}
             >
               <div className="h-6 w-px" style={{ background: "rgba(0,212,255,0.3)" }} />
@@ -237,6 +237,31 @@ export default function HeroSection() {
           </motion.div>
         </div>
 
+        {/* CV Download */}
+        <motion.div {...fadeUp(0.65)} className="mt-4 flex">
+          <a
+            href="/Rayan_Sekkat_CV_EN_2026.pdf"
+            download
+            className="group inline-flex items-center gap-2.5 rounded-full border px-6 py-3 font-mono text-[10px] tracking-[0.15em] uppercase transition-all duration-200"
+            style={{
+              borderColor: "rgba(0,212,255,0.2)",
+              background: "rgba(0,212,255,0.04)",
+              color: "rgba(0,212,255,0.8)",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.borderColor = "rgba(0,212,255,0.4)";
+              e.currentTarget.style.background = "rgba(0,212,255,0.08)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.borderColor = "rgba(0,212,255,0.2)";
+              e.currentTarget.style.background = "rgba(0,212,255,0.04)";
+            }}
+          >
+            <FileDown className="h-3.5 w-3.5" aria-hidden="true" />
+            {t("hero.downloadCV")}
+          </a>
+        </motion.div>
+
         {/* Trust signals — social + production badge */}
         <motion.div {...fadeUp(0.72)} className="mt-10 flex flex-wrap items-center gap-4">
           {/* 3 SaaS badge */}
@@ -256,7 +281,7 @@ export default function HeroSection() {
 
           {/* GitHub */}
           <a
-            href="https://github.com/rayan-sekkat"
+            href="https://github.com/rayansekkatkr"
             target="_blank"
             rel="noopener noreferrer"
             className="group inline-flex items-center gap-2 rounded-full border px-4 py-1.5 font-mono text-[10px] tracking-wide transition-all duration-200"
@@ -310,7 +335,7 @@ export default function HeroSection() {
           style={{ borderColor: "var(--section-line)" }}
         >
           <div className="hidden items-center gap-6 lg:flex">
-            {["Next.js", "React", "TypeScript", "Python", "AI"].map((tech, i) => (
+            {["Next.js", "TypeScript", "NestJS", "Python", "Stripe"].map((tech, i) => (
               <span
                 key={tech}
                 className="flex items-center gap-4 font-mono text-[11px] tracking-wide"

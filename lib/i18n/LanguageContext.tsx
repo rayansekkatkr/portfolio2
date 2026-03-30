@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useState, ReactNode } from "react";
+import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 import fr from "@/public/locales/fr/common.json";
 import en from "@/public/locales/en/common.json";
 import kr from "@/public/locales/kr/common.json";
@@ -20,9 +20,7 @@ type TranslationData = Record<string, any>;
 
 const translations: Record<Locale, TranslationData> = { fr, en, kr };
 
-function getInitialLocale(): Locale {
-  if (typeof window === "undefined") return "fr";
-
+function detectLocale(): Locale {
   const stored = localStorage.getItem("locale") as Locale | null;
   if (stored && ["fr", "en", "kr"].includes(stored)) return stored;
 
@@ -33,14 +31,20 @@ function getInitialLocale(): Locale {
 }
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [locale, setLocaleState] = useState<Locale>(getInitialLocale);
+  // Always start with "fr" to match SSR — sync to real locale after hydration
+  const [locale, setLocaleState] = useState<Locale>("fr");
+
+  useEffect(() => {
+    const real = detectLocale();
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setLocaleState(real);
+    document.documentElement.lang = real;
+  }, []);
 
   const setLocale = (newLocale: Locale) => {
     setLocaleState(newLocale);
-    if (typeof window !== "undefined") {
-      localStorage.setItem("locale", newLocale);
-      document.documentElement.lang = newLocale;
-    }
+    localStorage.setItem("locale", newLocale);
+    document.documentElement.lang = newLocale;
   };
 
   const t = (key: string): string => {

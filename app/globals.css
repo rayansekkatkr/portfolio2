@@ -156,7 +156,7 @@
   --footer-border: rgba(255, 255, 255, 0.04);
   --footer-text: rgba(255, 255, 255, 0.15);
   --marquee-border: rgba(255, 255, 255, 0.04);
-  --marquee-text: rgba(255, 255, 255, 0.12);
+  --marquee-text: rgba(255, 255, 255, 0.42);
 }
 
 /* Theme transition */
