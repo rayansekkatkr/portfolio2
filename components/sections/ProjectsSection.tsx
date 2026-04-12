@@ -9,6 +9,7 @@ import { AnimatedBrowser } from "@/components/ui/magic/AnimatedBrowser";
 import { FacturxMockup } from "@/components/ui/magic/FacturxMockup";
 import { DocExtractMockup } from "@/components/ui/magic/DocExtractMockup";
 import { Pick4meMockup } from "@/components/ui/magic/Pick4meMockup";
+import { StampeoMockup } from "@/components/ui/magic/StampeoMockup";
 import { useTranslation } from "@/lib/i18n/useLanguage";
 
 const PROJECTS = [
@@ -66,6 +67,29 @@ const PROJECTS = [
     accentColor: "#F97316",
     secondaryColor: "#EF4444",
     Mockup: Pick4meMockup,
+  },
+  {
+    num: "04",
+    name: "stampeo.app",
+    url: "https://stampeo.app",
+    demoUrl: "https://stampeo.app",
+    translationKey: "project4",
+    technologies: [
+      "Next.js",
+      "TypeScript",
+      "Apple Wallet",
+      "Google Wallet",
+      "Stripe",
+      "PostgreSQL",
+    ],
+    results: [
+      { value: 5, suffix: "min", decimalPlaces: 0, key: "projects.project4.results.setup" },
+      { value: 2, suffix: "", decimalPlaces: 0, key: "projects.project4.results.wallets" },
+      { value: 100, suffix: "%", decimalPlaces: 0, key: "projects.project4.results.wallet" },
+    ],
+    accentColor: "#F59E0B",
+    secondaryColor: "#EF4444",
+    Mockup: StampeoMockup,
   },
 ] as const;
 

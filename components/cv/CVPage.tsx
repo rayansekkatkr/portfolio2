@@ -445,7 +445,7 @@ export default function CVPage() {
             transition={{ duration: dur(0.5), delay: del(0.45) }}
           >
             <a
-              href="/Rayan_Sekkat_CV_EN_2026.pdf"
+              href="/Rayan_Sekkat_CV_2026_english.pdf"
               download
               className="group inline-flex items-center gap-3 rounded-full px-8 py-4 font-mono text-[11px] tracking-[0.2em] uppercase transition-all duration-200"
               style={{

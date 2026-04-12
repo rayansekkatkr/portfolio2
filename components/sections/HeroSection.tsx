@@ -240,7 +240,7 @@ export default function HeroSection() {
         {/* CV Download */}
         <motion.div {...fadeUp(0.65)} className="mt-4 flex">
           <a
-            href="/Rayan_Sekkat_CV_EN_2026.pdf"
+            href="/Rayan_Sekkat_CV_2026_english.pdf"
             download
             className="group inline-flex items-center gap-2.5 rounded-full border px-6 py-3 font-mono text-[10px] tracking-[0.15em] uppercase transition-all duration-200"
             style={{

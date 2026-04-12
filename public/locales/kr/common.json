@@ -134,6 +134,15 @@
         "integrations": "결제 연동 수",
         "uptime": "목표 VPS 업타임"
       }
+    },
+    "project4": {
+      "tagline": "SaaS / 디지털 스탬프 카드 · CEO & 단독 개발자",
+      "description": "아키텍처부터 프로덕션까지 단독 개발. 종이 스탬프 카드 분실로 고객을 잃던 가맹점을 위해, Apple Wallet과 Google Wallet에 직접 추가되는 디지털 적립 카드 SaaS를 구축했습니다. 앱 다운로드 불필요. 로고와 색상을 설정하면 몇 분 안에 카드가 활성화됩니다.",
+      "results": {
+        "setup": "설정 시간",
+        "wallets": "지갑 플랫폼 수",
+        "wallet": "네이티브 지갑 지원"
+      }
     }
   },
   "contact": {

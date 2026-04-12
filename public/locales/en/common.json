@@ -134,6 +134,15 @@
         "integrations": "Payment integrations",
         "uptime": "Target VPS uptime"
       }
+    },
+    "project4": {
+      "tagline": "SaaS / Digital Loyalty Cards · CEO & Sole Developer",
+      "description": "Built solo, from architecture to production. Merchants struggled with paper stamp cards that customers lose. I built a SaaS that creates digital loyalty cards added directly to Apple Wallet and Google Wallet — no app download required. Import your logo, pick your colors, and your card is live in minutes.",
+      "results": {
+        "setup": "Setup time",
+        "wallets": "Wallet platforms",
+        "wallet": "Native wallet support"
+      }
     }
   },
   "contact": {

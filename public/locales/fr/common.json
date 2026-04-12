@@ -134,6 +134,15 @@
         "integrations": "Integrations paiement",
         "uptime": "Uptime cible VPS"
       }
+    },
+    "project4": {
+      "tagline": "SaaS / Cartes de fidelite digitales · CEO & Developpeur solo",
+      "description": "Developpe seul, de l'architecture a la production. Les commercants perdaient des clients a cause des cartes tampons papier. J'ai cree un SaaS qui genere des cartes de fidelite digitales ajoutees directement dans Apple Wallet et Google Wallet, sans application a telecharger. Logo, couleurs, carte en ligne en quelques minutes.",
+      "results": {
+        "setup": "Temps de configuration",
+        "wallets": "Plateformes wallet",
+        "wallet": "Support wallet natif"
+      }
     }
   },
   "contact": {
