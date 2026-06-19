@@ -4,7 +4,6 @@ import { motion, useInView, useReducedMotion } from "framer-motion";
 import { useRef } from "react";
 import Image from "next/image";
 import { NumberTicker } from "@/components/ui/magic/NumberTicker";
-import { GlowCard } from "@/components/ui/magic/GlowCard";
 import { SectionDivider } from "@/components/ui/magic/SectionDivider";
 import { useTranslation } from "@/lib/i18n/useLanguage";
 
@@ -251,52 +250,6 @@ export default function AboutSection() {
           ))}
           <div style={{ borderTop: "1px solid rgba(255,255,255,0.05)" }} />
         </div>
-
-        {/* Testimonial */}
-        <motion.div
-          className="mt-20"
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: dur(0.5), delay: del(0.45) }}
-        >
-          <p
-            className="mb-6 flex items-center gap-3 font-mono text-[10px] tracking-[0.25em] uppercase"
-            style={{ color: "rgba(0,212,255,0.4)" }}
-          >
-            <span className="h-px w-6" style={{ background: "rgba(0,212,255,0.3)" }} />
-            {t("about.testimonial.label")}
-          </p>
-          <GlowCard glowColor="rgba(0,212,255,0.06)">
-            <div
-              className="relative overflow-hidden rounded-2xl p-8 sm:p-10"
-              style={{
-                border: "1px solid var(--section-line)",
-                background: "var(--pill-bg)",
-              }}
-            >
-              {/* Giant quote mark */}
-              <span
-                aria-hidden="true"
-                className="font-cormorant absolute -top-2 left-6 select-none"
-                style={{ fontSize: "6rem", lineHeight: 1, color: "rgba(0,212,255,0.08)" }}
-              >
-                &ldquo;
-              </span>
-              <p
-                className="relative mb-6 max-w-2xl text-base leading-8 sm:text-lg"
-                style={{ color: "var(--t-primary)" }}
-              >
-                {t("about.testimonial.quote")}
-              </p>
-              <p
-                className="font-mono text-[10px] tracking-widest uppercase"
-                style={{ color: "var(--t-muted)" }}
-              >
-                {t("about.testimonial.author")}
-              </p>
-            </div>
-          </GlowCard>
-        </motion.div>
       </div>
     </section>
   );

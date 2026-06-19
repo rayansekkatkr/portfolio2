@@ -3,19 +3,20 @@
     "about": "소개",
     "services": "서비스",
     "projects": "프로젝트",
+    "experience": "경력",
     "contact": "연락처",
     "cv": "CV"
   },
   "hero": {
     "available": "새 프로젝트 수락 가능",
     "availableOn": "다음에서 이용 가능",
-    "role": "풀스택 개발자 & 프로덕트 엔지니어",
+    "role": "풀스택 & DevOps 엔지니어",
     "description": "프로덕션에 배포되는 SaaS 플랫폼과 AI 도구를 구축합니다. 아키텍처부터 첫 번째 결제 사용자까지. 템플릿 없이, 지름길 없이.",
     "cta": {
       "primary": "프로젝트 시작하기",
       "secondary": "작업 보기"
     },
-    "location": "모로코 기반",
+    "location": "대한민국 서울 기반",
     "saasProduction": "3개 SaaS 프로덕션 운영 중",
     "downloadCV": "CV 다운로드"
   },
@@ -53,11 +54,6 @@
         "title": "프론트엔드 크래프트",
         "desc": "픽셀 퍼펙트 인터페이스, 고급 애니메이션, 3D 웹 경험 및 성능에 집착하는 반응형 디자인."
       }
-    },
-    "testimonial": {
-      "quote": "2개월 예상 작업을 3주 만에 납품했습니다. 견고한 아키텍처, 깔끔한 코드, 그리고 제품에 대한 진정한 이해. 강력 추천합니다.",
-      "author": "클라이언트, B2B 이커머스 프로젝트",
-      "label": "클라이언트 후기"
     }
   },
   "skills": {
@@ -134,15 +130,35 @@
         "integrations": "결제 연동 수",
         "uptime": "목표 VPS 업타임"
       }
+    }
+  },
+  "experience": {
+    "label": "// 경력",
+    "headline": "제가 일한 곳.",
+    "job1": {
+      "role": "DevOps 엔지니어",
+      "company": "STMicroelectronics",
+      "period": "2024년 1월 — 2024년 12월",
+      "type": "정규직",
+      "points": [
+        "하루 170개 이상의 임베디드 파이프라인을 지원하는 GitLab CI/CD 플랫폼 운영.",
+        "Kubernetes와 Ansible로 배포 자동화 — 릴리스 시간 30% 단축.",
+        "하이브리드 AWS 환경에서 Terraform으로 IaC 관리.",
+        "Prometheus, Grafana, Alertmanager 모니터링 구축; 견습생 2명 멘토링."
+      ],
+      "tech": ["GitLab CI", "Kubernetes", "Ansible", "Terraform", "AWS", "Prometheus"]
     },
-    "project4": {
-      "tagline": "SaaS / 디지털 스탬프 카드 · CEO & 단독 개발자",
-      "description": "아키텍처부터 프로덕션까지 단독 개발. 종이 스탬프 카드 분실로 고객을 잃던 가맹점을 위해, Apple Wallet과 Google Wallet에 직접 추가되는 디지털 적립 카드 SaaS를 구축했습니다. 앱 다운로드 불필요. 로고와 색상을 설정하면 몇 분 안에 카드가 활성화됩니다.",
-      "results": {
-        "setup": "설정 시간",
-        "wallets": "지갑 플랫폼 수",
-        "wallet": "네이티브 지갑 지원"
-      }
+    "job2": {
+      "role": "풀스택 개발자 / DevOps",
+      "company": "UNYC",
+      "period": "2020년 9월 — 2023년 9월",
+      "type": "일학습 병행",
+      "points": [
+        "서비스 상태와 운영 데이터를 통합하는 사내 웹 플랫폼 구축.",
+        "아키텍처, 데이터베이스 모델링부터 프로덕션 배포까지 전체 주기 담당.",
+        "CI/CD 파이프라인, 자동화 테스트, 보안 점검, Docker 배포 구축."
+      ],
+      "tech": ["Vue.js", "React", "Django / DRF", "Docker", "Kubernetes", "Scrum"]
     }
   },
   "contact": {
@@ -300,7 +316,7 @@
     }
   },
   "footer": {
-    "tagline": "풀스택 개발자 & AI 엔지니어",
+    "tagline": "풀스택 & DevOps 엔지니어",
     "copyright": "Rayan Sekkat",
     "builtWith": "Next.js, Three.js & Framer Motion으로 제작"
   }

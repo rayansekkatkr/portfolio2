@@ -3,19 +3,20 @@
     "about": "About",
     "services": "Services",
     "projects": "Projects",
+    "experience": "Experience",
     "contact": "Contact",
     "cv": "CV"
   },
   "hero": {
     "available": "Open to new projects",
     "availableOn": "Available on",
-    "role": "Full-Stack Developer & Product Engineer",
+    "role": "Full-Stack & DevOps Engineer",
     "description": "I build SaaS platforms and AI tools that ship to production. From architecture to the first paying user. No templates, no shortcuts.",
     "cta": {
       "primary": "Start a project",
       "secondary": "View work"
     },
-    "location": "Based in Morocco",
+    "location": "Based in Seoul, South Korea",
     "saasProduction": "3 SaaS in production",
     "downloadCV": "Download CV"
   },
@@ -53,11 +54,6 @@
         "title": "Frontend Craft",
         "desc": "Pixel-perfect interfaces, advanced animations, 3D web experiences, and performance-obsessed responsive design."
       }
-    },
-    "testimonial": {
-      "quote": "Rayan delivered in 3 weeks what we estimated at 2 months. Solid architecture, clean code, and a real understanding of the product. Highly recommended.",
-      "author": "Client, B2B e-commerce project",
-      "label": "What clients say"
     }
   },
   "skills": {
@@ -134,15 +130,35 @@
         "integrations": "Payment integrations",
         "uptime": "Target VPS uptime"
       }
+    }
+  },
+  "experience": {
+    "label": "// experience",
+    "headline": "Where I've worked.",
+    "job1": {
+      "role": "DevOps Engineer",
+      "company": "STMicroelectronics",
+      "period": "Jan 2024 — Dec 2024",
+      "type": "Full-time",
+      "points": [
+        "Ran a GitLab CI/CD platform serving 170+ embedded pipelines a day.",
+        "Automated deployments with Kubernetes and Ansible — 30% faster releases.",
+        "Managed infrastructure as code with Terraform on hybrid AWS environments.",
+        "Built monitoring with Prometheus, Grafana & Alertmanager; mentored 2 apprentices."
+      ],
+      "tech": ["GitLab CI", "Kubernetes", "Ansible", "Terraform", "AWS", "Prometheus"]
     },
-    "project4": {
-      "tagline": "SaaS / Digital Loyalty Cards · CEO & Sole Developer",
-      "description": "Built solo, from architecture to production. Merchants struggled with paper stamp cards that customers lose. I built a SaaS that creates digital loyalty cards added directly to Apple Wallet and Google Wallet — no app download required. Import your logo, pick your colors, and your card is live in minutes.",
-      "results": {
-        "setup": "Setup time",
-        "wallets": "Wallet platforms",
-        "wallet": "Native wallet support"
-      }
+    "job2": {
+      "role": "Full-Stack Developer / DevOps",
+      "company": "UNYC",
+      "period": "Sep 2020 — Sep 2023",
+      "type": "Work-study",
+      "points": [
+        "Built an internal web platform centralizing service status and operational data.",
+        "Owned the full cycle: architecture, database modeling, and production delivery.",
+        "Set up CI/CD pipelines, automated tests, security checks and Dockerized deploys."
+      ],
+      "tech": ["Vue.js", "React", "Django / DRF", "Docker", "Kubernetes", "Scrum"]
     }
   },
   "contact": {
@@ -300,7 +316,7 @@
     }
   },
   "footer": {
-    "tagline": "Full-Stack Developer & AI Engineer",
+    "tagline": "Full-Stack & DevOps Engineer",
     "copyright": "Rayan Sekkat",
     "builtWith": "Built with Next.js, Three.js & Framer Motion"
   }

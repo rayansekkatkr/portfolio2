@@ -3,19 +3,20 @@
     "about": "A propos",
     "services": "Services",
     "projects": "Projets",
+    "experience": "Parcours",
     "contact": "Contact",
     "cv": "CV"
   },
   "hero": {
     "available": "Disponible pour de nouveaux projets",
     "availableOn": "Disponible sur",
-    "role": "Developpeur Full-Stack & Product Engineer",
+    "role": "Développeur Full-Stack & DevOps",
     "description": "Je construis des SaaS et des outils IA qui passent en production. De l'architecture au premier utilisateur payant. Pas de template, pas de raccourcis.",
     "cta": {
       "primary": "Demarrer un projet",
       "secondary": "Voir mes travaux"
     },
-    "location": "Base au Maroc",
+    "location": "Basé à Séoul, Corée du Sud",
     "saasProduction": "3 SaaS en production",
     "downloadCV": "Télécharger CV"
   },
@@ -53,11 +54,6 @@
         "title": "Craft Frontend",
         "desc": "Interfaces pixel-perfect, animations avancees, experiences web 3D et design responsive obsede par la performance."
       }
-    },
-    "testimonial": {
-      "quote": "Rayan a livre en 3 semaines ce qu on estimait a 2 mois. Architecture solide, code propre, et une vraie comprehension du produit. Je recommande sans hesitation.",
-      "author": "Client, Projet e-commerce B2B",
-      "label": "Ce que disent les clients"
     }
   },
   "skills": {
@@ -134,15 +130,35 @@
         "integrations": "Integrations paiement",
         "uptime": "Uptime cible VPS"
       }
+    }
+  },
+  "experience": {
+    "label": "// parcours",
+    "headline": "Où j'ai travaillé.",
+    "job1": {
+      "role": "Ingénieur DevOps",
+      "company": "STMicroelectronics",
+      "period": "Jan 2024 — Déc 2024",
+      "type": "Temps plein",
+      "points": [
+        "Administré une plateforme CI/CD GitLab servant 170+ pipelines embarqués par jour.",
+        "Automatisé les déploiements avec Kubernetes et Ansible — releases 30% plus rapides.",
+        "Géré l'infrastructure as code avec Terraform sur environnements AWS hybrides.",
+        "Mis en place le monitoring Prometheus, Grafana & Alertmanager ; encadré 2 alternants."
+      ],
+      "tech": ["GitLab CI", "Kubernetes", "Ansible", "Terraform", "AWS", "Prometheus"]
     },
-    "project4": {
-      "tagline": "SaaS / Cartes de fidelite digitales · CEO & Developpeur solo",
-      "description": "Developpe seul, de l'architecture a la production. Les commercants perdaient des clients a cause des cartes tampons papier. J'ai cree un SaaS qui genere des cartes de fidelite digitales ajoutees directement dans Apple Wallet et Google Wallet, sans application a telecharger. Logo, couleurs, carte en ligne en quelques minutes.",
-      "results": {
-        "setup": "Temps de configuration",
-        "wallets": "Plateformes wallet",
-        "wallet": "Support wallet natif"
-      }
+    "job2": {
+      "role": "Développeur Full-Stack / DevOps",
+      "company": "UNYC",
+      "period": "Sep 2020 — Sep 2023",
+      "type": "Alternance",
+      "points": [
+        "Construit une plateforme web interne centralisant l'état des services et les données opérationnelles.",
+        "Pris en charge tout le cycle : architecture, modélisation de la base et mise en production.",
+        "Mis en place CI/CD, tests automatisés, contrôles de sécurité et déploiements Dockerisés."
+      ],
+      "tech": ["Vue.js", "React", "Django / DRF", "Docker", "Kubernetes", "Scrum"]
     }
   },
   "contact": {
@@ -300,7 +316,7 @@
     }
   },
   "footer": {
-    "tagline": "Developpeur Full-Stack & Ingenieur IA",
+    "tagline": "Développeur Full-Stack & DevOps",
     "copyright": "Rayan Sekkat",
     "builtWith": "Construit avec Next.js, Three.js & Framer Motion"
   }

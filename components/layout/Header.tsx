@@ -9,6 +9,7 @@ const navigation = [
   { key: "navigation.about", href: "#about" },
   { key: "navigation.services", href: "#skills" },
   { key: "navigation.projects", href: "#projects" },
+  { key: "navigation.experience", href: "#experience" },
   { key: "navigation.contact", href: "#contact" },
 ];
 
@@ -65,7 +66,7 @@ export default function Header() {
       { rootMargin: "-100px 0px -50% 0px", threshold: 0 }
     );
 
-    const sections = ["hero", "about", "skills", "projects", "contact"];
+    const sections = ["hero", "about", "skills", "projects", "experience", "contact"];
     sections.forEach((id) => {
       const el = document.getElementById(id);
       if (el) observer.observe(el);
