@@ -1,5 +1,9 @@
 # Working rules
 
+## Git Rules
+
+- NEVER add `Co-Authored-By` or any co-author trailer to git commits
+
 ## Scope
 
 - Ne lis pas tout le repo sans nécessité.
