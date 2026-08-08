@@ -6,7 +6,6 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
 
 const nextConfig: NextConfig = {
   /* config options here */
-  reactCompiler: true,
   images: {
     remotePatterns: [
       {
@@ -29,6 +28,17 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   experimental: {
     optimizePackageImports: ["lucide-react", "framer-motion"],
+  },
+  async redirects() {
+    return [
+      // English is the default and x-default locale
+      { source: "/", destination: "/en", permanent: true },
+      // French locale removed from V1
+      { source: "/fr", destination: "/en", permanent: true },
+      { source: "/fr/:path*", destination: "/en/:path*", permanent: true },
+      // The old CV page contradicted the new homepage; the PDF is the single source
+      { source: "/cv", destination: "/Rayan_Sekkat_CV_English_2026.pdf", permanent: false },
+    ];
   },
   async headers() {
     return [

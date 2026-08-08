@@ -7,7 +7,6 @@ import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 import dynamic from "next/dynamic";
 import { GrainOverlay } from "@/components/ui/magic/GrainOverlay";
-import { CustomCursor } from "@/components/ui/CustomCursor";
 import { ScrollProgress } from "@/components/ui/ScrollProgress";
 import { GlobalBackground } from "@/components/ui/GlobalBackground";
 
@@ -49,7 +48,6 @@ export default function ClientProviders({ children }: { children: ReactNode }) {
       <LanguageProvider>
         <GlobalBackground />
         {children}
-        <CustomCursor />
         <ScrollProgress />
         <GrainOverlay opacity={0.04} />
         <ScrollToTop />

@@ -255,6 +255,66 @@ body {
   --color-input-foreground: rgb(var(--input-foreground));
   --color-ring: rgb(var(--ring));
   --font-sans: var(--font-plus-jakarta);
+  --color-se-bg: var(--se-bg);
+  --color-se-surface: var(--se-surface);
+  --color-se-text: var(--se-text);
+  --color-se-muted: var(--se-muted);
+  --color-se-accent: var(--se-accent);
+  --color-se-on-accent: var(--se-on-accent);
+  --color-se-line: var(--se-line);
+  --font-display: var(--font-instrument-serif), Georgia, serif;
+  --font-meta: var(--font-plex-mono), ui-monospace, monospace;
+}
+
+/* ─── Seoul Editorial tokens (homepage) ─── */
+:root {
+  --se-bg: #f3f0e8;
+  --se-surface: #fffdf7;
+  --se-text: #15181d;
+  --se-muted: #686d74;
+  --se-accent: #2446ff;
+  --se-on-accent: #ffffff;
+  --se-line: rgba(21, 24, 29, 0.14);
+}
+
+.dark {
+  --se-bg: #0a0d12;
+  --se-surface: #151a23;
+  --se-text: #f5f1e8;
+  --se-muted: #9da3ad;
+  --se-accent: #c9ff63;
+  --se-on-accent: #0a0d12;
+  --se-line: rgba(245, 241, 232, 0.14);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not(.light):not(.dark) {
+    --se-bg: #0a0d12;
+    --se-surface: #151a23;
+    --se-text: #f5f1e8;
+    --se-muted: #9da3ad;
+    --se-accent: #c9ff63;
+    --se-on-accent: #0a0d12;
+    --se-line: rgba(245, 241, 232, 0.14);
+  }
+}
+
+/* Homepage root: unlayered so it wins over the legacy html/body background rules */
+.se-root {
+  background: var(--se-bg);
+}
+.se-root body {
+  background: var(--se-bg);
+  color: var(--se-text);
+}
+
+/* Subtle editorial grid texture, pure CSS, ignored by AT */
+.se-grid-texture {
+  background-image:
+    linear-gradient(var(--se-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--se-line) 1px, transparent 1px);
+  background-size: 72px 72px;
+  opacity: 0.35;
 }
 
 /* Fallback for system preference (when no class is set) */
@@ -293,8 +353,24 @@ body {
   font-family: var(--font-sans, Arial, Helvetica, sans-serif);
 }
 
+/* Native form controls follow the active theme */
+:root {
+  color-scheme: light;
+}
+.dark {
+  color-scheme: dark;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not(.light):not(.dark) {
+    color-scheme: dark;
+  }
+}
+
 /* Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
   *,
   *::before,
   *::after {
@@ -344,15 +420,6 @@ body {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border-width: 0;
-}
-
-/* Custom cursor — hide default on non-touch devices */
-@media (hover: hover) and (pointer: fine) {
-  *,
-  *::before,
-  *::after {
-    cursor: none !important;
-  }
 }
 
 /* Animated gradient text for hero role label */
