@@ -3,7 +3,13 @@
 import { useTheme } from "@/lib/theme/useTheme";
 import { Sun, Moon } from "lucide-react";
 
-export default function ThemeToggle() {
+interface ThemeToggleProps {
+  toDarkLabel?: string;
+  toLightLabel?: string;
+  className?: string;
+}
+
+export default function ThemeToggle({ toDarkLabel, toLightLabel, className }: ThemeToggleProps) {
   const { theme, resolvedTheme, setTheme } = useTheme();
 
   const cycleTheme = () => {
@@ -23,8 +29,8 @@ export default function ThemeToggle() {
 
   const getLabel = () => {
     return resolvedTheme === "dark"
-      ? "Dark theme (click to switch to light)"
-      : "Light theme (click to switch to dark)";
+      ? (toLightLabel ?? "Dark theme (click to switch to light)")
+      : (toDarkLabel ?? "Light theme (click to switch to dark)");
   };
 
   return (
@@ -46,8 +52,11 @@ export default function ThemeToggle() {
             cycleTheme();
           }
         }}
-        className="animate-fade-in inline-flex h-9 w-9 items-center justify-center rounded-full opacity-0 text-muted-foreground transition-all duration-300 hover:bg-muted hover:text-foreground hover:scale-110"
-        style={{ animationDelay: "50ms", animationFillMode: "forwards" }}
+        className={
+          className ??
+          "animate-fade-in text-muted-foreground hover:bg-muted hover:text-foreground inline-flex h-9 w-9 items-center justify-center rounded-full opacity-0 transition-all duration-300 hover:scale-110"
+        }
+        style={className ? undefined : { animationDelay: "50ms", animationFillMode: "forwards" }}
         aria-label={getLabel()}
         title={getLabel()}
       >

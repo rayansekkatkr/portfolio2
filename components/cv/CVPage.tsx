@@ -18,7 +18,7 @@ const EXPERIENCE = [
   {
     title: "DevOps Engineer",
     company: "STMicroelectronics",
-    period: "Jan 2024 — Dec 2024",
+    period: "Jan 2024 - Dec 2024",
     location: "Remote / Korea",
     items: [
       "Automated CI/CD pipelines reducing deployment time by 60%",
@@ -30,11 +30,11 @@ const EXPERIENCE = [
   {
     title: "Full-Stack Developer & DevOps",
     company: "UNYC",
-    period: "Sep 2020 — Sep 2023",
+    period: "Sep 2020 - Sep 2023",
     location: "France",
     items: [
       "Built and maintained B2B SaaS platform (Next.js + FastAPI + PostgreSQL)",
-      "Integrated Stripe billing — subscriptions, invoices, webhook handling",
+      "Integrated Stripe billing: subscriptions, invoices, webhook handling",
       "Designed REST + WebSocket API serving 10k+ daily active sessions",
       "Led frontend rewrite from legacy PHP templates to React/TypeScript",
     ],
@@ -44,7 +44,7 @@ const EXPERIENCE = [
 const PROJECTS = [
   {
     name: "Pont Factur-X",
-    tagline: "AI B2B SaaS — CEO & Sole Developer",
+    tagline: "AI B2B SaaS · CEO & Sole Developer",
     accent: "#00D4FF",
     stack: ["Next.js", "FastAPI", "PostgreSQL", "OCR", "Stripe", "Docker"],
     highlights: ["99.9% OCR precision", "Sub-10s processing", "Full GDPR compliance"],
@@ -53,7 +53,7 @@ const PROJECTS = [
   },
   {
     name: "Pick4Me",
-    tagline: "Delivery Marketplace — Lead Backend Dev & Website",
+    tagline: "Delivery Marketplace · Lead Backend Dev & Website",
     accent: "#818cf8",
     stack: ["NestJS", "Socket.IO", "Stripe Issuing", "Revolut Business", "Mapbox", "Firebase FCM"],
     highlights: ["<100ms WebSocket latency", "2 payment integrations", "99.9% VPS uptime"],
@@ -62,12 +62,12 @@ const PROJECTS = [
   },
   {
     name: "AI Portfolio",
-    tagline: "Personal — Sole Developer",
+    tagline: "Personal · Sole Developer",
     accent: "#C9A55C",
     stack: ["Next.js 15", "React 19", "Three.js", "Framer Motion", "Tailwind v4"],
     highlights: ["Lighthouse 100", "i18n (FR/EN/KR)", "3D WebGL hero"],
     description:
-      "This portfolio — custom design system, 3D canvas hero, multilingual, dark/light modes, and Framer Motion animations throughout.",
+      "This portfolio: custom design system, 3D canvas hero, multilingual, dark/light modes, and Framer Motion animations throughout.",
   },
 ];
 
@@ -113,7 +113,7 @@ export default function CVPage() {
             <div className="flex flex-wrap gap-4 text-sm" style={{ color: "var(--t-secondary)" }}>
               <span className="flex items-center gap-1.5">
                 <MapPin className="h-3.5 w-3.5" style={{ color: "rgba(0,212,255,0.6)" }} />
-                Seoul, South Korea — Open to Remote
+                Seoul, South Korea · Open to Remote
               </span>
               <a
                 href="mailto:rayan.sekkat@gmail.com"
@@ -159,11 +159,10 @@ export default function CVPage() {
           >
             <SectionLabel>{"// summary"}</SectionLabel>
             <p className="text-base leading-relaxed" style={{ color: "var(--t-secondary)" }}>
-              Full-stack SaaS engineer with 4+ years shipping production software — from
-              architecture to the first paying user. TypeScript/Next.js on the frontend,
-              Python/FastAPI or NestJS on the backend, deployed on K8s or Vercel. Comfortable with
-              LLMs, real-time systems, and payment integrations. I work end-to-end and own the
-              outcome.
+              Full-stack SaaS engineer with 4+ years shipping production software, from architecture
+              to the first paying user. TypeScript/Next.js on the frontend, Python/FastAPI or NestJS
+              on the backend, deployed on K8s or Vercel. Comfortable with LLMs, real-time systems,
+              and payment integrations. I work end-to-end and own the outcome.
             </p>
           </motion.section>
 
@@ -376,7 +375,7 @@ export default function CVPage() {
                   className="mb-2 font-mono text-[10px] tracking-wide"
                   style={{ color: "rgba(0,212,255,0.7)" }}
                 >
-                  EPSI · 2018 — 2023
+                  EPSI · 2018 - 2023
                 </p>
                 <p className="text-sm" style={{ color: "var(--t-secondary)" }}>
                   5-year program covering software architecture, DevOps, project management, and
@@ -394,7 +393,7 @@ export default function CVPage() {
                 <div className="mb-4 space-y-2">
                   {[
                     { lang: "French", level: "Native" },
-                    { lang: "English", level: "C1 — Professional" },
+                    { lang: "English", level: "C1 (Professional)" },
                     { lang: "Korean", level: "Basic" },
                   ].map(({ lang, level }) => (
                     <div key={lang} className="flex items-center justify-between">
@@ -445,7 +444,7 @@ export default function CVPage() {
             transition={{ duration: dur(0.5), delay: del(0.45) }}
           >
             <a
-              href="/Rayan_Sekkat_CV_2026_english.pdf"
+              href="/Rayan_Sekkat_CV_English_2026.pdf"
               download
               className="group inline-flex items-center gap-3 rounded-full px-8 py-4 font-mono text-[11px] tracking-[0.2em] uppercase transition-all duration-200"
               style={{
