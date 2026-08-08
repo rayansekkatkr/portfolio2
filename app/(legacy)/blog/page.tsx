@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { SITE_URL } from "@/lib/site";
 import { prisma } from "@/lib/prisma";
 import BlogPageClient from "@/components/blog/BlogPageClient";
 import BlogHeader from "@/components/layout/BlogHeader";
@@ -8,14 +9,14 @@ export const metadata: Metadata = {
   description:
     "Articles techniques et partage de connaissances sur le développement web moderne, Next.js, TypeScript et l'intelligence artificielle.",
   alternates: {
-    canonical: "https://rayansekkat.com/blog",
+    canonical: `${SITE_URL}/blog`,
   },
   openGraph: {
     title: "Blog | Rayan Sekkat",
     description:
       "Articles techniques et partage de connaissances sur le développement web moderne, Next.js, TypeScript et l'intelligence artificielle.",
     type: "website",
-    url: "https://rayansekkat.com/blog",
+    url: `${SITE_URL}/blog`,
     siteName: "Rayan Sekkat Portfolio",
     locale: "fr_FR",
   },
@@ -93,7 +94,7 @@ export default async function BlogPage({ searchParams }: PageProps) {
       <BlogHeader />
 
       {/* Blog content */}
-      <main id="main-content" className="mx-auto max-w-7xl px-6 py-12">
+      <main id="main-content" lang="fr" className="mx-auto max-w-7xl px-6 py-12">
         <div className="mb-12">
           <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl dark:text-white">
             Blog

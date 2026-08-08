@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { SITE_URL } from "@/lib/site";
 import { ArrowLeft } from "lucide-react";
 import { Metadata } from "next";
 
@@ -6,13 +7,13 @@ export const metadata: Metadata = {
   title: "Terms of Use",
   description: "Terms and conditions of use for Rayan Sekkat's portfolio website.",
   alternates: {
-    canonical: "https://rayansekkat.com/terms",
+    canonical: `${SITE_URL}/terms`,
   },
   openGraph: {
     title: "Terms of Use | Rayan Sekkat",
     description: "Terms and conditions of use",
     type: "website",
-    url: "https://rayansekkat.com/terms",
+    url: `${SITE_URL}/terms`,
   },
   robots: {
     index: true,
@@ -22,7 +23,7 @@ export const metadata: Metadata = {
 
 export default function TermsPage() {
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div lang="fr" className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <div className="mx-auto max-w-4xl px-6 py-16">
         <Link
           href="/"
@@ -46,9 +47,9 @@ export default function TermsPage() {
               1. Acceptation des Conditions
             </h2>
             <p className="mt-4 text-gray-600 dark:text-gray-400">
-              En accédant et en utilisant ce site web (rayansekkat.com), vous acceptez d&apos;être
-              lié par ces conditions d&apos;utilisation et par notre politique de confidentialité.
-              Si vous n&apos;acceptez pas ces conditions, veuillez ne pas utiliser ce site.
+              En accédant et en utilisant ce site web, vous acceptez d&apos;être lié par ces
+              conditions d&apos;utilisation et par notre politique de confidentialité. Si vous
+              n&apos;acceptez pas ces conditions, veuillez ne pas utiliser ce site.
             </p>
           </section>
 

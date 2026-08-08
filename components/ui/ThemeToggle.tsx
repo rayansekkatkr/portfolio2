@@ -6,20 +6,33 @@ import { Sun, Moon } from "lucide-react";
 interface ThemeToggleProps {
   toDarkLabel?: string;
   toLightLabel?: string;
+  announcedDark?: string;
+  announcedLight?: string;
   className?: string;
 }
 
-export default function ThemeToggle({ toDarkLabel, toLightLabel, className }: ThemeToggleProps) {
-  const { theme, resolvedTheme, setTheme } = useTheme();
+export default function ThemeToggle({
+  toDarkLabel,
+  toLightLabel,
+  announcedDark,
+  announcedLight,
+  className,
+}: ThemeToggleProps) {
+  const { resolvedTheme, setTheme } = useTheme();
 
   const cycleTheme = () => {
-    const newTheme: "light" | "dark" = theme === "light" ? "dark" : "light";
+    // Base the switch on the resolved theme so the first click always flips,
+    // including when the stored preference is "system"
+    const newTheme: "light" | "dark" = resolvedTheme === "light" ? "dark" : "light";
     setTheme(newTheme);
 
     // Announce theme change to screen readers
     const announcement = document.getElementById("theme-announcement");
     if (announcement) {
-      announcement.textContent = `Theme changed to ${newTheme} mode`;
+      announcement.textContent =
+        newTheme === "dark"
+          ? (announcedDark ?? "Dark theme enabled")
+          : (announcedLight ?? "Light theme enabled");
     }
   };
 

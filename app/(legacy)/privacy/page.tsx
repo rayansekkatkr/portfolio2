@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { SITE_URL } from "@/lib/site";
 import { ArrowLeft } from "lucide-react";
 import { Metadata } from "next";
 
@@ -6,19 +7,19 @@ export const metadata: Metadata = {
   title: "Privacy Policy",
   description:
     "Privacy policy and data protection information for Rayan Sekkat's portfolio website.",
-  alternates: { canonical: "https://rayansekkat.com/privacy" },
+  alternates: { canonical: `${SITE_URL}/privacy` },
   openGraph: {
     title: "Privacy Policy | Rayan Sekkat",
     description: "Privacy policy and data protection information",
     type: "website",
-    url: "https://rayansekkat.com/privacy",
+    url: `${SITE_URL}/privacy`,
   },
   robots: { index: true, follow: true },
 };
 
 export default function PrivacyPage() {
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div lang="fr" className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <div className="mx-auto max-w-4xl px-6 py-16">
         <Link
           href="/"

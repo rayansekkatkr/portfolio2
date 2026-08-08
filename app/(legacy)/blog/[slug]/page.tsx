@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { SITE_URL } from "@/lib/site";
 import { Metadata } from "next";
 import { prisma } from "@/lib/prisma";
 import BlogPost from "@/components/blog/BlogPost";
@@ -60,7 +61,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   // Truncate description to 160 characters for meta description
   const description = (article.seoMetaDescription || article.excerpt).slice(0, 160);
-  const articleUrl = `https://rayansekkat.com/blog/${slug}`;
+  const articleUrl = `${SITE_URL}/blog/${slug}`;
   const publishDate = article.publishedAt?.toISOString() || new Date().toISOString();
 
   return {
@@ -108,7 +109,7 @@ export default async function ArticlePage({ params }: PageProps) {
     notFound();
   }
 
-  const articleUrl = `https://rayansekkat.com/blog/${slug}`;
+  const articleUrl = `${SITE_URL}/blog/${slug}`;
   const publishDate = article.publishedAt?.toISOString() || new Date().toISOString();
 
   // JSON-LD structured data for Article schema
@@ -123,12 +124,12 @@ export default async function ArticlePage({ params }: PageProps) {
     author: {
       "@type": "Person",
       name: article.author,
-      url: "https://rayansekkat.com",
+      url: SITE_URL,
     },
     publisher: {
       "@type": "Person",
       name: "Rayan Sekkat",
-      url: "https://rayansekkat.com",
+      url: SITE_URL,
     },
     mainEntityOfPage: {
       "@type": "WebPage",
@@ -162,7 +163,7 @@ export default async function ArticlePage({ params }: PageProps) {
       <BlogHeader backHref="/blog" backLabel="Retour au blog" />
 
       {/* Article content */}
-      <main id="main-content" className="mx-auto max-w-7xl px-6 py-12">
+      <main id="main-content" lang="fr" className="mx-auto max-w-7xl px-6 py-12">
         <BlogPost
           title={article.title}
           content={article.content}

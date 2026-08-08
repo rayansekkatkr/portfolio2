@@ -1,16 +1,12 @@
 import { ImageResponse } from "next/og";
-import { home } from "@/lib/content/home";
-import { isLocale, type Locale } from "@/lib/site";
 
 export const runtime = "edge";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-export default async function OgImage({ params }: { params: Promise<{ locale: string }> }) {
-  const { locale } = await params;
-  const resolved: Locale = isLocale(locale) ? locale : "en";
-  const { hero } = home[resolved];
-
+// Latin-only text: the default OG font has no Korean glyphs, so both locales
+// share this card rather than risk missing characters on /ko previews.
+export default async function OgImage() {
   return new ImageResponse(
     <div
       style={{
@@ -34,7 +30,7 @@ export default async function OgImage({ params }: { params: Promise<{ locale: st
           color: "#c9ff63",
         }}
       >
-        {hero.eyebrow}
+        Seoul, South Korea · Available for full-time roles
       </div>
       <div style={{ display: "flex", flexDirection: "column" }}>
         <div style={{ display: "flex", fontSize: 120, lineHeight: 1 }}>Rayan Sekkat.</div>
@@ -49,8 +45,10 @@ export default async function OgImage({ params }: { params: Promise<{ locale: st
         />
       </div>
       <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-        <div style={{ display: "flex", fontSize: 44, fontWeight: 700 }}>{hero.title}</div>
-        <div style={{ display: "flex", fontSize: 30, color: "#9da3ad" }}>{hero.subtitle}</div>
+        <div style={{ display: "flex", fontSize: 44, fontWeight: 700 }}>Full-Stack Engineer</div>
+        <div style={{ display: "flex", fontSize: 30, color: "#9da3ad" }}>
+          Backend Engineering · Cloud &amp; DevOps
+        </div>
       </div>
     </div>,
     size

@@ -31,6 +31,8 @@ export interface HomeContent {
     localeSwitcherLabel: string;
     themeToggleToDark: string;
     themeToggleToLight: string;
+    themeAnnouncedDark: string;
+    themeAnnouncedLight: string;
     homeAriaLabel: string;
   };
   hero: {
@@ -123,6 +125,8 @@ export const home: Record<Locale, HomeContent> = {
       localeSwitcherLabel: "Language",
       themeToggleToDark: "Switch to dark theme",
       themeToggleToLight: "Switch to light theme",
+      themeAnnouncedDark: "Dark theme enabled",
+      themeAnnouncedLight: "Light theme enabled",
       homeAriaLabel: "Rayan Sekkat, home",
     },
     hero: {
@@ -178,7 +182,7 @@ export const home: Record<Locale, HomeContent> = {
           "A multilingual esports prediction platform for League of Legends, Valorant, CS2 and Rocket League.",
         role: "Creator & Full-Stack Engineer: mobile and backend architecture, product, and deployment workflows.",
         challenge:
-          "Settling thousands of predictions against live match data without double-crediting points or corrupting standings when providers resend or correct results.",
+          "Settling predictions against live match data without double-crediting points or corrupting standings when providers resend or correct results.",
         decisions: [
           "Provider ingestion layer normalizing external esports match data.",
           "Versioned scoring engine so rule changes never rewrite past results.",
@@ -339,6 +343,8 @@ export const home: Record<Locale, HomeContent> = {
       localeSwitcherLabel: "언어 선택",
       themeToggleToDark: "다크 테마로 전환",
       themeToggleToLight: "라이트 테마로 전환",
+      themeAnnouncedDark: "다크 테마가 적용되었습니다",
+      themeAnnouncedLight: "라이트 테마가 적용되었습니다",
       homeAriaLabel: "Rayan Sekkat 홈",
     },
     hero: {
@@ -390,7 +396,7 @@ export const home: Record<Locale, HomeContent> = {
           "League of Legends, Valorant, CS2, Rocket League를 지원하는 다국어 e스포츠 승부 예측 플랫폼입니다.",
         role: "창립자 & 풀스택 엔지니어: 모바일/백엔드 아키텍처, 프로덕트, 배포 워크플로 전반을 담당.",
         challenge:
-          "경기 결과가 재전송되거나 정정되는 상황에서도 포인트 중복 지급이나 순위 오류 없이 수천 건의 예측을 정산하는 것.",
+          "경기 결과가 재전송되거나 정정되는 상황에서도 포인트 중복 지급이나 순위 오류 없이 예측을 정산하는 것.",
         decisions: [
           "외부 e스포츠 경기 데이터를 정규화하는 프로바이더 수집 레이어.",
           "규칙이 변경되어도 과거 결과가 바뀌지 않는 버전 관리형 스코어링 엔진.",

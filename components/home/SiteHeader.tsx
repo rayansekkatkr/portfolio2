@@ -47,6 +47,8 @@ export default function SiteHeader({ locale, nav }: SiteHeaderProps) {
           <ThemeToggle
             toDarkLabel={nav.themeToggleToDark}
             toLightLabel={nav.themeToggleToLight}
+            announcedDark={nav.themeAnnouncedDark}
+            announcedLight={nav.themeAnnouncedLight}
             className="border-se-line text-se-muted hover:text-se-text focus-visible:outline-se-accent inline-flex h-9 w-9 items-center justify-center rounded-sm border transition-colors focus-visible:outline-2 focus-visible:outline-offset-2"
           />
           <button
