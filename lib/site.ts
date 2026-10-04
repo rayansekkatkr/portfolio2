@@ -7,11 +7,19 @@ export const LINKS = {
   github: "https://github.com/rayansekkatkr",
   goodcall: "https://goodcall.gg/en/",
   pick4me: "https://pick4me.be",
-  pontFacturX: "https://pont-facturx.com",
-  rayanStudios: "https://rayanstudios.com/fr",
+  pontFacturX: "https://www.pont-facturx.com",
+  rayanStudios: "https://www.rayanstudios.com/",
 } as const;
 
-export const CV_PATH = "/Rayan_Sekkat_CV_English_2026.pdf";
+// Two CV tracks, matching the two roles I apply for.
+export const CV = {
+  backend: "/Rayan_Sekkat_CV_Backend_FullStack_EN.pdf",
+  devops: "/Rayan_Sekkat_CV_DevOps_Platform_EN.pdf",
+} as const;
+export type Track = keyof typeof CV;
+
+// Default CV (kept for /cv redirect and legacy links)
+export const CV_PATH = CV.backend;
 
 export const LOCALES = ["en", "ko"] as const;
 export type Locale = (typeof LOCALES)[number];

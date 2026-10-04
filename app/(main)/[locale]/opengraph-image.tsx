@@ -16,9 +16,9 @@ export default async function OgImage() {
         flexDirection: "column",
         justifyContent: "space-between",
         padding: "72px 80px",
-        backgroundColor: "#0a0d12",
-        color: "#f5f1e8",
-        fontFamily: "Georgia, serif",
+        backgroundColor: "#0f0f0e",
+        color: "#efede7",
+        fontFamily: "sans-serif",
       }}
     >
       <div
@@ -27,7 +27,7 @@ export default async function OgImage() {
           fontSize: 26,
           letterSpacing: "0.2em",
           textTransform: "uppercase",
-          color: "#c9ff63",
+          color: "#ff5d30",
         }}
       >
         Seoul, South Korea · Available for full-time roles
@@ -40,14 +40,16 @@ export default async function OgImage() {
             marginTop: 28,
             width: 96,
             height: 8,
-            backgroundColor: "#c9ff63",
+            backgroundColor: "#ff5d30",
           }}
         />
       </div>
       <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-        <div style={{ display: "flex", fontSize: 44, fontWeight: 700 }}>Full-Stack Engineer</div>
-        <div style={{ display: "flex", fontSize: 30, color: "#9da3ad" }}>
-          Backend Engineering · Cloud &amp; DevOps
+        <div style={{ display: "flex", fontSize: 44, fontWeight: 700 }}>
+          Backend &amp; DevOps Engineer
+        </div>
+        <div style={{ display: "flex", fontSize: 30, color: "#a6a39b" }}>
+          NestJS · FastAPI · CI/CD · Kubernetes · AWS
         </div>
       </div>
     </div>,

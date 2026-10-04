@@ -1,105 +1,124 @@
+import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
-import { type CaseStudyContent, type HomeContent } from "@/lib/content/home";
+import Pipeline from "@/components/home/Pipeline";
+import { SectionHead, WRAP } from "@/components/home/Section";
+import { type HomeContent, type Project } from "@/lib/content/home";
 
-function StackList({ label, stack }: { label: string; stack: string[] }) {
+function MetaRow({ label, children }: { label: string; children: React.ReactNode }) {
   return (
-    <div>
-      <p className="font-meta text-se-muted text-[10px] tracking-[0.16em] uppercase">{label}</p>
-      <ul className="mt-2 flex flex-wrap gap-x-3 gap-y-1">
-        {stack.map((tech) => (
-          <li key={tech} className="font-meta text-se-text text-xs">
-            {tech}
-          </li>
-        ))}
-      </ul>
+    <div className="border-se-line grid grid-cols-[96px_1fr] gap-4 border-b py-3">
+      <dt className="font-meta text-se-faint pt-0.5 text-[11px] tracking-[0.12em] uppercase">
+        {label}
+      </dt>
+      <dd className="text-se-text text-sm">{children}</dd>
     </div>
   );
 }
 
-function ExternalCta({ study }: { study: CaseStudyContent }) {
-  if (!study.url || !study.ctaLabel) return null;
-  return (
-    <a
-      href={study.url}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="text-se-accent focus-visible:outline-se-accent inline-flex items-center gap-1 text-sm font-bold underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2"
-    >
-      {study.ctaLabel}
-      <ArrowUpRight aria-hidden="true" className="h-4 w-4" />
-    </a>
-  );
-}
-
-// GoodCall: full-width featured case study with real engineering substance.
-function FeaturedCaseStudy({ work }: { work: HomeContent["work"] }) {
-  const study = work.goodcall;
-  return (
-    <article className="border-se-line bg-se-surface rounded-md border p-6 sm:p-10">
-      <p className="font-meta text-se-accent text-[10px] tracking-[0.2em] uppercase">
-        {work.featuredTag}
-      </p>
-      <h3 className="font-display text-se-text mt-3 text-4xl sm:text-5xl">{study.name}</h3>
-      <p className="text-se-muted mt-3 max-w-2xl text-base leading-relaxed">{study.positioning}</p>
-
-      <div className="mt-8 grid gap-8 lg:grid-cols-2">
-        <div className="space-y-6">
-          <div>
-            <p className="font-meta text-se-muted text-[10px] tracking-[0.16em] uppercase">
-              {work.roleLabel}
-            </p>
-            <p className="text-se-text mt-2 text-sm leading-relaxed">{study.role}</p>
-          </div>
-          {study.challenge && (
-            <div>
-              <p className="font-meta text-se-muted text-[10px] tracking-[0.16em] uppercase">
-                {work.challengeLabel}
-              </p>
-              <p className="text-se-text mt-2 text-sm leading-relaxed">{study.challenge}</p>
-            </div>
-          )}
-          <StackList label={work.stackLabel} stack={study.stack} />
-        </div>
-        {study.decisions && (
-          <div>
-            <p className="font-meta text-se-muted text-[10px] tracking-[0.16em] uppercase">
-              {work.decisionsLabel}
-            </p>
-            <ul className="border-se-accent mt-2 space-y-2 border-l-2 pl-4">
-              {study.decisions.map((decision) => (
-                <li key={decision} className="text-se-text text-sm leading-relaxed">
-                  {decision}
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-      </div>
-
-      <div className="border-se-line mt-8 border-t pt-6">
-        <ExternalCta study={study} />
-      </div>
-    </article>
-  );
-}
-
-function SecondaryCaseStudy({
-  study,
+function ProjectEntry({
+  project,
+  n,
   work,
 }: {
-  study: CaseStudyContent;
+  project: Project;
+  n: number;
   work: HomeContent["work"];
 }) {
+  const headingId = `project-${project.id}`;
   return (
-    <article className="border-se-line bg-se-surface flex flex-col rounded-md border p-6 sm:p-8">
-      <h3 className="font-display text-se-text text-3xl">{study.name}</h3>
-      <p className="text-se-muted mt-2 text-sm">{study.positioning}</p>
-      <p className="text-se-text mt-4 text-sm leading-relaxed">{study.role}</p>
-      <div className="mt-5">
-        <StackList label={work.stackLabel} stack={study.stack} />
-      </div>
-      <div className="border-se-line mt-auto border-t pt-5">
-        <ExternalCta study={study} />
+    <article
+      aria-labelledby={headingId}
+      className="border-se-line-strong grid gap-10 border-t pt-8 lg:grid-cols-12 lg:gap-10 lg:pt-10"
+    >
+      {/* Title row */}
+      <header className="lg:col-span-12">
+        <div className="font-meta text-se-muted flex flex-wrap items-center justify-between gap-3 text-[11px] tracking-[0.14em] uppercase">
+          <span>
+            <span className="text-se-accent">
+              {work.index}.{n}
+            </span>
+            <span aria-hidden="true" className="text-se-faint mx-2">
+              /
+            </span>
+            {project.kind}
+          </span>
+          <a
+            href={project.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-se-text hover:text-se-accent focus-visible:outline-se-accent inline-flex items-center gap-1 normal-case transition-colors focus-visible:outline-2 focus-visible:outline-offset-4"
+          >
+            {project.urlLabel}
+            <ArrowUpRight aria-hidden="true" className="h-3.5 w-3.5" />
+          </a>
+        </div>
+        <h3 id={headingId} className="se-display text-se-text mt-5 text-[clamp(3rem,8.5vw,7.5rem)]">
+          {project.name}
+        </h3>
+      </header>
+
+      {/* Meta column */}
+      <dl className="border-se-line self-start border-t lg:col-span-4">
+        <MetaRow label={work.roleLabel}>{project.role}</MetaRow>
+        <MetaRow label={work.platformsLabel}>{project.platforms}</MetaRow>
+        <MetaRow label={work.yearLabel}>{project.year}</MetaRow>
+        <MetaRow label={work.stackLabel}>
+          <ul className="font-meta text-se-muted flex flex-wrap gap-x-2 gap-y-1 text-xs">
+            {project.stack.map((tech, i) => (
+              <li key={tech}>
+                {tech}
+                {i < project.stack.length - 1 && (
+                  <span aria-hidden="true" className="text-se-faint ml-2">
+                    /
+                  </span>
+                )}
+              </li>
+            ))}
+          </ul>
+        </MetaRow>
+      </dl>
+
+      {/* Story column */}
+      <div className="lg:col-span-8">
+        <p className="text-se-text max-w-2xl text-lg leading-relaxed sm:text-xl">
+          {project.summary}
+        </p>
+        <ul className="mt-6 grid max-w-3xl gap-x-8 gap-y-3 sm:grid-cols-2">
+          {project.highlights.map((h) => (
+            <li key={h} className="text-se-muted flex gap-3 text-sm leading-relaxed">
+              <span aria-hidden="true" className="font-meta text-se-accent mt-px shrink-0">
+                →
+              </span>
+              {h}
+            </li>
+          ))}
+        </ul>
+
+        <div className="mt-10">
+          <Pipeline title={project.pipelineTitle} steps={project.pipeline} />
+        </div>
+
+        {project.image && (
+          <figure className="border-se-line-strong bg-se-surface mt-6 overflow-hidden border">
+            <div
+              aria-hidden="true"
+              className="border-se-line font-meta text-se-faint flex items-center gap-1.5 border-b px-3 py-2 text-[10px]"
+            >
+              <span className="bg-se-line h-2 w-2 rounded-full" />
+              <span className="bg-se-line h-2 w-2 rounded-full" />
+              <span className="bg-se-line h-2 w-2 rounded-full" />
+              <span className="ml-3">{project.urlLabel}</span>
+            </div>
+            <Image
+              src={project.image.src}
+              alt={project.image.alt}
+              width={project.image.width}
+              height={project.image.height}
+              sizes="(min-width: 1024px) 820px, 100vw"
+              className="h-auto w-full"
+            />
+          </figure>
+        )}
       </div>
     </article>
   );
@@ -108,18 +127,20 @@ function SecondaryCaseStudy({
 export default function SelectedWork({ content }: { content: HomeContent }) {
   const { work } = content;
   return (
-    <section id="work" className="scroll-mt-20">
-      <div className="mx-auto max-w-6xl px-6 py-16 lg:px-8 lg:py-24">
-        <h2 className="font-meta text-se-accent text-xs tracking-[0.2em] uppercase">
-          {work.heading}
-        </h2>
-        <div className="mt-8 space-y-8">
-          <FeaturedCaseStudy work={work} />
-          <div className="grid gap-8 md:grid-cols-2">
-            {work.secondary.map((study) => (
-              <SecondaryCaseStudy key={study.name} study={study} work={work} />
-            ))}
-          </div>
+    <section id="work" aria-labelledby="work-heading" className="scroll-mt-14">
+      <div className={`${WRAP} pt-20 pb-4 lg:pt-28`}>
+        <SectionHead
+          id="work-heading"
+          index={work.index}
+          label={content.nav.work}
+          heading={work.heading}
+          intro={work.intro}
+          aside={`${work.projects.length} × prod`}
+        />
+        <div className="mt-16 space-y-24 lg:mt-20 lg:space-y-32">
+          {work.projects.map((project, i) => (
+            <ProjectEntry key={project.id} project={project} n={i + 1} work={work} />
+          ))}
         </div>
       </div>
     </section>

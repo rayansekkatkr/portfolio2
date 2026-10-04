@@ -7,10 +7,16 @@ interface CopyEmailButtonProps {
   email: string;
   label: string;
   copiedLabel: string;
+  className?: string;
 }
 
 // Progressive enhancement: mailto/LinkedIn links next to this always work if clipboard fails.
-export default function CopyEmailButton({ email, label, copiedLabel }: CopyEmailButtonProps) {
+export default function CopyEmailButton({
+  email,
+  label,
+  copiedLabel,
+  className,
+}: CopyEmailButtonProps) {
   const [copied, setCopied] = useState(false);
 
   const copy = async () => {
@@ -19,7 +25,7 @@ export default function CopyEmailButton({ email, label, copiedLabel }: CopyEmail
       setCopied(true);
       setTimeout(() => setCopied(false), 2500);
     } catch {
-      // Clipboard unavailable — the adjacent mailto link remains the fallback.
+      // Clipboard unavailable: the adjacent mailto link remains the fallback.
     }
   };
 
@@ -27,12 +33,15 @@ export default function CopyEmailButton({ email, label, copiedLabel }: CopyEmail
     <button
       type="button"
       onClick={copy}
-      className="border-se-line bg-se-surface text-se-text hover:border-se-accent focus-visible:outline-se-accent inline-flex items-center gap-2 rounded-sm border px-5 py-3 text-sm font-bold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2"
+      className={
+        className ??
+        "border-se-line-strong text-se-text hover:bg-se-text hover:text-se-bg focus-visible:outline-se-accent font-meta inline-flex items-center gap-2 border px-3 py-2 text-[11px] tracking-[0.12em] uppercase transition-colors focus-visible:outline-2 focus-visible:outline-offset-2"
+      }
     >
       {copied ? (
-        <Check aria-hidden="true" className="text-se-accent h-4 w-4" />
+        <Check aria-hidden="true" className="text-se-ok h-3.5 w-3.5" />
       ) : (
-        <Copy aria-hidden="true" className="h-4 w-4" />
+        <Copy aria-hidden="true" className="h-3.5 w-3.5" />
       )}
       {copied ? copiedLabel : label}
       <span className="sr-only" role="status" aria-live="polite">

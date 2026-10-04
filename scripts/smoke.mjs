@@ -33,34 +33,41 @@ for (const [path, dest] of [
 }
 
 // Locale pages
+const CV_BACKEND = "Rayan_Sekkat_CV_Backend_FullStack_EN.pdf";
+const CV_DEVOPS = "Rayan_Sekkat_CV_DevOps_Platform_EN.pdf";
+
 const expectations = {
   en: [
     'lang="en"',
     "Rayan",
-    "Full-Stack Engineer",
+    "Backend / Full-Stack",
+    "DevOps / Platform",
     "170+",
-    "5+ years",
+    "5+",
     "30%",
     "GoodCall",
     "Pick4Me",
     "Pont Factur-X",
     "https://goodcall.gg/en/",
     "https://www.linkedin.com/in/rayan-sekkat-3911a9294",
-    "https://rayanstudios.com/fr",
-    "H-1 Working Holiday",
-    "Rayan_Sekkat_CV_English_2026.pdf",
+    "https://www.rayanstudios.com/",
+    "H-1",
+    "E-7",
+    CV_BACKEND,
+    CV_DEVOPS,
     'hreflang="ko"',
     'hreflang="x-default"',
   ],
   ko: [
     'lang="ko"',
-    "풀스택 엔지니어",
+    "백엔드 / 풀스택",
     "170+",
     "30%",
     "GoodCall",
-    "워킹홀리데이",
-    "영문 이력서",
-    "Rayan_Sekkat_CV_English_2026.pdf",
+    "E-7",
+    "이력서",
+    CV_BACKEND,
+    CV_DEVOPS,
     'hreflang="en"',
   ],
 };
@@ -73,7 +80,7 @@ for (const [locale, needles] of Object.entries(expectations)) {
     // Next serializes some attributes camelCase (hrefLang) — match case-insensitively
     check(
       html.toLowerCase().includes(needle.toLowerCase()),
-      `/${locale} contains ${JSON.stringify(needle)}`,
+      `/${locale} contains ${JSON.stringify(needle)}`
     );
   }
   check(!html.includes(">0<"), `/${locale} has no zero-rendered metric`);
@@ -85,7 +92,7 @@ for (const [locale, needles] of Object.entries(expectations)) {
 {
   const res = await fetch(`${BASE}/ko`);
   const html = await res.text();
-  for (const englishChrome of ["Download CV", "View case studies", "Based in Seoul"]) {
+  for (const englishChrome of ["Download CV", "See the work", "Hiring in Korea"]) {
     check(
       !html.includes(englishChrome),
       `/ko has no English UI string ${JSON.stringify(englishChrome)}`
@@ -94,7 +101,7 @@ for (const [locale, needles] of Object.entries(expectations)) {
 }
 
 // Assets and preserved routes
-for (const path of ["/Rayan_Sekkat_CV_English_2026.pdf", "/blog", "/privacy", "/terms", "/cv"]) {
+for (const path of [`/${CV_BACKEND}`, `/${CV_DEVOPS}`, "/blog", "/privacy", "/terms", "/cv"]) {
   const res = await fetch(`${BASE}${path}`);
   check(res.status === 200, `${path} returns 200 (got ${res.status})`);
 }
@@ -104,7 +111,7 @@ for (const path of ["/Rayan_Sekkat_CV_English_2026.pdf", "/blog", "/privacy", "/
   const res = await fetch(`${BASE}/api/health`);
   check(
     [200, 503].includes(res.status),
-    `/api/health responds with a health payload (got ${res.status})`,
+    `/api/health responds with a health payload (got ${res.status})`
   );
 }
 
