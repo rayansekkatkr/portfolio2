@@ -262,40 +262,56 @@ body {
   --color-se-accent: var(--se-accent);
   --color-se-on-accent: var(--se-on-accent);
   --color-se-line: var(--se-line);
-  --font-display: var(--font-instrument-serif), Georgia, serif;
-  --font-meta: var(--font-plex-mono), ui-monospace, monospace;
+  --color-se-sunken: var(--se-sunken);
+  --color-se-faint: var(--se-faint);
+  --color-se-ok: var(--se-ok);
+  --color-se-line-strong: var(--se-line-strong);
+  --font-display: var(--font-sans-stack);
+  --font-meta: var(--font-mono-stack);
 }
 
-/* ─── Seoul Editorial tokens (homepage) ─── */
+/* ─── Homepage tokens: "spec sheet" system ─── */
 :root {
-  --se-bg: #f3f0e8;
-  --se-surface: #fffdf7;
-  --se-text: #15181d;
-  --se-muted: #686d74;
-  --se-accent: #2446ff;
+  --se-bg: #f1efe9;
+  --se-surface: #f8f7f3;
+  --se-sunken: #e8e5dd;
+  --se-text: #121210;
+  --se-muted: #5c5a54;
+  --se-faint: #8b8880;
+  --se-accent: #d23c12;
   --se-on-accent: #ffffff;
-  --se-line: rgba(21, 24, 29, 0.14);
+  --se-ok: #15803d;
+  --se-line: rgba(18, 18, 16, 0.13);
+  --se-line-strong: rgba(18, 18, 16, 0.9);
 }
 
 .dark {
-  --se-bg: #0a0d12;
-  --se-surface: #151a23;
-  --se-text: #f5f1e8;
-  --se-muted: #9da3ad;
-  --se-accent: #c9ff63;
-  --se-on-accent: #0a0d12;
-  --se-line: rgba(245, 241, 232, 0.14);
+  --se-bg: #0f0f0e;
+  --se-surface: #171715;
+  --se-sunken: #1e1e1b;
+  --se-text: #efede7;
+  --se-muted: #a6a39b;
+  --se-faint: #6f6c65;
+  --se-accent: #ff5d30;
+  --se-on-accent: #0f0f0e;
+  --se-ok: #4ade80;
+  --se-line: rgba(239, 237, 231, 0.12);
+  --se-line-strong: rgba(239, 237, 231, 0.85);
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not(.light):not(.dark) {
-    --se-bg: #0a0d12;
-    --se-surface: #151a23;
-    --se-text: #f5f1e8;
-    --se-muted: #9da3ad;
-    --se-accent: #c9ff63;
-    --se-on-accent: #0a0d12;
-    --se-line: rgba(245, 241, 232, 0.14);
+    --se-bg: #0f0f0e;
+    --se-surface: #171715;
+    --se-sunken: #1e1e1b;
+    --se-text: #efede7;
+    --se-muted: #a6a39b;
+    --se-faint: #6f6c65;
+    --se-accent: #ff5d30;
+    --se-on-accent: #0f0f0e;
+    --se-ok: #4ade80;
+    --se-line: rgba(239, 237, 231, 0.12);
+    --se-line-strong: rgba(239, 237, 231, 0.85);
   }
 }
 
@@ -304,17 +320,99 @@ body {
   background: var(--se-bg);
 }
 .se-root body {
+  --font-sans-stack:
+    var(--font-bricolage), "Apple SD Gothic Neo", "Pretendard", "Noto Sans KR", "Malgun Gothic",
+    system-ui, sans-serif;
+  --font-mono-stack:
+    var(--font-jetbrains), "Apple SD Gothic Neo", "Noto Sans KR", ui-monospace, monospace;
   background: var(--se-bg);
   color: var(--se-text);
+  font-optical-sizing: auto;
+}
+.se-root body,
+.se-root body * {
+  font-family: var(--font-sans-stack);
+}
+.se-root .font-meta,
+.se-root .font-meta * {
+  font-family: var(--font-mono-stack);
+  font-feature-settings: "zero" 1;
+}
+.se-root ::selection {
+  background: var(--se-accent);
+  color: var(--se-on-accent);
 }
 
-/* Subtle editorial grid texture, pure CSS, ignored by AT */
-.se-grid-texture {
-  background-image:
-    linear-gradient(var(--se-line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--se-line) 1px, transparent 1px);
-  background-size: 72px 72px;
-  opacity: 0.35;
+/* Condensed heavy display cut of Bricolage Grotesque (variable wdth/opsz) */
+.se-display {
+  font-variation-settings:
+    "wdth" 75,
+    "opsz" 96;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 0.86;
+}
+.se-title {
+  font-variation-settings:
+    "wdth" 85,
+    "opsz" 48;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+}
+
+/* Fine dotted leader used in spec rows */
+.se-leader {
+  background-image: radial-gradient(circle, var(--se-faint) 0.75px, transparent 1px);
+  background-size: 6px 2px;
+  background-repeat: repeat-x;
+  background-position: left center;
+}
+
+/* Pipeline: a signal pulse travels along the rail */
+@keyframes se-signal {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(500%);
+  }
+}
+@keyframes se-signal-y {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(500%);
+  }
+}
+.se-pulse {
+  animation: se-signal 3.2s cubic-bezier(0.6, 0, 0.4, 1) infinite;
+}
+.se-pulse-y {
+  animation: se-signal-y 3.2s cubic-bezier(0.6, 0, 0.4, 1) infinite;
+}
+@keyframes se-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+.se-blink {
+  animation: se-blink 2s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .se-pulse,
+  .se-pulse-y,
+  .se-blink {
+    animation: none;
+    opacity: 0;
+  }
+  .se-blink {
+    opacity: 1;
+  }
 }
 
 /* Fallback for system preference (when no class is set) */

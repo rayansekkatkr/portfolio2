@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { IBM_Plex_Mono, Instrument_Serif, Plus_Jakarta_Sans } from "next/font/google";
+import localFont from "next/font/local";
 import Script from "next/script";
 import { notFound } from "next/navigation";
 import { ThemeProvider } from "@/lib/theme/ThemeContext";
@@ -7,24 +7,18 @@ import { home } from "@/lib/content/home";
 import { isLocale, LINKS, LOCALES, SITE_URL, type Locale } from "@/lib/site";
 import "../../globals.css";
 
-const plusJakarta = Plus_Jakarta_Sans({
-  variable: "--font-plus-jakarta",
-  subsets: ["latin"],
-  weight: ["400", "500", "700", "800"],
+// Self-hosted variable fonts (SIL OFL, see app/fonts): no runtime call to Google.
+const bricolage = localFont({
+  src: "../../fonts/BricolageGrotesque-latin.woff2",
+  variable: "--font-bricolage",
+  weight: "200 800",
   display: "swap",
 });
 
-const instrumentSerif = Instrument_Serif({
-  variable: "--font-instrument-serif",
-  subsets: ["latin"],
-  weight: "400",
-  display: "swap",
-});
-
-const plexMono = IBM_Plex_Mono({
-  variable: "--font-plex-mono",
-  subsets: ["latin"],
-  weight: ["400", "500"],
+const jetbrains = localFont({
+  src: "../../fonts/JetBrainsMono-latin.woff2",
+  variable: "--font-jetbrains",
+  weight: "100 800",
   display: "swap",
 });
 
@@ -82,8 +76,8 @@ export const viewport: Viewport = {
   initialScale: 1,
   viewportFit: "cover",
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f3f0e8" },
-    { media: "(prefers-color-scheme: dark)", color: "#0a0d12" },
+    { media: "(prefers-color-scheme: light)", color: "#f1efe9" },
+    { media: "(prefers-color-scheme: dark)", color: "#0f0f0e" },
   ],
 };
 
@@ -115,7 +109,7 @@ export default async function LocaleLayout({
     "@context": "https://schema.org",
     "@type": "Person",
     name: "Rayan Sekkat",
-    jobTitle: "Full-Stack Engineer",
+    jobTitle: "Backend & DevOps Engineer",
     description: meta.description,
     url: `${SITE_URL}/${locale}`,
     email: `mailto:${LINKS.email}`,
@@ -134,8 +128,12 @@ export default async function LocaleLayout({
       "PostgreSQL",
       "Docker",
       "Kubernetes",
+      "Terraform",
+      "GitLab CI",
       "CI/CD",
       "AWS",
+      "Python",
+      "FastAPI",
     ],
   };
 
@@ -154,7 +152,7 @@ export default async function LocaleLayout({
         />
       </head>
       <body
-        className={`${plusJakarta.variable} ${instrumentSerif.variable} ${plexMono.variable} bg-se-bg text-se-text antialiased`}
+        className={`${bricolage.variable} ${jetbrains.variable} bg-se-bg text-se-text antialiased`}
         suppressHydrationWarning
       >
         <ThemeProvider>{children}</ThemeProvider>

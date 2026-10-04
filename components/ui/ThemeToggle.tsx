@@ -1,5 +1,6 @@
 "use client";
 
+import { useSyncExternalStore } from "react";
 import { useTheme } from "@/lib/theme/useTheme";
 import { Sun, Moon } from "lucide-react";
 
@@ -19,6 +20,13 @@ export default function ThemeToggle({
   className,
 }: ThemeToggleProps) {
   const { resolvedTheme, setTheme } = useTheme();
+  // The server can't know the stored theme: render the light variant until hydrated.
+  const hydrated = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false
+  );
+  const isDark = hydrated && resolvedTheme === "dark";
 
   const cycleTheme = () => {
     // Base the switch on the resolved theme so the first click always flips,
@@ -37,11 +45,11 @@ export default function ThemeToggle({
   };
 
   const getIcon = () => {
-    return resolvedTheme === "dark" ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />;
+    return isDark ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />;
   };
 
   const getLabel = () => {
-    return resolvedTheme === "dark"
+    return isDark
       ? (toLightLabel ?? "Dark theme (click to switch to light)")
       : (toDarkLabel ?? "Light theme (click to switch to dark)");
   };

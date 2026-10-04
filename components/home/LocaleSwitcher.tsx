@@ -2,7 +2,7 @@
 
 import { LOCALES, type Locale } from "@/lib/site";
 
-const LOCALE_LABELS: Record<Locale, string> = { en: "EN", ko: "한국어" };
+const LOCALE_LABELS: Record<Locale, string> = { en: "EN", ko: "KO" };
 const LOCALE_NAMES: Record<Locale, string> = { en: "English", ko: "한국어" };
 
 interface LocaleSwitcherProps {
@@ -12,7 +12,7 @@ interface LocaleSwitcherProps {
 
 export default function LocaleSwitcher({ current, ariaLabel }: LocaleSwitcherProps) {
   return (
-    <nav aria-label={ariaLabel} className="flex items-center gap-1">
+    <nav aria-label={ariaLabel} className="border-se-line flex h-8 items-stretch border">
       {LOCALES.map((locale) => (
         <a
           key={locale}
@@ -28,10 +28,8 @@ export default function LocaleSwitcher({ current, ariaLabel }: LocaleSwitcherPro
               window.location.href = `/${locale}${hash}`;
             }
           }}
-          className={`font-meta focus-visible:outline-se-accent rounded-sm px-2 py-1 text-xs tracking-widest uppercase transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 ${
-            locale === current
-              ? "text-se-text decoration-se-accent underline decoration-2 underline-offset-4"
-              : "text-se-muted hover:text-se-text"
+          className={`font-meta focus-visible:outline-se-accent inline-flex items-center px-2.5 text-[11px] tracking-[0.12em] transition-colors focus-visible:outline-2 focus-visible:-outline-offset-2 ${
+            locale === current ? "bg-se-text text-se-bg" : "text-se-muted hover:text-se-text"
           }`}
         >
           <span className="sr-only">{LOCALE_NAMES[locale]}</span>
