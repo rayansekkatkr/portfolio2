@@ -60,6 +60,15 @@ function ProjectEntry({
       {/* Meta column */}
       <dl className="border-se-line self-start border-t lg:col-span-4">
         <MetaRow label={work.roleLabel}>{project.role}</MetaRow>
+        <MetaRow label={work.statusLabel}>
+          <span className="inline-flex items-center gap-2">
+            <span
+              aria-hidden="true"
+              className={`h-1.5 w-1.5 rounded-full ${project.live ? "bg-se-ok" : "bg-se-accent"}`}
+            />
+            {project.status}
+          </span>
+        </MetaRow>
         <MetaRow label={work.platformsLabel}>{project.platforms}</MetaRow>
         <MetaRow label={work.yearLabel}>{project.year}</MetaRow>
         <MetaRow label={work.stackLabel}>
@@ -83,16 +92,45 @@ function ProjectEntry({
         <p className="text-se-text max-w-2xl text-lg leading-relaxed sm:text-xl">
           {project.summary}
         </p>
-        <ul className="mt-6 grid max-w-3xl gap-x-8 gap-y-3 sm:grid-cols-2">
-          {project.highlights.map((h) => (
-            <li key={h} className="text-se-muted flex gap-3 text-sm leading-relaxed">
-              <span aria-hidden="true" className="font-meta text-se-accent mt-px shrink-0">
-                →
-              </span>
-              {h}
-            </li>
-          ))}
-        </ul>
+        {project.metrics && (
+          <dl className="border-se-line mt-8 grid max-w-2xl grid-cols-2 border-t">
+            {project.metrics.map((m) => (
+              <div key={m.label} className="border-se-line border-b py-4 pr-4 odd:border-r">
+                <dd className="se-display text-se-text text-[clamp(2.5rem,5vw,3.75rem)]">
+                  {m.value}
+                </dd>
+                <dt className="text-se-muted mt-2 text-sm">{m.label}</dt>
+              </div>
+            ))}
+          </dl>
+        )}
+
+        <div className="mt-10 grid gap-8 xl:grid-cols-[2fr_3fr] xl:gap-10">
+          <div>
+            <h4 className="font-meta text-se-accent text-[11px] tracking-[0.14em] uppercase">
+              {work.problemLabel}
+            </h4>
+            <p className="text-se-text mt-3 text-[15px] leading-relaxed">{project.problem}</p>
+          </div>
+          <div>
+            <h4 className="font-meta text-se-accent text-[11px] tracking-[0.14em] uppercase">
+              {work.contributionsLabel}
+            </h4>
+            <ul className="mt-3 space-y-2.5">
+              {project.contributions.map((c) => (
+                <li
+                  key={c}
+                  className="text-se-text grid grid-cols-[20px_1fr] text-[15px] leading-relaxed"
+                >
+                  <span aria-hidden="true" className="font-meta text-se-accent">
+                    →
+                  </span>
+                  {c}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
 
         <div className="mt-10">
           <Pipeline title={project.pipelineTitle} steps={project.pipeline} />
