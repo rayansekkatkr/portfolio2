@@ -16,8 +16,12 @@ export interface Project {
   year: string;
   role: string;
   platforms: string;
+  status: string;
+  live: boolean;
   summary: string;
-  highlights: string[];
+  problem: string;
+  contributions: string[];
+  metrics?: { value: string; label: string }[];
   pipelineTitle: string;
   pipeline: PipelineStep[];
   stack: string[];
@@ -72,7 +76,10 @@ export interface HomeContent {
     index: string;
     heading: string;
     intro: string;
+    problemLabel: string;
+    contributionsLabel: string;
     roleLabel: string;
+    statusLabel: string;
     platformsLabel: string;
     yearLabel: string;
     stackLabel: string;
@@ -96,7 +103,11 @@ export interface HomeContent {
   capabilities: {
     index: string;
     heading: string;
-    groups: { name: string; items: string[] }[];
+    intro: string;
+    productHeading: string;
+    product: string[];
+    engineeringHeading: string;
+    tiers: { name: string; note: string; items: string[] }[];
   };
   education: {
     heading: string;
@@ -167,7 +178,7 @@ export const home: Record<Locale, HomeContent> = {
     nav: {
       work: "Work",
       experience: "Experience",
-      capabilities: "Stack",
+      capabilities: "Skills",
       contact: "Contact",
       skipToContent: "Skip to main content",
       openMenu: "Open menu",
@@ -189,7 +200,7 @@ export const home: Record<Locale, HomeContent> = {
           tab: "Backend / Full-Stack",
           title: "I build the backend, and the pipeline that ships it.",
           summary:
-            "Backend-focused full-stack engineer with 5+ years of production experience. TypeScript/NestJS and Python/FastAPI services on PostgreSQL and Redis, Stripe payments, real-time features, and end-to-end ownership from API design to on-call.",
+            "Software engineer with 5+ years of experience combining product understanding and hands-on backend work. I work directly with clients to scope products, turn requirements into technical solutions and ship them to production: TypeScript/NestJS and Python/FastAPI on PostgreSQL and Redis, Stripe payments, real-time and AI features.",
           focus: "NestJS · FastAPI · PostgreSQL · Redis · Stripe · React / Next.js",
           cvLabel: "Download CV, Backend",
         },
@@ -231,9 +242,9 @@ export const home: Record<Locale, HomeContent> = {
           source: "STMicroelectronics",
         },
         {
-          value: "3",
-          label: "products live in production",
-          source: "GoodCall · Factur-X · Pick4Me",
+          value: "2,200+",
+          label: "registered users on a marketplace I built",
+          source: "Pick4Me · 1,147 helpers + 1,094 customers",
         },
       ],
     },
@@ -241,8 +252,11 @@ export const home: Record<Locale, HomeContent> = {
       index: "01",
       heading: "Selected work",
       intro:
-        "Three products I designed, built and operate, each with its own hard problem. Below each one: the pipeline at its core.",
+        "Three products, each told the same way: the business problem, what I did about it, and the pipeline at its core.",
+      problemLabel: "The problem",
+      contributionsLabel: "What I did",
       roleLabel: "Role",
+      statusLabel: "Status",
       platformsLabel: "Platforms",
       yearLabel: "Year",
       stackLabel: "Stack",
@@ -252,15 +266,19 @@ export const home: Record<Locale, HomeContent> = {
           name: "GoodCall",
           kind: "Esports prediction app",
           year: "2025 →",
-          role: "Creator · full-stack engineer",
+          role: "Creator · product & full-stack",
+          status: "In App Store review, launching soon",
+          live: false,
           platforms: "iOS · Android · Web",
           summary:
             "Call the winner and the exact score of pro League of Legends, Valorant and CS2 matches, then climb global, regional and private-league rankings. No betting: points can't be bought or exchanged, only earned.",
-          highlights: [
-            "+10 for the right winner, +15 for the exact score, same rules for every match",
-            "Covers LCK, LEC, LPL, Worlds, VCT, Majors and more",
-            "Six languages, Korean included",
-            "pnpm / Turborepo monorepo, Docker deploys, GitHub Actions CI",
+          problem:
+            "Results come from third-party data providers that resend and correct scores. Points and rankings must stay exact for every player: no double credit, no rewritten history, and rules that feel fair whatever the odds.",
+          contributions: [
+            "Defined the game rules: +10 for the winner, +15 for the exact score, same for every match, no money involved.",
+            "Designed the player journeys: calls before a deadline, private leagues with invite codes, chat and weekly podiums.",
+            "Built the mobile app and backend: provider ingestion, idempotent settlement, append-only points ledger, leaderboards.",
+            "Set up the monorepo, Docker deploys and GitHub Actions CI; shipped in six languages, Korean included.",
           ],
           pipelineTitle: "Match settlement pipeline",
           pipeline: [
@@ -283,15 +301,23 @@ export const home: Record<Locale, HomeContent> = {
           name: "Pont Factur-X",
           kind: "AI B2B e-invoicing SaaS",
           year: "2025 →",
-          role: "Full-stack · infrastructure",
+          role: "Creator · product & full-stack",
+          status: "Live",
+          live: true,
           platforms: "Web · REST API",
           summary:
-            "Turns a PDF invoice, or a simple form, into a compliant Factur-X file for France's e-invoicing reform: receiving becomes mandatory in September 2026, sending follows for SMEs in 2027.",
-          highlights: [
-            "PDF/A-3 with embedded CII XML, aligned with EN 16931",
-            "AI field extraction (SIRET, VAT, amounts, IBAN) with manual review",
-            "Typical conversion under 15 seconds",
-            "REST API (OpenAPI 3.0) for ERPs; credit packs and subscriptions via Stripe",
+            "Turns a PDF invoice, or a simple form, into a compliant Factur-X file for France's e-invoicing reform.",
+          problem:
+            "Since September 2026 every VAT-registered company in France must be able to receive e-invoices, and SMEs must issue them by 2027. Most small businesses still produce plain PDFs from tools they don't want to replace.",
+          contributions: [
+            "Scoped the product around that constraint: keep your software, convert the PDF it already produces.",
+            "Shaped the offer for three audiences (SMEs, accounting firms, software vendors via API) with credit packs or subscriptions.",
+            "Built AI field extraction (SIRET, VAT, amounts, IBAN) with a manual review step, then PDF/A-3 + CII XML aligned with EN 16931.",
+            "Run the platform: FastAPI, PostgreSQL, Redis, MinIO on Docker, plus a REST API (OpenAPI 3.0) for ERPs.",
+          ],
+          metrics: [
+            { value: "83", label: "registered users since launch" },
+            { value: "< 15 s", label: "typical PDF conversion" },
           ],
           pipelineTitle: "Conversion pipeline",
           pipeline: [
@@ -312,16 +338,25 @@ export const home: Record<Locale, HomeContent> = {
         {
           id: "pick4me",
           name: "Pick4Me",
-          kind: "Delivery & shopping marketplace",
+          kind: "Two-sided delivery marketplace",
           year: "2025",
-          role: "Backend engineer · client project",
-          platforms: "Mobile · Backend",
+          role: "Product & backend engineer · client project",
+          status: "Live in Belgium",
+          live: true,
+          platforms: "iOS · Android · Backend",
           summary:
-            "A Belgian marketplace where people post errands and local helpers pick them up. I built the backend: mission workflows, real-time chat, live location, notifications and the payment flow.",
-          highlights: [
-            "Stripe pre-authorization, capture and refunds, driven by webhooks",
-            "Real-time chat and helper tracking over Socket.IO",
-            "Push notifications with FCM",
+            "A Belgian marketplace where customers get groceries and parcels delivered by local helpers who earn money on trips they already make.",
+          problem:
+            "Two sides with different needs have to trust each other: customers want a reliable delivery and a fair charge, helpers want clear missions and guaranteed payment, and money can only move once the job is done.",
+          contributions: [
+            "Designed the customer and helper journeys of the two-sided marketplace with the client.",
+            "Defined the business rules: mission acceptance, order tracking, payment, refunds and cancellations.",
+            "Translated those workflows into features and technical specifications.",
+            "Built the backend: Stripe pre-authorization, capture and refunds, real-time chat and tracking, push notifications.",
+          ],
+          metrics: [
+            { value: "1,147", label: "registered helpers" },
+            { value: "1,094", label: "registered customers" },
           ],
           pipelineTitle: "Mission lifecycle",
           pipeline: [
@@ -352,12 +387,13 @@ export const home: Record<Locale, HomeContent> = {
           role: "Independent Full-Stack & DevOps Engineer",
           company: "Rayan Studios",
           place: "Freelance · Remote",
-          context: "SaaS, marketplace and mobile products for French and Belgian clients.",
+          context:
+            "SaaS, marketplace and mobile products for French and Belgian clients, from the first workshop to production.",
           bullets: [
-            "Deliver products from scoping to launch and day-to-day operations.",
-            "Backend services with NestJS / FastAPI, PostgreSQL / Prisma and Redis: Socket.IO events, FCM push, SendGrid email.",
-            "Stripe end to end: subscriptions, pre-authorization & capture, refunds, webhooks.",
-            "Own Docker / VPS / AWS deployments, GitHub Actions CI/CD, monitoring and incident response.",
+            "Work directly with clients: needs analysis, workshops, and prioritizing what ships first.",
+            "Turn business requirements into user journeys, functional specs and technical design.",
+            "Build the backend (NestJS / FastAPI, PostgreSQL, Redis) and Stripe payment flows end to end.",
+            "Run demos and user acceptance, then own deployment (Docker, AWS, GitHub Actions), monitoring and incidents.",
           ],
           tags: ["NestJS", "FastAPI", "PostgreSQL", "Stripe", "Docker", "AWS"],
           current: true,
@@ -394,70 +430,53 @@ export const home: Record<Locale, HomeContent> = {
     },
     capabilities: {
       index: "03",
-      heading: "Stack",
-      groups: [
+      heading: "Skills",
+      intro:
+        "Engineering first, ranked by how much I've shipped with it, plus the product work that comes with owning a project end to end.",
+      productHeading: "Product & delivery",
+      product: [
+        "Requirements gathering",
+        "Client workshops",
+        "Functional scoping",
+        "User journeys & workflows",
+        "API & system design",
+        "Technical specifications",
+        "UAT / product validation",
+        "Stakeholder communication",
+      ],
+      engineeringHeading: "Engineering",
+      tiers: [
         {
-          name: "Backend",
-          items: [
-            "TypeScript",
-            "Node.js",
-            "NestJS",
-            "Express",
-            "Python",
-            "FastAPI",
-            "Django/DRF",
-            "REST",
-            "Socket.IO",
-            "JWT · RBAC",
-          ],
+          name: "Primary",
+          note: "Daily, in production",
+          items: ["TypeScript", "Node.js", "NestJS", "PostgreSQL", "Redis"],
         },
         {
-          name: "CI/CD & release",
+          name: "Strong",
+          note: "Shipped and operated",
           items: [
-            "GitLab CI",
-            "GitHub Actions",
-            "Jenkins",
-            "Multi-OS builds",
-            "Artifactory",
-            "SonarQube",
-          ],
-        },
-        {
-          name: "Infra & cloud",
-          items: [
+            "React / Next.js",
+            "Python / FastAPI",
             "Docker",
-            "Kubernetes",
-            "Ansible",
-            "Terraform",
             "AWS",
-            "Nginx",
-            "Linux",
-            "MinIO / S3",
+            "GitLab CI / GitHub Actions",
+            "Stripe",
+            "REST & WebSockets",
           ],
         },
-        { name: "Data", items: ["PostgreSQL", "Prisma", "Redis", "MongoDB"] },
         {
-          name: "Observability",
-          items: ["Prometheus", "Grafana", "Alertmanager", "Runbooks", "Incident response"],
-        },
-        {
-          name: "Frontend & mobile",
+          name: "Working knowledge",
+          note: "Used on real projects",
           items: [
-            "React",
-            "Next.js",
+            "Kubernetes",
+            "Terraform",
+            "Ansible",
+            "Prometheus / Grafana",
+            "React Native / Expo",
             "Vue.js",
-            "Nuxt",
-            "Angular",
-            "React Native",
-            "Expo",
-            "Tailwind",
+            "Django",
           ],
         },
-        {
-          name: "Integrations",
-          items: ["Stripe", "FCM", "SendGrid", "Revolut Business", "Mistral AI"],
-        },
-        { name: "Quality", items: ["Playwright", "Automated test runs", "Coverage monitoring"] },
       ],
     },
     education: {
@@ -513,7 +532,7 @@ export const home: Record<Locale, HomeContent> = {
     nav: {
       work: "프로젝트",
       experience: "경력",
-      capabilities: "기술",
+      capabilities: "역량",
       contact: "연락",
       skipToContent: "본문으로 건너뛰기",
       openMenu: "메뉴 열기",
@@ -535,7 +554,7 @@ export const home: Record<Locale, HomeContent> = {
           tab: "백엔드 / 풀스택",
           title: "백엔드를 만들고, 그것을 배포하는 파이프라인까지 책임집니다.",
           summary:
-            "5년 이상의 프로덕션 경험을 가진 백엔드 중심 풀스택 엔지니어입니다. PostgreSQL·Redis 기반의 TypeScript/NestJS, Python/FastAPI 서비스, Stripe 결제, 실시간 기능을 개발하며 API 설계부터 운영까지 전 과정을 담당합니다.",
+            "제품에 대한 이해와 백엔드 개발 역량을 겸비한 5년 차 소프트웨어 엔지니어입니다. 클라이언트와 직접 제품 범위를 정의하고, 요구사항을 기술 솔루션으로 전환해 프로덕션까지 출시합니다: PostgreSQL·Redis 기반 TypeScript/NestJS, Python/FastAPI, Stripe 결제, 실시간·AI 기능.",
           focus: "NestJS · FastAPI · PostgreSQL · Redis · Stripe · React / Next.js",
           cvLabel: "이력서 다운로드 (백엔드)",
         },
@@ -573,9 +592,9 @@ export const home: Record<Locale, HomeContent> = {
           source: "STMicroelectronics",
         },
         {
-          value: "3",
-          label: "개 서비스 프로덕션 운영 중",
-          source: "GoodCall · Factur-X · Pick4Me",
+          value: "2,200+",
+          label: "직접 개발한 마켓플레이스 가입자",
+          source: "Pick4Me · 헬퍼 1,147명 + 고객 1,094명",
         },
       ],
     },
@@ -583,8 +602,11 @@ export const home: Record<Locale, HomeContent> = {
       index: "01",
       heading: "주요 프로젝트",
       intro:
-        "직접 설계·개발하고 운영 중인 세 가지 서비스입니다. 각 서비스의 핵심 파이프라인을 함께 소개합니다.",
+        "세 가지 서비스를 같은 방식으로 소개합니다: 비즈니스 문제, 제가 한 일, 그리고 핵심 파이프라인.",
+      problemLabel: "문제",
+      contributionsLabel: "제가 한 일",
       roleLabel: "역할",
+      statusLabel: "상태",
       platformsLabel: "플랫폼",
       yearLabel: "연도",
       stackLabel: "기술 스택",
@@ -594,15 +616,19 @@ export const home: Record<Locale, HomeContent> = {
           name: "GoodCall",
           kind: "e스포츠 승부 예측 앱",
           year: "2025 →",
-          role: "창업자 · 풀스택 엔지니어",
+          role: "창업자 · 프로덕트 & 풀스택",
+          status: "App Store 심사 중, 곧 출시",
+          live: false,
           platforms: "iOS · Android · Web",
           summary:
             "리그 오브 레전드, 발로란트, CS2 프로 경기의 승자와 정확한 스코어를 예측하고 글로벌·지역·프라이빗 리그 랭킹에 도전하는 앱입니다. 베팅이 아닌 실력 기반: 포인트는 구매하거나 교환할 수 없습니다.",
-          highlights: [
-            "승자 적중 +10점, 정확한 스코어 +15점, 모든 경기 동일 규칙",
-            "LCK, LEC, LPL, Worlds, VCT, Majors 등 지원",
-            "한국어 포함 6개 언어 지원",
-            "pnpm / Turborepo 모노레포, Docker 배포, GitHub Actions CI",
+          problem:
+            "경기 결과는 외부 데이터 제공업체에서 오며, 재전송되거나 정정되기도 합니다. 모든 플레이어의 포인트와 순위는 항상 정확해야 합니다: 중복 지급 없이, 과거 기록 변경 없이, 누구에게나 공정한 규칙으로.",
+          contributions: [
+            "게임 규칙 정의: 승자 적중 +10점, 정확한 스코어 +15점, 모든 경기 동일, 금전 거래 없음.",
+            "플레이어 여정 설계: 마감 전 예측, 초대 코드 기반 프라이빗 리그, 채팅, 주간 포디움.",
+            "모바일 앱과 백엔드 개발: 데이터 수집, 멱등성 정산, append-only 포인트 원장, 리더보드.",
+            "모노레포, Docker 배포, GitHub Actions CI 구축. 한국어 포함 6개 언어로 출시.",
           ],
           pipelineTitle: "경기 정산 파이프라인",
           pipeline: [
@@ -623,17 +649,25 @@ export const home: Record<Locale, HomeContent> = {
         {
           id: "facturx",
           name: "Pont Factur-X",
-          kind: "AI 기반 B2B 전자세금계산서 SaaS",
+          kind: "AI 기반 B2B 전자 인보이스 SaaS",
           year: "2025 →",
-          role: "풀스택 · 인프라",
+          role: "창업자 · 프로덕트 & 풀스택",
+          status: "운영 중",
+          live: true,
           platforms: "Web · REST API",
           summary:
-            "PDF 인보이스나 간단한 양식을 프랑스 전자 인보이스 개혁에 맞는 Factur-X 파일로 변환합니다. 2026년 9월부터 수신 의무화, 2027년부터 중소기업 발행 의무화가 시작됩니다.",
-          highlights: [
-            "CII XML이 포함된 PDF/A-3, EN 16931 기준 준수",
-            "AI 필드 추출 (SIRET, VAT, 금액, IBAN) 및 수동 검토",
-            "변환 시간 대부분 15초 이내",
-            "ERP 연동용 REST API (OpenAPI 3.0), Stripe 기반 크레딧 팩·구독 결제",
+            "PDF 인보이스나 간단한 양식을 프랑스 전자 인보이스 개혁에 맞는 Factur-X 파일로 변환합니다.",
+          problem:
+            "2026년 9월부터 프랑스의 모든 부가세 과세 기업은 전자 인보이스를 수신할 수 있어야 하며, 중소기업은 2027년까지 발행도 해야 합니다. 대부분의 소규모 기업은 바꾸고 싶지 않은 기존 도구로 일반 PDF를 만들고 있습니다.",
+          contributions: [
+            "그 제약을 중심으로 제품 범위 설정: 기존 소프트웨어는 그대로, 이미 만드는 PDF를 변환.",
+            "세 가지 고객층(중소기업, 회계법인, API를 쓰는 소프트웨어 기업)을 위한 크레딧 팩·구독 모델 설계.",
+            "AI 필드 추출(SIRET, VAT, 금액, IBAN)과 수동 검토 단계, EN 16931 기준 PDF/A-3 + CII XML 생성 개발.",
+            "플랫폼 운영: Docker 기반 FastAPI, PostgreSQL, Redis, MinIO, ERP 연동용 REST API (OpenAPI 3.0).",
+          ],
+          metrics: [
+            { value: "83", label: "출시 이후 가입자" },
+            { value: "< 15초", label: "평균 PDF 변환 시간" },
           ],
           pipelineTitle: "변환 파이프라인",
           pipeline: [
@@ -654,16 +688,25 @@ export const home: Record<Locale, HomeContent> = {
         {
           id: "pick4me",
           name: "Pick4Me",
-          kind: "배달 & 쇼핑 마켓플레이스",
+          kind: "양면 배달 마켓플레이스",
           year: "2025",
-          role: "백엔드 엔지니어 · 클라이언트 프로젝트",
-          platforms: "Mobile · Backend",
+          role: "프로덕트 & 백엔드 엔지니어 · 클라이언트 프로젝트",
+          status: "벨기에에서 운영 중",
+          live: true,
+          platforms: "iOS · Android · Backend",
           summary:
-            "사용자가 심부름을 등록하면 지역 헬퍼가 수행하는 벨기에 마켓플레이스입니다. 미션 워크플로, 실시간 채팅, 위치 추적, 알림, 결제 플로 등 백엔드를 개발했습니다.",
-          highlights: [
-            "웹훅 기반 Stripe 사전 승인, 캡처, 환불",
-            "Socket.IO 기반 실시간 채팅 및 헬퍼 위치 추적",
-            "FCM 푸시 알림",
+            "고객은 장보기와 택배를 배달받고, 지역 헬퍼는 평소 이동하는 길에 돈을 버는 벨기에 마켓플레이스입니다.",
+          problem:
+            "요구가 다른 양쪽이 서로 신뢰해야 합니다: 고객은 확실한 배달과 공정한 요금을, 헬퍼는 명확한 미션과 보장된 지급을 원하며, 결제는 일이 끝난 뒤에만 확정되어야 합니다.",
+          contributions: [
+            "클라이언트와 함께 고객·헬퍼 양측의 사용자 여정 설계.",
+            "비즈니스 규칙 정의: 미션 수락, 주문 추적, 결제, 환불, 취소.",
+            "워크플로를 기능 및 기술 명세로 전환.",
+            "백엔드 개발: Stripe 사전 승인·캡처·환불, 실시간 채팅과 위치 추적, 푸시 알림.",
+          ],
+          metrics: [
+            { value: "1,147", label: "가입 헬퍼" },
+            { value: "1,094", label: "가입 고객" },
           ],
           pipelineTitle: "미션 라이프사이클",
           pipeline: [
@@ -693,12 +736,13 @@ export const home: Record<Locale, HomeContent> = {
           role: "독립 풀스택 & DevOps 엔지니어",
           company: "Rayan Studios",
           place: "프리랜서 · 원격",
-          context: "프랑스·벨기에 고객을 위한 SaaS, 마켓플레이스, 모바일 서비스.",
+          context:
+            "프랑스·벨기에 고객을 위한 SaaS, 마켓플레이스, 모바일 서비스. 첫 워크숍부터 프로덕션까지.",
           bullets: [
-            "기획부터 출시, 운영까지 서비스 전 과정을 담당.",
-            "NestJS / FastAPI, PostgreSQL / Prisma, Redis 기반 백엔드: Socket.IO 이벤트, FCM 푸시, SendGrid 이메일.",
-            "Stripe 결제 전 과정: 구독, 사전 승인 & 캡처, 환불, 웹훅.",
-            "Docker / VPS / AWS 배포, GitHub Actions CI/CD, 모니터링, 장애 대응을 직접 운영.",
+            "클라이언트와 직접 협업: 요구사항 분석, 워크숍, 우선 출시 범위 결정.",
+            "비즈니스 요구사항을 사용자 여정, 기능 명세, 기술 설계로 전환.",
+            "백엔드(NestJS / FastAPI, PostgreSQL, Redis)와 Stripe 결제 플로 전 과정 개발.",
+            "데모와 사용자 인수 테스트 진행 후 배포(Docker, AWS, GitHub Actions), 모니터링, 장애 대응까지 담당.",
           ],
           tags: ["NestJS", "FastAPI", "PostgreSQL", "Stripe", "Docker", "AWS"],
           current: true,
@@ -735,64 +779,53 @@ export const home: Record<Locale, HomeContent> = {
     },
     capabilities: {
       index: "03",
-      heading: "기술 스택",
-      groups: [
+      heading: "역량",
+      intro:
+        "실제로 얼마나 출시해 봤는지에 따라 정리한 엔지니어링 역량, 그리고 프로젝트를 처음부터 끝까지 맡으며 쌓은 프로덕트 역량입니다.",
+      productHeading: "프로덕트 & 딜리버리",
+      product: [
+        "요구사항 수집",
+        "클라이언트 워크숍",
+        "기능 범위 설정",
+        "사용자 여정 & 워크플로",
+        "API & 시스템 설계",
+        "기술 명세 작성",
+        "UAT / 제품 검증",
+        "이해관계자 커뮤니케이션",
+      ],
+      engineeringHeading: "엔지니어링",
+      tiers: [
         {
-          name: "백엔드",
-          items: [
-            "TypeScript",
-            "Node.js",
-            "NestJS",
-            "Express",
-            "Python",
-            "FastAPI",
-            "Django/DRF",
-            "REST",
-            "Socket.IO",
-            "JWT · RBAC",
-          ],
+          name: "주력",
+          note: "매일, 프로덕션에서",
+          items: ["TypeScript", "Node.js", "NestJS", "PostgreSQL", "Redis"],
         },
         {
-          name: "CI/CD & 릴리스",
+          name: "숙련",
+          note: "출시 및 운영 경험",
           items: [
-            "GitLab CI",
-            "GitHub Actions",
-            "Jenkins",
-            "멀티 OS 빌드",
-            "Artifactory",
-            "SonarQube",
-          ],
-        },
-        {
-          name: "인프라 & 클라우드",
-          items: [
+            "React / Next.js",
+            "Python / FastAPI",
             "Docker",
-            "Kubernetes",
-            "Ansible",
-            "Terraform",
             "AWS",
-            "Nginx",
-            "Linux",
-            "MinIO / S3",
+            "GitLab CI / GitHub Actions",
+            "Stripe",
+            "REST & WebSockets",
           ],
         },
-        { name: "데이터", items: ["PostgreSQL", "Prisma", "Redis", "MongoDB"] },
-        { name: "모니터링", items: ["Prometheus", "Grafana", "Alertmanager", "런북", "장애 대응"] },
         {
-          name: "프론트엔드 & 모바일",
+          name: "실무 경험",
+          note: "실제 프로젝트에서 사용",
           items: [
-            "React",
-            "Next.js",
+            "Kubernetes",
+            "Terraform",
+            "Ansible",
+            "Prometheus / Grafana",
+            "React Native / Expo",
             "Vue.js",
-            "Nuxt",
-            "Angular",
-            "React Native",
-            "Expo",
-            "Tailwind",
+            "Django",
           ],
         },
-        { name: "연동", items: ["Stripe", "FCM", "SendGrid", "Revolut Business", "Mistral AI"] },
-        { name: "품질", items: ["Playwright", "자동화 테스트", "커버리지 모니터링"] },
       ],
     },
     education: {
