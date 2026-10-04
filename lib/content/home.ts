@@ -150,11 +150,11 @@ const FACTURX_STACK = [
 ];
 const PICK4ME_STACK = ["NestJS", "PostgreSQL", "Prisma", "Redis", "Socket.IO", "Stripe", "FCM"];
 
-const FACTURX_IMAGE = {
-  src: "/images/facturx-screenshot.png",
-  width: 3002,
-  height: 1486,
-};
+// Landing-page screenshots of each live product (1512×699).
+const shot = (file: string) => ({ src: `/images/${file}`, width: 1512, height: 699 });
+const GOODCALL_IMAGE = shot("goodcall.jpg");
+const FACTURX_IMAGE = shot("pont-facturx.jpg");
+const PICK4ME_IMAGE = shot("pick4me.jpg");
 
 export const home: Record<Locale, HomeContent> = {
   en: {
@@ -273,6 +273,10 @@ export const home: Record<Locale, HomeContent> = {
           stack: GOODCALL_STACK,
           url: "https://goodcall.gg/en/",
           urlLabel: "goodcall.gg",
+          image: {
+            ...GOODCALL_IMAGE,
+            alt: "GoodCall landing page: esports predictions app on iOS and Android",
+          },
         },
         {
           id: "facturx",
@@ -302,7 +306,7 @@ export const home: Record<Locale, HomeContent> = {
           urlLabel: "pont-facturx.com",
           image: {
             ...FACTURX_IMAGE,
-            alt: "Pont Factur-X landing page: PDF to Factur-X XML conversion",
+            alt: "Pont Factur-X landing page: e-invoicing reform obligations, receive and send",
           },
         },
         {
@@ -330,6 +334,10 @@ export const home: Record<Locale, HomeContent> = {
           stack: PICK4ME_STACK,
           url: "https://pick4me.be",
           urlLabel: "pick4me.be",
+          image: {
+            ...PICK4ME_IMAGE,
+            alt: "Pick4Me landing page: collaborative delivery app with live helper tracking",
+          },
         },
       ],
     },
@@ -607,6 +615,10 @@ export const home: Record<Locale, HomeContent> = {
           stack: GOODCALL_STACK,
           url: "https://goodcall.gg/en/",
           urlLabel: "goodcall.gg",
+          image: {
+            ...GOODCALL_IMAGE,
+            alt: "GoodCall 랜딩 페이지: iOS·Android e스포츠 승부 예측 앱",
+          },
         },
         {
           id: "facturx",
@@ -634,7 +646,10 @@ export const home: Record<Locale, HomeContent> = {
           stack: FACTURX_STACK,
           url: "https://www.pont-facturx.com",
           urlLabel: "pont-facturx.com",
-          image: { ...FACTURX_IMAGE, alt: "Pont Factur-X 랜딩 페이지: PDF를 Factur-X XML로 변환" },
+          image: {
+            ...FACTURX_IMAGE,
+            alt: "Pont Factur-X 랜딩 페이지: 전자 인보이스 수신·발행 의무 안내",
+          },
         },
         {
           id: "pick4me",
@@ -661,6 +676,10 @@ export const home: Record<Locale, HomeContent> = {
           stack: PICK4ME_STACK,
           url: "https://pick4me.be",
           urlLabel: "pick4me.be",
+          image: {
+            ...PICK4ME_IMAGE,
+            alt: "Pick4Me 랜딩 페이지: 실시간 헬퍼 추적이 가능한 공동 배달 앱",
+          },
         },
       ],
     },
